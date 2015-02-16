@@ -1,5 +1,5 @@
 
-#Behat Template Project
+#Olive 3 Behat Tests (Using new method - Work in Progress)
 
 Frontend regression tests using the Behat framework
 
@@ -49,9 +49,9 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
 
 2. Run behat
 
- eg. Orange Brand with Mink Context
+ eg. Olive 3 Test Server with Mink Context
  ```sh
- bin/behat --tags=mink --expand --profile=orange
+ bin/behat --tags=olive --expand --profile=essence
  ```
 
  ```
