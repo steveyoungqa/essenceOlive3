@@ -1,0 +1,40 @@
+default:
+    extensions:
+        SensioLabs\Behat\PageObjectExtension\Extension: ~
+
+        Behat\MinkExtension\Extension:
+            base_url: 'http://ess-lon-olive-web-001s.essence.internal.com:7000/'
+            default_session: selenium2
+            javascript_session: selenium2
+            selenium2:
+                browser: 'chrome'
+
+localhost:
+    extensions:
+        Behat\MinkExtension\Extension:
+            base_url: 'TBC'
+
+staging:
+    extensions:
+        Behat\MinkExtension\Extension:
+            base_url: 'TBC'
+
+uat:
+    extensions:
+        Behat\MinkExtension\Extension:
+            base_url: 'TBC'
+
+essence:
+    extensions:
+        Behat\MinkExtension\Extension:
+            base_url: 'http://ess-lon-olive-web-001s.essence.internal.com:7000/'
+
+
+orange:
+    extensions:
+        Behat\MinkExtension\Extension:
+            base_url: 'http://www.brand.orange.com/pages/login.php'
+
+#  default parameters can be over-ridden by adding --profile=(environment) to the Behat commands:
+
+#  Example: bin/behat --tags=mink --expand --profile=uat
