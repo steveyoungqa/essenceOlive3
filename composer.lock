@@ -731,12 +731,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Filesystem.git",
-                "reference": "177e0a8e29fab3f0556f7a973b5a42935e42a4d7"
+                "reference": "cb5db1cf2440ceb68760ef0e70f9d1d4ba135444"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/177e0a8e29fab3f0556f7a973b5a42935e42a4d7",
-                "reference": "177e0a8e29fab3f0556f7a973b5a42935e42a4d7",
+                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/cb5db1cf2440ceb68760ef0e70f9d1d4ba135444",
+                "reference": "cb5db1cf2440ceb68760ef0e70f9d1d4ba135444",
                 "shasum": ""
             },
             "require": {
@@ -769,7 +769,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "http://symfony.com",
-            "time": "2015-02-11 07:17:51"
+            "time": "2015-02-16 09:13:25"
         },
         {
             "name": "symfony/finder",
@@ -778,12 +778,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Finder.git",
-                "reference": "b17b334a1d7ca08b4551c94d7fe662509ebffd70"
+                "reference": "c959ef6094e9f294bfa85535322fe84170149fb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Finder/zipball/b17b334a1d7ca08b4551c94d7fe662509ebffd70",
-                "reference": "b17b334a1d7ca08b4551c94d7fe662509ebffd70",
+                "url": "https://api.github.com/repos/symfony/Finder/zipball/c959ef6094e9f294bfa85535322fe84170149fb8",
+                "reference": "c959ef6094e9f294bfa85535322fe84170149fb8",
                 "shasum": ""
             },
             "require": {
@@ -816,7 +816,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "http://symfony.com",
-            "time": "2015-02-08 07:41:14"
+            "time": "2015-02-15 14:36:33"
         },
         {
             "name": "symfony/translation",

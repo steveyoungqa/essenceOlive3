@@ -12,28 +12,22 @@ default:
 localhost:
     extensions:
         Behat\MinkExtension\Extension:
-            base_url: 'TBC'
+            base_url: 'http://localhost:7000/'
 
 staging:
     extensions:
         Behat\MinkExtension\Extension:
-            base_url: 'TBC'
+            base_url: 'http://ess-lon-olive-web-001s.essence.internal.com:7000/'
 
 uat:
     extensions:
         Behat\MinkExtension\Extension:
-            base_url: 'TBC'
+            base_url: 'http://ess-lon-olive-web-001s.essence.internal.com:7001/'
 
-essence:
+test:
     extensions:
         Behat\MinkExtension\Extension:
-            base_url: 'http://ess-lon-olive-web-001s.essence.internal.com:7000/'
-
-
-orange:
-    extensions:
-        Behat\MinkExtension\Extension:
-            base_url: 'http://www.brand.orange.com/pages/login.php'
+            base_url: 'http://ess-lon-olive-web-001s.essence.internal.com:7002/'
 
 #  default parameters can be over-ridden by adding --profile=(environment) to the Behat commands:
 
