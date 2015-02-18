@@ -12,155 +12,23 @@ class pageContext extends PageObjectContext
 
 
     /**
-     * @Given /^I am on the "([^"]*)" page$/
-     */
-    public function iAmOnTheHomepage($home)
-    {
-        /**
-         * @var customTests $custom
-         */
-        $custom = $this->getPage('customTests');
-        $custom->home($home);
-
-    }
-
-    /**
-     * @Given /^I select the "([^"]*)" section$/
-     */
-    public function iSelectTheSection($section)
-    {
-        /**
-         * @var customTests $custom
-         */
-        $custom = $this->getPage('customTests');
-        $custom->section($section);
-    }
-
-    /**
-     * @Then /^I select the "([^"]*)" Sport section$/
-     */
-    public function iSelectTheSportSection($sport)
-    {
-        /**
-         * @var customTests $custom
-         */
-        $custom = $this->getPage('customTests');
-        $custom->sport($sport);
-    }
-
-    /**
-     * @Given /^I select the Tables section$/
-     */
-    public function iSelectTheTablesSection()
-    {
-        /**
-         * @var customTests $custom
-         */
-        $custom = $this->getPage('customTests');
-        $custom->table();
-    }
-
-    /**
-     * @Then /^I choose my favourite team "([^"]*)"$/
-     */
-    public function iChooseMyFavouriteTeam($team)
-    {
-        /**
-         * @var customTests $custom
-         */
-        $custom = $this->getPage('customTests');
-        $custom->faveTeam($team);
-    }
-
-    /**
-     * @Given /^I enter a User Name of "([^"]*)"$/
-     */
-    public function iEnterAUserNameOf($user)
-    {
-        /**
-         * @var customTests $custom
-         */
-        $custom = $this->getPage('customTests');
-        $custom->username($user);
-    }
-
-    /**
-     * @Given /^I enter a Password of "([^"]*)"$/
-     */
-    public function iEnterAPasswordOf($password)
-    {
-        /**
-         * @var customTests $custom
-         */
-        $custom = $this->getPage('customTests');
-        $custom->password($password);
-    }
-
-    /**
-     * @Given /^I select the Log In button$/
-     */
-    public function iSelectTheSignInButton()
-    {
-        /**
-         * @var customTests $custom
-         */
-        $custom = $this->getPage('customTests');
-        $custom->logInButton();
-    }
-
-    /**
-     * @Then /^I close the pop up box$/
-     */
-    public function closePopUpBox()
-    {
-        /**
-         * @var customTests $custom
-         */
-        $custom = $this->getPage('customTests');
-        $custom->popUpBoxClose();
-    }
-
-
-
-    #CSS Contexts:
-
-    /**
+     * For elements that don't have IDs,CSS,Values etc - so use page object arrays instead
+     *
      * @Then /^I click the "([^"]*)" link$/
      */
-    public function iClickLink($css)
+    public function usePageObjectArray($xpath)
     {
         /**
          * @var customTests $custom
          */
         $custom = $this->getPage('customTests');
-        $custom->clickCssElementLink($css);
+        $custom->clickPageObject($xpath);
     }
 
-    /**
-     * @Given /^I fill in the "([^"]*)" field with "([^"]*)"$/
-     */
-    public function iFillInFieldWith($field, $value)
-    {
-        /**
-         * @var customTests $custom
-         */
-        $custom = $this->getPage('customTests');
-        $custom->fillCSSField($field,$value);
-
-    }
 
     /**
-     * @Then /^I select the "([^"]*)" checkbox$/
-     */
-    public function iSelectTheCheckbox($check)
-    {
-        /**
-         * @var customTests $custom
-         */
-        $custom = $this->getPage('customTests');
-    }
-
-    /**
+     * Pause for user defined time for slow loading tests/api's
+     *
      * @Then /^I wait for (\d+)$/
      */
     public function iWaitForAWhile($milliseconds)
@@ -173,16 +41,34 @@ class pageContext extends PageObjectContext
     }
 
     /**
-     * @Then /^I click on the Navigation header$/
+     * Clicks link that contains the x-path
+     *
+     * @Then /^I click "([^"]*)" xpath contains link$/
      */
-    public function iClickOnTheNavigationHeader()
+    public function iClickAlternateLink($click)
     {
         /**
          * @var customTests $custom
          */
         $custom = $this->getPage('customTests');
-        $custom->clickNavHeader();
+        $custom->clickXpathID($click);
     }
+
+    /**
+     * Locate a checkbox based on ancestor xpath (Pain in the arse)
+     *
+     * @Then /^I select the "([^"]*)" checkbox$/
+     */
+    public function ancestorCheckbox($campaign)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->deleteCampaign($campaign);
+    }
+
+
 
 
 }

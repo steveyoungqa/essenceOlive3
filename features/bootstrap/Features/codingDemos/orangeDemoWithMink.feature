@@ -7,28 +7,11 @@ Feature: As a team user of Hive
 
 Scenario Outline: Basic Login
 
-    Given I am on "/"
+    Given I am on "<home>"
     When I fill in "name" with "<Username>"
     And I fill in "pass" with "<Password>"
     Then I press "login-submit"
 
-  Then I click the "#fancybox-close" link
-#  Then I follow "fancybox-close"
-#  The above Mink step definition is not working TBC - using customTest instead
-
-
-
-
-
-#  Then I fill in "searchHolder > form > input.k" with "london"
-#    And I fill in "#searchHolder > form > input.k" with "<Search>"
-#   Then I click the "#searchHolder > form > input.btn.btn-search" link
-#    Then I click the "#f-region-search > div > div:nth-child(8) > a" link
-#    Then I select the "#search_filter_40_262" checkbox
-
-
-
-
   Examples:
-  |home                        |Username        |Password|Search|
-  |http://www.brand.orange.com |kirsty_anderson |K869730a|london|
+  |home                        |Username        |Password|
+  |http://www.brand.orange.com |kirsty_anderson |K869730a|
