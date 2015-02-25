@@ -1,58 +1,8 @@
-@regression
-Feature: End to End Regression Test Pack
-         All using consistent test data in a single user Chrome browser session
+@delete
+Feature: Using Mink Context Properly
 
-  Scenario Outline: Create new campaign, Add Media Plan, Add Media Plan Line & Service, Publish Media Plan
-                    Insertion Order, Map to DS3, Map to Search Campaign, Approval Process
-                    Conversion Events, Tagging, Tracking Management - Mapping Status
+  Scenario Outline:
 
-
-    Given I am on the Olive login screen of environment "<environment>"
-    And I Sign in with Google using login credentials of "<user>" and "<pass>"
-    Then I will be logged in to the homepage
-
-    Then I click on the Navigation header
-    Then I select Campaign
-    And I select Add campaign
-    Then I add a new campaign name of "<campaign>"
-    And I select client of "<client>"
-  Then I allow a 10000 wait to allow APIs to be loaded
-    Then I select an owner of "<owner>"
-    And I add memo comments of "<memo>"
-    Then I select Save Campaign
-
-    Then I Link Campaign to External Platform of Google
-    Then I choose a Google Sub-Product of "<subproduct>"
-    Then I save Google Mapping
-
-    Then I select Add Media Plan
-
-    And I enter a Media Plan label of "<label>"
-
-    Then I select Add Period
-    And I add a Period name of "<period>"
-    Then I save the Add period
-    Then I close the Add Period panel
-
-    Then I choose a Media Plan period of "<period>"
-    And I choose a Media Plan market of "<market>"
-    Then I select a start date of "<start>"
-    Then I select a end date of "<end>"
-
-    Then I select a Liable entity of "<entity>"
-    And I select a Currency of "<currency>"
-    And I set a Budget of "<budget>"
-    Then I select Managed by "<managed>"
-
-    Then I select Save Media Plan
-
-    And I add an External Platform of Google Initiative to the Media Plan
-    And I choose to add a Google Initiative of "<initiative>"
-    Then I save the Mapped Account
-
-    Then I close the Add Media Plan panel
-
-    Then I select to add a Media Plan Line to Campaign of "<campaign>"
 
     And I Add a Line Cost Type of "<line>"
 

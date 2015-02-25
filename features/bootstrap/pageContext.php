@@ -41,11 +41,11 @@ class pageContext extends PageObjectContext
     }
 
     /**
-     * Clicks link that contains the x-path
+     * Clicks link that contains the x-path ID
      *
-     * @Then /^I click "([^"]*)" xpath contains link$/
+     * @Then /^I click the link containing ID "([^"]*)"$/
      */
-    public function iClickAlternateLink($click)
+    public function iClickContainsXpath($click)
     {
         /**
          * @var customTests $custom
@@ -55,11 +55,25 @@ class pageContext extends PageObjectContext
     }
 
     /**
-     * Locate a checkbox based on ancestor xpath (Pain in the arse)
+     * Clicks link that contains the text
      *
-     * @Then /^I select the "([^"]*)" checkbox$/
+     * @Then /^I click the link containing Text "([^"]*)"$/
      */
-    public function ancestorCheckbox($campaign)
+    public function iClickContainsText($click)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->clickContainsText($click);
+    }
+
+    /**
+     * Locate a checkbox based on ancestor xpath (Pain in the arse) and Deletes an existing campaign if there is one
+     *
+     * @Then /^I select the Delete "([^"]*)" check$/
+     */
+    public function deleteCampaignCheckbox($campaign)
     {
         /**
          * @var customTests $custom
@@ -67,6 +81,83 @@ class pageContext extends PageObjectContext
         $custom = $this->getPage('customTests');
         $custom->deleteCampaign($campaign);
     }
+
+    /**
+     * Locate a checkbox based on ancestor xpath (Pain in the arse) and selects for Mapping
+     *
+     * @Then /^I Map Search Campaign "([^"]*)"$/
+     */
+    public function campaignCheckbox($campaign)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->mapSearchCampaign($campaign);
+    }
+
+    /**
+     * @Then /^I select a Media Plan Start Date of "([^"]*)"$/
+     */
+    public function iSelectAMediaPLanStartDateOf($date)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->planStartDate($date);
+    }
+
+    /**
+     * @Then /^I Select a Media Plan End Date of "([^"]*)"$/
+     */
+    public function iSelectAMediaPlanEndDateOf($date)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->planEndDate($date);
+    }
+
+    /**
+     * @Then /^I select a Plan Line Start Date of "([^"]*)"$/
+     */
+    public function iSelectAStartDateOf($date)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->lineStartDate($date);
+    }
+
+    /**
+     * @Then /^I Select a Plan Line End Date of "([^"]*)"$/
+     */
+    public function iSelectAEndDateOf($date)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->lineEndDate($date);
+    }
+
+    /**
+     * @Then /^I select the Media Plan linked to Campaign of "([^"]*)"$/
+     */
+    public function iSelectToAddAMediaPlanLineToCampaignOf($campaign)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->addMediaPlanLine($campaign);
+
+    }
+
+
 
 
 
