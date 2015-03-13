@@ -60,6 +60,9 @@ class customTests extends CustomPage
         'Manage Mapped Entities' => array('xpath' => "//*[contains(text(),'Manage mapped campaigns')]"),
         'Save Managed Entities' => array('xpath' => "//*[@class='page-actions table-actions']/a[@class='button add--button']"),
 
+        'Manage Approval' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-manage-approval']"),
+        'Add Approver' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add']"),
+
     );
 
     public function clickXpathID ($click)

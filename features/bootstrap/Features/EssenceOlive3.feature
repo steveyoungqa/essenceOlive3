@@ -1,7 +1,10 @@
-@olive
-Feature: Using Mink Context Properly
+@regression
+Feature: End to End Regression Test Pack
+  All using consistent test data in a single user Chrome browser session
 
-  Scenario Outline: Test that checks if media and service plan lines can be added to a media plan
+  Scenario Outline: Create new campaign, Add Media Plan, Add Media Plan Line & Service, Publish Media Plan
+  Insertion Order, Map to DS3, Map to Search Campaign,
+#  To follow: Approval Process, Conversion Events, Tagging, Tracking Management - Mapping Status
 
      Given I am on "/login"
      Then I press "Sign in with Google"
@@ -18,7 +21,6 @@ Feature: Using Mink Context Properly
      Then I wait for 3000
      Then I select the Delete "<campaign>" check
      Then I wait for 5000
-
 
      Then I click the "Navigation Header" link
      Then I follow "Campaigns"
@@ -101,10 +103,8 @@ Feature: Using Mink Context Properly
      Then I wait for 2000
      Then I click the "Line Cost Type" link
      And I click the "Cost Type Media" link
-#    And I click the "Cost Type Media" link
      Then I click the "Line Channel" link
      And I click the "Line Channel Display" link
-#    And I click the "Channel Type Search" link
      Then I click the "Section" link
      And I click the link containing Text "Default"
      Then I click the "Supplier" link
@@ -154,19 +154,22 @@ Feature: Using Mink Context Properly
      And I click the "Save Managed Entities" link
      Then I wait for 10000
 
+     Then I click the "Manage Approval" link
+     And I click the "Add Approver" link
 
-     Then I click the "Navigation Header" link
-     Then I follow "Campaigns"
 
-     Then I fill in "campaign-search-basic" with "<campaign>"
-     Then I wait for 3000
-     Then I select the Delete "<campaign>" check
-     Then I wait for 5000
 
+#     Then I click the "Navigation Header" link
+#     Then I follow "Campaigns"
+#
+#     Then I fill in "campaign-search-basic" with "<campaign>"
+#     Then I wait for 3000
+#     Then I select the Delete "<campaign>" check
+#     Then I wait for 5000
 
   Examples:
-    |user                      |pass        |campaign  |client|owner      |period |budget|clientLiable|initiative|supplier      |ds3            |searchCampaign|
-    |steve.automation@gmail.com|Warlock99   |minky     |google|automation |q4-2015|100000|america     |nexlab    |Google Ireland|700000001004851|Madrid        |
+    |user                      |pass        |campaign       |client|owner      |period |budget|clientLiable|initiative|supplier      |ds3            |searchCampaign|
+    |steve.automation@gmail.com|Warlock99   |regressiontests|google|automation |q4-2015|100000|america     |nexlab    |Google Ireland|700000001004851|Madrid        |
 
 
 

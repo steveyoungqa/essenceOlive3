@@ -4,60 +4,9 @@ Feature: Using Mink Context Properly
   Scenario Outline:
 
 
-    And I Add a Line Cost Type of "<line>"
 
-    And I choose a Line Channel of "<channel>"
-    Then I choose a Line Section of "<section>"
-  Then I allow a 10000 wait to allow APIs to be loaded
-    Then I choose a Line Supplier of "<supplier>"
-    Then I choose a Line Platform of "<platform>"
-    And I choose a Line Property of "<property>"
-    Then I choose a Line Ad Unit of "<adUnit>"
-    And I choose a Line Cost Model of "<costModel>"
 
-    Then I select a Line Start Date of "<start>"
-    Then I select a Line End Date of "<end>"
 
-    Then I add a Line Currency of "<currency>"
-    And I set a Line Budget of "<budget2>"
-
-    Then I add a Line Description of "<description>"
-
-    And I Save the new Media Plan Line
-
-    Then I select Publish Media Plan
-
-    Then a check is made that plan is Published
-
-    Then I choose to change from Editable Draft to Published Draft
-
-    Then I select the Insertion Order tab
-
-    And I select Map Account
-
-    And I select an Insertion Order External Platform Link DS3
-
-    Then I add a DSThree Account ID of "<id>"
-
-#    And I add a Description of "<description>"
-
-    Then I save the Manually Linked Account
-
-#    And a check is made that the Mapped Account "<description>" has been saved
-
-    Then I select Manage mapped entities
-
-  Then I allow a 10000 wait to allow APIs to be loaded
-
-    Then I select the Map Search Campaign "<searchCampaign>" checkbox
-
-    Then I select Save the Managed Entities
-
-  Then I allow a 15000 wait to allow APIs to be loaded
-
-    Then I close the Mapped Panel
-
-    Then I select the Plan tab
 
     Then I choose to change from Editable Draft to Published Draft
 
