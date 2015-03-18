@@ -59,9 +59,17 @@ class customTests extends CustomPage
         'Plan Lines tab' => array('xpath' => "//*[@class='navigation-tabs']//*[contains(text(),'Plan Lines')]"),
         'Manage Mapped Entities' => array('xpath' => "//*[contains(text(),'Manage mapped campaigns')]"),
         'Save Managed Entities' => array('xpath' => "//*[@class='page-actions table-actions']/a[@class='button add--button']"),
+        'Close Mapped Panel' => array('xpath' => "//*[@class='button__icon button__icon--left icon icon--clear icon--lrg icon--cropped']"),
+        'Plan tab' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-tab']"),
+
 
         'Manage Approval' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-manage-approval']"),
         'Add Approver' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add']"),
+        'Save Approver' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add-save']"),
+        'Publish Dropdown' => array('xpath' => "//*[@class='expandable-dropdown__toggle']"),
+        'Published State' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-published']"),
+        'Editable Draft State' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-plan']"),
+        'Approver Field' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add-person']"),
 
     );
 

@@ -3,8 +3,8 @@ Feature: End to End Regression Test Pack
   All using consistent test data in a single user Chrome browser session
 
   Scenario Outline: Create new campaign, Add Media Plan, Add Media Plan Line & Service, Publish Media Plan
-  Insertion Order, Map to DS3, Map to Search Campaign,
-#  To follow: Approval Process, Conversion Events, Tagging, Tracking Management - Mapping Status
+  Insertion Order, Map to DS3, Map to Search Campaign, Approval Process,
+#  In Progress: Conversion Events, Tagging, Tracking Management - Mapping Status
 
      Given I am on "/login"
      Then I press "Sign in with Google"
@@ -112,11 +112,12 @@ Feature: End to End Regression Test Pack
      Then I click the "Platform" link
      And I click the link containing Text "DS3"
      Then I click the "Property" link
-     And I click the link containing Text "Bing"
+     And I click the link containing Text "Yandex"
      Then I click the "Media Type" link
      And I click the link containing Text "Lightbox"
      Then I click the "Cost Model" link
-     And I click the link containing Text "Biddable CPC"
+     Then I fill in "campaign-marketbudgets-versions-lines-new-costModel" with "Biddable CPC"
+#     And I click the link containing Text "Biddable CPC"
 
      Then I select a Plan Line Start Date of "2015-01-01"
      Then I wait for 2000
@@ -154,9 +155,26 @@ Feature: End to End Regression Test Pack
      And I click the "Save Managed Entities" link
      Then I wait for 10000
 
+     Then I click the "Close Mapped Panel" link
+     Then I click the "Plan tab" link
+
+     Then I click the "Publish Dropdown" link
+     And I click the "Published State" link
+
      Then I click the "Manage Approval" link
      And I click the "Add Approver" link
+     Then I wait for 2000
+     And I fill in "campaign-marketbudgets-versions-approvers-add-type" with "Internal"
+     Then I wait for 2000
+     Then I click the "Approver Field" link
+     Then I wait for 2000
+     And I fill in "campaign-marketbudgets-versions-approvers-add-person" with "<approver>"
+     Then I wait for 2000
+     Then I click the link containing Text "<approver>"
+     Then I wait for 2000
+     Then I click the "Save Approver" link
 
+     Then I wait for 10000
 
 
 #     Then I click the "Navigation Header" link
@@ -168,8 +186,9 @@ Feature: End to End Regression Test Pack
 #     Then I wait for 5000
 
   Examples:
-    |user                      |pass        |campaign       |client|owner      |period |budget|clientLiable|initiative|supplier      |ds3            |searchCampaign|
-    |steve.automation@gmail.com|Warlock99   |regressiontests|google|automation |q4-2015|100000|america     |nexlab    |Google Ireland|700000001004851|Madrid        |
+    |user                      |pass        |campaign       |client|owner      |period |budget|clientLiable|initiative|supplier      |ds3            |searchCampaign|approver|
+    |steve.automation@gmail.com|Warlock99   |regressiontests|google|automation |q4-2015|100000|america     |nexlab    |Google Ireland|700000001004851|Madrid        |Steve Young|
+
 
 
 

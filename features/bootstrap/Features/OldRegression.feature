@@ -8,13 +8,7 @@ Feature: Using Mink Context Properly
 
 
 
-    Then I choose to change from Editable Draft to Published Draft
 
-    Then I select Manage Approval
-    And I select the Add Approval button
-    And I select an Approval Category of "<category>"
-    And I select an Approval Person of "<approver>"
-    Then I Save the Approval
 
     Then I select Request Approval
     Then I select the Insertion Order tab
