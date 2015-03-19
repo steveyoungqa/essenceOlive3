@@ -13,8 +13,8 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
 
 1. Git clone this repository and cd/dir into it's root directory
  ```sh
- git clone https://github.com/steveyoungqa/behatFramework.git
- cd behatFramework
+ git clone https://github.com/essence-tech/essence-olive-3-qa-mink-context
+ cd essence-olive-3-qa-mink-context
  ```
 
 2. Download the composer package manager and run install to get all the vendors (behat, selenium, etc)
@@ -51,7 +51,7 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
 
  eg. Olive 3 Regression tests on UAT
  ```sh
- bin/behat --tags=regression --expand --profile=uat
+ bin/behat --tags=regression --expand --profile=test
  ```
 
  ```
