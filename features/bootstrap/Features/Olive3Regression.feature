@@ -220,8 +220,9 @@ Feature: Olive 3 Regression Pack using Qa Mink Context repo
      Then I click the "Tracking Management" link
      And I click the "Tracking Code Search Box" link
      Then I fill in the "Tracking Code Search Box" with "<searchCampaign>"
-     Then I wait for 10000
+     Then I wait for 3000
      And I click the "Advanced Filter" link
+     Then I wait for 2000
      Then I click the "DS3 Advertiser Filter" link
      And I fill in the "DS3 Advertiser Filter" with "<ds3Advert>"
      Then I wait for 2000
@@ -238,8 +239,8 @@ Feature: Olive 3 Regression Pack using Qa Mink Context repo
      Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |user                      |pass        |campaign       |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert      |
-    |steve.automation@gmail.com|Warlock99   |regressiontests|google|automation |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|chromecast emea|
+    |user                      |pass        |campaign       |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |steve.automation@gmail.com|Warlock99   |regressiontests|google|automation |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

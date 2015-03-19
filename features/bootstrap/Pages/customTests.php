@@ -94,7 +94,7 @@ class customTests extends CustomPage
         'Tracking Management' => array('xpath' => "//*[@id='site-navigation-campaigns-tracking-management']"),
         'Tracking Code Search Box' => array ('xpath' => "//*[@id='trackingcode-search-basic']"),
         'Advanced Filter' => array('xpath' => "//*[@id='trackingcode-search-advanced']"),
-        'DS3 Advertiser Filter' => array('xpath' => "//*[@id='trackingcode-search-mapping']"),
+        'DS3 Advertiser Filter' => array('xpath' => "//*[@id='trackingcode-search-advertiser']"),
         'Advanced Search Close' => array('xpath' => "//*[@id='trackingcode-search-close']"),
         'Tracking Details' => array('xpath' => "//*[contains(@id,'actionbuttons')]")
     );
