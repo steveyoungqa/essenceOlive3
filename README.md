@@ -13,7 +13,7 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
 
 1. Git clone this repository and cd/dir into it's root directory
  ```sh
- git clone https://github.com/steveyoungqa/behatFramework.git
+ git clone https://github.com/essence-tech/essence-olive-3-qa-mink-context
  cd behatFramework
  ```
 
