@@ -25,6 +25,20 @@ class pageContext extends PageObjectContext
         $custom->clickPageObject($xpath);
     }
 
+    /**
+     * Fill in xpath array with values
+     *
+     * @Then /^I fill in the "([^"]*)" with "([^"]*)"$/
+     */
+    public function fillInXpathWithValue($xpath, $value)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->fillInXpathLinkWithValue($xpath, $value);
+    }
+
 
     /**
      * Pause for user defined time for slow loading tests/api's
@@ -71,7 +85,7 @@ class pageContext extends PageObjectContext
     /**
      * Locate a checkbox based on ancestor xpath (Pain in the arse) and Deletes an existing campaign if there is one
      *
-     * @Then /^I select the Delete "([^"]*)" check$/
+     * @Then /^I select the Delete "([^"]*)" checkbox$/
      */
     public function deleteCampaignCheckbox($campaign)
     {
@@ -80,6 +94,20 @@ class pageContext extends PageObjectContext
          */
         $custom = $this->getPage('customTests');
         $custom->deleteCampaign($campaign);
+    }
+
+    /**
+     * Edit Existing Campaign
+     *
+     * @Given /^I select Edit for the existing Campaign "([^"]*)"$/
+     */
+    public function editExistingCampaign($campaign)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->editExistingCampaign($campaign);
     }
 
     /**
@@ -156,6 +184,8 @@ class pageContext extends PageObjectContext
         $custom->addMediaPlanLine($campaign);
 
     }
+
+
 
 
 

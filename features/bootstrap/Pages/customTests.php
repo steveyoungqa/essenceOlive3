@@ -12,9 +12,11 @@ class customTests extends CustomPage
 
         #essence xpaths - that dont have IDs or Values:
 
+        'Campaign Search' => array('xpath' => "//*[@id='campaign-search-basic']"),
         'Navigation Header' => array('xpath' => "//*[@class='menu-close icon icon--med icon--tables']"), //ID Needed
         'Campaign Save' => array('xpath' => "//*[@id='campaign-new-save']"),
         'Campaign Delete' => array('xpath' => "//*[@id='campaign-delete']"),
+        'editExistingCampaign' => array('xpath' => "//*[contains(@id,'actionbuttons')]"),
         'Delete Yes' => array('xpath' => "//*[@class='toast-action'][contains(text(),'Yes')]"),
         'External Platforms' => array('xpath' => "//*[@class='header--tabs']//*[contains(text(),'External platforms')]"),
         'Google Sub Product' => array('xpath' => "//a[@id='campaign-google-sub-product-link']"),
@@ -26,6 +28,7 @@ class customTests extends CustomPage
         'Media Plan Market' => array('xpath' => "//*[@id='campaign-marketbudgets-new-market']"),
         'Campaign New Market' => array('xpath' => "//*[@id='campaign-marketbudgets-new-market']"),
         'Market United Kingdom' => array('xpath' => "//*[@id='campaign-marketbudgets-new-market-united-kingdom']"),
+        'Market USA' => array('xpath' => "//*[@id='campaign-marketbudgets-new-market-united-states']"),
         'Start Date Media Plan' => array('xpath' => "//input[@id='campaign-marketbudgets-new-startDate']"),
         'End Date Media Plan' => array('xpath' => "//input[@id='campaign-marketbudgets-new-endDate']"),
         'Start Date Media Plan Line' => array('xpath' => "//input[@id='campaign-marketbudgets-versions-lines-new-startDate']"),
@@ -70,7 +73,30 @@ class customTests extends CustomPage
         'Published State' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-published']"),
         'Editable Draft State' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-plan']"),
         'Approver Field' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add-person']"),
-
+        'Request Approval' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-request']"),
+        'Set Status' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-set-status']"),
+        'Feedback Notes' => array('xpath' => "//*[@ng-model='feedback.note']"),
+        'Approve' => array('xpath' => "//*[@class='button'][contains(text(),'Approve')]"),
+        'Conversion Mapping Tab' => array('xpath' => "//*[@class='header--tabs']//*[contains(text(),'Conversion mapping')]"),
+        'Manage Conversion Event Mapping' => array('xpath' => "//*[@id='campaign-conversion-mapping']"),
+        'Add Event' => array('xpath' => "//*[@id='campaign-events-add']"),
+        'Event Number' => array('xpath' => "//*[@id='campaign-events-new-number']"),
+        'Event Name' => array('xpath' => "//*[@id='campaign-events-new-name']"),
+        'Conversion Source Field' => array('xpath' => "//*[@id='campaign-events-new-source']"),
+        'Google Floodlights' => array('xpath' => "//*[@id='campaign-events-new-source-google-floodlights']"),
+        'Event Save' => array('xpath' => "//*[@id='campaign-events-new-save']"),
+        'Add Tag' => array('xpath' => "//*[@id='campaign-events-tags-add']"),
+        'Conversion Type' => array('xpath' => "//*[@id='campaign-events-tags-new-conversionType']"),
+        'Activity Category' => array('xpath' => "//*[@id='campaign-events-tags-new-activityGroup']"),
+        'Activity Tag' => array('xpath' => "//*[@id='campaign-events-tags-new-activityTag']"),
+        'Weighting' => array('xpath' => "//*[@id='campaign-events-tags-new-weight']"),
+        'Tag Save' => array('xpath' => "//*[@id='campaign-events-tags-new-save']"),
+        'Tracking Management' => array('xpath' => "//*[@id='site-navigation-campaigns-tracking-management']"),
+        'Tracking Code Search Box' => array ('xpath' => "//*[@id='trackingcode-search-basic']"),
+        'Advanced Filter' => array('xpath' => "//*[@id='trackingcode-search-advanced']"),
+        'DS3 Advertiser Filter' => array('xpath' => "//*[@id='trackingcode-search-mapping']"),
+        'Advanced Search Close' => array('xpath' => "//*[@id='trackingcode-search-close']"),
+        'Tracking Details' => array('xpath' => "//*[contains(@id,'actionbuttons')]")
     );
 
     public function clickXpathID ($click)
@@ -93,6 +119,18 @@ class customTests extends CustomPage
         else {
             throw new Exception (".$click. Element not found");
         }
+    }
+
+    public function fillInXpathLinkWithValue ($xpath, $value)
+    {
+        $this->getElement($xpath)->setValue($value);
+
+//        $this->getElement($xpath)->setValue($xpath,$value);
+
+//        $xpath = $this->fixStepArgument($xpath);
+//        $value = $this->fixStepArgument($value);
+//        $this->getSession()->getPage()->fillField($xpath, $value);
+
     }
 
     public function waitForAWhile ($milliseconds)
@@ -129,6 +167,19 @@ class customTests extends CustomPage
         } else {
             throw new Exception('ERROR!! '.$campaign.' Checkbox not found!!');
         }
+    }
+
+    public function editExistingCampaign ($campaign)
+    {
+        $this->getElement('editExistingCampaign')->click();
+        $element = $this->find('xpath', '//*[contains(@id,"'.$campaign.'")][contains(@id,"edit")]');
+
+        if (isset($element)) {
+            $element->click();
+        } else {
+            throw new Exception(' '.$campaign.' not found');
+        }
+        $this->getSession()->wait(3000);
     }
 
     public function planStartDate ($date)

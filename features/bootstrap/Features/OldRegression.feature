@@ -3,62 +3,13 @@ Feature: Using Mink Context Properly
 
   Scenario Outline:
 
+    And I choose a DS3 Advertiser of "<ds3advert>"
 
+    Then I close the Advanced Search Filter
 
+    Then I select the detail page for the "<searchCampaign>"
 
-
-
-
-
-    Then I select Request Approval
-    Then I select the Insertion Order tab
-    Then I select the Plan tab
-
-#    Then I close the Approval panel
-    And I select Set Status
-    And enter Feedback comments of "<comments>"
-    Then I choose Approve
-#    Then I choose Reject
-
-    Then I click on the Navigation header
-    Then I select Campaign
-    Then I search for Campaign "<campaign>"
-    And I select to edit an existing Campaign of "<campaign>"
-    And I select Manage Conversion Event Mapping for existing Campaign of "<campaign>"
-    Then I select Add Event
-    And I add an Event Number of "20"
-    And I add and Event name of "<event>"
-    And I add a Conversion Source of Google FloodLights
-    Then I save the Event
-
-    Then I select Add Tag
-    And I add a Conversion Type of "<conversion>"
-    Then I allow a 5000 wait to allow APIs to be loaded
-    And I choose an Activity Category of "<activity>"
-    And I choose an Activity Tag of "<tag>"
-    And I choose a Weighting of "<weighting>"
-
-    Then I save the Tag
-
-#    Then I click on the Navigation header
-
-#    Then I select Tracking Management
-#
-#  Then I allow a 75000 wait to allow APIs to be loaded
-#
-#    Then I search for a Campaign tracking code of "<searchCampaign>"
-#
-##    And a check is made to ensure that the "<searchCampaign>" is shown as Mapped
-#
-#    Then I select the Advanced Filter
-#
-#    And I choose a DS3 Advertiser of "<ds3advert>"
-#
-#    Then I close the Advanced Search Filter
-
-#    Then I select the detail page for the "<searchCampaign>"
-#
-#    Then a check is made that the Status is MAPPED
+    Then a check is made that the Status is MAPPED
 
     Then I click on the Navigation header
     Then I select Campaign
