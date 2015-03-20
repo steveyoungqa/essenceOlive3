@@ -12,8 +12,9 @@ Feature: Olive 3 Regression Pack using Qa Mink Context repo
       Then I should see "Notifications"
 
   Scenario Outline: Create new campaign, Add Media Plan, Add Media Plan Line & Service, Publish Media Plan
-  Insertion Order, Map to DS3, Map to Search Campaign, Approval Process,
-#  In Progress: Conversion Events, Tagging, Tracking Management - Mapping Status
+                    Insertion Order, Map to DS3, Map to Search Campaign, Approval Process
+                    Conversion Evens, Tagging, Tracking Management & Mapping Status
+
 
      Then I click the "Navigation Header" link
      Then I follow "Campaigns"
@@ -73,8 +74,7 @@ Feature: Olive 3 Regression Pack using Qa Mink Context repo
 
      Then I fill in "campaign-marketbudgets-new-liableEntity" with "<clientLiable>"
      Then I wait for 2000
-    Then I click the link containing Text "<clientLiable>"
-#     Then I click the link containing ID "<clientLiable>"
+     Then I click the link containing Text "<clientLiable>"
 
      And I fill in "campaign-marketbudgets-new-currency" with "GBP"
      Then I wait for 2000
@@ -115,13 +115,9 @@ Feature: Olive 3 Regression Pack using Qa Mink Context repo
      And I click the link containing Text "DS3"
      Then I click the "Property" link
      Then I fill in "campaign-marketbudgets-versions-lines-new-indicativeProperty" with "Google+"
-#     And I click the link containing Text "Google+"
-#     Then I click the "Media Type" link
-#     And I click the link containing Text "Lightbox"
      Then I wait for 2000
      Then I click the "Cost Model" link
      Then I fill in "campaign-marketbudgets-versions-lines-new-costModel" with "Biddable CPC"
-#     And I click the link containing Text "Biddable CPC"
 
      Then I select a Plan Line Start Date of "2015-01-01"
      Then I wait for 2000
@@ -239,8 +235,8 @@ Feature: Olive 3 Regression Pack using Qa Mink Context repo
      Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |user                      |pass        |campaign       |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |steve.automation@gmail.com|Warlock99   |regressiontests|google|automation |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |campaign       |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |regressiontests|google|automation |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 
