@@ -14,7 +14,6 @@ Feature: Regression Tests split into single Scenarios
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
-
     Then I click the "Navigation Header" link
     Then I follow "Campaigns"
 
@@ -136,9 +135,16 @@ Feature: Regression Tests split into single Scenarios
     Then I should see "Media Plan published successfully"
     Then I wait for 2000
 
+    Then I click the "Navigation Header" link
+    Then I follow "Campaigns"
+
+    Then I fill in "campaign-search-basic" with "<campaign>"
+    Then I wait for 3000
+    Then I select the Delete "<campaign>" checkbox
+
   Examples:
-    |campaign       |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |regressionWorks|google|automation |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |campaign         |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |regressionpublish|google|automation |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 
