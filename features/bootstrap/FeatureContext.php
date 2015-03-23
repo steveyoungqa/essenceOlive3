@@ -56,7 +56,7 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext
             if (!is_dir($directory)) {
                 mkdir($directory, 0777, true);
             }
-            $filename = sprintf('%s_%s_%s_%s.%s', $event->getLogicalParent()->getTitle(), $this->browserName, date('YmdHis'), uniqid('', true), 'png');
+            $filename = sprintf('%s_%s_%s_%s.%s', $event->getLogicalParent()->getTitle(), $this->browserName, date('m-d H-i'), uniqid(''), 'png');
             file_put_contents($directory . '/' . $filename, $driver->getScreenshot());
         }
     }
