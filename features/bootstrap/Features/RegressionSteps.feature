@@ -1,4 +1,4 @@
-@regressionSteps
+@regressionFix
 Feature: Regression Tests split into single Scenarios
   (Trying to avoid Jenkins Chromedriver issue)
 
@@ -13,6 +13,7 @@ Feature: Regression Tests split into single Scenarios
     Then I should see "Notifications"
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
+
 
     Then I click the "Navigation Header" link
     Then I follow "Campaigns"
@@ -36,11 +37,111 @@ Feature: Regression Tests split into single Scenarios
     And I fill in "campaign-new-memo" with "Test Notes"
     Then I wait for 5000
     Then I click the "Campaign Save" link
+    Then I wait for 8000
+
+    Then I click the "External Platforms" link
+    And I click the "Google Sub Product" link
+    Then I fill in "mapping-externalSystem-googleSubProduct" with "AdWords - A01 (Acquisition)"
+    Then I wait for 5000
+    Then I click the "External System Save" link
+     # The above link doesnt click External Save - it takes focus off the form dropdown in the previous step
+    Then I click the "External System Save" link
     Then I wait for 5000
 
+    Then I click the "Media Plans" link
+    Then I follow "campaign-marketbudgets-add"
+    Then I wait for 3000
+    And I fill in "campaign-marketbudgets-new-label" with "Test Label"
+    Then I click the "Add New Period" link
+    And I fill in "campaign-marketbudgets-new-periods-new-name" with "<period>"
+    Then I click the "New Period Save" link
+    And I click the "Close Add Period" link
+
+    Then I fill in "campaign-marketbudgets-new-period" with "<period>"
+
+    Then I click the link containing ID "<period>"
+    Then I wait for 2000
+
+    Then I click the "Campaign New Market" link
+    Then I wait for 2000
+    Then I click the "Market USA" link
+
+    Then I select a Media Plan Start Date of "2015-01-01"
+    Then I wait for 2000
+    Then I Select a Media Plan End Date of "2015-01-31"
+    Then I wait for 2000
+
+    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<clientLiable>"
+    Then I wait for 2000
+    Then I click the link containing Text "<clientLiable>"
+
+    And I fill in "campaign-marketbudgets-new-currency" with "GBP"
+    Then I wait for 2000
+    Then I fill in "campaign-marketbudgets-new-budget" with "<budget>"
+    Then I wait for 2000
+
+    And I fill in "campaign-marketbudgets-new-owner" with "<owner>"
+    Then I wait for 2000
+    Then I click the link containing ID "<owner>"
+
+    Then I click the "Media Plan Save" link
+    Then I wait for 5000
+
+    Then I click the "Link Google Initiative" link
+    Then I fill in "mapping-externalSystem-googleInitiative" with "<initiative>"
+    Then I wait for 2000
+    Then I click the link containing ID "<initiative>"
+    Then I click the "Save Mapped Account" link
+    Then I wait for 10000
+    Then I click the "Previous Breadcrumb" link
+
+    Then I click the "Media Plan Whole Column" link
+    Then I wait for 5000
+    And I select the Media Plan linked to Campaign of "<campaign>"
+    Then I wait for 5000
+
+    Then I click the "Add Media Plan Line" link
+    Then I wait for 2000
+    Then I click the "Line Cost Type" link
+    And I click the "Cost Type Media" link
+    Then I click the "Line Channel" link
+    And I click the "Line Channel Search" link
+    Then I click the "Section" link
+    And I click the link containing Text "Default"
+    Then I click the "Supplier" link
+    And I click the link containing Text "<supplier>"
+    Then I click the "Platform" link
+    And I click the link containing Text "DS3"
+    Then I click the "Property" link
+    Then I fill in "campaign-marketbudgets-versions-lines-new-indicativeProperty" with "Google+"
+    Then I wait for 2000
+    Then I click the "Cost Model" link
+    Then I fill in "campaign-marketbudgets-versions-lines-new-costModel" with "Biddable CPC"
+
+    Then I select a Plan Line Start Date of "2015-01-01"
+    Then I wait for 2000
+    Then I Select a Plan Line End Date of "2015-01-31"
+    Then I wait for 2000
+
+    Then I click the "Line Currency" link
+    And I click the link containing Text "British Pound"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100000"
+    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
+
+    Then I click the "Save Media Plan Line" link
+    Then I wait for 5000
+
+    When I click the "Publish Media Plan" link
+    Then I wait for 1000
+    Then I should see "Media Plan published successfully"
+    Then I wait for 2000
+
   Examples:
-    |campaign       |client|owner      |
-    |regressionSteps|google|automation |
+    |campaign       |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |regressiontests|google|automation |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+
+
+
 
 
 
