@@ -2,6 +2,7 @@
 
 use Symfony\Component\Finder\Finder;
 use \SensioLabs\Behat\PageObjectExtension\Context\PageObjectContext;
+use Behat\Behat\Event\StepEvent;
 
 
 //class FeatureContext extends PageObjectContext implements  \Behat\MinkExtension\Context\MinkAwareInterface
@@ -60,6 +61,8 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext
             file_put_contents($directory . '/' . $filename, $driver->getScreenshot());
         }
     }
+
+
 
 
 
