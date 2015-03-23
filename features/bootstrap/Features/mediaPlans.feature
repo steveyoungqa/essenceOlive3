@@ -1,5 +1,5 @@
-@regression
-Feature: Olive 3 Regression Pack using Qa Mink Context repo
+@mediaPlans
+Feature: Olive 3 Media Plan Creation
 
   Background:
 
@@ -11,10 +11,7 @@ Feature: Olive 3 Regression Pack using Qa Mink Context repo
     Then I wait for 3000
     Then I should see "Notifications"
 
-  Scenario Outline: Create new campaign, Add Media Plan, Add Media Plan Line & Service, Publish Media Plan
-  Insertion Order, Map to DS3, Map to Search Campaign, Approval Process
-  Conversion Evens, Tagging, Tracking Management & Mapping Status
-
+  Scenario Outline: Create Media Plan Standalone Test
 
     Then I click the "Navigation Header" link
     Then I follow "Campaigns"
@@ -88,7 +85,13 @@ Feature: Olive 3 Regression Pack using Qa Mink Context repo
     Then I click the "Media Plan Save" link
     Then I wait for 5000
 
-  Examples:
-    |campaign       |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |regressiontests|google|automation |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    Then I click the "Navigation Header" link
+    Then I follow "Campaigns"
 
+    Then I fill in "campaign-search-basic" with "<campaign>"
+    Then I wait for 3000
+    Then I select the Delete "<campaign>" checkbox
+
+  Examples:
+    |campaign       |client|owner      |period |budget|clientLiable |
+    |regressiontests|google|automation |q4-2015|100000|Client Liable|
