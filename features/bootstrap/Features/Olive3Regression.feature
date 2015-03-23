@@ -39,7 +39,7 @@ Feature: Olive 3 Regression Pack
      And I fill in "campaign-new-memo" with "Test Notes"
      Then I wait for 5000
      Then I click the "Campaign Save" link
-     Then I wait for 5000
+     Then I wait for 8000
 
      Then I click the "External Platforms" link
      And I click the "Google Sub Product" link
@@ -144,7 +144,7 @@ Feature: Olive 3 Regression Pack
      Then I click the "External Platforms tab" link
      And I click the "Link DS3" link
      And I fill in "mapping-externalSystem-ds3" with "<ds3>"
-     Then I wait for 4000
+     Then I wait for 8000
      And I click the link containing Text "<ds3>"
      Then I click the "External System Save" link
 
