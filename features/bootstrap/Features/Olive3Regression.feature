@@ -4,19 +4,18 @@ Feature: Olive 3 Regression Pack
          Insertion Order, Map to DS3, Map to Search Campaign, Approval Process
          Conversion Evens, Tagging, Tracking Management & Mapping Status
 
-#    Background:
+    Background:
 
-
+      Given I am on "/login"
+      Then I press "Sign in with Google"
+      And I fill in "Email" with "steve.automation@gmail.com"
+      And I fill in "Passwd" with "Warlock99"
+      Then I press "signIn"
+      Then I wait for 3000
+      Then I should see "Notifications"
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
-    Given I am on "/login"
-    Then I press "Sign in with Google"
-    And I fill in "Email" with "steve.automation@gmail.com"
-    And I fill in "Passwd" with "Warlock99"
-    Then I press "signIn"
-    Then I wait for 3000
-    Then I should see "Notifications"
 
      Then I click the "Navigation Header" link
      Then I follow "Campaigns"
