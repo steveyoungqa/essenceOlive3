@@ -19,7 +19,7 @@ Feature: Regression Tests split into single Scenarios
 
     Then I fill in "campaign-search-basic" with "<campaign>"
     Then I wait for 3000
-    Then I select the Delete "<campaign>" check
+    Then I select the Delete "<campaign>" checkbox
     Then I wait for 5000
 
     Then I click the "Navigation Header" link
