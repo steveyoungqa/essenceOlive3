@@ -14,7 +14,6 @@ Feature: Regression Tests split into single Scenarios
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
-
     Then I click the "Navigation Header" link
     Then I follow "Campaigns"
 
@@ -43,8 +42,5 @@ Feature: Regression Tests split into single Scenarios
     |campaign       |client|owner      |
     |regressionSteps|google|automation |
 
-#    Scenario Outline: Test 2
-#
-#    Given I follow
 
 
