@@ -1,5 +1,8 @@
 @regression
-Feature: Olive 3 Regression Pack using Qa Mink Context repo
+Feature: Olive 3 Regression Pack
+         Create new campaign, Add Media Plan, Add Media Plan Line & Service, Publish Media Plan
+         Insertion Order, Map to DS3, Map to Search Campaign, Approval Process
+         Conversion Evens, Tagging, Tracking Management & Mapping Status
 
     Background:
 
@@ -11,9 +14,7 @@ Feature: Olive 3 Regression Pack using Qa Mink Context repo
       Then I wait for 3000
       Then I should see "Notifications"
 
-  Scenario Outline: Create new campaign, Add Media Plan, Add Media Plan Line & Service, Publish Media Plan
-                    Insertion Order, Map to DS3, Map to Search Campaign, Approval Process
-                    Conversion Evens, Tagging, Tracking Management & Mapping Status
+  Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
 
      Then I click the "Navigation Header" link

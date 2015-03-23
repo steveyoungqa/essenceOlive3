@@ -52,7 +52,7 @@ class FeatureContext extends Behat\MinkExtension\Context\MinkContext
             if (!($driver instanceof Selenium2Driver)) {
 //                throw new UnsupportedDriverActionException('Taking screenshots is not supported by %s, use Selenium2Driver instead.', $driver);
             }
-            $directory = 'build/behat/' . $event->getLogicalParent()->getFeature()->getTitle();
+            $directory = 'error screenshots/' . $event->getLogicalParent()->getFeature()->getTitle();
             if (!is_dir($directory)) {
                 mkdir($directory, 0777, true);
             }
