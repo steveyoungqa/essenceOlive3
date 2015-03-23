@@ -28,7 +28,7 @@ Feature: Olive 3 Regression Pack
      Then I click the "Navigation Header" link
      Then I follow "Campaigns"
      Then I wait for 3000
-     Then I follow "campaign-add"
+#     Then I follow "campaign-add"
      Then I wait for 3000
 
      And I fill in "campaign-new-name" with "<campaign>"
