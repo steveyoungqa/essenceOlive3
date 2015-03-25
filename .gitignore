@@ -2,6 +2,7 @@
 .DS_Store
 /.idea
 /.vagrant
+error screenshots
 bin
 vendor
 composer.lock
