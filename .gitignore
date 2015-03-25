@@ -2,4 +2,6 @@
 .DS_Store
 /.idea
 /.vagrant
-vendor/*
+vendor
+composer.lock
+composer.phar
