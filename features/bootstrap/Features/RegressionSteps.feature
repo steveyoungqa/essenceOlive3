@@ -48,9 +48,18 @@ Feature: Regression Tests split into single Scenarios
     Then I wait for 5000
 
     Then I click the "Media Plans" link
+
     Then I follow "campaign-marketbudgets-add"
     Then I wait for 3000
     And I fill in "campaign-marketbudgets-new-label" with "Test Label"
+    Then I wait for 2000
+
+    Then I click the "KPI Type" link
+    And I wait for 2000
+    And I fill in the "KPI Type" with "Brand"
+    Then I wait for 2000
+    Then I click the link containing Text "Brand"
+
     Then I click the "Add New Period" link
     And I fill in "campaign-marketbudgets-new-periods-new-name" with "<period>"
     Then I click the "New Period Save" link
@@ -62,8 +71,10 @@ Feature: Regression Tests split into single Scenarios
     Then I wait for 2000
 
     Then I click the "Campaign New Market" link
-    Then I wait for 2000
-    Then I click the "Market USA" link
+    Then I fill in the "Campaign New Market" with "Market USA"
+#    Then I click the "Campaign New Market" link
+#    Then I wait for 2000
+#    Then I click the "Market USA" link
 
     Then I select a Media Plan Start Date of "2015-01-01"
     Then I wait for 2000
@@ -92,7 +103,10 @@ Feature: Regression Tests split into single Scenarios
     Then I click the link containing ID "<initiative>"
     Then I click the "Save Mapped Account" link
     Then I wait for 10000
-    Then I click the "Previous Breadcrumb" link
+    Then I click the "Navigation Header" link
+    Then I follow "Campaigns"
+    Then I wait for 5000
+    Given I select Edit for the existing Campaign "<campaign>"
 
     Then I click the "Media Plan Whole Column" link
     Then I wait for 5000
@@ -135,16 +149,39 @@ Feature: Regression Tests split into single Scenarios
     Then I should see "Media Plan published successfully"
     Then I wait for 2000
 
+    Given I am on "/login"
+
     Then I click the "Navigation Header" link
     Then I follow "Campaigns"
-
-    Then I fill in "campaign-search-basic" with "<campaign>"
+    Then I wait for 5000
+    Given I select Edit for the existing Campaign "<campaign>"
     Then I wait for 3000
-    Then I select the Delete "<campaign>" checkbox
+#    Then I click the "Action Buttons" link
+    And I click the "Media Plan Button" link
+    Then I wait for 3000
+    Then I click the "Publish Dropdown" link
+    And I click the "Published State" link
+
+    Then I click the "Insertion Order tab" link
+    Then I wait for 4000
+    And I click the "Map Lines" link
+    Then I wait for 4000
+    Then I click the "External Platforms Insertion Order" link
+    Then I wait for 2000
+    And I click the "Link DS3" link
+    Then I wait for 2000
+    Then I click the "DS3 Account ID" link
+    Then I wait for 2000
+    And I fill in the "DS3 Account ID" with "<ds3>"
+    Then I wait for 8000
+    And I click the link containing Text "<ds3>"
+    Then I click the "External System Save" link
 
   Examples:
     |campaign         |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |regressionpublish|google|automation |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |regressionsplit  |google|automation |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+
+
 
 
 

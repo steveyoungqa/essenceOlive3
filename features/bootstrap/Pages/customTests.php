@@ -18,10 +18,11 @@ class customTests extends CustomPage
         'Campaign Delete' => array('xpath' => "//*[@id='campaign-delete']"),
         'editExistingCampaign' => array('xpath' => "//*[contains(@id,'actionbuttons')]"),
         'Delete Yes' => array('xpath' => "//*[@class='toast-action'][contains(text(),'Yes')]"),
-        'External Platforms' => array('xpath' => "//*[@class='header--tabs']//*[contains(text(),'External platforms')]"),
+        'External Platforms' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'External platforms')]"),
         'Google Sub Product' => array('xpath' => "//a[@id='campaign-google-sub-product-link']"),
         'External System Save' => array('xpath' => "//*[@class='ng-isolate-scope']//*[@class='form-standard ng-pristine ng-valid']//*[@class='tiered__actions']//*[@id='mapping-externalSystem-save']"),
-        'Media Plans' => array('xpath' => "//*[@class='header--tabs']//*[contains(text(),'Media Plans')]"),
+        'Media Plans' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Media Plans')]"),
+        'KPI Type' => array('xpath' => "//*[@id='campaign-marketbudgets-new-kpiType']"),
         'Add New Period' => array('xpath' => "//*[@class='form__input']//*[@class='button add--button ng-scope']"),
         'New Period Save' => array('xpath' => "//a[@id='campaign-marketbudgets-new-periods-new-save']"),
         'Close Add Period' => array('xpath' => "//*[@id='campaign-marketbudgets-new-periods-new-panel-close']"),
@@ -36,7 +37,7 @@ class customTests extends CustomPage
         'Media Plan Save' => array('xpath' => "//a[@id='campaign-marketbudgets-new-save']"),
         'Link Google Initiative' => array('xpath' => "//a[@id='campaign-marketbudgets-google-initiative-link']"),
         'Save Mapped Account' => array('xpath' => "//*[@class='ng-isolate-scope']//*[@class='ng-isolate-scope']//*[@id='mapping-externalSystem-save']"),
-        'Previous Breadcrumb' => array('xpath' => "//*[@class='linkContainer ng-scope']/a[@id='breadcrumb-1']"),
+        'Previous Breadcrumb' => array('xpath' => "//*[@class='linkContainer breadcrumb-step ng-scope']/a[@id='breadcrumb-1']"),
         'Media Plan Whole Column' => array('xpath' => "//*[@class='ng-scope']/div[@class='ng-scope']/ol-list[@class='ng-isolate-scope']/table[@class='standard-table table__records-editable']/tbody[@class='ng-scope']//*[@class='ol-list-item ol-drag-preview ng-scope']"),
 
         'Add Media Plan Line' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-line-add']"),
@@ -55,8 +56,8 @@ class customTests extends CustomPage
         'Line Currency' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-currency']"),
         'Save Media Plan Line' => array('xpath' => "//a[@id='campaign-marketbudgets-versions-lines-new-save']"),
         'Publish Media Plan' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-publish']"),
-        'External Platforms tab' => array('xpath' => "//*[@class='navigation-tabs']//*[contains(text(),'External platforms')]"),
-        'Insertion Order tab' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-ios-tab']"),
+        'External Platforms Insertion Order' => array('xpath' => "//*[@class='md-header-items-container']//*[contains(text(),'External platforms')]"),
+        'Insertion Order tab' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Insertion orders')]"),
         'Map Lines' => array('xpath' => "//*[@class='button button__label-only']//*[contains(text(),'Map lines')]"),
         'Link DS3' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-ios-ds3-link']"),
         'Plan Lines tab' => array('xpath' => "//*[@class='navigation-tabs']//*[contains(text(),'Plan Lines')]"),
@@ -77,7 +78,7 @@ class customTests extends CustomPage
         'Set Status' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-set-status']"),
         'Feedback Notes' => array('xpath' => "//*[@ng-model='feedback.note']"),
         'Approve' => array('xpath' => "//*[@class='button'][contains(text(),'Approve')]"),
-        'Conversion Mapping Tab' => array('xpath' => "//*[@class='header--tabs']//*[contains(text(),'Conversion mapping')]"),
+        'Conversion Mapping Tab' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Conversion mapping')]"),
         'Manage Conversion Event Mapping' => array('xpath' => "//*[@id='campaign-conversion-mapping']"),
         'Add Event' => array('xpath' => "//*[@id='campaign-events-add']"),
         'Event Number' => array('xpath' => "//*[@id='campaign-events-new-number']"),
@@ -96,7 +97,11 @@ class customTests extends CustomPage
         'Advanced Filter' => array('xpath' => "//*[@id='trackingcode-search-advanced']"),
         'DS3 Advertiser Filter' => array('xpath' => "//*[@id='trackingcode-search-advertiser']"),
         'Advanced Search Close' => array('xpath' => "//*[@id='trackingcode-search-close']"),
-        'Tracking Details' => array('xpath' => "//*[contains(@id,'actionbuttons')]")
+        'Tracking Details' => array('xpath' => "//*[contains(@id,'actionbuttons')]"),
+        'Action Buttons' => array('xpath' => "//*[contains(@id,'actionbuttons')]"),
+        'Media Plan Button' => array('xpath' => "//*[@ol-message='marketbudget:action:plan']"),
+        'DS3 Account ID' => array('xpath' => "//*[@id='mapping-externalSystem-ds3']"),
+
     );
 
     public function clickXpathID ($click)
