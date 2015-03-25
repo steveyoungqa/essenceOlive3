@@ -38,27 +38,30 @@ Feature: Regression Tests split into single Scenarios
     Then I click the "Campaign Save" link
     Then I wait for 8000
 
-    Then I click the "External Platforms" link
-    And I click the "Google Sub Product" link
-    Then I fill in "mapping-externalSystem-googleSubProduct" with "AdWords - A01 (Acquisition)"
-    Then I wait for 5000
-    Then I click the "External System Save" link
-     # The above link doesnt click External Save - it takes focus off the form dropdown in the previous step
-    Then I click the "External System Save" link
-    Then I wait for 5000
+#    Then I click the "External Platforms" link
+#    And I click the "Google Sub Product" link
+#    Then I fill in "mapping-externalSystem-googleSubProduct" with "AdWords - A01 (Acquisition)"
+#    Then I wait for 5000
+#    Then I click the "External System Save" link
+#     # The above link doesnt click External Save - it takes focus off the form dropdown in the previous step
+#    Then I click the "External System Save" link
+#    Then I wait for 5000
 
     Then I click the "Media Plans" link
+    Then I follow "Add media plan"
+    Then I wait for 2000
 
-    Then I follow "campaign-marketbudgets-add"
+#    Then I follow "campaign-marketbudgets-new-kpiType"
+#    Then I click the "KPI Type" link
+#    And I wait for 2000
+    And I fill in the "KPI Type" with "Brand"
+#    Then I wait for 2000
+#    Then I click the link containing Text "Brand"
+
+    Then I follow "#campaign-marketbudgets-add"
     Then I wait for 3000
     And I fill in "campaign-marketbudgets-new-label" with "Test Label"
     Then I wait for 2000
-
-    Then I click the "KPI Type" link
-    And I wait for 2000
-    And I fill in the "KPI Type" with "Brand"
-    Then I wait for 2000
-    Then I click the link containing Text "Brand"
 
     Then I click the "Add New Period" link
     And I fill in "campaign-marketbudgets-new-periods-new-name" with "<period>"
