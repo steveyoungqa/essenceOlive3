@@ -3,8 +3,7 @@
         "behat/behat": "~2.4.5",
         "behat/mink-selenium2-driver":  "~1.1.1",
         "sensiolabs/behat-page-object-extension": "1.0.0",
-        "se/selenium-server-standalone": "dev-master",
-        "behat/behat-bundle": "~3.0.6"
+        "se/selenium-server-standalone": "dev-master"
     },
     "minimum-stability": "dev",
     "config": {
