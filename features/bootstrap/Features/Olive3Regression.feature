@@ -16,7 +16,7 @@ Feature: Olive 3 Regression Pack
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
-
+# ***CREATE CAMPAIGN***
      Then I click the "Navigation Header" link
      Then I follow "Campaigns"
 
@@ -41,6 +41,7 @@ Feature: Olive 3 Regression Pack
      Then I click the "Campaign Save" link
      Then I wait for 8000
 
+# ***LINK TO EXTERNAL PLATFORM***
      Then I click the "External Platforms" link
      And I click the "Google Sub Product" link
      Then I fill in "mapping-externalSystem-googleSubProduct" with "AdWords - A01 (Acquisition)"
@@ -50,6 +51,7 @@ Feature: Olive 3 Regression Pack
      Then I click the "External System Save" link
      Then I wait for 5000
 
+# ***CREATE MEDIA PLAN***
      Then I click the "Media Plans" link
      Then I follow "campaign-marketbudgets-add"
      Then I wait for 3000
@@ -89,6 +91,7 @@ Feature: Olive 3 Regression Pack
      Then I click the "Media Plan Save" link
      Then I wait for 5000
 
+# ***LINK TO GOOGLE INITIATIVE***
      Then I click the "Link Google Initiative" link
      Then I fill in "mapping-externalSystem-googleInitiative" with "<initiative>"
      Then I wait for 2000
@@ -102,6 +105,8 @@ Feature: Olive 3 Regression Pack
      And I select the Media Plan linked to Campaign of "<campaign>"
      Then I wait for 5000
 
+
+# ***ADD MEDIA PLAN LINE**
      Then I click the "Add Media Plan Line" link
      Then I wait for 2000
      Then I click the "Line Cost Type" link
@@ -133,6 +138,7 @@ Feature: Olive 3 Regression Pack
      Then I click the "Save Media Plan Line" link
      Then I wait for 5000
 
+# ***PUBLISH MEDIA PLAN***
      When I click the "Publish Media Plan" link
      Then I wait for 1000
      Then I should see "Media Plan published successfully"
