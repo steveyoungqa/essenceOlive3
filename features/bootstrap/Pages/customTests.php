@@ -60,11 +60,11 @@ class customTests extends CustomPage
         'Insertion Order tab' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Insertion orders')]"),
         'Map Lines' => array('xpath' => "//*[@class='button button__label-only']//*[contains(text(),'Map lines')]"),
         'Link DS3' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-ios-ds3-link']"),
-        'Plan Lines tab' => array('xpath' => "//*[@class='navigation-tabs']//*[contains(text(),'Plan Lines')]"),
+        'Plan Lines' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Plan Lines')]"),
         'Manage Mapped Entities' => array('xpath' => "//*[contains(text(),'Manage mapped campaigns')]"),
         'Save Managed Entities' => array('xpath' => "//*[@class='page-actions table-actions']/a[@class='button add--button']"),
         'Close Mapped Panel' => array('xpath' => "//*[@class='button__icon button__icon--left icon icon--clear icon--lrg icon--cropped']"),
-        'Plan tab' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-tab']"),
+        'Plan tab' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Plan')]"),
 
 
         'Manage Approval' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-manage-approval']"),
@@ -78,11 +78,12 @@ class customTests extends CustomPage
         'Set Status' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-set-status']"),
         'Feedback Notes' => array('xpath' => "//*[@ng-model='feedback.note']"),
         'Approve' => array('xpath' => "//*[@class='button'][contains(text(),'Approve')]"),
-        'Conversion Mapping Tab' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Conversion mapping')]"),
+        'Default KPIs' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Default KPIs')]"),
         'Manage Conversion Event Mapping' => array('xpath' => "//*[@id='campaign-conversion-mapping']"),
-        'Add Event' => array('xpath' => "//*[@id='campaign-events-add']"),
-        'Event Number' => array('xpath' => "//*[@id='campaign-events-new-number']"),
-        'Event Name' => array('xpath' => "//*[@id='campaign-events-new-name']"),
+        'Add KPI' => array('xpath' => "//*[@id='campaign-events-add']"),
+        'KPI Event Type' => array('xpath' => "//*[@id='campaign-events-new-kpiType']"),
+        'KPI Event Number' => array('xpath' => "//*[@id='campaign-events-new-number']"),
+        'KPI Event Name' => array('xpath' => "//*[@id='campaign-events-new-name']"),
         'Conversion Source Field' => array('xpath' => "//*[@id='campaign-events-new-source']"),
         'Google Floodlights' => array('xpath' => "//*[@id='campaign-events-new-source-google-floodlights']"),
         'Event Save' => array('xpath' => "//*[@id='campaign-events-new-save']"),
@@ -102,6 +103,7 @@ class customTests extends CustomPage
         'Media Plan Button' => array('xpath' => "//*[@ol-message='marketbudget:action:plan']"),
         'DS3 Account ID' => array('xpath' => "//*[@id='mapping-externalSystem-ds3']"),
 
+        'Brand Test' => array('xpath' => "//*[@id='campaign-events-new-kpiType-brand']"),
     );
 
     public function clickXpathID ($click)

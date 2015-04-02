@@ -15,7 +15,6 @@ Feature: Olive 3 Regression Pack
       Then I should see "Notifications"
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
-
 # ***CREATE CAMPAIGN***
      Then I click the "Navigation Header" link
      Then I follow "Campaigns"
@@ -44,7 +43,7 @@ Feature: Olive 3 Regression Pack
 # ***LINK TO EXTERNAL PLATFORM***
      Then I click the "External Platforms" link
      And I click the "Google Sub Product" link
-     Then I fill in "mapping-externalSystem-googleSubProduct" with "AdWords - A01 (Acquisition)"
+     Then I fill in "mapping-externalSystem-googleSubProduct" with "Wildfire - E15"
      Then I wait for 5000
      Then I click the "External System Save" link
      # The above link doesnt click External Save - it takes focus off the form dropdown in the previous step
@@ -92,6 +91,7 @@ Feature: Olive 3 Regression Pack
      Then I wait for 5000
 
 # ***LINK TO GOOGLE INITIATIVE***
+     Then I click the "External Platforms" link
      Then I click the "Link Google Initiative" link
      Then I fill in "mapping-externalSystem-googleInitiative" with "<initiative>"
      Then I wait for 2000
@@ -100,13 +100,12 @@ Feature: Olive 3 Regression Pack
      Then I wait for 10000
      Then I click the "Previous Breadcrumb" link
 
+# ***ADD MEDIA PLAN LINE**
      Then I click the "Media Plan Whole Column" link
      Then I wait for 5000
      And I select the Media Plan linked to Campaign of "<campaign>"
      Then I wait for 5000
 
-
-# ***ADD MEDIA PLAN LINE**
      Then I click the "Add Media Plan Line" link
      Then I wait for 2000
      Then I click the "Line Cost Type" link
@@ -121,7 +120,7 @@ Feature: Olive 3 Regression Pack
      And I click the link containing Text "DS3"
      Then I click the "Property" link
      Then I fill in "campaign-marketbudgets-versions-lines-new-indicativeProperty" with "Google+"
-     Then I wait for 2000
+     Then I wait for 3000
      Then I click the "Cost Model" link
      Then I fill in "campaign-marketbudgets-versions-lines-new-costModel" with "Biddable CPC"
 
@@ -147,14 +146,14 @@ Feature: Olive 3 Regression Pack
      Then I click the "Insertion Order tab" link
      Then I wait for 4000
      And I click the "Map Lines" link
-     Then I click the "External Platforms tab" link
+     Then I click the "External Platforms" link
      And I click the "Link DS3" link
      And I fill in "mapping-externalSystem-ds3" with "<ds3>"
      Then I wait for 8000
      And I click the link containing Text "<ds3>"
      Then I click the "External System Save" link
 
-     Then I click the "Plan Lines tab" link
+     Then I click the "Plan Lines" link
      And I click the "Manage Mapped Entities" link
      Then I wait for 15000
 
@@ -196,11 +195,11 @@ Feature: Olive 3 Regression Pack
      Then I wait for 3000
 
      Given I select Edit for the existing Campaign "<campaign>"
-     And I click the "Conversion Mapping Tab" link
+     And I click the "Default KPIs" link
      And I click the "Manage Conversion Event Mapping" link
-     Then I click the "Add Event" link
-     And I fill in the "Event Number" with "20"
-     And I fill in the "Event Name" with "Regression Event"
+     Then I click the "Add KPI" link
+     And I fill in the "KPI Event Number" with "20"
+     And I fill in the "KPI Event Number" with "Regression Event"
      Then I click the "Conversion Source Field" link
      Then I click the link containing Text "Google Floodlights"
      And I click the "Event Save" link
@@ -243,7 +242,7 @@ Feature: Olive 3 Regression Pack
 
   Examples:
     |campaign       |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |regressiontests|google|automation |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |regressiontests|google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

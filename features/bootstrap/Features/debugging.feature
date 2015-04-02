@@ -1,8 +1,6 @@
 @debug
 Feature: Olive 3 Regression Pack
-  Create new campaign, Add Media Plan, Add Media Plan Line & Service, Publish Media Plan
-  Insertion Order, Map to DS3, Map to Search Campaign, Approval Process
-  Conversion Evens, Tagging, Tracking Management & Mapping Status
+         Requires Existing Campaign, Media Plan and External Platform.
 
   Background:
 
@@ -16,18 +14,158 @@ Feature: Olive 3 Regression Pack
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
+    Then I click the "Navigation Header" link
+    Then I follow "Campaigns"
+    Then I wait for 3000
+    Given I select Edit for the existing Campaign "<campaign>"
+    Then I wait for 5000
+
+    # ***ADD MEDIA PLAN LINE**
+    Then I click the "Media Plan Whole Column" link
+    Then I wait for 5000
+    And I select the Media Plan linked to Campaign of "<campaign>"
+    Then I wait for 5000
+
+    Then I click the "Add Media Plan Line" link
+    Then I wait for 2000
+    Then I click the "Line Cost Type" link
+    And I click the "Cost Type Media" link
+    Then I click the "Line Channel" link
+    And I click the "Line Channel Search" link
+    Then I click the "Section" link
+    And I click the link containing Text "Default"
+    Then I click the "Supplier" link
+    And I click the link containing Text "<supplier>"
+    Then I click the "Platform" link
+    And I click the link containing Text "DS3"
+    Then I click the "Property" link
+    Then I fill in "campaign-marketbudgets-versions-lines-new-indicativeProperty" with "Google+"
+    Then I wait for 3000
+    Then I click the "Cost Model" link
+    Then I fill in "campaign-marketbudgets-versions-lines-new-costModel" with "Biddable CPC"
+
+    Then I select a Plan Line Start Date of "2015-03-05"
+    Then I wait for 2000
+    Then I Select a Plan Line End Date of "2015-03-10"
+    Then I wait for 2000
+
+    Then I click the "Line Currency" link
+    And I click the link containing Text "British Pound"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100000"
+    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
+
+    Then I click the "Save Media Plan Line" link
+    Then I wait for 5000
+
+    # ***PUBLISH MEDIA PLAN***
+    When I click the "Publish Media Plan" link
+    Then I wait for 1000
+    Then I should see "Media Plan published successfully"
+    Then I wait for 2000
+
+    Then I click the "Insertion Order tab" link
+    Then I wait for 4000
+    And I click the "Map Lines" link
+    Then I click the "External Platforms" link
+    And I click the "Link DS3" link
+    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
+    Then I wait for 8000
+    And I click the link containing Text "<ds3>"
+    Then I click the "External System Save" link
+
+    Then I click the "Plan Lines" link
+    And I click the "Manage Mapped Entities" link
+    Then I wait for 15000
+
+    Then I Map Search Campaign "<searchCampaign>"
+    And I click the "Save Managed Entities" link
+    Then I wait for 3000
+
+    Then I click the "Close Mapped Panel" link
+    Then I click the "Plan tab" link
+
+    Then I click the "Publish Dropdown" link
+    And I click the "Published State" link
+
+    Then I click the "Manage Approval" link
+    And I click the "Add Approver" link
+    Then I wait for 2000
+    And I fill in "campaign-marketbudgets-versions-approvers-add-type" with "Internal"
+    Then I wait for 2000
+    Then I click the "Approver Field" link
+    Then I wait for 2000
+    And I fill in "campaign-marketbudgets-versions-approvers-add-person" with "<approver>"
+    Then I wait for 2000
+    Then I click the link containing Text "<approver>"
+    Then I wait for 2000
+    Then I click the "Save Approver" link
+    Then I wait for 2000
+    And I click the "Request Approval" link
+    Then I wait for 2000
+
+    Then I click the "Insertion Order tab" link
+    Then I click the "Plan tab" link
+    Then I click the "Set Status" link
+    And I fill in the "Feedback Notes" with "Regression Testing feedback test"
+    Then I click the "Approve" link
+
+    Then I click the "Navigation Header" link
+    Then I follow "Campaigns"
+    Then I fill in the "Campaign Search" with "<campaign>"
+    Then I wait for 3000
+
+    Given I select Edit for the existing Campaign "<campaign>"
+    And I click the "Default KPIs" link
+    Then I click the "Add KPI" link
+    Then I wait for 2000
+    And I fill in the "KPI Event Type" with "Brand"
+    Then I wait for 2000
+    Then I click the "Brand Test" link
+    And I fill in the "KPI Event Number" with "20"
+    And I fill in the "KPI Event Name" with "Regression Event"
+    Then I click the "Conversion Source Field" link
+    Then I click the link containing Text "Google Floodlights"
+    And I click the "Event Save" link
+    Then I click the "Add Tag" link
+    And I click the "Conversion Type" link
+    And I fill in the "Conversion Type" with "<conversion>"
+    And I click the link containing Text "<conversion>"
+    Then I wait for 5000
+    And I click the "Activity Category" link
+    And I fill in the "Activity Category" with "<activity>"
+    And I click the link containing Text "<activity>"
+    And I click the "Activity Tag" link
+    And I fill in the "Activity Tag" with "<tag>"
+    Then I wait for 3000
+    And I click the link containing Text "<tag>"
+    Then I fill in the "Weighting" with "10"
+    And I click the "Tag Save" link
+
+    Then I click the "Navigation Header" link
+    Then I click the "Tracking Management" link
+    And I click the "Tracking Code Search Box" link
+    Then I fill in the "Tracking Code Search Box" with "<searchCampaign>"
+    Then I wait for 3000
+    And I click the "Advanced Filter" link
+    Then I wait for 2000
+    Then I click the "DS3 Advertiser Filter" link
+    And I fill in the "DS3 Advertiser Filter" with "<ds3Advert>"
+    Then I wait for 2000
+    Then I click the link containing Text "<ds3Advert>"
+    And I click the "Advanced Search Close" link
+    Then I click the "Tracking Details" link
+    Then I should see "MAPPED"
 
     Then I click the "Navigation Header" link
     Then I follow "Campaigns"
 
-    Then I fill in the "Campaign Search" with "DEBUG SCREENSHOT TEST"
-    Then I click the "External Platforms" link
-#
-#    THIS TEST WILL FAIL - TO TEST SCREENSHOT GENERATION
+    Then I fill in "campaign-search-basic" with "<campaign>"
+    Then I wait for 3000
+    Then I select the Delete "<campaign>" checkbox
 
   Examples:
     |campaign       |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |regressiontests|google|automation |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |donotdelete    |google|automation |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 
