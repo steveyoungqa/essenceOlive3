@@ -94,12 +94,12 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
  using the standard Mink context, due to missing IDs, Names etc. So there is an additonal Context file
  called **pageContext.php** that has been created for other functions as follows:
 
+
  ***Then I click the "Navigation Header" link***
   ```
  Used to Click elements that do not have an ID, Title, Alt or Text matches in the code
  The text in the quotes, i.e. "Navigation Header" is an x-path defined in an array in 
  the customTests.php file
- 
   ```
   ***Then I fill in the "Campaign Search" with "Defined Name"***
   ```
@@ -118,10 +118,47 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
   ```
  Used to pause the tests and wait for the numerous API's to load in the background,
  measured in milliseconds, 1000 = 1 second
+  
+  ```
+  ***Then I click the link containing ID "unique"***
+  ```
+ There will be occasions that the tests will need to interact with elements that have and ID
+ that is unique or user-generated
+ Example ID: [@id='campaignmarketbudget-donotdelete-q42015-united-kingdom-~-test-edit']
+ Due to the many facets of creating a Campaign the ID above can be different each time,
+ so this feature will click the link that contains for instance "donotdelete" which is the
+ campagin name
  
   ```
+  ***Then I click the link containing Text "Google Floodlights"***
+  ```
+ Similar to the previuous statement but this time selecting the actual text option,
+ used mainly in dropdowns
  
+ ```
+  ***Then I select the Delete "campaign" checkbox"***
+  ```
+ Checkboxes throughtout the site do not have and IDs or Names, so this statement uses
+ an ancestor xpath to locate a checkbox related to it, in this instance the Campaign name
  
+ ```
+  ***Given I select Edit for the existing Campaign "campaign"***
+  
+  ***Then I Map Search Campaign "searchCampaign"***
+  
+  ***Then I select a Media Plan Start Date of "2015-01-01"***
+  
+  ***Then I select a Media Plan End Date of "2015-01-01"***
+  
+  ***Then I select a Media Plan Line Start Date of "2015-01-01"***
+  
+  ***Then I select a Media Plan Line End Date of "2015-01-01"***
+  
+  ***And I select the Media Plan linked to Campaign of "campaign"***
+ 
+  ```
+ Full descriptions of each of these statements and their usage can be found in the
+ the customTests.php file
 
  
  
