@@ -1,7 +1,7 @@
 
-#Olive 3 Regression Tests using better MinkContext method
+#Olive 3 Regression Tests using MinkContext and Custom Context
 
-Frontend regression tests using the Behat framework
+Frontend Automaation regression tests using the Behat framework
 
 Behat is an open source behavior-driven development framework for PHP 5.3+ using Gherkin language feature files to interact with web browsers via the Mink library.
 
@@ -84,13 +84,45 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
  
 
 ##Using PHP Storm to Create new Automation Feature files:
- ```sh 
- Download the latest version of PHP Storm (v8.03 has extended Behat support)
+
+ 1. Download the latest version of PHP Storm (v8.03 has extended Behat support)
  
- The Feature files use predefined statements using the Mink Context, detailed
- [here](http://blog.lepine.pro/images/2012-03-behat-cheat-sheet-en.pdf)
+ 2. The Feature files use predefined statements using the Mink Context, detailed here
+ http://blog.lepine.pro/images/2012-03-behat-cheat-sheet-en.pdf
+ 
+ 3. Due to the design of the current site there are many page elements that cannot be interacted with
+ using the standard Mink context, due to missing IDs, Names etc. So there is an additonal Context file
+ called **pageContext.php** that has been created for other functions as follows:
+
+ ***Then I click the "Navigation Header" link***
+  ```
+ Used to Click elements that do not have an ID, Title, Alt or Text matches in the code
+ The text in the quotes, i.e. "Navigation Header" is an x-path defined in an array in 
+ the customTests.php file
+ 
+  ```
+  ***Then I fill in the "Campaign Search" with "Defined Name"***
+  ```
+ Used to fill in elements that do not have an ID, Title, Alt or Text matches in the code
+ x-path defined in an array in the customTests.php file
+ 
+  ```
+  ***Then I click the "Navigation Header" link***
+  ```
+ Used to Click elements that do not have an ID, Title, Alt or Text matches in the code
+ The text in the quotes, i.e. "Navigation Header" is an x-path defined in an array in 
+ the customTests.php file
+ 
+  ```
+  ***Then I wait for "5000"***
+  ```
+ Used to pause the tests and wait for the numerous API's to load in the background,
+ measured in milliseconds, 1000 = 1 second
+ 
+  ```
  
  
+
  
  
  
