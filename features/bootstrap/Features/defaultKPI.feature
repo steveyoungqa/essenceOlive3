@@ -69,6 +69,13 @@ Feature: Olive 3 Regression Pack
     Then I fill in the "Weighting" with "10"
     And I click the "Tag Save" link
 
+    Then I click the "Navigation Header" link
+    Then I follow "Campaigns"
+
+    Then I fill in "campaign-search-basic" with "<campaign>"
+    Then I wait for 3000
+    Then I select the Delete "<campaign>" checkbox
+
   Examples:
   |campaign|client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
   |kpi     |google|automation |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
