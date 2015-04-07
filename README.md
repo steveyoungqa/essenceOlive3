@@ -49,7 +49,7 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
 
 2. Run behat
 
- eg. Olive 3 Regression tests on UAT
+ eg. Olive 3 Regression tests on Test
  ```sh
  bin/behat --tags=regression --expand --profile=test
  ```
@@ -68,8 +68,8 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
  @regression
  @campaign
  @kpi
- @breach
- @breach2
+ @login
+ @mediaPlans
 
   
  eg:
@@ -81,6 +81,18 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
  Add this line to autoload.php
  
  error_reporting(E_ERROR | E_WARNING | E_PARSE);
+ 
+
+##Using PHP Storm to Create new Automation Feature files:
+ ```sh 
+ Download the latest version of PHP Storm (v8.03 has extended Behat support)
+ 
+ The Feature files use predefined statements using the Mink Context, detailed
+ [here](http://blog.lepine.pro/images/2012-03-behat-cheat-sheet-en.pdf)
+ 
+ 
+ 
+ 
  
  
  
