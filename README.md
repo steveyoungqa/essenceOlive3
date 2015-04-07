@@ -107,11 +107,9 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
  x-path defined in an array in the customTests.php file
  
   ```
-  ***Then I click the "Navigation Header" link***
+ 
   ```
- Used to Click elements that do not have an ID, Title, Alt or Text matches in the code
- The text in the quotes, i.e. "Navigation Header" is an x-path defined in an array in 
- the customTests.php file
+
  
   ```
   ***Then I wait for "5000"***
