@@ -1,7 +1,7 @@
 
 #Olive 3 Regression Tests using MinkContext and Custom Context
 
-Frontend Automaation regression tests using the Behat framework
+Frontend Automation regression tests using the Behat framework
 
 Behat is an open source behavior-driven development framework for PHP 5.3+ using Gherkin language feature files to interact with web browsers via the Mink library.
 
