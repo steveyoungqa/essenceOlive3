@@ -57,7 +57,7 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
  ```
 
  eg. Domains
- ```sh
+
  --profile=localhost #runs on http://localhost:7000/
  --profile=staging   #runs on http://ess-lon-olive-web-001s.essence.internal.com:7000/
  --profile=test      #runs on http://ess-lon-olive-web-001s.essence.internal.com:7002/
