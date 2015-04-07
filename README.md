@@ -81,7 +81,7 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
  Add this line to autoload.php
  
  error_reporting(E_ERROR | E_WARNING | E_PARSE);
- 
+  ```
 
 ##Using PHP Storm to Create new Automation Feature files:
 
