@@ -111,6 +111,7 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
   ```
   ***Then I wait for "5000"***
   ```
+   ```
  Used to pause the tests and wait for the numerous API's to load in the background,
  measured in milliseconds, 1000 = 1 second
   
