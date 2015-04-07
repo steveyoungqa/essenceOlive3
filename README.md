@@ -55,40 +55,33 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
  ```
 
  ```
- 
-  eg. UAT Pack on UAT
- ```sh
- bin/behat --tags=uat --expand --profile=uat
- ```
 
  eg. Domains
  ```sh
  --profile=localhost #runs on http://localhost:7000/
  --profile=staging   #runs on http://ess-lon-olive-web-001s.essence.internal.com:7000/
- --profile=uat       #runs on http://ess-lon-olive-web-001s.essence.internal.com:7001/
  --profile=test      #runs on http://ess-lon-olive-web-001s.essence.internal.com:7002/
  ```
  
  eg. Other Test Packs Tags:
  ```sh
+ @regression
  @campaign
- @campaignEdge
+ @kpi
  @breach
  @breach2
- @conversion
- @insertion
- @approval
- @mappingtests
- @mediaplanline
- @mediaplan
- @missingsearch
- @publishMediaPlanEdgeCases
- @spendtodate
- @trackManage
- @untracked
+
   
  eg:
- bin/behat --tags=mappingtests --expand --profile=uat
+ bin/behat --tags=regression --expand --profile=uat
  ```
+ 
+ To supress Depreceated PHP messages:
+ ```sh 
+ Add this line to autoload.php
+ 
+ error_reporting(E_ERROR | E_WARNING | E_PARSE);
+ 
+ 
  
 
