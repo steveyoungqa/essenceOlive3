@@ -185,6 +185,18 @@ class pageContext extends PageObjectContext
 
     }
 
+    /**
+     * @Then /^I Maximize the Browser Window$/
+     */
+    public function maximizeWindow()
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->maximizeWindow();
+    }
+
 
 
 

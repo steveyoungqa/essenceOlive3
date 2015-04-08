@@ -18,7 +18,8 @@ class customTests extends CustomPage
         'Campaign Delete' => array('xpath' => "//*[@id='campaign-delete']"),
         'editExistingCampaign' => array('xpath' => "//*[contains(@id,'actionbuttons')]"),
         'Delete Yes' => array('xpath' => "//*[@class='toast-action'][contains(text(),'Yes')]"),
-        'External Platforms' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'External platforms')]"),
+        'External Platforms Market Level' => array('xpath' => "//*[@class='active--panel tiered__panel ng-scope show--panel']//*[contains(text(),'External platforms')]"),
+        'External Platforms Post Create Plan' => array('xpath' => "//*[contains(@class,'active--panel')]//*[contains(text(),'External platforms')]"),
         'Google Sub Product' => array('xpath' => "//a[@id='campaign-google-sub-product-link']"),
         'External System Save' => array('xpath' => "//*[@class='ng-isolate-scope']//*[@class='form-standard ng-pristine ng-valid']//*[@class='tiered__actions']//*[@id='mapping-externalSystem-save']"),
         'Media Plans' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Media Plans')]"),
@@ -34,7 +35,7 @@ class customTests extends CustomPage
         'End Date Media Plan' => array('xpath' => "//input[@id='campaign-marketbudgets-new-endDate']"),
         'Start Date Media Plan Line' => array('xpath' => "//input[@id='campaign-marketbudgets-versions-lines-new-startDate']"),
         'End Date Media Plan Line' => array('xpath' => "//input[@id='campaign-marketbudgets-versions-lines-new-endDate']"),
-        'Media Plan Save' => array('xpath' => "//a[@id='campaign-marketbudgets-new-save']"),
+        'Media Plan Save' => array('xpath' => "//*[@id='campaign-marketbudgets-new-save']"),
         'Link Google Initiative' => array('xpath' => "//a[@id='campaign-marketbudgets-google-initiative-link']"),
         'Save Mapped Account' => array('xpath' => "//*[@class='ng-isolate-scope']//*[@class='ng-isolate-scope']//*[@id='mapping-externalSystem-save']"),
         'Previous Breadcrumb' => array('xpath' => "//*[@class='linkContainer breadcrumb-step ng-scope']/a[@id='breadcrumb-1']"),
@@ -103,7 +104,11 @@ class customTests extends CustomPage
         'Media Plan Button' => array('xpath' => "//*[@ol-message='marketbudget:action:plan']"),
         'DS3 Account ID' => array('xpath' => "//*[@id='mapping-externalSystem-ds3']"),
 
-        'Brand Test' => array('xpath' => "//*[@id='campaign-events-new-kpiType-brand']"),
+        'KPI Brand' => array('xpath' => "//*[@id='campaign-marketbudgets-new-kpiType-brand']/span[@class='ng-binding ng-scope']"),
+        'KPI Type Long Path' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[2]"),
+        'Market Long Path' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[4]"),
+        'Media Plan Long Save' => array('xpath' => "//*[@class='tiered__panel-inner']/div[@class='ng-scope']/div[@class='tiered__panel-details ng-scope']/div[@class='ng-isolate-scope']/div[@class='tiered__actions ng-scope']//*[contains(text(),'Save')]"),
+
     );
 
     public function clickXpathID ($click)
@@ -219,6 +224,11 @@ class customTests extends CustomPage
             throw new Exception('Element not found');
         }
         $this->getSession()->wait(5000);
+    }
+
+    public function maximizeWindow ()
+    {
+        $this->getSession()->resizeWindow(1440,800);
     }
 
 }

@@ -48,7 +48,6 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     And I fill in the "KPI Event Type" with "Brand"
     Then I wait for 2000
-    Then I click the "Brand Test" link
     And I fill in the "KPI Event Number" with "20"
     And I fill in the "KPI Event Name" with "Regression Event"
     Then I click the "Conversion Source Field" link

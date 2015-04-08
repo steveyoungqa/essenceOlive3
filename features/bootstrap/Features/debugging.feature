@@ -34,16 +34,20 @@ Feature: Olive 3 Regression Pack
     And I click the "Line Channel Search" link
     Then I click the "Section" link
     And I click the link containing Text "Default"
+    Then I wait for 2000
     Then I click the "Supplier" link
     And I click the link containing Text "<supplier>"
     Then I click the "Platform" link
     And I click the link containing Text "DS3"
+    Then I wait for 2000
     Then I click the "Property" link
-    Then I fill in "campaign-marketbudgets-versions-lines-new-indicativeProperty" with "Google+"
-    Then I wait for 3000
+    And I click the link containing Text "Google Search"
+    Then I wait for 2000
+    Then I click the "Media Type" link
+    And I click the link containing Text "Search Text Ad"
+    Then I wait for 2000
     Then I click the "Cost Model" link
-    Then I fill in "campaign-marketbudgets-versions-lines-new-costModel" with "Biddable CPC"
-
+    And I click the link containing Text "Biddable CPC"
     Then I select a Plan Line Start Date of "2015-03-05"
     Then I wait for 2000
     Then I Select a Plan Line End Date of "2015-03-10"
@@ -66,7 +70,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "Insertion Order tab" link
     Then I wait for 4000
     And I click the "Map Lines" link
-    Then I click the "External Platforms" link
+    Then I click the "External Platforms Insertion Order" link
     And I click the "Link DS3" link
     And I fill in "mapping-externalSystem-ds3" with "<ds3>"
     Then I wait for 8000
