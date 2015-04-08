@@ -48,6 +48,6 @@ Feature: P01 - Create new campaign
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign       |client|owner      |
-    |campiagntest   |google|automation |
+    |campaign |client|owner      |
+    |campaigns|google|automation |
 

@@ -1,4 +1,4 @@
-@mediaPlans
+@mediaplans
 Feature: Olive 3 Media Plan Creation
 
   Background:
@@ -37,7 +37,7 @@ Feature: Olive 3 Media Plan Creation
     Then I click the "Campaign Save" link
     Then I wait for 5000
 
-    Then I click the "External Platforms" link
+    Then I click the "External Platforms Market Level" link
     And I click the "Google Sub Product" link
     Then I fill in "mapping-externalSystem-googleSubProduct" with "AdWords - A01 (Acquisition)"
     Then I wait for 5000
@@ -50,23 +50,29 @@ Feature: Olive 3 Media Plan Creation
     Then I follow "campaign-marketbudgets-add"
     Then I wait for 3000
     And I fill in "campaign-marketbudgets-new-label" with "Test Label"
+    Then I wait for 2000
+
+    Then I click the "KPI Type Long Path" link
+    Then I click the "KPI Brand" link
+    Then I wait for 2000
+
     Then I click the "Add New Period" link
     And I fill in "campaign-marketbudgets-new-periods-new-name" with "<period>"
     Then I click the "New Period Save" link
     And I click the "Close Add Period" link
 
     Then I fill in "campaign-marketbudgets-new-period" with "<period>"
-
+    Then I wait for 2000
     Then I click the link containing ID "<period>"
     Then I wait for 2000
 
-    Then I click the "Campaign New Market" link
+    Then I click the "Market Long Path" link
     Then I wait for 2000
     Then I click the "Market USA" link
 
-    Then I select a Media Plan Start Date of "2015-01-01"
-    Then I wait for 2000
-    Then I Select a Media Plan End Date of "2015-01-31"
+    Then I select a Media Plan Start Date of "2015-04-01"
+    Then I wait for 3000
+    Then I Select a Media Plan End Date of "2015-04-30"
     Then I wait for 2000
 
     Then I fill in "campaign-marketbudgets-new-liableEntity" with "<clientLiable>"
@@ -82,7 +88,7 @@ Feature: Olive 3 Media Plan Creation
     Then I wait for 2000
     Then I click the link containing ID "<owner>"
 
-    Then I click the "Media Plan Save" link
+    Then I click the "Media Plan Long Save" link
     Then I wait for 5000
 
     Then I click the "Navigation Header" link
@@ -93,5 +99,5 @@ Feature: Olive 3 Media Plan Creation
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign       |client|owner      |period |budget|clientLiable |
-    |regressiontests|google|automation |q4-2015|100000|Client Liable|
+    |campaign |client|owner      |period |budget|clientLiable |
+    |mediaplan|google|automation |q4-2015|100000|Client Liable|
