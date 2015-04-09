@@ -45,6 +45,7 @@ class customTests extends CustomPage
         'Line Cost Type' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-costType']"),
         'Cost Type Media' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-costType-media']"),
         'Cost Type Service' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-costType-service']"),
+        'Buy Type' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-buyType']"),
         'Line Channel' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-channel']"),
         'Line Channel Display' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-channel-display']"),
         'Line Channel Search' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-channel-search']"),
@@ -55,6 +56,7 @@ class customTests extends CustomPage
         'Media Type' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-indicativeMediaType']"),
         'Cost Model' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-costModel']"),
         'Line Currency' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-currency']"),
+        'Unknown Budget' => array('xpath' => "//*[@class='form__input']//*[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']"),
         'Save Media Plan Line' => array('xpath' => "//a[@id='campaign-marketbudgets-versions-lines-new-save']"),
         'Publish Media Plan' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-publish']"),
         'External Platforms Insertion Order' => array('xpath' => "//*[@class='md-header-items-container']//*[contains(text(),'External platforms')]"),
@@ -66,7 +68,7 @@ class customTests extends CustomPage
         'Save Managed Entities' => array('xpath' => "//*[@class='page-actions table-actions']/a[@class='button add--button']"),
         'Close Mapped Panel' => array('xpath' => "//*[@class='button__icon button__icon--left icon icon--clear icon--lrg icon--cropped']"),
         'Plan tab' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Plan')]"),
-
+        'Edit Plan Line' => array('xpath' => "//*[@class='table__actions ng-scope']//*[contains(text(),'Edit')]"),
 
         'Manage Approval' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-manage-approval']"),
         'Add Approver' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add']"),

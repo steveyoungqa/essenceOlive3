@@ -1,8 +1,7 @@
 @planlines
 Feature: Olive 3 Regression Pack
-  Create new campaign, Add Media Plan, Add Media Plan Line & Service, Publish Media Plan
-  Insertion Order, Map to DS3, Map to Search Campaign, Approval Process
-  Conversion Evens, Tagging, Tracking Management & Mapping Status
+  Create new campaign, Add Media Plan, Add Media Plan Line & Service
+  OAT-99, OAT-111
 
   Background:
 
@@ -105,13 +104,14 @@ Feature: Olive 3 Regression Pack
     Then I click the link containing ID "<initiative>"
     Then I click the "Save Mapped Account" link
     Then I wait for 10000
+
+
+# ***ADD MEDIA PLAN LINE**
     Then I click the "Navigation Header" link
     Then I follow "Campaigns"
     Then I wait for 3000
     Given I select Edit for the existing Campaign "<campaign>"
     Then I wait for 5000
-
-# ***ADD MEDIA PLAN LINE**
     Then I click the "Media Plan Whole Column" link
     Then I wait for 5000
     And I select the Media Plan linked to Campaign of "<campaign>"
@@ -121,8 +121,22 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the "Line Cost Type" link
     And I click the "Cost Type Media" link
+   
+    Then I click the "Buy Type" link
+    Then I wait for 2000
+    Then I should see text matching "Programmatic - PMP"
+    Then I should see text matching "Programmatic - Preferred deal"
+    Then I should see text matching "Programmatic - Open Exchange"
+    Then I should see text matching "Programmatic - Guaranteed"
+    Then I should see text matching "Biddable"
+    Then I should see text matching "Direct Buy"
+    And I fill in the "Buy Type" with "<buyType>"
+    Then I wait for 2000
+
     Then I click the "Line Channel" link
-    And I click the "Line Channel Search" link
+    And I fill in the "Line Channel" with "Display"
+    Then I wait for 2000
+#    And I click the "Line Channel Search" link
     Then I click the "Section" link
     And I click the link containing Text "Default"
     Then I wait for 2000
@@ -135,7 +149,19 @@ Feature: Olive 3 Regression Pack
     And I click the link containing Text "Google Search"
     Then I wait for 2000
     Then I click the "Media Type" link
-    And I click the link containing Text "Search Text Ad"
+    Then I wait for 2000
+    Then I should see text matching "Link / text ad"
+    Then I should see text matching "Text & image ad"
+    Then I should see text matching "Expandable banner"
+    Then I should see text matching "Lightbox"
+    Then I should see text matching "Synced Roadblock"
+    Then I should see text matching "Overlay"
+    Then I should see text matching "Bespoke takeover"
+    Then I should see text matching "Advertorial"
+    Then I should see text matching "Interstitial"
+
+
+    And I click the link containing Text "Link / text ad"
     Then I wait for 2000
     Then I click the "Cost Model" link
     And I click the link containing Text "Biddable CPC"
@@ -152,17 +178,91 @@ Feature: Olive 3 Regression Pack
     Then I click the "Save Media Plan Line" link
     Then I wait for 5000
 
-# ***DELETE CAMPAIGN CLEAN UP***
+# ***ADD 2ND MEDIA PLAN LINE **
     Then I click the "Navigation Header" link
     Then I follow "Campaigns"
-
-    Then I fill in "campaign-search-basic" with "<campaign>"
     Then I wait for 3000
-    Then I select the Delete "<campaign>" checkbox
+    Given I select Edit for the existing Campaign "<campaign>"
+    Then I wait for 5000
+    Then I click the "Media Plan Whole Column" link
+    Then I wait for 5000
+    And I select the Media Plan linked to Campaign of "<campaign>"
+    Then I wait for 5000
+
+    Then I click the "Add Media Plan Line" link
+    Then I wait for 2000
+    Then I click the "Line Cost Type" link
+    And I click the "Cost Type Media" link
+
+    Then I click the "Buy Type" link
+    Then I wait for 2000
+    And I fill in the "Buy Type" with "<buyType>"
+    Then I wait for 2000
+    Then I click the "Line Channel" link
+    And I fill in the "Line Channel" with "Display"
+    Then I wait for 2000
+    Then I click the "Section" link
+    And I click the link containing Text "Default"
+    Then I wait for 2000
+    Then I click the "Supplier" link
+    And I click the link containing Text "<supplier>"
+    Then I click the "Platform" link
+    And I click the link containing Text "DS3"
+    Then I wait for 2000
+    Then I click the "Property" link
+    And I click the link containing Text "Google Search"
+    Then I wait for 2000
+    Then I click the "Media Type" link
+    Then I wait for 2000
+    And I click the link containing Text "Link / text ad"
+    Then I wait for 2000
+    Then I click the "Cost Model" link
+    And I click the link containing Text "Biddable CPC"
+    Then I select a Plan Line Start Date of "2015-04-04"
+    Then I wait for 2000
+    Then I Select a Plan Line End Date of "2015-04-04"
+    Then I wait for 2000
+
+    Then I click the "Line Currency" link
+    And I click the link containing Text "British Pound"
+    And I click the "Unknown Budget" checkbox
+    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Plan Line 2"
+
+    Then I click the "Save Media Plan Line" link
+    Then I wait for 5000
+
+# ***ADD 2ND MEDIA PLAN LINE *
+    Then I click the "Navigation Header" link
+    Then I follow "Campaigns"
+    Then I wait for 3000
+    Given I select Edit for the existing Campaign "<campaign>"
+    Then I wait for 5000
+    Then I click the "Media Plan Whole Column" link
+    Then I wait for 5000
+    And I select the Media Plan linked to Campaign of "<campaign>"
+    Then I wait for 5000
+    Then I click the "Edit Plan Line" link
+
+# ***PUBLISH MEDIA PLAN***
+    When I click the "Publish Media Plan" link
+    Then I wait for 1000
+    Then I should see "Media Plan published successfully"
+    Then I wait for 2000
+
+    Then I click the "Insertion Order tab" link
+    Then I wait for 4000
+
+## ***DELETE CAMPAIGN CLEAN UP***
+#    Then I click the "Navigation Header" link
+#    Then I follow "Campaigns"
+#    Then I wait for 2000
+#    Then I fill in "campaign-search-basic" with "<campaign>"
+#    Then I wait for 3000
+#    Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |planline |google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |campaign |client|owner      |period |budget|clientLiable |initiative|buyType   |supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |planline |google|automation |q4-2015|100000|Client Liable|wildfire  |Direct Buy|Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

@@ -15,6 +15,7 @@ class pageContext extends PageObjectContext
      * For elements that don't have IDs,CSS,Values etc - so use page object arrays instead
      *
      * @Then /^I click the "([^"]*)" link$/
+     * @Then /^I click the "([^"]*)" checkbox$/
      */
     public function usePageObjectArray($xpath)
     {
