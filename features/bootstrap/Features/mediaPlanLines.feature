@@ -1,7 +1,7 @@
 @planlines
 Feature: Olive 3 Regression Pack
   Create new campaign, Add Media Plan, Add Media Plan Line & Service
-  OAT-99, OAT-111
+  OAT-99, OAT-111, OAT-62
 
   Background:
 
@@ -172,7 +172,7 @@ Feature: Olive 3 Regression Pack
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100000"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100"
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
@@ -231,35 +231,19 @@ Feature: Olive 3 Regression Pack
     Then I click the "Save Media Plan Line" link
     Then I wait for 5000
 
-# ***ADD 2ND MEDIA PLAN LINE *
-    Then I click the "Navigation Header" link
-    Then I follow "Campaigns"
-    Then I wait for 3000
-    Given I select Edit for the existing Campaign "<campaign>"
-    Then I wait for 5000
-    Then I click the "Media Plan Whole Column" link
-    Then I wait for 5000
-    And I select the Media Plan linked to Campaign of "<campaign>"
-    Then I wait for 5000
-    Then I click the "Edit Plan Line" link
-
-# ***PUBLISH MEDIA PLAN***
-    When I click the "Publish Media Plan" link
-    Then I wait for 1000
-    Then I should see "Media Plan published successfully"
-    Then I wait for 2000
-
+# ***CHECK INDIVIDUAL INSERTION ORDERS ARE CREATED DUE TO A MIX OF SET AND UNKNOWN BUDGET *
     Then I click the "Insertion Order tab" link
     Then I wait for 4000
+    Then I should see "2 found"
 
 
-## ***DELETE CAMPAIGN CLEAN UP***
-#    Then I click the "Navigation Header" link
-#    Then I follow "Campaigns"
-#    Then I wait for 2000
-#    Then I fill in "campaign-search-basic" with "<campaign>"
-#    Then I wait for 3000
-#    Then I select the Delete "<campaign>" checkbox
+# ***DELETE CAMPAIGN CLEAN UP***
+    Then I click the "Navigation Header" link
+    Then I follow "Campaigns"
+    Then I wait for 2000
+    Then I fill in "campaign-search-basic" with "<campaign>"
+    Then I wait for 3000
+    Then I select the Delete "<campaign>" checkbox
 
   Examples:
     |campaign |client|owner      |period |budget|clientLiable |initiative|buyType   |supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
