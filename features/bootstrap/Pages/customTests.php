@@ -50,6 +50,7 @@ class customTests extends CustomPage
         'Line Channel Display' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-channel-display']"),
         'Line Channel Search' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-channel-search']"),
         'Section' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-vertical']"),
+        'Section Edit'=>array('xpath' => "//*[@class='icon icon--md icon--edit ng-scope']"),
         'Supplier' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-supplier']"),
         'Platform' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-externalSystem']"),
         'Property' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-indicativeProperty']"),
@@ -132,6 +133,17 @@ class customTests extends CustomPage
         }
         else {
             throw new Exception (".$click. Element not found");
+        }
+    }
+
+    public function hoverOver ($hover)
+    {
+        $element = $this->find('xpath', '//*[contains(@id,"'.$hover.'")]');
+        if (isset($element)) {
+            $element->mouseOver();
+        }
+        else {
+            throw new Exception (".$hover. Element not found");
         }
     }
 

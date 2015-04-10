@@ -70,6 +70,20 @@ class pageContext extends PageObjectContext
     }
 
     /**
+     * Hover over the link that contains the x-path ID
+     *
+     * @Then /^I hover over the link containing ID "([^"]*)"$/
+     */
+    public function hoverOverLink($hover)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->hoverOver($hover);
+    }
+
+    /**
      * Clicks link that contains the text
      *
      * @Then /^I click the link containing Text "([^"]*)"$/

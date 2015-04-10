@@ -193,14 +193,11 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the "Line Cost Type" link
     And I click the "Cost Type Media" link
-
-    Then I click the "Buy Type" link
-    Then I wait for 2000
-    And I fill in the "Buy Type" with "<buyType>"
     Then I wait for 2000
     Then I click the "Line Channel" link
-    And I fill in the "Line Channel" with "Display"
+    And I fill in the "Line Channel" with "Search"
     Then I wait for 2000
+    Then I should see text matching "Biddable"
     Then I click the "Section" link
     And I click the link containing Text "Default"
     Then I wait for 2000
@@ -214,7 +211,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the "Media Type" link
     Then I wait for 2000
-    And I click the link containing Text "Link / text ad"
+    And I click the link containing Text "PLA"
     Then I wait for 2000
     Then I click the "Cost Model" link
     And I click the link containing Text "Biddable CPC"

@@ -124,6 +124,11 @@ Feature: Olive 3 Regression Pack
     Then I click the "Line Channel" link
     And I click the "Line Channel Search" link
     Then I click the "Section" link
+    Then I should see an "" element
+    And I hover over the link containing ID "campaign-marketbudgets-versions-lines-new-vertical"
+    Then I wait for 2000
+    Then I click the "Section Edit" link
+    Then I wait for 999999
     And I click the link containing Text "Default"
     Then I wait for 2000
     Then I click the "Supplier" link
@@ -152,11 +157,11 @@ Feature: Olive 3 Regression Pack
     Then I click the "Save Media Plan Line" link
     Then I wait for 5000
 
-## ***PUBLISH MEDIA PLAN***
-#    When I click the "Publish Media Plan" link
-#    Then I wait for 1000
-#    Then I should see "Media Plan published successfully"
-#    Then I wait for 2000
+# ***PUBLISH MEDIA PLAN***
+    When I click the "Publish Media Plan" link
+    Then I wait for 1000
+    Then I should see "Media Plan published successfully"
+    Then I wait for 2000
 
 
 
