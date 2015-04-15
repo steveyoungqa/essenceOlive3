@@ -27,6 +27,20 @@ class pageContext extends PageObjectContext
     }
 
     /**
+     * Double Click Element - Also used for a Hover/MouseOver event
+     *
+     * @Then /^I double click the "([^"]*)" link$/
+     */
+    public function doubleClick($click)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->doubleClick($click);
+    }
+
+    /**
      * Fill in xpath array with values
      *
      * @Then /^I fill in the "([^"]*)" with "([^"]*)"$/
@@ -67,20 +81,6 @@ class pageContext extends PageObjectContext
          */
         $custom = $this->getPage('customTests');
         $custom->clickXpathID($click);
-    }
-
-    /**
-     * Hover over the link that contains the x-path ID
-     *
-     * @Then /^I hover over the link containing ID "([^"]*)"$/
-     */
-    public function hoverOverLink($hover)
-    {
-        /**
-         * @var customTests $custom
-         */
-        $custom = $this->getPage('customTests');
-        $custom->hoverOver($hover);
     }
 
     /**

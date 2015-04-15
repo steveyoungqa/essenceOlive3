@@ -1,7 +1,7 @@
 @planlines
 Feature: Olive 3 Regression Pack
   Create new campaign, Add Media Plan, Add Media Plan Line & Service
-  OAT-99, OAT-111, OAT-62
+  OAT-99, OAT-111, OAT-62, OAT-72
 
   Background:
 
@@ -138,7 +138,12 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
 #    And I click the "Line Channel Search" link
     Then I click the "Section" link
-    And I click the link containing Text "Default"
+    Then I wait for 2000
+    Then I double click the "Section Edit" link
+    Then I wait for 2000
+    Then I fill in the "Section Edit Input" with "Custom Section"
+    Then I wait for 2000
+    And I click the "Confirm Section Edit" link
     Then I wait for 2000
     Then I click the "Supplier" link
     And I click the link containing Text "<supplier>"

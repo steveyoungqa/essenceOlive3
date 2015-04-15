@@ -50,7 +50,9 @@ class customTests extends CustomPage
         'Line Channel Display' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-channel-display']"),
         'Line Channel Search' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-channel-search']"),
         'Section' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-vertical']"),
-        'Section Edit'=>array('xpath' => "//*[@class='icon icon--md icon--edit ng-scope']"),
+        'Section Edit'=>array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-vertical-default']/span[@class='icon icon--md icon--edit ng-scope']"),
+        'Section Edit Input' => array('xpath' => "//input[@id='campaign-marketbudgets-versions-lines-new-vertical-edit']"),
+        'Confirm Section Edit' => array('xpath' => "//*[@class='icon icon--md icon--tick']"),
         'Supplier' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-supplier']"),
         'Liable Entity' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-medialines-liableEntity']"),
         'Platform' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-externalSystem']"),
@@ -117,11 +119,34 @@ class customTests extends CustomPage
         'First Plan Line Edit' => array('xpath' => "//*[@class='ng-scope'][1]/td//*[contains(text(),'Edit')]"),
     );
 
+
+    public function clickPageObject ($xpath)
+    {
+        $this->getElement($xpath)->click();
+        $this->getSession()->wait(2000);
+    }
+
+    public function waitForAWhile ($milliseconds)
+    {
+        $this->getSession()->wait($milliseconds);
+    }
+
     public function clickXpathID ($click)
     {
         $element = $this->find('xpath', '//*[contains(@id,"'.$click.'")]');
         if (isset($element)) {
             $element->click();
+        }
+        else {
+            throw new Exception (".$click. Element not found");
+        }
+    }
+
+    public function doubleClick ($click)
+    {
+        $element = $this->getElement($click);
+        if (isset($element)) {
+            $element->doubleClick();
         }
         else {
             throw new Exception (".$click. Element not found");
@@ -139,18 +164,6 @@ class customTests extends CustomPage
         }
     }
 
-    public function hoverOver ($hover)
-    {
-        $element = $this->find('xpath', '//*[contains(@id,"'.$hover.'")]');
-        if (isset($element)) {
-            $element->focus();
-            $element->mouseOver();
-        }
-        else {
-            throw new Exception (".$hover. Element not found");
-        }
-    }
-
     public function fillInXpathLinkWithValue ($xpath, $value)
     {
         $this->getElement($xpath)->setValue($value);
@@ -160,18 +173,6 @@ class customTests extends CustomPage
 //        $xpath = $this->fixStepArgument($xpath);
 //        $value = $this->fixStepArgument($value);
 //        $this->getSession()->getPage()->fillField($xpath, $value);
-
-    }
-
-    public function waitForAWhile ($milliseconds)
-    {
-        $this->getSession()->wait($milliseconds);
-    }
-
-    public function clickPageObject ($xpath)
-    {
-        $this->getElement($xpath)->click();
-        $this->getSession()->wait(2000);
 
     }
 
