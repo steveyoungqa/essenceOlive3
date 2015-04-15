@@ -52,6 +52,7 @@ class customTests extends CustomPage
         'Section' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-vertical']"),
         'Section Edit'=>array('xpath' => "//*[@class='icon icon--md icon--edit ng-scope']"),
         'Supplier' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-supplier']"),
+        'Liable Entity' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-medialines-liableEntity']"),
         'Platform' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-externalSystem']"),
         'Property' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-indicativeProperty']"),
         'Media Type' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-indicativeMediaType']"),
@@ -59,6 +60,7 @@ class customTests extends CustomPage
         'Line Currency' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-currency']"),
         'Unknown Budget' => array('xpath' => "//*[@class='form__input']//*[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']"),
         'Save Media Plan Line' => array('xpath' => "//a[@id='campaign-marketbudgets-versions-lines-new-save']"),
+        'Save Edited Media Plan Line' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-medialines-save']"),
         'Publish Media Plan' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-publish']"),
         'External Platforms Insertion Order' => array('xpath' => "//*[@class='md-header-items-container']//*[contains(text(),'External platforms')]"),
         'Insertion Order tab' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Insertion orders')]"),
@@ -112,6 +114,7 @@ class customTests extends CustomPage
         'Market Long Path' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[4]"),
         'Media Plan Long Save' => array('xpath' => "//*[@class='tiered__panel-inner']/div[@class='ng-scope']/div[@class='tiered__panel-details ng-scope']/div[@class='ng-isolate-scope']/div[@class='tiered__actions ng-scope']//*[contains(text(),'Save')]"),
 
+        'First Plan Line Edit' => array('xpath' => "//*[@class='ng-scope'][1]/td//*[contains(text(),'Edit')]"),
     );
 
     public function clickXpathID ($click)
@@ -140,6 +143,7 @@ class customTests extends CustomPage
     {
         $element = $this->find('xpath', '//*[contains(@id,"'.$hover.'")]');
         if (isset($element)) {
+            $element->focus();
             $element->mouseOver();
         }
         else {
