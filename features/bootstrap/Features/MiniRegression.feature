@@ -1,5 +1,4 @@
-@miniregression
-@CI
+@miniregression @CI
 Feature: Olive 3 Regression Pack
   Create new campaign, Add Media Plan, Add Media Plan Line & Service, Publish Media Plan
   Insertion Order, Map to DS3, Map to Search Campaign, Approval Process
