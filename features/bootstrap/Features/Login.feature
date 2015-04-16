@@ -1,4 +1,4 @@
-@login
+@login @CI
 Feature: Test Olive 3 Login
 
   Scenario Outline: Login Scenarios

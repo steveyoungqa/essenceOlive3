@@ -1,4 +1,4 @@
-@kpi
+@kpi @CI
 Feature: Olive 3 Regression Pack
   Default KPI Tests
 

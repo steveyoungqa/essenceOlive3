@@ -1,4 +1,4 @@
-@mediaplans
+@mediaplans @CI
 Feature: Olive 3 Media Plan Creation
 
   Background:

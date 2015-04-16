@@ -1,7 +1,8 @@
-@planlines @CI
+@miniregression @CI
 Feature: Olive 3 Regression Pack
-  Create new campaign, Add Media Plan, Add Media Plan Line & Service
-  OAT-99, OAT-111, OAT-62, OAT-72, OAT-102
+  Create new campaign, Add Media Plan, Add Media Plan Line & Service, Publish Media Plan
+  Insertion Order, Map to DS3, Map to Search Campaign, Approval Process
+  Conversion Evens, Tagging, Tracking Management & Mapping Status
 
   Background:
 
@@ -46,7 +47,7 @@ Feature: Olive 3 Regression Pack
     Then I fill in "mapping-externalSystem-googleSubProduct" with "Wildfire - E15"
     Then I wait for 5000
     Then I click the "External System Save" link
-     # The above link doesnt click External Save - it takes focus off the form dropdown in the previous step
+  # The above doesnt click External Save - it takes focus off the form dropdown in the previous step
     Then I click the "External System Save" link
     Then I wait for 5000
 
@@ -104,13 +105,13 @@ Feature: Olive 3 Regression Pack
     Then I click the link containing ID "<initiative>"
     Then I click the "Save Mapped Account" link
     Then I wait for 10000
-
-# ***ADD MEDIA PLAN LINE**
     Then I click the "Navigation Header" link
     Then I follow "Campaigns"
     Then I wait for 3000
     Given I select Edit for the existing Campaign "<campaign>"
     Then I wait for 5000
+
+# ***ADD MEDIA PLAN LINE**
     Then I click the "Media Plan Whole Column" link
     Then I wait for 5000
     And I select the Media Plan linked to Campaign of "<campaign>"
@@ -119,32 +120,13 @@ Feature: Olive 3 Regression Pack
     Then I click the "Add Media Plan Line" link
     Then I wait for 2000
     And I click the "Cost Type Media" link
-   
-    Then I click the "Buy Type" link
-    Then I wait for 2000
-    Then I should see text matching "Programmatic - PMP"
-    Then I should see text matching "Programmatic - Preferred deal"
-    Then I should see text matching "Programmatic - Open Exchange"
-    Then I should see text matching "Programmatic - Guaranteed"
-    Then I should see text matching "Biddable"
-    Then I should see text matching "Direct Buy"
-    And I fill in the "Buy Type" with "<buyType>"
-    Then I wait for 2000
-
     Then I click the "Line Channel" link
-    And I fill in the "Line Channel" with "Display"
-    Then I wait for 2000
+    And I click the "Line Channel Search" link
     Then I click the "Section" link
-    Then I wait for 2000
-    Then I double click the "Section Edit" link
-    Then I wait for 2000
-    Then I fill in the "Section Edit Input" with "Custom Section"
-    Then I wait for 2000
-    And I click the "Confirm Section Edit" link
+    And I click the link containing Text "Default"
     Then I wait for 2000
     Then I click the "Supplier" link
     And I click the link containing Text "<supplier>"
-    Then I should see text matching "<clientLiable>"
     Then I click the "Platform" link
     And I click the link containing Text "DS3"
     Then I wait for 2000
@@ -152,18 +134,7 @@ Feature: Olive 3 Regression Pack
     And I click the link containing Text "Google Search"
     Then I wait for 2000
     Then I click the "Media Type" link
-    Then I wait for 2000
-    Then I should see text matching "Link / text ad"
-    Then I should see text matching "Text & image ad"
-    Then I should see text matching "Expandable banner"
-    Then I should see text matching "Lightbox"
-    Then I should see text matching "Synced Roadblock"
-    Then I should see text matching "Overlay"
-    Then I should see text matching "Bespoke takeover"
-    Then I should see text matching "Advertorial"
-    Then I should see text matching "Interstitial"
-
-    And I click the link containing Text "Link / text ad"
+    And I click the link containing Text "Search Text Ad"
     Then I wait for 2000
     Then I click the "Cost Model" link
     And I click the link containing Text "Biddable CPC"
@@ -174,97 +145,68 @@ Feature: Olive 3 Regression Pack
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100000"
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
     Then I wait for 5000
 
-# ***ADD 2ND MEDIA PLAN LINE **
-    Then I click the "Add Media Plan Line" link
+# ***ADD KPI***
+    Then I click the "Navigation Header" link
+    Then I follow "Campaigns"
     Then I wait for 2000
-    And I click the "Cost Type Media" link
-
-    Then I click the "Buy Type" link
+    Given I select Edit for the existing Campaign "<campaign>"
+    And I click the "Default KPIs" link
+    Then I click the "Add KPI" link
     Then I wait for 2000
-    And I fill in the "Buy Type" with "<buyType>"
+    And I fill in the "KPI Event Type" with "Brand"
     Then I wait for 2000
-
-    Then I click the "Line Channel" link
-    And I fill in the "Line Channel" with "Display"
-    Then I wait for 2000
-    Then I click the "Section" link
-    Then I wait for 2000
-    And I fill in "campaign-marketbudgets-versions-lines-new-vertical" with "Custom Section"
-    Then I wait for 2000
-    Then I click the "Supplier" link
-    Then I wait for 2000
-    Then I fill in the "Supplier" with "<supplier>"
-    Then I wait for 2000
-    Then I click the "Platform" link
-    And I click the link containing Text "DS3"
-    Then I wait for 2000
-    Then I click the "Property" link
-    And I click the link containing Text "Google Search"
-    Then I wait for 2000
-    Then I click the "Media Type" link
-    Then I wait for 2000
-
-    And I click the link containing Text "Link / text ad"
-    Then I wait for 2000
-    Then I click the "Cost Model" link
-    And I click the link containing Text "Biddable CPC"
-    Then I select a Plan Line Start Date of "2015-04-04"
-    Then I wait for 2000
-    Then I Select a Plan Line End Date of "2015-04-04"
-    Then I wait for 2000
-
-    Then I click the "Line Currency" link
-    And I click the link containing Text "British Pound"
-    And I click the "Unknown Budget" checkbox
-    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Plan Line 2"
-
-    Then I click the "Save Media Plan Line" link
+    And I fill in the "KPI Event Number" with "20"
+    And I fill in the "KPI Event Name" with "Regression Event"
+    Then I click the "Conversion Source Field" link
+    Then I click the link containing Text "Google Floodlights"
+    And I click the "Event Save" link
+    Then I click the "Add Tag" link
+    And I click the "Conversion Type" link
+    And I fill in the "Conversion Type" with "<conversion>"
+    And I click the link containing Text "<conversion>"
     Then I wait for 5000
+    And I click the "Activity Category" link
+    And I fill in the "Activity Category" with "<activity>"
+    And I click the link containing Text "<activity>"
+    And I click the "Activity Tag" link
+    And I fill in the "Activity Tag" with "<tag>"
+    Then I wait for 3000
+    And I click the link containing Text "<tag>"
+    Then I fill in the "Weighting" with "10"
+    And I click the "Tag Save" link
 
-# ***CHECK INDIVIDUAL INSERTION ORDERS ARE CREATED DUE TO A MIX OF SET AND UNKNOWN BUDGET *
-    Then I click the "Insertion Order tab" link
-    Then I wait for 4000
-    Then I should see "2 found"
-
-#   ***EDIT FIRST MEDIA PLAN LINE***
-    Then I click the "Plan tab" link
-    Then I Maximize the Browser Window
-    And I wait for 2000
-    Then I click the "First Plan Line Edit" link
-    Then I wait for 4000
-    Then I click the "Liable Entity" link
+# ***TRACKING MANAGEMENT***
+    Then I click the "Navigation Header" link
+    Then I click the "Tracking Management" link
+    And I click the "Tracking Code Search Box" link
+    Then I fill in the "Tracking Code Search Box" with "<searchCampaign>"
+    Then I wait for 3000
+    And I click the "Advanced Filter" link
     Then I wait for 2000
-    Then I click the link containing Text "Essence LON"
+    Then I click the "DS3 Advertiser Filter" link
+    And I fill in the "DS3 Advertiser Filter" with "<ds3Advert>"
     Then I wait for 2000
-    And I click the "Unknown Budget" checkbox
-    And I wait for 2000
-    And I should see text matching "Client Liable"
-    Then I click the "Save Edited Media Plan Line" link
-    Then I wait for 5000
-
-    # ***PUBLISH MEDIA PLAN***
-    When I click the "Publish Media Plan" link
-    Then I wait for 1000
-    Then I should see "Media Plan published successfully"
-    Then I wait for 2000
+    Then I click the link containing Text "<ds3Advert>"
+    And I click the "Advanced Search Close" link
+    Then I click the "Tracking Details" link
+    Then I should see "MAPPED"
 
 # ***DELETE CAMPAIGN CLEAN UP***
     Then I click the "Navigation Header" link
     Then I follow "Campaigns"
-    Then I wait for 2000
     Then I fill in "campaign-search-basic" with "<campaign>"
     Then I wait for 3000
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign |client|owner      |period |budget|clientLiable |initiative|buyType   |supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |planline |google|automation |q4-2015|100000|Client Liable|wildfire  |Direct Buy|Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |campaign  |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |regression|google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

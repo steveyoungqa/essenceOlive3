@@ -1,4 +1,4 @@
-@campaign
+@campaign @CI
 Feature: P01 - Create new campaign
          Test that the user can create a campaign
          Test that the user can Edit the created campaign
