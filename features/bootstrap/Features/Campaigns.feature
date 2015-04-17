@@ -25,12 +25,12 @@ Feature: P01 - Create new campaign
     Then I select the Delete "<campaign>" checkbox
     Then I wait for 5000
 
-    Then I click the "Navigation Header" link
-    Then I wait for 3000
-    Then I click the "Campaigns" link
-    Then I wait for 3000
-    Then I follow "campaign-add"
-    Then I wait for 3000
+#    Then I click the "Navigation Header" link
+#    Then I wait for 3000
+#    Then I click the "Campaigns" link
+#    Then I wait for 3000
+#    Then I follow "campaign-add"
+#    Then I wait for 3000
 
     And I fill in "campaign-new-name" with "<campaign>"
     And I fill in "campaign-new-client" with "<client>"
