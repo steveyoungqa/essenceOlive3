@@ -10,7 +10,6 @@ class pageContext extends PageObjectContext
         // void
     }
 
-
     /**
      * For elements that don't have IDs,CSS,Values etc - so use page object arrays instead
      *
@@ -54,7 +53,6 @@ class pageContext extends PageObjectContext
         $custom->fillInXpathLinkWithValue($xpath, $value);
     }
 
-
     /**
      * Pause for user defined time for slow loading tests/api's
      *
@@ -81,6 +79,20 @@ class pageContext extends PageObjectContext
          */
         $custom = $this->getPage('customTests');
         $custom->clickXpathID($click);
+    }
+
+    /**
+     * Checks that element with specified XPATH exists on page.
+     *
+     * @Then /^(?:|I )should see an? "(?P<element>[^"]*)" X-Path element$/
+     */
+    public function xpathIsVisible($element)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->xpathIsVisible($element);
     }
 
     /**
@@ -211,12 +223,5 @@ class pageContext extends PageObjectContext
         $custom = $this->getPage('customTests');
         $custom->maximizeWindow();
     }
-
-
-
-
-
-
-
 
 }

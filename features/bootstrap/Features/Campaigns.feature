@@ -18,7 +18,7 @@ Feature: P01 - Create new campaign
 
     Then I click the "Navigation Header" link
     Then I follow "Campaigns"
-
+    Then I wait for 3000
     Then I fill in the "Campaign Search" with "<campaign>"
     Then I wait for 3000
     Then I select the Delete "<campaign>" checkbox
@@ -42,6 +42,7 @@ Feature: P01 - Create new campaign
 
     Then I click the "Navigation Header" link
     Then I follow "Campaigns"
+    Then I wait for 3000
 
     Then I fill in "campaign-search-basic" with "<campaign>"
     Then I wait for 3000

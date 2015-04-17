@@ -35,6 +35,7 @@ class customTests extends CustomPage
         'End Date Media Plan' => array('xpath' => "//input[@id='campaign-marketbudgets-new-endDate']"),
         'Start Date Media Plan Line' => array('xpath' => "//input[@id='campaign-marketbudgets-versions-lines-new-startDate']"),
         'End Date Media Plan Line' => array('xpath' => "//input[@id='campaign-marketbudgets-versions-lines-new-endDate']"),
+        'Olive 2 MAF Tooltip' => array('xpath' => "//*[@class='flyout_container flyout_onhover highlight_container highlight-none-blue ng-scope']/span[@class='button__icon button__icon--left icon icon--lrg icon--cropped icon--info color--icon']"),
         'Media Plan Save' => array('xpath' => "//*[@id='campaign-marketbudgets-new-save']"),
         'Link Google Initiative' => array('xpath' => "//a[@id='campaign-marketbudgets-google-initiative-link']"),
         'Save Mapped Account' => array('xpath' => "//*[@class='ng-isolate-scope']//*[@class='ng-isolate-scope']//*[@id='mapping-externalSystem-save']"),
@@ -112,9 +113,12 @@ class customTests extends CustomPage
         'DS3 Account ID' => array('xpath' => "//*[@id='mapping-externalSystem-ds3']"),
 
         'KPI Brand' => array('xpath' => "//*[@id='campaign-marketbudgets-new-kpiType-brand']/span[@class='ng-binding ng-scope']"),
+
+//       THESE FOUR FOLLOWING IDS - XPATHS ARE NOT RECOGNISED SINCE DEV CHANGES TO MEDIA PLAN - SARAH TO INVESTIGATE:
         'KPI Type Long Path' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[2]"),
         'Market Long Path' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[4]"),
         'Media Plan Long Save' => array('xpath' => "//*[@class='tiered__panel-inner']/div[@class='ng-scope']/div[@class='tiered__panel-details ng-scope']/div[@class='ng-isolate-scope']/div[@class='tiered__actions ng-scope']//*[contains(text(),'Save')]"),
+        'Use Olive 2 MAFs' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[11]/label[2]/span[1]"),
 
         'First Plan Line Edit' => array('xpath' => "//*[@class='ng-scope'][1]/td//*[contains(text(),'Edit')]"),
     );
@@ -139,6 +143,16 @@ class customTests extends CustomPage
         }
         else {
             throw new Exception (".$click. Element not found");
+        }
+    }
+
+    public function xpathIsVisible ($element)
+    {
+        $element = $this->getElement($element);
+        if (isset($element)) {
+        }
+        else {
+            throw new Exception (".$element. Element not found");
         }
     }
 

@@ -1,5 +1,6 @@
 @mediaplans @CI
 Feature: Olive 3 Media Plan Creation
+         OAT-1894
 
   Background:
 
@@ -12,9 +13,10 @@ Feature: Olive 3 Media Plan Creation
     Then I should see "Notifications"
 
   Scenario Outline: Create Media Plan Standalone Test
-
+# ***CREATE CAMPAIGN***
     Then I click the "Navigation Header" link
     Then I follow "Campaigns"
+    Then I wait for 2000
 
     Then I fill in the "Campaign Search" with "<campaign>"
     Then I wait for 3000
@@ -37,6 +39,7 @@ Feature: Olive 3 Media Plan Creation
     Then I click the "Campaign Save" link
     Then I wait for 5000
 
+# ***LINK TO EXTERNAL PLATFORM***
     Then I click the "External Platforms Market Level" link
     And I click the "Google Sub Product" link
     Then I fill in "mapping-externalSystem-googleSubProduct" with "AdWords - A01 (Acquisition)"
@@ -46,6 +49,7 @@ Feature: Olive 3 Media Plan Creation
     Then I click the "External System Save" link
     Then I wait for 5000
 
+# ***CREATE MEDIA PLAN***
     Then I click the "Media Plans" link
     Then I follow "campaign-marketbudgets-add"
     Then I wait for 3000
@@ -87,13 +91,16 @@ Feature: Olive 3 Media Plan Creation
     And I fill in "campaign-marketbudgets-new-owner" with "<owner>"
     Then I wait for 2000
     Then I click the link containing ID "<owner>"
-
+    Then I should see an "Use Olive 2 MAFs" X-Path element
+    Then I click the "Use Olive 2 MAFs" checkbox
     Then I click the "Media Plan Long Save" link
     Then I wait for 5000
+    Then I should see text matching "true"
 
+# ***DELETE CAMPAIGN CLEAN UP***
     Then I click the "Navigation Header" link
     Then I follow "Campaigns"
-
+    Then I wait for 3000
     Then I fill in "campaign-search-basic" with "<campaign>"
     Then I wait for 3000
     Then I select the Delete "<campaign>" checkbox
