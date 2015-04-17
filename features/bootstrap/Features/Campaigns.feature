@@ -17,6 +17,7 @@ Feature: P01 - Create new campaign
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
     Then I click the "Navigation Header" link
+    Then I wait for 3000
     Then I follow "site-navigation-campaigns"
     Then I wait for 3000
     Then I fill in the "Campaign Search" with "<campaign>"
