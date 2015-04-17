@@ -17,7 +17,7 @@ Feature: Olive 3 Regression Pack
 
     # ***ADD MEDIA PLAN LINE**
     Then I click the "Navigation Header" link
-    Then I click the link containing Text "Campaigns"
+    Then I click the "Campaigns" link
     Then I wait for 3000
     Given I select Edit for the existing Campaign "<campaign>"
     Then I wait for 5000
@@ -103,7 +103,7 @@ Feature: Olive 3 Regression Pack
 
 ## ***DELETE CAMPAIGN CLEAN UP***
 #    Then I click the "Navigation Header" link
-#    Then I click the link containing Text "Campaigns"
+#    Then I click the "Campaigns" link
 #    Then I wait for 2000
 #    Then I fill in "campaign-search-basic" with "<campaign>"
 #    Then I wait for 3000

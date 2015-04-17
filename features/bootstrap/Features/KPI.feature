@@ -15,7 +15,7 @@ Feature: Olive 3 Regression Pack
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 # ***CREATE CAMPAIGN***
     Then I click the "Navigation Header" link
-    Then I click the link containing Text "Campaigns"
+    Then I click the "Campaigns" link
     Then I wait for 3000
     Then I fill in the "Campaign Search" with "<campaign>"
     Then I wait for 3000
@@ -23,7 +23,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 5000
 
     Then I click the "Navigation Header" link
-    Then I click the link containing Text "Campaigns"
+    Then I click the "Campaigns" link
     Then I wait for 3000
     Then I follow "campaign-add"
     Then I wait for 3000
@@ -40,7 +40,7 @@ Feature: Olive 3 Regression Pack
 
 # ***ADD KPI***
     Then I click the "Navigation Header" link
-    Then I click the link containing Text "Campaigns"
+    Then I click the "Campaigns" link
     Then I wait for 2000
     Given I select Edit for the existing Campaign "<campaign>"
     And I click the "Default KPIs" link
@@ -69,7 +69,7 @@ Feature: Olive 3 Regression Pack
     And I click the "Tag Save" link
 
     Then I click the "Navigation Header" link
-    Then I click the link containing Text "Campaigns"
+    Then I click the "Campaigns" link
     Then I wait for 3000
     Then I fill in "campaign-search-basic" with "<campaign>"
     Then I wait for 3000

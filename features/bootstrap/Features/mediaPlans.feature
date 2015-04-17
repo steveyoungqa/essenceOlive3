@@ -15,7 +15,7 @@ Feature: Olive 3 Media Plan Creation
   Scenario Outline: Create Media Plan Standalone Test
 # ***CREATE CAMPAIGN***
     Then I click the "Navigation Header" link
-    Then I click the link containing Text "Campaigns"
+    Then I click the "Campaigns" link
     Then I wait for 2000
 
     Then I fill in the "Campaign Search" with "<campaign>"
@@ -24,7 +24,7 @@ Feature: Olive 3 Media Plan Creation
     Then I wait for 5000
 
     Then I click the "Navigation Header" link
-    Then I click the link containing Text "Campaigns"
+    Then I click the "Campaigns" link
     Then I wait for 3000
     Then I follow "campaign-add"
     Then I wait for 3000
@@ -99,7 +99,7 @@ Feature: Olive 3 Media Plan Creation
 
 # ***DELETE CAMPAIGN CLEAN UP***
     Then I click the "Navigation Header" link
-    Then I click the link containing Text "Campaigns"
+    Then I click the "Campaigns" link
     Then I wait for 3000
     Then I fill in "campaign-search-basic" with "<campaign>"
     Then I wait for 3000

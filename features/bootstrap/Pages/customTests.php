@@ -14,6 +14,7 @@ class customTests extends CustomPage
 
         'Campaign Search' => array('xpath' => "//*[@id='campaign-search-basic']"),
         'Navigation Header' => array('xpath' => "//*[@class='menu-close icon icon--med icon--tables']"), //ID Needed
+        'Campaigns' => array('xpath' => "//*[@id='site-navigation-campaigns']"),
         'Campaign Save' => array('xpath' => "//*[@id='campaign-new-save']"),
         'Campaign Delete' => array('xpath' => "//*[@id='campaign-delete']"),
         'editExistingCampaign' => array('xpath' => "//*[contains(@id,'actionbuttons')]"),
