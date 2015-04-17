@@ -26,6 +26,7 @@ Feature: P01 - Create new campaign
     Then I wait for 5000
 
     Then I click the "Navigation Header" link
+    Then I wait for 3000
     Then I click the link containing Text "Campaigns"
     Then I wait for 3000
     Then I follow "campaign-add"
@@ -42,6 +43,7 @@ Feature: P01 - Create new campaign
     Then I wait for 8000
 
     Then I click the "Navigation Header" link
+    Then I wait for 3000
     Then I click the link containing Text "Campaigns"
     Then I wait for 3000
 
