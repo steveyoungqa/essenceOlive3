@@ -18,7 +18,7 @@ Feature: Olive 3 Regression Pack
 
 # ***CREATE CAMPAIGN***
     Then I click the "Navigation Header" link
-    Then I follow "site-navigation-campaigns"
+    Then I click the link containing Text "Campaigns"
     Then I wait for 3000
     Then I fill in the "Campaign Search" with "<campaign>"
     Then I wait for 3000
@@ -26,7 +26,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 5000
 
     Then I click the "Navigation Header" link
-    Then I follow "site-navigation-campaigns"
+    Then I click the link containing Text "Campaigns"
     Then I wait for 3000
     Then I follow "campaign-add"
     Then I wait for 3000
@@ -106,7 +106,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "Save Mapped Account" link
     Then I wait for 10000
     Then I click the "Navigation Header" link
-    Then I follow "site-navigation-campaigns"
+    Then I click the link containing Text "Campaigns"
     Then I wait for 3000
     Given I select Edit for the existing Campaign "<campaign>"
     Then I wait for 5000
@@ -205,7 +205,7 @@ Feature: Olive 3 Regression Pack
 
 # ***ADD KPI***
     Then I click the "Navigation Header" link
-    Then I follow "site-navigation-campaigns"
+    Then I click the link containing Text "Campaigns"
     Then I wait for 2000
     Given I select Edit for the existing Campaign "<campaign>"
     And I click the "Default KPIs" link
@@ -251,7 +251,7 @@ Feature: Olive 3 Regression Pack
 
 # ***DELETE CAMPAIGN CLEAN UP***
     Then I click the "Navigation Header" link
-    Then I follow "site-navigation-campaigns"
+    Then I click the link containing Text "Campaigns"
     Then I wait for 3000
     Then I fill in "campaign-search-basic" with "<campaign>"
     Then I wait for 3000

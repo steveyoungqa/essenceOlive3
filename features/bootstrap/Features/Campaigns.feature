@@ -19,7 +19,6 @@ Feature: P01 - Create new campaign
     Then I click the "Navigation Header" link
     Then I wait for 3000
     Then I click the link containing Text "Campaigns"
-#    Then I follow "site-navigation-campaigns"
     Then I wait for 3000
     Then I fill in the "Campaign Search" with "<campaign>"
     Then I wait for 3000
@@ -27,7 +26,7 @@ Feature: P01 - Create new campaign
     Then I wait for 5000
 
     Then I click the "Navigation Header" link
-    Then I follow "site-navigation-campaigns"
+    Then I click the link containing Text "Campaigns"
     Then I wait for 3000
     Then I follow "campaign-add"
     Then I wait for 3000
@@ -43,7 +42,7 @@ Feature: P01 - Create new campaign
     Then I wait for 8000
 
     Then I click the "Navigation Header" link
-    Then I follow "site-navigation-campaigns"
+    Then I click the link containing Text "Campaigns"
     Then I wait for 3000
 
     Then I fill in "campaign-search-basic" with "<campaign>"
