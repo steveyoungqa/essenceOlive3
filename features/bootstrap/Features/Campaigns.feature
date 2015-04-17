@@ -32,7 +32,8 @@ Feature: P01 - Create new campaign
     Then I follow "campaign-add"
     Then I wait for 3000
 
-    And I fill in "campaign-new-name" with "<campaign>"
+    Then I fill in the "Campaign Name" with "<campaign>"
+#    And I fill in "campaign-new-name" with "<campaign>"
     And I fill in "campaign-new-client" with "<client>"
     Then I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
