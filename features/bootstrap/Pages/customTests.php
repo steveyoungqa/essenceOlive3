@@ -64,6 +64,7 @@ class customTests extends CustomPage
         'Cost Model' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-costModel']"),
         'Line Currency' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-currency']"),
         'Unknown Budget' => array('xpath' => "//*[@class='form__input']//*[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']"),
+        'Plan Line Description' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-description']"),
         'Save Media Plan Line' => array('xpath' => "//a[@id='campaign-marketbudgets-versions-lines-new-save']"),
         'Save Edited Media Plan Line' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-medialines-save']"),
         'Publish Media Plan' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-publish']"),
@@ -77,13 +78,14 @@ class customTests extends CustomPage
         'Close Mapped Panel' => array('xpath' => "//*[@class='button__icon button__icon--left icon icon--clear icon--lrg icon--cropped']"),
         'Plan tab' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Plan')]"),
         'Edit Plan Line' => array('xpath' => "//*[@class='table__actions ng-scope']//*[contains(text(),'Edit')]"),
+        'Plan Line Delete' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-line-delete']"),
 
         'Manage Approval' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-manage-approval']"),
         'Add Approver' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add']"),
         'Save Approver' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add-save']"),
         'Publish Dropdown' => array('xpath' => "//*[@class='expandable-dropdown__toggle']"),
         'Published State' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-published']"),
-        'Editable Draft State' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-plan']"),
+        'Editable Draft State' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-editable']"),
         'Approver Field' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add-person']"),
         'Request Approval' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-request']"),
         'Set Status' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-set-status']"),
@@ -202,6 +204,19 @@ class customTests extends CustomPage
             $this->getElement('Delete Yes')->click();
         } else {
             echo("\033[01;36m '.$campaign.' was not found so doesn't need to be deleted\033[0m");
+        }
+    }
+
+    public function deleteMediaPlanLine ($description)
+    {
+        $element = $this->find('xpath', '//ancestor::tbody/tr[td//text()[contains(., "'.$description.'")]]//*[@class="custom-checkbox__icon icon icon--tick icon--md icon--cropped"]');
+        if (isset($element)) {
+            $element->click();
+            $this->getElement('Plan Line Delete')->click();
+            $this->getSession()->wait(2000);
+//            $this->getElement('Delete Yes')->click();
+        } else {
+            echo("\033[01;36m '.$description.' was not found so doesn't need to be deleted\033[0m");
         }
     }
 

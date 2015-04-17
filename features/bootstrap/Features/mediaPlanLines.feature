@@ -1,7 +1,7 @@
 @planlines @CI
 Feature: Olive 3 Regression Pack
   Create new campaign, Add Media Plan, Add Media Plan Line & Service
-  OAT-99, OAT-111, OAT-62, OAT-72, OAT-102
+  OAT-99, OAT-111, OAT-62, OAT-72, OAT-102, OAT-28, OAT-17
 
   Background:
 
@@ -175,7 +175,8 @@ Feature: Olive 3 Regression Pack
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
     Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100"
-    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
+    And I fill in the "Plan Line Description" with "<description1>"
+#    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
     Then I wait for 5000
@@ -222,7 +223,8 @@ Feature: Olive 3 Regression Pack
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
     And I click the "Unknown Budget" checkbox
-    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Plan Line 2"
+    And I fill in the "Plan Line Description" with "<description2>"
+#    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Plan Line 2"
 
     Then I click the "Save Media Plan Line" link
     Then I wait for 5000
@@ -254,6 +256,11 @@ Feature: Olive 3 Regression Pack
     Then I should see "Media Plan published successfully"
     Then I wait for 2000
 
+#   DELETE PLAN LINES
+    Then I click the "Editable Draft State" link
+    Then I wait for 2000
+    Then I delete Media Plan Line with a description of"<description2>"
+
 # ***DELETE CAMPAIGN CLEAN UP***
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
@@ -263,8 +270,8 @@ Feature: Olive 3 Regression Pack
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign |client|owner      |period |budget|clientLiable |initiative|buyType   |supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |planline |google|automation |q4-2015|100000|Client Liable|wildfire  |Direct Buy|Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |campaign      |client|owner      |period |budget|clientLiable |initiative|buyType   |supplier      |description1|description2|ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |planlinetests |google|automation |q42015 |100000|Client Liable|wildfire  |Direct Buy|Google Ireland|Plan Line 1 |Plan Line 2 |700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

@@ -124,6 +124,20 @@ class pageContext extends PageObjectContext
     }
 
     /**
+     * Locate a checkbox based on ancestor xpath and Deletes Media Plan Line with $description
+     *
+     * @Then /^I delete Media Plan Line with a description of"([^"]*)"$/
+     */
+    public function deleteMediaPlanLine($description)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->deleteMediaPlanLine($description);
+    }
+
+    /**
      * Edit Existing Campaign
      *
      * @Given /^I select Edit for the existing Campaign "([^"]*)"$/
