@@ -23,7 +23,7 @@ Feature: P01 - Create new campaign
     Then I fill in the "Campaign Search" with "<campaign>"
     Then I wait for 3000
     Then I select the Delete "<campaign>" checkbox
-    Then I wait for 5000
+    Then I wait for 10000
 
 #    Then I click the "Navigation Header" link
 #    Then I wait for 3000
