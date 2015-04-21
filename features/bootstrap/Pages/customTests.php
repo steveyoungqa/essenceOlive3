@@ -126,7 +126,8 @@ class customTests extends CustomPage
         'Use Olive 2 MAFs' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[11]/label[2]/span[1]"),
 
         'First Plan Line Edit' => array('xpath' => "//*[@class='ng-scope'][1]/td//*[contains(text(),'Edit')]"),
-    );
+        'Continue & Publish' => array('xpath' => "//*[@class='toast-message error--message show']//*[contains(text(),'Continue & Publish')]"),
+        );
 
 
     public function clickPageObject ($xpath)

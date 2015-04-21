@@ -1,7 +1,6 @@
-@planlines @CI
-Feature: Olive 3 Regression Pack
-  Create new campaign, Add Media Plan, Add Media Plan Line & Service
-  OAT-99, OAT-111, OAT-62, OAT-72, OAT-102, OAT-28, OAT-17
+@breach
+Feature: Breach Scenarios
+  OAT-25
 
   Background:
 
@@ -119,15 +118,9 @@ Feature: Olive 3 Regression Pack
     Then I click the "Add Media Plan Line" link
     Then I wait for 2000
     And I click the "Cost Type Media" link
-   
+
     Then I click the "Buy Type" link
     Then I wait for 2000
-    Then I should see text matching "Programmatic - PMP"
-    Then I should see text matching "Programmatic - Preferred deal"
-    Then I should see text matching "Programmatic - Open Exchange"
-    Then I should see text matching "Programmatic - Guaranteed"
-    Then I should see text matching "Biddable"
-    Then I should see text matching "Direct Buy"
     And I fill in the "Buy Type" with "<buyType>"
     Then I wait for 2000
 
@@ -153,15 +146,6 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the "Media Type" link
     Then I wait for 2000
-    Then I should see text matching "Link / text ad"
-    Then I should see text matching "Text & image ad"
-    Then I should see text matching "Expandable banner"
-    Then I should see text matching "Lightbox"
-    Then I should see text matching "Synced Roadblock"
-    Then I should see text matching "Overlay"
-    Then I should see text matching "Bespoke takeover"
-    Then I should see text matching "Advertorial"
-    Then I should see text matching "Interstitial"
 
     And I click the link containing Text "Link / text ad"
     Then I wait for 2000
@@ -229,49 +213,68 @@ Feature: Olive 3 Regression Pack
     Then I click the "Save Media Plan Line" link
     Then I wait for 5000
 
-# ***CHECK INDIVIDUAL INSERTION ORDERS ARE CREATED DUE TO A MIX OF SET AND UNKNOWN BUDGET *
-    Then I click the "Insertion Order tab" link
-    Then I wait for 4000
-    Then I should see "2 found"
-
-#   ***EDIT FIRST MEDIA PLAN LINE***
-    Then I click the "Plan tab" link
-    Then I Maximize the Browser Window
-    And I wait for 2000
-    Then I click the "First Plan Line Edit" link
-    Then I wait for 4000
-    Then I click the "Liable Entity" link
-    Then I wait for 2000
-    Then I click the link containing Text "Essence LON"
-    Then I wait for 2000
-    And I click the "Unknown Budget" checkbox
-    And I wait for 2000
-    And I should see text matching "Client Liable"
-    Then I click the "Save Edited Media Plan Line" link
-    Then I wait for 5000
-
 # ***PUBLISH MEDIA PLAN***
     When I click the "Publish Media Plan" link
     Then I wait for 1000
     Then I should see "Media Plan published successfully"
     Then I wait for 5000
 
-#   DELETE PLAN LINES
+# ***REQUEST APPROVAL***
+    Then I click the "Manage Approval" link
+    And I click the "Add Approver" link
+    Then I wait for 2000
+    And I fill in "campaign-marketbudgets-versions-approvers-add-type" with "Internal"
+    Then I wait for 2000
+    Then I click the "Approver Field" link
+    Then I wait for 2000
+    And I fill in "campaign-marketbudgets-versions-approvers-add-person" with "<approver>"
+    Then I wait for 2000
+    Then I click the link containing Text "<approver>"
+    Then I wait for 2000
+    Then I click the "Save Approver" link
+    Then I wait for 2000
+    And I click the "Request Approval" link
+    Then I wait for 2000
+
+# ***FEEDBACK & APPROVE***
+    Then I click the "Insertion Order tab" link
+    Then I click the "Plan tab" link
+    Then I click the "Set Status" link
+    And I fill in the "Feedback Notes" with "Regression Testing feedback test"
+    Then I click the "Approve" link
+
+#   ***EDIT FIRST MEDIA PLAN LINE***
+    Then I click the "Plan tab" link
+    And I wait for 2000
     Then I click the "Editable Draft State" link
     Then I wait for 2000
-    Then I delete Media Plan Line with a description of"<description2>"
-
-# ***DELETE CAMPAIGN CLEAN UP***
-    Then I click the "Navigation Header" link
-    Then I click the "Campaigns" link
+    Then I click the "First Plan Line Edit" link
+    And I wait for 2000
+    Then I click the "Line Currency" link
+    And I click the link containing Text "Australian Dollar"
     Then I wait for 2000
-    Then I fill in "campaign-search-basic" with "<campaign>"
-    Then I wait for 3000
-    Then I select the Delete "<campaign>" checkbox
+    Then I click the "Save Edited Media Plan Line" link
+    Then I wait for 5000
+
+#   ***PUBLISH AND ACCEPT BREACH***
+    When I click the "Publish Media Plan" link
+    Then I wait for 1000
+    Then I should see "Publishing this media plan you will require further internal approval for the amends you have made"
+    And I click the "Continue & Publish" link
+    Then I wait for 2000
+    Then I should see "Media Plan published successfully"
+
+## ***DELETE CAMPAIGN CLEAN UP***
+#    Then I click the "Navigation Header" link
+#    Then I click the "Campaigns" link
+#    Then I wait for 2000
+#    Then I fill in "campaign-search-basic" with "<campaign>"
+#    Then I wait for 3000
+#    Then I select the Delete "<campaign>" checkbox
 
   Examples:
     |campaign      |client|owner      |period |budget|clientLiable |initiative|buyType   |supplier      |description1|description2|ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |planlinetests |google|automation |q42015 |100000|Client Liable|wildfire  |Direct Buy|Google Ireland|Plan Line 1 |Plan Line 2 |700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |breach |google|automation |q42015 |100000|Client Liable|wildfire  |Direct Buy|Google Ireland|Plan Line 1 |Plan Line 2 |700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

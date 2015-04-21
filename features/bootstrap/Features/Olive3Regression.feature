@@ -9,7 +9,7 @@ Feature: Olive 3 Regression Pack
     Given I am on "/login"
     Then I press "Sign in with Google"
     And I fill in "Email" with "steve.automation@gmail.com"
-    And I fill in "Passwd" with "Warlock99"
+    And I fill in "Passwd" with "Warlock1990"
     Then I press "signIn"
     Then I wait for 3000
     Then I should see "Notifications"
@@ -182,6 +182,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "Publish Dropdown" link
     And I click the "Published State" link
 
+# ***REQUEST APPROVAL***
     Then I click the "Manage Approval" link
     And I click the "Add Approver" link
     Then I wait for 2000
@@ -198,6 +199,7 @@ Feature: Olive 3 Regression Pack
     And I click the "Request Approval" link
     Then I wait for 2000
 
+# ***FEEDBACK & APPROVE***
     Then I click the "Insertion Order tab" link
     Then I click the "Plan tab" link
     Then I click the "Set Status" link

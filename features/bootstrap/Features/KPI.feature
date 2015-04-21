@@ -7,7 +7,7 @@ Feature: Olive 3 Regression Pack
     Given I am on "/login"
     Then I press "Sign in with Google"
     And I fill in "Email" with "steve.automation@gmail.com"
-    And I fill in "Passwd" with "Warlock99"
+    And I fill in "Passwd" with "Warlock1990"
     Then I press "signIn"
     Then I wait for 3000
     Then I should see "Notifications"
