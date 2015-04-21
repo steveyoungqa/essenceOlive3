@@ -1,6 +1,6 @@
-@mediaplans @CI
-Feature: Olive 3 Media Plan Creation
-         OAT-1894
+@mediaplanIssues
+Feature: IDs not working
+  KPI TYPE, Media Plan Market, Media Plan Save
 
   Background:
 
@@ -56,7 +56,8 @@ Feature: Olive 3 Media Plan Creation
     And I fill in "campaign-marketbudgets-new-label" with "Test Label"
     Then I wait for 2000
 
-    Then I click the "KPI Type Long Path" link
+    Then I click the "KPI Type" link
+#    Then I click the "KPI Type Long Path" link
     Then I click the "KPI Brand" link
     Then I wait for 2000
 
@@ -70,7 +71,9 @@ Feature: Olive 3 Media Plan Creation
     Then I click the link containing ID "<period>"
     Then I wait for 2000
 
-    Then I click the "Market Long Path" link
+
+    Then I click the "Media Plan Market" link
+#    Then I click the "Market Long Path" link
     Then I wait for 2000
     Then I click the "Market USA" link
 
@@ -93,19 +96,20 @@ Feature: Olive 3 Media Plan Creation
     Then I click the link containing ID "<owner>"
     Then I should see an "Use Olive 2 MAFs" X-Path element
     Then I click the "Use Olive 2 MAFs" checkbox
-    Then I click the "Media Plan Long Save" link
+    Then I click the "Media Plan Save" link
+#    Then I click the "Media Plan Long Save" link
     Then I wait for 5000
     Then I should see text matching "true"
 
-# ***DELETE CAMPAIGN CLEAN UP***
-    Then I click the "Navigation Header" link
-    Then I click the "Campaigns" link
-    Then I wait for 3000
-    Then I fill in "campaign-search-basic" with "<campaign>"
-    Then I wait for 3000
-    Then I select the Delete "<campaign>" checkbox
+## ***DELETE CAMPAIGN CLEAN UP***
+#    Then I click the "Navigation Header" link
+#    Then I click the "Campaigns" link
+#    Then I wait for 3000
+#    Then I fill in "campaign-search-basic" with "<campaign>"
+#    Then I wait for 3000
+#    Then I select the Delete "<campaign>" checkbox
 
   Examples:
     |campaign |client|owner      |period |budget|clientLiable |
-    |mediaplan|google|automation |q4-2015|100000|Client Liable|
+    |issues   |google|automation |q4-2015|100000|Client Liable|
 
