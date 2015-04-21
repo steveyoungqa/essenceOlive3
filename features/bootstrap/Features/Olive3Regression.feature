@@ -167,6 +167,7 @@ Feature: Olive 3 Regression Pack
     And I click the link containing Text "<ds3>"
     Then I click the "External System Save" link
 
+# ***MAP SEARCH CAMPAIGN***
     Then I click the "Plan Lines" link
     And I click the "Manage mappings" link
     Then I wait for 15000

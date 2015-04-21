@@ -250,11 +250,11 @@ Feature: Olive 3 Regression Pack
     Then I click the "Save Edited Media Plan Line" link
     Then I wait for 5000
 
-    # ***PUBLISH MEDIA PLAN***
+# ***PUBLISH MEDIA PLAN***
     When I click the "Publish Media Plan" link
     Then I wait for 1000
     Then I should see "Media Plan published successfully"
-    Then I wait for 2000
+    Then I wait for 5000
 
 #   DELETE PLAN LINES
     Then I click the "Editable Draft State" link
