@@ -1,5 +1,5 @@
-@setup
-Feature: Setup Campaign, Media Plan, Plan Lines, Insertion Order to perform tests upon
+@untracked
+Feature: OAT-2 Untracked Spend
 
   Background:
 
@@ -148,16 +148,51 @@ Feature: Setup Campaign, Media Plan, Plan Lines, Insertion Order to perform test
     Then I click the "Save Media Plan Line" link
     Then I wait for 5000
 
+#   ***PUBLISH MEDIA PLAN***
+    When I click the "Publish Media Plan" link
+    Then I wait for 3000
+    Then I should see "Media Plan published successfully"
+    Then I wait for 2000
+
+#   ***LINK INSERTION ORDER TO DS3***
+    Then I click the "Insertion Order tab" link
+    Then I wait for 4000
+    And I click the "View IO" link
+    Then I click the "External Platforms Insertion Order" link
+    And I click the "Link DS3" link
+    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
+    Then I wait for 8000
+    And I click the link containing Text "<ds3>"
+    Then I click the "External System Save" link
+
+#   ***MAP SEARCH CAMPAIGN***
+    Then I click the "Plan Lines" link
+    And I click the "Manage mappings" link
+    Then I wait for 15000
+
+    Then I Map Search Campaign "<searchCampaign>"
+    And I click the "Save Managed Entities" link
+    Then I wait for 3000
+
+    Then I click the "Close Mapped Panel" link
+    Then I click the "Plan tab" link
+
+    Then I click the "Publish Dropdown" link
+    And I click the "Published State" link
 
 
 
-
-
-
+##   ***DELETE CAMPAIGN CLEAN UP***
+#    Then I click the "Navigation Header" link
+#    Then I click the "Campaigns" link
+#    Then I wait for 3000
+#    Then I fill in "campaign-search-basic" with "<campaign>"
+#    Then I wait for 3000
+#    Then I select the Delete "<campaign>" checkbox
 
   Examples:
     |campaign  |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |setup     |google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |untracked |google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

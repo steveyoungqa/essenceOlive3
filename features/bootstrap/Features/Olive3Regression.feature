@@ -157,6 +157,7 @@ Feature: Olive 3 Regression Pack
     Then I should see "Media Plan published successfully"
     Then I wait for 2000
 
+#   ***LINK INSERTION ORDER TO DS3***
     Then I click the "Insertion Order tab" link
     Then I wait for 4000
     And I click the "View IO" link
