@@ -1,4 +1,4 @@
-@campaign @CI
+@campaign
 Feature: P01 - Create new campaign
          Test that the user can create a campaign and Edit.
          OAT-14 - Delete Existing Campaign. Duplicate name check

@@ -1,4 +1,4 @@
-@planlines @CI
+@planlines
 Feature: Olive 3 Regression Pack
   Create new campaign, Add Media Plan, Add Media Plan Line & Service
   OAT-99, OAT-111, OAT-62, OAT-72, OAT-102, OAT-28, OAT-17

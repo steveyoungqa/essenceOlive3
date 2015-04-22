@@ -1,4 +1,4 @@
-@mediaplans @CI
+@mediaplans
 Feature: Olive 3 Media Plan Creation
          OAT-1894
 

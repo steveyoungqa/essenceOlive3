@@ -33,7 +33,7 @@ Feature: Breach Scenarios
     And I fill in "campaign-new-client" with "<client>"
     Then I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
-    Then I wait for 9000
+    Then I wait for 12000
     And I fill in "campaign-new-memo" with "Test Notes"
     Then I wait for 5000
     Then I click the "Campaign Save" link
@@ -215,7 +215,7 @@ Feature: Breach Scenarios
 
 # ***PUBLISH MEDIA PLAN***
     When I click the "Publish Media Plan" link
-    Then I wait for 1000
+    Then I wait for 3000
     Then I should see "Media Plan published successfully"
     Then I wait for 5000
 
@@ -237,11 +237,10 @@ Feature: Breach Scenarios
     Then I wait for 2000
 
 # ***FEEDBACK & APPROVE***
-    Then I click the "Insertion Order tab" link
-    Then I click the "Plan tab" link
     Then I click the "Set Status" link
     And I fill in the "Feedback Notes" with "Regression Testing feedback test"
     Then I click the "Approve" link
+    And I wait for 2000
 
 #   ***EDIT FIRST MEDIA PLAN LINE***
     Then I click the "Plan tab" link
@@ -250,7 +249,7 @@ Feature: Breach Scenarios
     Then I wait for 2000
     Then I click the "First Plan Line Edit" link
     And I wait for 2000
-    Then I click the "Line Currency" link
+    Then I click the "Edit Line Currency" link
     And I click the link containing Text "Australian Dollar"
     Then I wait for 2000
     Then I click the "Save Edited Media Plan Line" link
@@ -258,23 +257,57 @@ Feature: Breach Scenarios
 
 #   ***PUBLISH AND ACCEPT BREACH***
     When I click the "Publish Media Plan" link
-    Then I wait for 1000
+    Then I wait for 3000
     Then I should see "Publishing this media plan you will require further internal approval for the amends you have made"
     And I click the "Continue & Publish" link
     Then I wait for 2000
     Then I should see "Media Plan published successfully"
+    Then I wait for 3000
 
-## ***DELETE CAMPAIGN CLEAN UP***
-#    Then I click the "Navigation Header" link
-#    Then I click the "Campaigns" link
-#    Then I wait for 2000
-#    Then I fill in "campaign-search-basic" with "<campaign>"
-#    Then I wait for 3000
-#    Then I select the Delete "<campaign>" checkbox
+#   ***EDIT FIRST MEDIA PLAN LINE SECOND TIME***
+    Then I click the "Editable Draft State" link
+    Then I wait for 2000
+    Then I click the "First Plan Line Edit" link
+    And I wait for 2000
+    Then I click the "Edit Cost Model" link
+    And I click the link containing Text "Fixed Cost per Action"
+    Then I wait for 2000
+    Then I click the "Save Edited Media Plan Line" link
+    Then I wait for 5000
+
+#   ***PUBLISH AND ACCEPT BREACH***
+    When I click the "Publish Media Plan" link
+    Then I wait for 3000
+    Then I should see "Publishing this media plan you will require further internal approval for the amends you have made"
+    And I click the "Continue & Publish" link
+    Then I wait for 2000
+    Then I should see "Media Plan published successfully"
+    Then I wait for 3000
+
+# ***REQUEST APPROVAL***
+    Then I click the "Manage Approval" link
+    Then I wait for 2000
+    And I click the "Request Approval" link
+    Then I wait for 2000
+
+# ***FEEDBACK & REJECT***
+    Then I click the "Set Status" link
+    And I fill in the "Feedback Notes" with "Reject Amends Regression Test"
+    Then I click the "Reject" link
+    Then I should see "Amends Internally Rejected"
+    And I wait for 2000
+
+# ***DELETE CAMPAIGN CLEAN UP***
+    Then I click the "Navigation Header" link
+    Then I click the "Campaigns" link
+    Then I wait for 2000
+    Then I fill in "campaign-search-basic" with "<campaign>"
+    Then I wait for 3000
+    Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign      |client|owner      |period |budget|clientLiable |initiative|buyType   |supplier      |description1|description2|ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |breach |google|automation |q42015 |100000|Client Liable|wildfire  |Direct Buy|Google Ireland|Plan Line 1 |Plan Line 2 |700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |campaign|client|owner      |period |budget|clientLiable |initiative|buyType   |supplier      |description1|description2|approver   |
+    |breach  |google|automation |q42015 |100000|Client Liable|wildfire  |Direct Buy|Google Ireland|Plan Line 1 |Plan Line 2 |Steve Young|
 
 
 

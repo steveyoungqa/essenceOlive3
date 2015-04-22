@@ -1,8 +1,8 @@
 @regression
 Feature: Olive 3 Regression Pack
   Create new campaign, Add Media Plan, Add Media Plan Line & Service, Publish Media Plan
-  Insertion Order, Map to DS3, Map to Search Campaign, Approval Process
-  Conversion Evens, Tagging, Tracking Management & Mapping Status
+  Insertion Order, Map to DS3, Map to Search Campaign, Approval Process, Edit Media PLan
+  Breach Media Plan, Conversion Evens, Tagging, Tracking Management & Mapping Status
 
   Background:
 
@@ -16,7 +16,7 @@ Feature: Olive 3 Regression Pack
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
-# ***CREATE CAMPAIGN***
+#   ***CREATE CAMPAIGN***
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
     Then I wait for 3000
@@ -41,7 +41,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "Campaign Save" link
     Then I wait for 8000
 
-# ***LINK TO EXTERNAL PLATFORM***
+#   ***LINK TO EXTERNAL PLATFORM***
     Then I click the "External Platforms Market Level" link
     And I click the "Google Sub Product" link
     Then I fill in "mapping-externalSystem-googleSubProduct" with "Wildfire - E15"
@@ -51,7 +51,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "External System Save" link
     Then I wait for 5000
 
-# ***CREATE MEDIA PLAN***
+#   ***CREATE MEDIA PLAN***
     Then I click the "Media Plans" link
     Then I follow "campaign-marketbudgets-add"
     Then I wait for 3000
@@ -97,7 +97,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "Media Plan Long Save" link
     Then I wait for 5000
 
-# ***LINK TO GOOGLE INITIATIVE***
+#   ***LINK TO GOOGLE INITIATIVE***
     Then I click the "External Platforms Post Create Plan" link
     Then I click the "Link Google Initiative" link
     Then I fill in "mapping-externalSystem-googleInitiative" with "<initiative>"
@@ -111,7 +111,7 @@ Feature: Olive 3 Regression Pack
     Given I select Edit for the existing Campaign "<campaign>"
     Then I wait for 5000
 
-# ***ADD MEDIA PLAN LINE**
+#   ***ADD MEDIA PLAN LINE**
     Then I click the "Media Plan Whole Column" link
     Then I wait for 5000
     And I select the Media Plan linked to Campaign of "<campaign>"
@@ -151,9 +151,9 @@ Feature: Olive 3 Regression Pack
     Then I click the "Save Media Plan Line" link
     Then I wait for 5000
 
-# ***PUBLISH MEDIA PLAN***
+#   ***PUBLISH MEDIA PLAN***
     When I click the "Publish Media Plan" link
-    Then I wait for 1000
+    Then I wait for 3000
     Then I should see "Media Plan published successfully"
     Then I wait for 2000
 
@@ -167,7 +167,7 @@ Feature: Olive 3 Regression Pack
     And I click the link containing Text "<ds3>"
     Then I click the "External System Save" link
 
-# ***MAP SEARCH CAMPAIGN***
+#   ***MAP SEARCH CAMPAIGN***
     Then I click the "Plan Lines" link
     And I click the "Manage mappings" link
     Then I wait for 15000
@@ -182,7 +182,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "Publish Dropdown" link
     And I click the "Published State" link
 
-# ***REQUEST APPROVAL***
+#   ***REQUEST APPROVAL***
     Then I click the "Manage Approval" link
     And I click the "Add Approver" link
     Then I wait for 2000
@@ -199,14 +199,33 @@ Feature: Olive 3 Regression Pack
     And I click the "Request Approval" link
     Then I wait for 2000
 
-# ***FEEDBACK & APPROVE***
-    Then I click the "Insertion Order tab" link
-    Then I click the "Plan tab" link
+#   ***FEEDBACK & APPROVE***
     Then I click the "Set Status" link
     And I fill in the "Feedback Notes" with "Regression Testing feedback test"
     Then I click the "Approve" link
 
-# ***ADD KPI***
+#   ***EDIT FIRST MEDIA PLAN LINE***
+    Then I click the "Editable Draft State" link
+    Then I wait for 2000
+    Then I click the "First Plan Line Edit" link
+    And I wait for 2000
+    Then I click the "Edit Line Currency" link
+    And I click the link containing Text "Australian Dollar"
+    Then I wait for 2000
+    Then I click the "Save Edited Media Plan Line" link
+    Then I wait for 5000
+
+#   ***PUBLISH AND ACCEPT BREACH***
+    When I click the "Publish Media Plan" link
+    Then I wait for 3000
+    Then I should see "Publishing this media plan you will require further internal approval for the amends you have made"
+    And I click the "Continue & Publish" link
+    Then I wait for 2000
+    Then I should see "Media Plan published successfully"
+    Then I wait for 3000
+    And I should see "Amends Published"
+
+#   ***ADD KPI***
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
     Then I wait for 2000
@@ -221,6 +240,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "Conversion Source Field" link
     Then I click the link containing Text "Google Floodlights"
     And I click the "Event Save" link
+    And I wait for 3000
     Then I click the "Add Tag" link
     And I click the "Conversion Type" link
     And I fill in the "Conversion Type" with "<conversion>"
@@ -236,7 +256,7 @@ Feature: Olive 3 Regression Pack
     Then I fill in the "Weighting" with "10"
     And I click the "Tag Save" link
 
-# ***TRACKING MANAGEMENT***
+#   ***TRACKING MANAGEMENT***
     Then I click the "Navigation Header" link
     Then I click the "Tracking Management" link
     And I click the "Tracking Code Search Box" link
@@ -252,7 +272,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "Tracking Details" link
     Then I should see "MAPPED"
 
-# ***DELETE CAMPAIGN CLEAN UP***
+#   ***DELETE CAMPAIGN CLEAN UP***
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
     Then I wait for 3000
