@@ -1,5 +1,6 @@
 @untracked
 Feature: OAT-2 Untracked Spend
+         UNTRACKED SPEND ONLY WORKS ON STAGING ENVIRONMENT
 
   Background:
 
@@ -135,9 +136,9 @@ Feature: OAT-2 Untracked Spend
     Then I wait for 2000
     Then I click the "Cost Model" link
     And I click the link containing Text "Biddable CPC"
-    Then I select a Plan Line Start Date of "2015-04-04"
+    Then I select a Plan Line Start Date of "2015-04-01"
     Then I wait for 2000
-    Then I Select a Plan Line End Date of "2015-04-04"
+    Then I Select a Plan Line End Date of "2015-04-30"
     Then I wait for 2000
 
     Then I click the "Line Currency" link
@@ -180,6 +181,22 @@ Feature: OAT-2 Untracked Spend
     Then I click the "Publish Dropdown" link
     And I click the "Published State" link
 
+#   ***EDIT FIRST MEDIA PLAN LINE***
+    Then I click the "Editable Draft State" link
+    Then I wait for 2000
+    Then I click the "First Plan Line Edit" link
+    And I wait for 2000
+    Then I select a Plan Line Start Date of "2015-04-01"
+    Then I wait for 2000
+    Then I Select a Plan Line End Date of "2015-04-01"
+    Then I wait for 2000
+
+    Then I wait for 2000
+    Then I click the "Save Edited Media Plan Line" link
+    Then I wait for 5000
+
+    Then I click the "Olive Header Logo" link
+    And I should see text matching "<ds3"
 
 
 ##   ***DELETE CAMPAIGN CLEAN UP***

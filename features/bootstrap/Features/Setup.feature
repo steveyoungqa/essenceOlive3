@@ -148,13 +148,6 @@ Feature: Setup Campaign, Media Plan, Plan Lines, Insertion Order to perform test
     Then I click the "Save Media Plan Line" link
     Then I wait for 5000
 
-
-
-
-
-
-
-
   Examples:
     |campaign  |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
     |setup     |google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
