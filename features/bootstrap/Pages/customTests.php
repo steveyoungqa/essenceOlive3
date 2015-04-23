@@ -240,7 +240,7 @@ class customTests extends CustomPage
     public function editExistingCampaign ($campaign)
     {
         $this->getElement('editExistingCampaign')->click();
-        $element = $this->find('xpath', '//*[contains(@id,"'.$campaign.'")][contains(@id,"edit")]');
+        $element = $this->find('xpath', '//*[contains(@id,"'.$campaign.'")][contains(@id,"edit")]//*[@class="button button__icon-only"]');
 
         if (isset($element)) {
             $element->click();

@@ -13,40 +13,11 @@ Feature: IDs not working
     Then I should see "Notifications"
 
   Scenario Outline: Create Media Plan Standalone Test
-# ***CREATE CAMPAIGN***
+# ***ACCESS EXISTING CAMPAIGN**
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
-    Then I wait for 2000
-
-    Then I fill in the "Campaign Search" with "<campaign>"
-    Then I wait for 3000
-    Then I select the Delete "<campaign>" checkbox
     Then I wait for 5000
-
-    Then I click the "Navigation Header" link
-    Then I click the "Campaigns" link
-    Then I wait for 3000
-    Then I follow "campaign-add"
-    Then I wait for 3000
-
-    And I fill in "campaign-new-name" with "<campaign>"
-    And I fill in "campaign-new-client" with "<client>"
-    Then I wait for 5000
-    And I fill in "campaign-new-owner" with "<owner>"
-    Then I wait for 7000
-    And I fill in "campaign-new-memo" with "Test Notes"
-    Then I wait for 5000
-    Then I click the "Campaign Save" link
-    Then I wait for 5000
-
-# ***LINK TO EXTERNAL PLATFORM***
-    Then I click the "External Platforms Market Level" link
-    And I click the "Google Sub Product" link
-    Then I fill in "mapping-externalSystem-googleSubProduct" with "AdWords - A01 (Acquisition)"
-    Then I wait for 5000
-    Then I click the "External System Save" link
-     # The above link doesnt click External Save - it takes focus off the form dropdown in the previous step
-    Then I click the "External System Save" link
+    Given I select Edit for the existing Campaign "<campaign>"
     Then I wait for 5000
 
 # ***CREATE MEDIA PLAN***
