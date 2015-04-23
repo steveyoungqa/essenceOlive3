@@ -197,7 +197,7 @@ Feature: OAT-2 Untracked Spend
     And I wait for 2000
     Then I click the "Campaign Tasks Notification" link
     Then I follow "Go"
-    And I should see text matching "<ds3"
+    And I should see text matching "<ds3>"
 
 
 ##   ***DELETE CAMPAIGN CLEAN UP***
