@@ -1,5 +1,5 @@
 @coding
-Feature: Olive 3 Regression Pack
+Feature: Deugging and Coding ONLY
 
 
   Background:
@@ -7,47 +7,20 @@ Feature: Olive 3 Regression Pack
     Given I am on "/login"
     Then I press "Sign in with Google"
     And I fill in "Email" with "steve.automation@gmail.com"
-    And I fill in "Passwd" with "Warlock99"
+    And I fill in "Passwd" with "Warlock1990"
     Then I press "signIn"
     Then I wait for 3000
     Then I should see "Notifications"
 
-  Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
+  Scenario Outline: Debug & Coding
 # ***CREATE CAMPAIGN***
-    Then I click the "Navigation Header" link
-    Then I follow "Campaigns"
+    Then I click the "Campaign Tasks Notification" link
+    And I should see text matching "untracked spend"
+    Then I should see text matching "Go"
+    Then I click the link containing Text "Go"
+    Then
 
-    Then I fill in the "Campaign Search" with "<campaign>"
-    Then I wait for 3000
-    Then I select the Delete "<campaign>" checkbox
-    Then I wait for 5000
 
-    Then I click the "Navigation Header" link
-    Then I follow "Campaigns"
-    Then I wait for 3000
-    Then I follow "campaign-add"
-    Then I wait for 3000
-
-    And I fill in "campaign-new-name" with "<campaign>"
-    And I fill in "campaign-new-client" with "<client>"
-    Then I wait for 5000
-    And I fill in "campaign-new-owner" with "<owner>"
-    Then I wait for 9000
-    And I fill in "campaign-new-memo" with "Test Notes"
-    Then I wait for 5000
-    Then I click the "Campaign Save" link
-    Then I wait for 8000
-
-# ***LINK TO EXTERNAL PLATFORM***
-    Then I click the "External Platforms Market Level" link
-    Then I should see "T"
-    And I click the "Google Sub Product" link
-    Then I fill in "mapping-externalSystem-googleSubProduct" with "Wildfire - E15"
-    Then I wait for 5000
-    Then I click the "External System Save" link
-     # The above link doesnt click External Save - it takes focus off the form dropdown in the previous step
-    Then I click the "External System Save" link
-    Then I wait for 5000
 
   Examples:
     |campaign       |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |

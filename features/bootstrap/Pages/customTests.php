@@ -13,6 +13,7 @@ class customTests extends CustomPage
         #essence xpaths - that dont have IDs or Values:
 
         'Olive Header Logo' => array('xpath' => "//*[@class='header__logo']"),
+        'Campaign Tasks Notification' => array('xpath' => "//*[@class='tasklist_item ng-scope']//*[contains(text(),'Campaign')]"),
         'Campaign Search' => array('xpath' => "//*[@id='campaign-search-basic']"),
         'Navigation Header' => array('xpath' => "//*[@class='menu-close icon icon--med icon--tables']"), //ID Needed
         'Campaigns' => array('xpath' => "//*[@id='site-navigation-campaigns']"),

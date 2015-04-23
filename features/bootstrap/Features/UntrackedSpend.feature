@@ -186,8 +186,6 @@ Feature: OAT-2 Untracked Spend
     Then I wait for 2000
     Then I click the "First Plan Line Edit" link
     And I wait for 2000
-    Then I select a Plan Line Start Date of "2015-04-01"
-    Then I wait for 2000
     Then I Select a Plan Line End Date of "2015-04-01"
     Then I wait for 2000
 
@@ -196,6 +194,9 @@ Feature: OAT-2 Untracked Spend
     Then I wait for 5000
 
     Then I click the "Olive Header Logo" link
+    And I wait for 2000
+    Then I click the "Campaign Tasks Notification" link
+    Then I follow "Go"
     And I should see text matching "<ds3"
 
 
