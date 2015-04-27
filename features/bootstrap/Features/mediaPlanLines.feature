@@ -57,7 +57,7 @@ Feature: Olive 3 Regression Pack
     And I fill in "campaign-marketbudgets-new-label" with "Test Label"
     Then I wait for 2000
 
-    Then I click the "KPI Type Long Path" link
+    Then I click the "KPI Type" link
     Then I click the "KPI Brand" link
     Then I wait for 2000
 
@@ -71,7 +71,7 @@ Feature: Olive 3 Regression Pack
     Then I click the link containing ID "<period>"
     Then I wait for 2000
 
-    Then I click the "Market Long Path" link
+    Then I click the "Media Plan Market" link
     Then I wait for 2000
     Then I click the "Market USA" link
 
@@ -93,7 +93,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the link containing ID "<owner>"
 
-    Then I click the "Media Plan Long Save" link
+    Then I click the "Media Plan Save" link
     Then I wait for 5000
 
 # ***LINK TO GOOGLE INITIATIVE***
@@ -174,7 +174,7 @@ Feature: Olive 3 Regression Pack
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100"
     And I fill in the "Plan Line Description" with "<description1>"
 #    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 

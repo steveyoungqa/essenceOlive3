@@ -48,7 +48,7 @@ class customTests extends CustomPage
 
         'Add Media Plan Line' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-line-add']"),
         'Line Cost Type' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-costType']"),
-        'Cost Type Media' => array('xpath' => "//*[@class='custom-switcher button-group button-group--standard ng-isolate-scope']//*[contains(text(),'Media')]"),
+        'Cost Type Media' => array('xpath' => "//*[@class='form__input custom-switcher button-group button-group--standard custom-switcher button-group button-group--standard']//*[contains(text(),'Media')]"),
         'Cost Type Service' => array('xpath' => "//*[@class='custom-switcher button-group button-group--standard ng-isolate-scope']//*[contains(text(),'Service')]"),
         'Buy Type' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-buyType']"),
         'Line Channel' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-channel']"),

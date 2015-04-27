@@ -158,7 +158,7 @@ Feature: Breach Scenarios
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100"
     And I fill in the "Plan Line Description" with "<description1>"
 #    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
