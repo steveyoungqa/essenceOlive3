@@ -139,7 +139,7 @@ Feature: Breach Scenarios
     And I click the link containing Text "<supplier>"
     Then I should see text matching "<clientLiable>"
     Then I click the "Platform" link
-    And I click the link containing Text "DS3"
+    Then I click the "Platform DS3" link
     Then I wait for 2000
     Then I click the "Property" link
     And I click the link containing Text "Google Search"
@@ -187,7 +187,7 @@ Feature: Breach Scenarios
     Then I fill in the "Supplier" with "<supplier>"
     Then I wait for 2000
     Then I click the "Platform" link
-    And I click the link containing Text "DS3"
+    Then I click the "Platform DS3" link
     Then I wait for 2000
     Then I click the "Property" link
     And I click the link containing Text "Google Search"

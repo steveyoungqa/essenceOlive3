@@ -146,7 +146,7 @@ Feature: Olive 3 Regression Pack
     And I click the link containing Text "<supplier>"
     Then I should see text matching "<clientLiable>"
     Then I click the "Platform" link
-    And I click the link containing Text "DS3"
+    Then I click the "Platform DS3" link
     Then I wait for 2000
     Then I click the "Property" link
     And I click the link containing Text "Google Search"
@@ -175,8 +175,8 @@ Feature: Olive 3 Regression Pack
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
     Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100"
+
     And I fill in the "Plan Line Description" with "<description1>"
-#    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
     Then I wait for 5000
@@ -203,7 +203,7 @@ Feature: Olive 3 Regression Pack
     Then I fill in the "Supplier" with "<supplier>"
     Then I wait for 2000
     Then I click the "Platform" link
-    And I click the link containing Text "DS3"
+    Then I click the "Platform DS3" link
     Then I wait for 2000
     Then I click the "Property" link
     And I click the link containing Text "Google Search"

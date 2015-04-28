@@ -37,7 +37,7 @@ Feature: Perform tests upon an Existing Setup
     Then I click the "Supplier" link
     And I click the link containing Text "<supplier>"
     Then I click the "Platform" link
-    And I click the link containing Text "DS3"
+    Then I click the "Platform DS3" link
     Then I wait for 2000
     Then I click the "Property" link
     And I click the link containing Text "Google Search"
@@ -54,10 +54,18 @@ Feature: Perform tests upon an Existing Setup
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "10"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100"
+
+    Then I click the "Discount Applied" checkbox
+    And I wait for 2000
+    And I click the "Discount Amount Tab" link
+    Then I fill in the "Discount Amount" with "50"
+
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
+    Then I wait for 5000
+    Then I reload the page
     Then I wait for 5000
 
 #   ***PUBLISH MEDIA PLAN***
@@ -65,32 +73,36 @@ Feature: Perform tests upon an Existing Setup
     Then I wait for 3000
     Then I should see "Media Plan published successfully"
     Then I wait for 2000
+    Then I reload the page
+    Then I wait for 5000
 
-#    ***LINK INSERTION ORDER TO DS3***
-    Then I click the "Insertion Order tab" link
-    Then I wait for 4000
-    And I click the "View IO" link
-    Then I click the "External Platforms Insertion Order" link
-    And I click the "Link DS3" link
-    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
-    Then I wait for 8000
-    And I click the link containing Text "<ds3>"
-    Then I click the "External System Save" link
-
-#   ***MAP SEARCH CAMPAIGN***
-    Then I click the "Plan Lines" link
-    And I click the "Manage mappings" link
-    Then I wait for 15000
-
-    Then I Map Search Campaign "<searchCampaign>"
-    And I click the "Save Managed Entities" link
-    Then I wait for 3000
-
-    Then I click the "Close Mapped Panel" link
-    Then I click the "Plan tab" link
-
-    Then I click the "Publish Dropdown" link
-    And I click the "Published State" link
+##    ***LINK INSERTION ORDER TO DS3***
+#    Then I click the "Insertion Order tab" link
+#    Then I wait for 4000
+#    And I click the "View IO" link
+#    Then I click the "External Platforms Insertion Order" link
+#    And I click the "Link DS3" link
+#    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
+#    Then I wait for 8000
+#    And I click the link containing Text "<ds3>"
+#    Then I click the "External System Save" link
+#    Then I reload the page
+#    Then I wait for 5000
+#
+##   ***MAP SEARCH CAMPAIGN***
+#    Then I click the "Plan Lines" link
+#    And I click the "Manage mappings" link
+#    Then I wait for 15000
+#
+#    Then I Map Search Campaign "<searchCampaign>"
+#    And I click the "Save Managed Entities" link
+#    Then I wait for 3000
+#
+#    Then I click the "Close Mapped Panel" link
+#    Then I click the "Plan tab" link
+#
+#    Then I click the "Publish Dropdown" link
+#    And I click the "Published State" link
 
 #   ***REQUEST APPROVAL***
     Then I click the "Manage Approval" link
