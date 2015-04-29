@@ -58,8 +58,9 @@ Feature: Perform tests upon an Existing Setup
 
     Then I click the "Discount Applied" checkbox
     And I wait for 2000
-    And I click the "Discount Amount Tab" link
+    And I click the "Discount Percentage Tab" link
     Then I fill in the "Discount Amount" with "50"
+    And I wait for 10000
 
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 

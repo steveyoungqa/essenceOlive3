@@ -1,7 +1,7 @@
 @planlines
 Feature: Olive 3 Regression Pack
   Create new campaign, Add Media Plan, Add Media Plan Line & Service
-  OAT-99, OAT-111, OAT-62, OAT-72, OAT-102, OAT-28, OAT-17
+  OAT-99, OAT-111, OAT-62, OAT-72, OAT-102, OAT-28, OAT-17, OTD-1908
 
   Background:
 
@@ -57,7 +57,7 @@ Feature: Olive 3 Regression Pack
     And I fill in "campaign-marketbudgets-new-label" with "Test Label"
     Then I wait for 2000
 
-    Then I click the "KPI Type" link
+    Then I click the "KPI Type Long Path" link
     Then I click the "KPI Brand" link
     Then I wait for 2000
 
@@ -71,7 +71,7 @@ Feature: Olive 3 Regression Pack
     Then I click the link containing ID "<period>"
     Then I wait for 2000
 
-    Then I click the "Media Plan Market" link
+    Then I click the "Market Long Path" link
     Then I wait for 2000
     Then I click the "Market USA" link
 
@@ -93,7 +93,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the link containing ID "<owner>"
 
-    Then I click the "Media Plan Save" link
+    Then I click the "Media Plan Long Save" link
     Then I wait for 5000
 
 # ***LINK TO GOOGLE INITIATIVE***
@@ -175,7 +175,11 @@ Feature: Olive 3 Regression Pack
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
     Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100"
-
+#   ***APPLY BUDGET DISCOUNT***
+    Then I click the "Discount Applied" checkbox
+    And I wait for 2000
+    And I click the "Discount Amount Tab" link
+    Then I fill in the "Discount Amount" with "50"
     And I fill in the "Plan Line Description" with "<description1>"
 
     Then I click the "Save Media Plan Line" link
@@ -244,8 +248,8 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the link containing Text "Essence LON"
     Then I wait for 2000
-    And I click the "Unknown Budget" checkbox
-    And I wait for 2000
+#    And I click the "Unknown Budget" checkbox
+#    And I wait for 2000
     And I should see text matching "Client Liable"
     Then I click the "Save Edited Media Plan Line" link
     Then I wait for 5000
