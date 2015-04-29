@@ -45,7 +45,7 @@ Scenario: Notify Client Approver
     |Datetime |Currently Logged in User | Client Approval requested from [Approvers' names] | {message if available}|
     -----------------------------------------------------------------------------------------------------------------
 
-
+#TO REVIEW
 Scenario: Change Approvers while pending
   Given Client approval was requested from two Client Approvers
     And one of them has already approved
@@ -58,6 +58,7 @@ Scenario: Change Approvers while pending
     ------------------------------------------------------------------------
     |Datetime |Currently Logged in User | Client Approver changed from [Name of previous approver] to [Name of new approver] | N/A     |
 
+#TO REVIEW
 Scenario: Client gives feedback
   Given Client approval was requested from two Client Approvers
     And both have received a notificafiton email with a lilnk to the media plan
@@ -73,6 +74,7 @@ Scenario: Client gives feedback
     |Datetime |Currently Logged in User | [Approved/Rejected] plan | {message if available}|
     -----------------------------------------------------------------------------
 
+#TO REVIEW
 Scenario: Partial Client Approval
   Given Client approval was requested from two Client Approvers
     And both have received a notificafiton email with a lilnk to the media plan
@@ -80,6 +82,7 @@ Scenario: Partial Client Approval
   When the first approver approves plan
   Then the plan still stays in "Client Approval Requested" status
 
+#TO REVIEW
 Scenario: Full Client Approval
   Given Client approval was requested from two Client Approvers
     And both have received a notificafiton email with a lilnk to the media plan
@@ -87,6 +90,7 @@ Scenario: Full Client Approval
   When the last approver approves plan
   Then the plan status changes to "Client Approved"
 
+#TO REVIEW
 Scenario: Client Rejects
   Given Client approval was requested from two Client Approvers
     And both have received a notificafiton email with a lilnk to the media plan
@@ -95,7 +99,7 @@ Scenario: Client Rejects
   Then the plan status changes to "Client Rejected" status
     And feedback from other approvers is no longer expected
 
-
+#TO REVIEW
 Scenario: Version expired before Approval
   Given Client approval was requested
     And Client approver has received a notificafiton email with a lilnk to the media plan
@@ -103,6 +107,5 @@ Scenario: Version expired before Approval
   When Client clicks on the link
   Then
 
-
-#Internally Approved
+#TO REVIEW
 Scenario: View Last Client Approved Version
