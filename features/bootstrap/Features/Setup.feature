@@ -32,7 +32,7 @@ Feature: Setup Campaign, Media Plan, Plan Lines, Insertion Order to perform test
     And I fill in "campaign-new-client" with "<client>"
     Then I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
-    Then I wait for 9000
+    Then I wait for 10000
     And I fill in "campaign-new-memo" with "Test Notes"
     Then I wait for 5000
     Then I click the "Campaign Save" link
@@ -55,7 +55,8 @@ Feature: Setup Campaign, Media Plan, Plan Lines, Insertion Order to perform test
     And I fill in "campaign-marketbudgets-new-label" with "Test Label"
     Then I wait for 2000
 
-    Then I click the "KPI Type" link
+#    Then I click the "KPI Type" link
+    Then I click the "KPI Type Long Path" link
     Then I click the "KPI Brand" link
     Then I wait for 2000
 
@@ -69,7 +70,8 @@ Feature: Setup Campaign, Media Plan, Plan Lines, Insertion Order to perform test
     Then I click the link containing ID "<period>"
     Then I wait for 2000
 
-    Then I click the "Media Plan Market" link
+#    Then I click the "Media Plan Market" link
+    Then I click the "Market Long Path" link
     Then I wait for 2000
     Then I click the "Market USA" link
 
@@ -91,61 +93,8 @@ Feature: Setup Campaign, Media Plan, Plan Lines, Insertion Order to perform test
     Then I wait for 2000
     Then I click the link containing ID "<owner>"
 
-    Then I click the "Media Plan Save" link
-    Then I wait for 5000
-
-#   ***LINK TO GOOGLE INITIATIVE***
-    Then I click the "External Platforms Post Create Plan" link
-    Then I click the "Link Google Initiative" link
-    Then I fill in "mapping-externalSystem-googleInitiative" with "<initiative>"
-    Then I wait for 2000
-    Then I click the link containing ID "<initiative>"
-    Then I click the "Save Mapped Account" link
-    Then I wait for 10000
-    Then I click the "Navigation Header" link
-    Then I click the "Campaigns" link
-    Then I wait for 3000
-    Given I select Edit for the existing Campaign "<campaign>"
-    Then I wait for 5000
-
-#   ***ADD MEDIA PLAN LINE**
-    Then I click the "Media Plan Whole Column" link
-    Then I wait for 5000
-    And I select the Media Plan linked to Campaign of "<campaign>"
-    Then I wait for 5000
-
-    Then I click the "Add Media Plan Line" link
-    Then I wait for 2000
-    And I click the "Cost Type Media" link
-    Then I click the "Line Channel" link
-    And I click the "Line Channel Search" link
-    Then I click the "Section" link
-    And I click the link containing Text "Default"
-    Then I wait for 2000
-    Then I click the "Supplier" link
-    And I click the link containing Text "<supplier>"
-    Then I click the "Platform" link
-    Then I click the "Platform DS3" link
-    Then I wait for 2000
-    Then I click the "Property" link
-    And I click the link containing Text "Google Search"
-    Then I wait for 2000
-    Then I click the "Media Type" link
-    And I click the link containing Text "Search Text Ad"
-    Then I wait for 2000
-    Then I click the "Cost Model" link
-    And I click the link containing Text "Biddable CPC"
-    Then I select a Plan Line Start Date of "2015-04-04"
-    Then I wait for 2000
-    Then I Select a Plan Line End Date of "2015-04-04"
-    Then I wait for 2000
-
-    Then I click the "Line Currency" link
-    And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100000"
-    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
-
-    Then I click the "Save Media Plan Line" link
+#    Then I click the "Media Plan Save" link
+    Then I click the "Media Plan Long Save" link
     Then I wait for 5000
 
   Examples:

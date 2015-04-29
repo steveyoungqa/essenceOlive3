@@ -35,7 +35,7 @@ Feature: Olive 3 Regression Pack
     And I fill in "campaign-new-client" with "<client>"
     Then I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
-    Then I wait for 9000
+    Then I wait for 10000
     And I fill in "campaign-new-memo" with "Test Notes"
     Then I wait for 5000
     Then I click the "Campaign Save" link
@@ -114,7 +114,7 @@ Feature: Olive 3 Regression Pack
     Given I select Edit for the existing Campaign "<campaign>"
     Then I wait for 5000
     Then I reload the page
-    And I wait for 5000
+    And I wait for 8000
 
 #   ***ADD MEDIA PLAN LINE**
     Then I click the "Media Plan Whole Column" link
@@ -156,15 +156,14 @@ Feature: Olive 3 Regression Pack
     Then I click the "Save Media Plan Line" link
     Then I wait for 5000
     Then I reload the page
-    And I wait for 5000
+    And I wait for 8000
 
 #   ***PUBLISH MEDIA PLAN***
     When I click the "Publish Media Plan" link
-    Then I wait for 3000
+    Then I wait for 5000
     Then I should see "Media Plan published successfully"
-    Then I wait for 2000
     Then I reload the page
-    And I wait for 5000
+    And I wait for 8000
 
 ##   ***LINK INSERTION ORDER TO DS3***
 #    Then I click the "Insertion Order tab" link
@@ -209,7 +208,7 @@ Feature: Olive 3 Regression Pack
     And I click the "Request Approval" link
     Then I wait for 2000
     Then I reload the page
-    And I wait for 5000
+    And I wait for 8000
 
 #   ***FEEDBACK & APPROVE***
     Then I click the "Set Status" link
@@ -233,11 +232,11 @@ Feature: Olive 3 Regression Pack
     Then I should see "Publishing this media plan you will require further internal approval for the amends you have made"
     And I click the "Continue & Publish" link
     Then I wait for 2000
+    Then I should see "Media Plan published successfully"
+    Then I wait for 3000
+    And I should see "Amends Published"
     Then I reload the page
-    And I wait for 5000
-#    Then I should see "Media Plan published successfully"
-#    Then I wait for 3000
-#    And I should see "Amends Published"
+    And I wait for 8000
 
 #   ***ADD KPI***
     Then I click the "Navigation Header" link
@@ -270,23 +269,24 @@ Feature: Olive 3 Regression Pack
     Then I fill in the "Weighting" with "10"
     And I click the "Tag Save" link
     Then I reload the page
-    And I wait for 5000
+    And I wait for 8000
 
-##   ***TRACKING MANAGEMENT***
-#    Then I click the "Navigation Header" link
-#    Then I click the "Tracking Management" link
-#    And I click the "Tracking Code Search Box" link
-#    Then I fill in the "Tracking Code Search Box" with "<searchCampaign>"
-#    Then I wait for 3000
-#    And I click the "Advanced Filter" link
-#    Then I wait for 2000
-#    Then I click the "DS3 Advertiser Filter" link
-#    And I fill in the "DS3 Advertiser Filter" with "<ds3Advert>"
-#    Then I wait for 2000
-#    Then I click the link containing Text "<ds3Advert>"
-#    And I click the "Advanced Search Close" link
-#    Then I click the "Tracking Details" link
-#    Then I should see "MAPPED"
+#   ***TRACKING MANAGEMENT***
+    Then I click the "Navigation Header" link
+    Then I click the "Tracking Management DS3" link
+    And I click the "Tracking Code Search Box" link
+    Then I fill in the "Tracking Code Search Box" with "<searchCampaign>"
+    Then I wait for 3000
+    And I click the "Advanced Filter" link
+    Then I wait for 2000
+    Then I click the "DS3 Advertiser Filter" link
+    And I fill in the "DS3 Advertiser Filter" with "<ds3Advert>"
+    Then I wait for 2000
+    Then I click the link containing Text "<ds3Advert>"
+    And I click the "Advanced Search Close" link
+    Then I click the "Tracking Details" link
+    And I wait for 5000
+    Then I should see "MAPPED"
 
 #   ***DELETE CAMPAIGN CLEAN UP***
     Then I click the "Navigation Header" link
