@@ -11,11 +11,11 @@ Scenario: Download O3 Plan with Line IDs
     And I have published it
   When I view the published version of the plan
   Then I can download a csv of all lines contianing the following columns:
-    -------------------------------------------------
-    |Client Name  |Campaign ID    |Campaign Name  |
-    |Media Plan ID|Media Plan Name|Initiative     |Market (code)|Start Date |End Date   |
-    |Plan Line ID |Section        |Supplier       |Property     |Platform   |Channel    |
-    |Media Type   |Currency       |Budget         |Description  |
+#    -------------------------------------------------
+#    |Client Name  |Campaign ID    |Campaign Name  |
+#    |Media Plan ID|Media Plan Name|Initiative     |Market (code)|Start Date |End Date   |
+#    |Plan Line ID |Section        |Supplier       |Property     |Platform   |Channel    |
+#    |Media Type   |Currency       |Budget         |Description  |
 
 #TO REVIEW
 #in Olive 2
@@ -25,23 +25,23 @@ Scenario: New Format T-Sheet
     And Media Detail (T-sheet) relating to that plan is ready to be trafficked
   When AdOps member log into Olive 2
   Then he can find an upload form that accepts a new format T-sheet with the following changes:
-      ----------------------------------------------------------------------------------------------
-      |Campaign ID                    | PO ID     | Media Plan ID          | Plan Line ID          |
-      ----------------------------------------------------------------------------------------------
-      |Olive 2 Campaign ID (optional) | *REMOVE*  | Olive 3 Media Plan ID  | Olive 3 Plan Line ID  |
-      ----------------------------------------------------------------------------------------------
+#      ----------------------------------------------------------------------------------------------
+#      |Campaign ID                    | PO ID     | Media Plan ID          | Plan Line ID          |
+#      ----------------------------------------------------------------------------------------------
+#      |Olive 2 Campaign ID (optional) | *REMOVE*  | Olive 3 Media Plan ID  | Olive 3 Plan Line ID  |
+#      ----------------------------------------------------------------------------------------------
     And it is clearly labelled as "Olive 3 T-Sheet" (TBC)
     And on upload Olive 2 validates the T-Sheet format to ensure all columns are there
     And Olive 2 validates the content of new columns and displays feedback if failed:
-       ------------------------------------------------------------------------------------------------------------------------------
-       | RULE                                                         | Error Msg                                                   |
-       ------------------------------------------------------------------------------------------------------------------------------
-       | If Campaign ID provided, it's a recognised Olive 2 Campaign  | "Campaign ID not recognised"                                |
-       | If Campaign ID not provided, allow upload anyway             |                                                             |
-       | Plan Line ID is a recognised Olive 3 published plan line     | "Plan Line ID not recognised. Please ensure it's pubished"  |
-       | Media Plan ID is a recognised Olive 3 Pulbisehd Media Plan ID| "Media Plan ID not recognised. Please ensure it's published"|
-       | Plan Line belongs to Media Plan                              | "Plan Line belongs to a different Media Plan.               |
-       |                                                              | Please ensure IDs are correct"                              |
+#       ------------------------------------------------------------------------------------------------------------------------------
+#       | RULE                                                         | Error Msg                                                   |
+#       ------------------------------------------------------------------------------------------------------------------------------
+#       | If Campaign ID provided, it's a recognised Olive 2 Campaign  | "Campaign ID not recognised"                                |
+#       | If Campaign ID not provided, allow upload anyway             |                                                             |
+#       | Plan Line ID is a recognised Olive 3 published plan line     | "Plan Line ID not recognised. Please ensure it's pubished"  |
+#       | Media Plan ID is a recognised Olive 3 Pulbisehd Media Plan ID| "Media Plan ID not recognised. Please ensure it's published"|
+#       | Plan Line belongs to Media Plan                              | "Plan Line belongs to a different Media Plan.               |
+#       |                                                              | Please ensure IDs are correct"                              |
 
 #TO REVIEW
 Scenario: Olive 2 Campaign Doesn't exist
