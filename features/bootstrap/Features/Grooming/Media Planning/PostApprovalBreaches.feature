@@ -1,4 +1,7 @@
 Feature: Post approval breaches
+In order to ensure that media plans continusouly comply with agreements I've made with the Client and Suppliers
+As Campaign Manager
+I want Olive to detect the impact my published changes have on them and update status accordingly
 
 Scenario: Configure Breach thresholds (OTD-773)
   Given
@@ -50,7 +53,7 @@ Scenario: Publish Upweight by amount that breaches set thresholds (OTD-1988)
       # |Datetime |Currently Logged in User | Published upweight from [] to []  |N/A   |        |        |
 
 
-Scenario: Publish Upweight by amount that doesn't breach thresholds (non DBM) (OTD-1988)
+Scenario: Publish Upweight by amount that doesn't breach thresholds (OTD-1988)
   Given Media Plan has been approved by client
     And Breach thresholds have been configured
     And Campaign hasn't ended yet (Media Plan End date is in the future)
@@ -172,7 +175,7 @@ Scenario: Publish Cancelled property / supplier (OTD-1988)
       # --------------------------------------------------------------------------------------------------
       # |Datetime |Currently Logged in User | Published Cancelation                   |N/A      |        |
 
-Scenario: Publish Changes plan line dates (OTD-1988)
+Scenario: Publish Changes in plan line dates (OTD-1988)
   Given Media Plan has been approved by client
     And Campaign hasn't ended yet (Media Plan End date is in the future)
     And there are no upweights, but some lines have changed flight dates
