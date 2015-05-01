@@ -175,8 +175,10 @@ Feature: Olive 3 Regression Pack
     Then I click the "Insertion Order tab" link
     Then I wait for 4000
     And I click the "View IO" link
+    And I wait for 4000
     Then I click the "External Platforms Insertion Order" link
     And I click the "Link DS3" link
+    And I wait for 2000
     And I fill in "mapping-externalSystem-ds3" with "<ds3>"
     Then I wait for 8000
     And I click the link containing Text "<ds3>"
@@ -304,7 +306,7 @@ Feature: Olive 3 Regression Pack
 
   Examples:
     |campaign  |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |regression|google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |regressionlocal|google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

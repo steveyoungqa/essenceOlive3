@@ -19,16 +19,15 @@ Scenario: Require Internal Approval (OTD-2006)
     And allow them to request approval
     And change the state of the IO to "Internal Approval Requested"
     And Selected approver receives a persistent (until the said IO is internally approved) notification on their homepage with the following text:
-      | { Approver Name } has requested that you review and approve the following Insertion Order: { Supplier - IO Id - label } in { Media Plan Name } for { Currency Code} {Insertion Order Total } |
-      e.g.
-      | Zanete Ence has requested that you review and approve the following Insertion Order:  |
-      | Google Ireland Ltd. - #243 - PMP Non-AdX in Chrome EMEA Q2 2015 UK for GBP 3,500      |
-      With a link to the Published version of this Insertion Order
+#      | { Approver Name } has requested that you review and approve the following Insertion Order: { Supplier - IO Id - label } in { Media Plan Name } for { Currency Code} {Insertion Order Total } |
+#      | Zanete Ence has requested that you review and approve the following Insertion Order:  |
+#      | Google Ireland Ltd. - #243 - PMP Non-AdX in Chrome EMEA Q2 2015 UK for GBP 3,500      |
+#      With a link to the Published version of this Insertion Order
   And save an Event in the history:
-      ------------------------------------------------------------------------------
-      |Time     |User                     |Action                     |Document| Notes  |
-      ------------------------------------------------------------------------------
-      |Datetime |Currently Logged in User | IO Submitted for Approval | N/A    |        |
+#      ------------------------------------------------------------------------------
+#      |Time     |User                     |Action                     |Document| Notes  |
+#      ------------------------------------------------------------------------------
+#      |Datetime |Currently Logged in User | IO Submitted for Approval | N/A    |        |
 
 #(reviewed 23th April)
 Scenario: IO Approved (OTD-1914)
@@ -36,10 +35,10 @@ Scenario: IO Approved (OTD-1914)
   When  they approve the IO
   Then change the state of the IO to "Internally Approved"
     And save an Event in the history:
-    ------------------------------------------------------------------------------
-    |Time     |User                     |Action                     |Document| Notes  |
-    ------------------------------------------------------------------------------
-    |Datetime |Currently Logged in User | IO Approved               | N/A    |        |
+#    ------------------------------------------------------------------------------
+#    |Time     |User                     |Action                     |Document| Notes  |
+#    ------------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | IO Approved               | N/A    |        |
 
 #(reviewed 23th April)
 Scenario: IO Rejected (OTD-1914)
@@ -47,7 +46,7 @@ Scenario: IO Rejected (OTD-1914)
   When  they reject the IO
   Then change the state of the IO to "Internally Rejected"
     And save an Event in the history:
-    ------------------------------------------------------------------------------
-    |Time     |User                     |Action                     |Document| Notes  |
-    ------------------------------------------------------------------------------
-    |Datetime |Currently Logged in User | IO Rejected               | N/A    |        |
+#    ------------------------------------------------------------------------------
+#    |Time     |User                     |Action                     |Document| Notes  |
+#    ------------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | IO Rejected               | N/A    |        |

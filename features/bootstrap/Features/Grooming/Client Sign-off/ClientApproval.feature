@@ -34,16 +34,17 @@ Scenario: Notify Client Approver
     And I have chosen Client approvers
   When I request approval
   Then I am presented with a promt to confirm my action
-    "You're about to send approval requests to [Apperover's names]. Are you sure"
+    And I see "You're about to send approval requests to [Apperover's names]. Are you sure"
     And All chosen Client approvers receive a notification email with a link to the Media plan
-    "Text tbc"
+    And I should see "Text tbc"
     And plan status hanges to "Client Approval Requested"
+    And "Request Client Approval" button changes to "Manage Approval Request"
     And an event is added to the Plan History
-    -----------------------------------------------------------------------------------------------------------------
-    |Time     |User                     |Action                                             |Details                |
-    -----------------------------------------------------------------------------------------------------------------
-    |Datetime |Currently Logged in User | Client Approval requested from [Approvers' names] | {message if available}|
-    -----------------------------------------------------------------------------------------------------------------
+#    -----------------------------------------------------------------------------------------------------------------
+#    |Time     |User                     |Action                                             |Details                |
+#    -----------------------------------------------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | Client Approval requested from [Approvers' names] | {message if available}|
+#    -----------------------------------------------------------------------------------------------------------------
 
 #(reviewed 1st May)
 Scenario: Add Approvers while pending
@@ -74,6 +75,10 @@ Scenario: Remove Approvers while pending
 
 #(reviewed 1st May)
 Scenario: Popeye role
+  Given User account is set up in Olive
+  When Olive manager looks at the account details ("People" section)
+  Then he can choose "Popeye" as a Role and assign it to User account holder
+
 
 #(reviewed 1st May)
 Scenario: Remove Last pending Approver
@@ -120,11 +125,11 @@ Scenario: Client gives feedback
     And he can Approve or Reject the plan
     And he can add a message (optional)
     And an event is added to the Plan History
-    -----------------------------------------------------------------------------
-    |Time     |User                     |Action         |Details                |
-    -----------------------------------------------------------------------------
-    |Datetime |Currently Logged in User | [Approved/Rejected] plan | {message if available}|
-    -----------------------------------------------------------------------------
+#    -----------------------------------------------------------------------------
+#    |Time     |User                     |Action         |Details                |
+#    -----------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | [Approved/Rejected] plan | {message if available}|
+#    -----------------------------------------------------------------------------
 
 #TO REVIEW
 Scenario: Partial Client Approval
@@ -157,7 +162,6 @@ Scenario: Version expired before Approval
     And Client approver has received a notificafiton email with a lilnk to the media plan
     And campaign manager has published new changes
   When Client clicks on the link
-  Then
 
 #TO REVIEW
 Scenario: View Last Client Approved Version

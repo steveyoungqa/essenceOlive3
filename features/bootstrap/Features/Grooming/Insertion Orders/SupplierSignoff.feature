@@ -24,10 +24,10 @@ Scenario: Indicate Supplier Media buy confirmation (OTD-1916)
     And display the following text:
     |I [planner name], confirm that supplier has counter signed this IO - TBC with Helen|
     And save an action in the history:
-    ------------------------------------------------------------------------
-    |Time     |User                     |Action                  |Details  |
-    ------------------------------------------------------------------------
-    |Datetime |Currently Logged in User | Supplier Buy Confirmed | N/A     |
+#    ------------------------------------------------------------------------
+#    |Time     |User                     |Action                  |Details  |
+#    ------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | Supplier Buy Confirmed | N/A     |
 
 #(reviewed 23th April)
 Scenario: If the IO is Breached or Changed due to the Plan changing (OTD-2014)
@@ -38,10 +38,10 @@ Scenario: If the IO is Breached or Changed due to the Plan changing (OTD-2014)
     And the IO is invalidated
   Then remove the Supplier approval against the IO
     And A new event is added to the history
-    ------------------------------------------------------------------------------
-    |Time     |User                     |Action                 |Document| Notes  |
-    ------------------------------------------------------------------------------
-    |Datetime |Currently Logged in User | IO [upweight, downwegith] leading to invalidated Supplier confirmation | N/A    |        |
+#    ------------------------------------------------------------------------------
+#    |Time     |User                     |Action                 |Document| Notes  |
+#    ------------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | IO [upweight, downwegith] leading to invalidated Supplier confirmation | N/A    |        |
 
 #(reviewed 23th April)
 Scenario: If the IO is Breached or Changed due to a plan line changing (OTD-2014)
@@ -52,10 +52,10 @@ Scenario: If the IO is Breached or Changed due to a plan line changing (OTD-2014
     And the IO is invalidated
   Then remove the Supplier approval against the IO
     And A new event is added to the history
-    ------------------------------------------------------------------------------
-    |Time     |User                     |Action                 |Document| Notes  |
-    ------------------------------------------------------------------------------
-    |Datetime |Currently Logged in User | IO [upweight, downwegith] leading to invalidated Supplier confirmation | N/A    |        |
+#    ------------------------------------------------------------------------------
+#    |Time     |User                     |Action                 |Document| Notes  |
+#    ------------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | IO [upweight, downwegith] leading to invalidated Supplier confirmation | N/A    |        |
 
 #(reviewed 23th April)
 Scenario: If the IO is cancelled post Supplier approval (OTD-2014)
@@ -65,10 +65,10 @@ Scenario: If the IO is cancelled post Supplier approval (OTD-2014)
   Then the IO status changes to "Published"
     And Supplier approval is removed
     And A new event is added to the history
-    ------------------------------------------------------------------------------
-    |Time     |User                     |Action                 |Document| Notes  |
-    ------------------------------------------------------------------------------
-    |Datetime |Currently Logged in User | IO Down weighted to 0 | N/A    |        |
+#    ------------------------------------------------------------------------------
+#    |Time     |User                     |Action                 |Document| Notes  |
+#    ------------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | IO Down weighted to 0 | N/A    |        |
 
 #(reviewed 24th April)
 Scenario: Warn about spending without confirmed Supplier sign-off (OTD-1973)
@@ -97,4 +97,4 @@ Scenario: Spend against supplier confirmed cancelled IOs (OTD-1973)
   When I look at the plan in Olive 3
   Then I can see a warning icon against the spending lines on the left side (as indicated in attached screenshot)
     And On hover over the warning I see a message saying: "This plan line is spending against cancelled IO. Please resolve"
-    Adn IO Owner and Media Plan manager receives a persistent (until issue fixed) notification on the homepage saying: "Spend against Lines in IO [IO Label] that have been confirmed as cancelled by Supplier. Please resolve" with a link to the problem IO
+    And IO Owner and Media Plan manager receives a persistent (until issue fixed) notification on the homepage saying: "Spend against Lines in IO [IO Label] that have been confirmed as cancelled by Supplier. Please resolve" with a link to the problem IO
