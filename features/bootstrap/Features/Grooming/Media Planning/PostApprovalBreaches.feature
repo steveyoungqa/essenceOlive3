@@ -6,10 +6,10 @@ I want Olive to detect the impact my published changes have on them and update s
 Scenario: Configure Breach thresholds (OTD-773)
   Given media Plan Exists
   When I edit media plan details
-  Then I see a field Breach threshold (as absolute amount in Plan currency) and I can specify a numeric amount. This amount indicates the change threshold which cannot be exceeded when publishing new spend with a specific supplier / property / liable entity post plan approval group.
-    And by default the Breach threshold (as absolute amount in Plan currency) is set to 10,000.00
-    And I see a field Breach threshold (percent of Total Plan budget) and I can specify a numeric amount between 0 and 100. This indicates the change threshold amount as a % of Total Plan budget which cannot be exceeded when publishing new spend with a specific supplier / property / liable entity post plan approval group.
-    And by default the Breach threshold (percent of Total Plan budget) is set to %20
+  Then I see a field "Breach threshold (as absolute amount in Plan currency)" and I can specify a numeric amount. This amount indicates the change threshold which cannot be exceeded when publishing new spend with a specific supplier / property / liable entity post plan approval group.
+    And by default the "Breach threshold (as absolute amount in Plan currency)" is set to 10,000.00
+    And I see a field "Breach threshold (percent of Total Plan budget)" and I can specify a numeric amount between 0 and 100. This indicates the change threshold amount as a % of Total Plan budget which cannot be exceeded when publishing new spend with a specific supplier / property / liable entity post plan approval group.
+    And by default the "Breach threshold (percent of Total Plan budget)" is set to %20
 
 Scenario: Publish Upweight by amount that breaches set thresholds (OTD-1988)
   Given Media Plan has been approved by client
