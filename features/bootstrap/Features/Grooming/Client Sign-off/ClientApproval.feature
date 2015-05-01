@@ -54,10 +54,10 @@ Scenario: Add Approvers while pending
   Then they can add new approver
     And receive a promt to confirm email will be sent to Client ("text tbc")
     And on request a new event is added to the Plan History
-    ------------------------------------------------------------------------
-    |Time     |User                     |Action                  |Details  |
-    ------------------------------------------------------------------------
-    |Datetime |Currently Logged in User | Client Approval reqested from [Name of new approver] | N/A     |
+#    ------------------------------------------------------------------------------------------------------
+#    |Time     |User                     |Action                                                |Details  |
+#    ------------------------------------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | Client Approval reqested from [Name of new approver] | N/A     |
 
 #(reviewed 1st May)
 Scenario: Remove Approvers while pending
@@ -68,10 +68,10 @@ Scenario: Remove Approvers while pending
   Then  allow them to remove all but the last pending approver
     And don't allow them to remove an approver who has "Approved" the plan
     And record in the removal in the history:
-    ------------------------------------------------------------------------
-    |Time     |User                     |Action                  |Details  |
-    ------------------------------------------------------------------------
-    |Datetime |Currently Logged in User | Client Approval reqest retracked from [Name of new approver] | N/A     |
+#    --------------------------------------------------------------------------------------------------------------
+#    |Time     |User                     |Action                                                        |Details  |
+#    --------------------------------------------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | Client Approval reqest retracked from [Name of new approver] | N/A     |
 
 #(reviewed 1st May)
 Scenario: Popeye role
@@ -90,11 +90,11 @@ Scenario: Remove Last pending Approver
     And receive a promt to confirm the plan will be approved as all other approvers have approved ("text tbc")
     And Plan changes status to "Client Approved"
     And record in the removal in the history:
-    ------------------------------------------------------------------------
-    |Time     |User                     |Action                  |Details  |
-    ------------------------------------------------------------------------
-    |Datetime |Currently Logged in User | Client Approval reqest retracked from [Name of new approver] | N/A     |
-    |Datetime |Currently Logged in User | Plan has been Approved by the client                         | N/A     |
+#    --------------------------------------------------------------------------------------------------------------
+#    |Time     |User                     |Action                                                        |Details  |
+#    --------------------------------------------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | Client Approval reqest retracked from [Name of new approver] | N/A     |
+#    |Datetime |Currently Logged in User | Plan has been Approved by the client                         | N/A     |
 
 #(reviewed 1st May)
   Scenario: Removes all Client Approvers
@@ -106,11 +106,11 @@ Scenario: Remove Last pending Approver
       And receive a promt to confirm the plan will go back to ("text tbc")
       And Plan changes status to "Internally Approved"
       And record in the removal in the history:
-      ------------------------------------------------------------------------
-      |Time     |User                     |Action                  |Details  |
-      ------------------------------------------------------------------------
-      |Datetime |Currently Logged in User | All client approvers have been removed. | N/A  |
-      |Datetime |Currently Logged in User | Plan moved back to Internally Approved  | N/A     |
+#      ------------------------------------------------------------------------------------------
+#      |Time     |User                     |Action                                    |Details  |
+#      ------------------------------------------------------------------------------------------
+#      |Datetime |Currently Logged in User | All client approvers have been removed.  | N/A     |
+#      |Datetime |Currently Logged in User | Plan moved back to Internally Approved   | N/A     |
 
 
 Scenario: Add another approver once it's approved
@@ -125,11 +125,11 @@ Scenario: Client gives feedback
     And he can Approve or Reject the plan
     And he can add a message (optional)
     And an event is added to the Plan History
-#    -----------------------------------------------------------------------------
-#    |Time     |User                     |Action         |Details                |
-#    -----------------------------------------------------------------------------
-#    |Datetime |Currently Logged in User | [Approved/Rejected] plan | {message if available}|
-#    -----------------------------------------------------------------------------
+#    ------------------------------------------------------------------------------------------
+#    |Time     |User                     |Action                      |Details                |
+#    ------------------------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | [Approved/Rejected] plan   | {message if available}|
+#    ------------------------------------------------------------------------------------------
 
 #TO REVIEW
 Scenario: Partial Client Approval
