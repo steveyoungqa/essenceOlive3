@@ -6,7 +6,7 @@ I want to be able to upload a new format T-sheet in Olive 2
 
 #TO REVIEW
 #in Olive 3
-Scenario: Download O3 Plan with Line IDs
+Scenario: Download O3 Plan with Line IDs for T-sheet (OTD-1921)
   Given I have set up a Media Plan in Olive 3
     And I have published it
   When I view the published version of the plan

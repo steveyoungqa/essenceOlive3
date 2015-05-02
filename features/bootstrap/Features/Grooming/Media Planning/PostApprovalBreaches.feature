@@ -25,7 +25,7 @@ Scenario: Publish Upweight by amount that breaches set thresholds (OTD-1988)
     # * Insertion Order
     #---------------------------------------
   When changes are published
-  Then user is presented with a promt
+  Then user is presented with a promt that approval will be breached
     @todo - text with Helen
     # ""
     And on confirming, Media Plan status changes to "Published"
@@ -33,7 +33,7 @@ Scenario: Publish Upweight by amount that breaches set thresholds (OTD-1988)
     And Media Plan Manager receives a notification, with dynamic values emphasised
       @todo - review with Helen
       # *{Media plan name}*  plan status has changed from *{Old Status value}* to *{New Status value}*
-      # e.g. "Google Chrome EMEA Q2 2015 UK plan status has changed from Client Aproved to Amends Published"
+      # e.g. "Google Chrome EMEA Q2 2015 UK plan status has changed from Client Aproved to Published"
     And Olive saves an Event in the Plan history:
       # --------------------------------------------------------------------------------------------------
       # |Time     |User                     |Action                                    |Document| Notes  |
@@ -121,7 +121,7 @@ Scenario: Publish new property / supplier (OTD-1988)
     # * Insertion Order
     #---------------------------------------
   When changes are published
-  Then user is presented with a promt
+  Then user is presented with a promt that approval will be breached
     @todo - text with Helen
     # ""
     And on confirming, Media Plan status changes to "Published"
@@ -201,9 +201,89 @@ Scenario: Publish Changes in plan line dates (OTD-1988)
 
 
 Scenario: Publish increased Plan budget (OTD-2009)
+  Given Media Plan has been approved by client
+    And Campaign hasn't ended yet (Media Plan End date is in the future)
+    And Draft media plan total budget has been increased when compared to the last Client approved version
+  When changes are published
+  Then user is presented with a promt that approval will be breached
+    @todo - text with Helen
+    # ""
+    And on confirming, Media Plan status changes to "Published"
+    And "Breach" flag becomes visible
+    And Media Plan Manager receives a notification about Media Plan Status change, with dynamic values emphasised
+      @todo - review with Helen
+      # ""*{Media plan name}*  plan status has changed from *{Old Status value}* to *{New Status value}*"
+      # e.g. "Google Chrome EMEA Q2 2015 UK plan status has changed from Client Aproved to Published"
+      @todo - decide where the Budget change message belongs
+      # "Total budget for the approved *{Media plan name}*  plan has changed from *{Old Budget value}* to *{New Budget value}*"
+      # e.g. "Total budget for the approved Google Chrome EMEA Q2 2015 UK plan has changed from GBP 80,000 to GBP 100, 000"
+    And Olive saves 2 Events in the Plan history:
+      @todo - decide if it should be just one
+      # --------------------------------------------------------------------------------------------------
+      # |Time     |User                     |Action                                             | Notes  |
+      # --------------------------------------------------------------------------------------------------
+      # |Datetime |Currently Logged in User | Published Budget Upweight from [] to []           |        |
+      # |Datetime |Currently Logged in User | Client approval breach                            |        |
 
 Scenario: Publish decreased plan budget (OTD-2009)
+  Given Media Plan has been approved by client
+    And Draft media plan total budget has been decreased when compared to the last Client approved version
+  When changes are published
+  Then user is presented with a promt that Clients will be notified
+      @todo - text with Helen
+      # ""
+    And on confirming, Media Plan status remains unchanged
+    And Client approvers receive a notification
+      @todo - text with Helen
+      # ""
+    And Media Plan Manager receives a notification about Media Plan budget change, with dynamic values emphasised
+      @todo - review with Helen
+      # "Total budget for the approved *{Media plan name}*  plan has changed from *{Old Budget value}* to *{New Budget value}*"
+      # e.g. "Total budget for the approved Google Chrome EMEA Q2 2015 UK plan has changed from GBP 80,000 to GBP 100, 000"
+    And Olive saves an Event in the Plan history:
+      # --------------------------------------------------------------------------------------------------
+      # |Time     |User                     |Action                                             | Notes  |
+      # --------------------------------------------------------------------------------------------------
+      # |Datetime |Currently Logged in User | Published Budget downweight from [] to []         |        |
 
 Scenario: Publish Changed plan dates (OTD-2009)
+  Given Media Plan has been approved by client
+    And Draft media plan flight dates have been changed when compared to the last Client approved version
+  When changes are published
+  Then user is presented with a promt that Clients will be notified
+      @todo - text with Helen
+      # ""
+    And on confirming, Media Plan status remains unchanged
+    And Client approvers receive a notification
+      @todo - text with Helen
+      # ""
+    And Media Plan Manager receives a notification about Media Plan date changes, with dynamic values emphasised
+      @todo - review with Helen
+      # "Dates for the approved *{Media plan name}*  plan have changed from *{Old date range}* to *{New date range}*"
+      # e.g. "Dates for the approved Google Chrome EMEA Q2 2015 UK plan have changed from 1 Jan 2015 - 31 Mar 2015 to 1 Jan 2015 - 14 Apr 2015"
+    And Olive saves an Event in the Plan history:
+      # --------------------------------------------------------------------------------------------------
+      # |Time     |User                     |Action                                             | Notes  |
+      # --------------------------------------------------------------------------------------------------
+      # |Datetime |Currently Logged in User | Published Date Changes from [] to []              |        |
 
-Scenario: Pubish changes to breach thresholds (OTD-2009)
+Scenario: Publish changes to breach thresholds (OTD-2009)
+  Given Media Plan has been approved by client
+    And Draft media plan breach thresholds dates have been changed when compared to the last Client approved version
+  When changes are published
+  Then user is presented with a promt that Clients will be notified
+      @todo - text with Helen
+      # ""
+    And on confirming, Media Plan status remains unchanged
+    And Client approvers receive a notification
+      @todo - text with Helen
+      # ""
+    And Media Plan Manager receives a notification about Media Plan breach threshold changes, with dynamic values emphasised
+      @todo - review with Helen
+      # "Breach Thresholds for the approved *{Media plan name}*  plan have changed from *{Old Thresholds}* to *{New Thresholds}*"
+      # e.g. "Breach Thresholds for the approved Google Chrome EMEA Q2 2015 UK plan have changed from USD 100,000.00 or 20% to USD 100,000.00 or 95%"
+    And Olive saves an Event in the Plan history:
+      # --------------------------------------------------------------------------------------------------
+      # |Time     |User                     |Action                                             | Notes  |
+      # --------------------------------------------------------------------------------------------------
+      # |Datetime |Currently Logged in User | Published Breach thresholds Changes from [] to [] |        |

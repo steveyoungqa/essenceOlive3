@@ -32,3 +32,15 @@ Scenario: Media plan has been rejected (OTD-1856)
 #  --------------------------------------------------------------
 #  |Internally Rejected       | Review the Plan + Notes (hover) |
 #  |Externally Rejects        | Review the Plan + Notes (hover) |
+
+#TO FLESH OUT
+Scenario: FE - Display Breach and Indicate 2nd round
+
+#TO FLESH OUT
+Scenario: FE - Display Approved plan that has IOs with missing Supplier countersigned IO
+
+#TO FLESH OUT - prototype OTD-1976 ?
+Scenario: FE - Highlight Plan changes published since last approval 
+
+#TO FLESH OUT
+Scenario: FE - Highlight Plan meta data changes published since last approval
