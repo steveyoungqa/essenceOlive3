@@ -30,14 +30,14 @@ Scenario: Request Client Approval
 # TBC - the text
 #(reviewed 28th April)
 Scenario: Notify Client Approver
-  Given Media Plan has been internally apprver
+  Given Media Plan has been internally approved
     And I have chosen Client approvers
   When I request approval
-  Then I am presented with a promt to confirm my action
-    And I see "You're about to send approval requests to [Apperover's names]. Are you sure"
+  Then I am presented with a prompt to confirm my action
+    And I see "[Client approver name] will be emailed a link to approve this plan from [Current Logged In User]. Are you sure you want to send this email? Cancel/Yes, send request"
     And All chosen Client approvers receive a notification email with a link to the Media plan
-    And I should see "Text tbc"
-    And plan status hanges to "Client Approval Requested"
+    And I should see "Approval request sent"
+    And plan status changes to "Client Approval Requested"
     And "Request Client Approval" button changes to "Manage Approval Request"
     And an event is added to the Plan History
 #    -----------------------------------------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ Scenario: Add Approvers while pending
     And one of them has already approved
   When Campaign manager (anyone) looks at the media plan
   Then they can add new approver
-    And receive a promt to confirm email will be sent to Client ("text tbc")
+    And receive a prompt to confirm email will be sent to Client ("[Client approver name] will be emailed a link to approve this plan from [Current Logged In User]. Are you sure you want to send this email? Cancel/Yes, send request")
     And on request a new event is added to the Plan History
 #    ------------------------------------------------------------------------------------------------------
 #    |Time     |User                     |Action                                                |Details  |
@@ -90,14 +90,14 @@ Scenario: Remove Last pending Approver
     And the user is "Popeye"
   When  they view the approver list
   Then  allow them to remove the last pending approver
-    And receive a promt to confirm the plan will be approved as all other approvers have approved ("text tbc")
+    And receive a prompt to confirm the plan will be approved as all other approvers have approved ("Removing the last pending approver will automatically change this plan's status to Client Approved. Are you sure you want to do this? Cancel / Yes, remove approver")
     And Plan changes status to "Client Approved"
     And record in the removal in the history:
-#    --------------------------------------------------------------------------------------------------------------
-#    |Time     |User                     |Action                                                        |Details  |
-#    --------------------------------------------------------------------------------------------------------------
-#    |Datetime |Currently Logged in User | Client Approval reqest retracked from [Name of new approver] | N/A     |
-#    |Datetime |Currently Logged in User | Plan has been Approved by the client                         | N/A     |
+#    -------------------------------------------------------------------------------------------------------------------
+#    |Time     |User                     |Action                                                              |Details  |
+#    -------------------------------------------------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | Client Approval reqest retracted from [Name of pending approver]   | N/A     |
+#    |Datetime |Currently Logged in User | Plan has been Approved by the client                               | N/A     |
 
 #(reviewed 1st May)
   Scenario: Removes all Client Approvers
@@ -116,7 +116,18 @@ Scenario: Remove Last pending Approver
 #      |Datetime |Currently Logged in User | Plan moved back to Internally Approved   | N/A     |
 
 
+#TO REVIEW
+Scenario: Attempt to remove Last Pending Approver without "Popeye" status
+  Given Given Client approval was requested from two or more Client Approvers
+    And there is one pending approver
+    And the user is a "Campaign Manager"
+  When  they select to remove the pending approver
+  Then  show an alert saying "You are not authorised to remove the last pending approver. Please add another client approver before removing this approver, or ask a *Popeye* user to remove the last approver."
+
+
+
 Scenario: Add another approver once it's approved
+
 
 #(reviewed 5th May)
 Scenario: Client gives feedback
