@@ -5,7 +5,7 @@ As Campaign Manager
 I want to add line items to my plan
 
 #to review
-Scenario: Specify platform
+Scenario: Specify platform (OTD-2052)
   Given a Media plan is set up
   When I go to add a new or edit existing plan line of type "Media"
   Then I can specify a "Platform"
@@ -28,5 +28,6 @@ Scenario: Publish Plan meta data with individual line publishing
     And lines have been added to it
     And the whole plan has been published
     And later changes made to a few lines and plan meta data
-  Then Any changes to Plan meta data are published along with selected lines
-  When user publish a selection of changed plant lines
+  When user publish a selection of changed plan lines
+  Then User is informed that Plan meta data changes will be published as well
+    And all Plan meta data changes are published along with selected lines
