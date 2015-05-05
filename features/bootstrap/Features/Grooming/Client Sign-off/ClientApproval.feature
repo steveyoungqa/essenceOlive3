@@ -67,6 +67,9 @@ Scenario: Remove Approvers while pending
   When  they view the approver list
   Then  allow them to remove all but the last pending approver
     And don't allow them to remove an approver who has "Approved" the plan
+    And removed Approver gets a notification
+      @todo - Helen please confirm notification text
+      ""
     And record in the removal in the history:
 #    --------------------------------------------------------------------------------------------------------------
 #    |Time     |User                     |Action                                                        |Details  |
@@ -115,15 +118,15 @@ Scenario: Remove Last pending Approver
 
 Scenario: Add another approver once it's approved
 
-#TO REVIEW
+#(reviewed 5th May)
 Scenario: Client gives feedback
-  Given Client approval was requested from two Client Approvers
-    And both have received a notificafiton email with a lilnk to the media plan
-    And none of them have already given feedback (approved / rejected)
-  When One of them clicks on the link in notifcation
-  Then he can see a Client view of the plan
-    And he can Approve or Reject the plan
-    And he can add a message (optional)
+  Given Client approval was requested
+    And Client approver received a notificafiton email with a lilnk to the media plan
+    And the Plan hasn't been rejected
+  When they clicks on the link in notifcation
+  Then they can see a Client view of the plan
+    And they can Approve or Reject the plan
+    And they can add a message (optional)
     And an event is added to the Plan History
 #    ------------------------------------------------------------------------------------------
 #    |Time     |User                     |Action                      |Details                |
@@ -131,37 +134,56 @@ Scenario: Client gives feedback
 #    |Datetime |Currently Logged in User | [Approved/Rejected] plan   | {message if available}|
 #    ------------------------------------------------------------------------------------------
 
-#TO REVIEW
+#(reviewed 5th May)
 Scenario: Partial Client Approval
-  Given Client approval was requested from two Client Approvers
-    And both have received a notificafiton email with a lilnk to the media plan
-    And none of them have already approved
-  When the first approver approves plan
+  Given Client approval was requested from multiple Client Approvers
+    And there is more than one pending approvals
+  When only one of them approves plan
   Then the plan still stays in "Client Approval Requested" status
 
-#TO REVIEW
+#(reviewed 5th May)
 Scenario: Full Client Approval
-  Given Client approval was requested from two Client Approvers
-    And both have received a notificafiton email with a lilnk to the media plan
-    And one of them has already approved
+  Given Client approval was requested from one or more Client Approvers
+    And one approval is still pending
   When the last approver approves plan
   Then the plan status changes to "Client Approved"
+    And Media Plan Manager is notified
+    @todo - need to cnfirm text
+    ""
+    And an event is added to the Plan History
+    #------------------------------------------------------------------------------------------
+    #|Time     |User                     |Action                      |Details                |
+    #------------------------------------------------------------------------------------------
+    #|Datetime |Currently Logged in User | Plan Client approved   | {message if available}|
+    #------------------------------------------------------------------------------------------
 
-#TO REVIEW
+#(reviewed 5th May)
 Scenario: Client Rejects
-  Given Client approval was requested from two Client Approvers
-    And both have received a notificafiton email with a lilnk to the media plan
-    And none of them have already approved
-  When the first approver rejects plan
+  Given Client approval was requested from one or more Client Approvers
+    And plan is not "Client Approved"
+  When the any approver rejects plan
   Then the plan status changes to "Client Rejected" status
     And feedback from other approvers is no longer expected
+    And other approvers are notified
+      @todo - Helen, please write something here!
+      "[]"
+    And Media Plan Manager is notified
+    And an event is added to the Plan History
+    #------------------------------------------------------------------------------------------
+    #|Time     |User                     |Action                      |Details                |
+    #------------------------------------------------------------------------------------------
+    #|Datetime |Currently Logged in User | [Rejected] plan   | {message if available}|
+    #------------------------------------------------------------------------------------------
 
-#TO REVIEW
+#(reviewed 5th May)
 Scenario: Version expired before Approval
   Given Client approval was requested
     And Client approver has received a notificafiton email with a lilnk to the media plan
-    And campaign manager has published new changes
-  When Client clicks on the link
+  When campaign manager publishes new changes that breaches
+  Then Client approvers receive a notification about plan no longer needing approval
+    @todo - helen please confirm copy
+    And Plan status changes to "Published"
+
 
 #TO REVIEW
 Scenario: View Last Client Approved Version
