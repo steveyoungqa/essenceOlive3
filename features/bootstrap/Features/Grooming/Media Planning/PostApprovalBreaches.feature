@@ -33,7 +33,7 @@ Scenario: Publish Upweight by amount that breaches set thresholds (OTD-1988)
     # *Plans require client reapproval if the plan budget is increased; a supplier or property is added to the plan; or the total upweights of a single property with the same supplier and liability exceeds the agreed % of the last approved total media plan budget, or the agreed fixed threshold amount, whichever is reached first."
     # (The above description of what constitutes a breach is a footnote in the prompt)
     And on confirming, Media Plan status changes to "Published"
-    And "Breach" flag becomes visible
+    And "Breach" flag becomes visible as a block icon between "Internally approved" and "Client Approval requested" statuses
     And Media Plan Manager receives a notification, with dynamic values emphasised
     # The status of the plan "*{Media plan name}*" has changed from *{Old Status value}* to *{New Status value}*
     # e.g. "The status of the plan "Google Chrome EMEA Q2 2015 UK" has changed from Client Aproved to Published"
@@ -129,7 +129,7 @@ Scenario: Publish new property / supplier (OTD-1988)
     # *Plans require client reapproval if a supplier or property is added to the plan, or the total upweights of a single property with the same supplier and liability exceeds the agreed % of the last approved total media plan budget, or the agreed fixed threshold amount, whichever is reached first."
     # (The above description of what constitutes a breach is a footnote in the prompt)
     And on confirming, Media Plan status changes to "Published"
-    And "Breach" flag becomes visible
+    And "Breach" flag becomes visible as a block icon between "Internally approved" and "Client Approval requested" statuses
     And Media Plan Manager receives a notification, with dynamic values emphasised
       # The status of the plan "*{Media plan name}*" has changed from *{Old Status value}* to *{New Status value}*
       # e.g. "The status of the plan "Google Chrome EMEA Q2 2015 UK" has changed from Client Aproved to Published"
@@ -213,7 +213,7 @@ Scenario: Publish increased Plan budget (OTD-2009)
     # *Plans require client reapproval if the plan budget is increased; a supplier or property is added to the plan; or the total upweights of a single property with the same supplier and liability exceeds the agreed % of the last approved total media plan budget, or the agreed fixed threshold amount, whichever is reached first."
     # (The above description of what constitutes a breach is a footnote in the prompt)
     And on confirming, Media Plan status changes to "Published"
-    And "Breach" flag becomes visible
+    And "Breach" flag becomes visible as a block icon between "Internally approved" and "Client Approval requested" statuses
     And Media Plan Manager receives a notification about Media Plan Status change, with dynamic values emphasised
       # "Total budget for the plan "{Media Plan Name}" has changed from
       # {Previous Plan Budget} to {New Plan Budget} by {Publisher Name}, and requires internal and client reapproval.
