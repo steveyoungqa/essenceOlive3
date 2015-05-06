@@ -215,82 +215,61 @@ Scenario: Publish changes to breach thresholds (OTD-2009)
       # --------------------------------------------------------------------------------------------------
       # |Datetime |Currently Logged in User | Published Breach thresholds Changes from [] to [] |        |
 
-# TO DISCUSS - remove any notifications from the stories and handle separately as dismissable notifications
+# TO DISCUSS
 Scenario: Notify Media Plan manager of published change impact
   Given a media plan has been approved by the client
     And changes are made to either plan meta data or budget allocations within plan
   When changes are published
-  Then Media Plan Manager receives a notification (s) summarising changes, with dynamic values emphasised as outlined below:
-  #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  # Change                          |Notification                                                     | Example                                                               |
-  #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  # Plan Status change              | The status of the plan "*{Media plan name}*" has changed        | "The status of the plan "Google Chrome EMEA Q2 2015 UK" has changed   |
-  #                                 | from *{Old Status value}* to *{New Status value}*               | from Client Aproved to Published"                                     |
-  #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  # Plan budget changes             |
-  # Plan date changes               |
-  # Plan breach threshold changes   |
-  # New Properties / suppliers      |
-  # Upweights within plan           |
-  #   exceed breach threshold       |
-  # Upweights within plan           |
-  #   not exceed breach threshold   |
-  # Downweights within plan         |
-  # Cancelled properties / suppliers|
-  #   (downweights to 0)
-  # Changes to individual IO dates
-  #-----------------------------------------------------------
-    #
-    # e.g. "The status of the plan "Google Chrome EMEA Q2 2015 UK" has changed from Client Aproved to Published"
-    And Media Plan Manager receives a notification, with dynamic values emphasised
-    # The status of the plan "*{Media plan name}*" has changed from *{Old Status value}* to *{New Status value}*
-    # e.g. "The status of the plan "Google Chrome EMEA Q2 2015 UK" has changed from Client Aproved to Published"
-    And Media Plan Manager receives a notification about Media Plan Status change, with dynamic values emphasised
-      # "Total budget for the plan "{Media Plan Name}" has changed from
-      # {Previous Plan Budget} to {New Plan Budget} by {Publisher Name}, and requires internal and client reapproval.
-      # {Media plan name}  plan status has changed from *{Old Status value}* to *{New Status value}*"
-      # e.g. "Total budget for the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 2,000 to USD 3,000 by Zanete Ence, and requires internal and client reapproval.
-      # "Google Chrome EMEA Q2 2015 UK" plan status has changed from *{Old Status value}* to *{New Status value}*"
-    And Media Plan Manager receives a notification about Media Plan budget change, with dynamic values emphasised
-      # "Total budget for the approved plan "{Media Plan Name}" has changed from
-      # {Previous Plan Budget} to {New Plan Budget} by {Publisher Name}.
-    And Media Plan Manager receives a notification about Media Plan date changes, with dynamic values emphasised
-      # "Planned dates for the plan "{Media Plan Name}" have changed from
-      # {Previous Date Range} to {New Date Range} by {Publisher Name}."
-      # e.g. "Planned dates for the plan "Google Chrome EMEA Q2 2015 UK" have changed from "1 Jan 2015 - 2 Jan 2015" to "2 Jan 2015 - 3 Jan 2015" by Zanete Ence."
-    And Media Plan Manager receives a notification about Media Plan breach threshold changes, with dynamic values emphasised
-      # "Breach Thresholds for the approved plan "*{Media plan name}*""  have changed from *{Old Thresholds}* to *{New Thresholds}*"
-      # e.g. "Breach Thresholds for the approved plan "Google Chrome EMEA Q2 2015 UK" have changed from USD 100,000.00 or 20% to USD 100,000.00 or 95%"
-
-
-  And Media Plan Managers and Owners of changed Insertion Orders receive notification about budget change, with dynamic values emphasised
-  And multiple changes are listed in the same notification
-    @todo - review information in message
-    # "Planned budget for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" has changed from
-    # {Previous IO Total} to {New IO Total} by {Publisher Name}, and requires internal and client reapproval."
-    # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd #128")
-    # in the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 5,000 to USD 8,000 by Zanete Ence, and requires internal and client reapproval."
-  And Media Plan Manager and affected IO Owners receives a notification, with dynamic values emphasised
-    # "Planned budget for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" has changed from
-    # {Previous IO Total} to {New IO Total} by {Publisher Name}."
-    # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd")
-    # in the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 5,000 to USD 3,000 by Zanete Ence."
-  And Media Plan Managers and Owners of changed Insertion Orders receive notificaiton about budget change, with dynamic values emphasised
-    @todo - review information in message
-    # "Planned budget for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" has changed from
-    # {currency} 0 to {New IO Total} by {Publisher Name}, and requires internal and client reapproval."
-    # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd")
-    # in the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 0 to USD 3,000 by Zanete Ence, and requires internal and client reapproval."
-  And Media Plan Manager and affected IO Owners receives a notification, with dynamic values emphasised
-    # "Planned budget for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" has changed from
-    # {Previous IO Total} to {currency} 0 by {Publisher Name}"
-    # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd")
-    # in the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 3,000 to USD 0 by Zanete Ence"
-  And Media Plan Manager and affected IO Owners receives a notification, with dynamic values emphasised
-    # "Planned dates for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" have changed from
-    # {Previous Date Range} to {New Date Range} by {Publisher Name}." (Range is from Min IO date to Max IO date)
-    # e.g. "Planned dates for Google Search ("DS3 - Google Ireland Ltd")
-    # in Google Chrome EMEA Q2 2015 UK plan have changed from "1 Jan 2015 - 2 Jan 2015" to "2 Jan 2015 - 3 Jan 2015" by Zanete Ence."
+  Then Media Plan Manager receives a notification (s) summarising changes, with dynamic values emphasised as outlined in table below
+    And they can dismiss the notification without taking any action
+    And if multiple changes are published at the same time, each one is represented in its own notification
+  #=================================================================================================================================================================================|
+  # Change                          |Notification                                                       | Example                                                                   |
+  #=================================================================================================================================================================================|
+  # Plan Status change              | The status of the plan "*{Media plan name}*" has changed          | "The status of the plan "Google Chrome EMEA Q2 2015 UK" has changed       |
+  #                                 | from *{Old Status value}* to *{New Status value}*                 | from Client Aproved to Published"                                         |
+  #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  # Plan budget changes             | "Total budget for the approved plan "{Media Plan Name}"           |
+  #                                 | has changed from {Previous Plan Budget} to {New Plan Budget}      |
+  #                                 | by {Publisher Name}, and requires internal and client reapproval."|
+  #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  # Plan date changes               | "Planned dates for the plan "{Media Plan Name}" have changed      | "Planned dates for the plan "Google Chrome EMEA Q2 2015 UK" have changed  |
+  #                                 | from {Previous Date Range} to {New Date Range}                    | from "1 Jan 2015 - 2 Jan 2015" to "2 Jan 2015 - 3 Jan 2015"               |
+  #                                 | by {Publisher Name}."                                             |  by Zanete Ence"                                                          |
+  #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  # Plan breach threshold changes   | "Breach Thresholds for the approved plan "*{Media plan name}*"    | "Breach Thresholds for the approved plan "Google Chrome EMEA Q2 2015 UK"  |
+  #                                 |  have changed from *{Old Thresholds}* to *{New Thresholds}*"      |  have changed from 20% to 95%"                                            |
+  #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  # New Suppliers / Properties      | "Planned budget for {Property} ({Insertion Order Name}) in the    | "Planned budget for Google Search ("DS3 - Google Ireland Ltd #128") in    |
+  #                                 | plan "{Media Plan Name}" has changed from 0.00 to                 | the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 0.00 to     |
+  #                                 | {New IO Total} by {Publisher Name}, and requires internal and     | USD 8,000 by Zanete Ence, and requires internal and client reapproval."   |
+  #                                 | client reapproval."                                               |                                                                           |
+  #                                 | @todo - review information in message                             |                                                                           |
+  #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  # Upweights within plan           | "Planned budget for {Property} ({Insertion Order Name}) in the    | "Planned budget for Google Search ("DS3 - Google Ireland Ltd #128") in    |
+  #   exceed breach threshold       | plan "{Media Plan Name}" has changed from {Previous IO Total} to  | the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 5,000 to    |
+  #                                 | {New IO Total} by {Publisher Name}, and requires internal and     | USD 8,000 by Zanete Ence, and requires internal and client reapproval."   |
+  #                                 | client reapproval."                                               |                                                                           |
+  #                                 | @todo - review information in message                             |                                                                           |
+  #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  # Upweights within plan           | "Planned budget for {Property} ({Insertion Order Name}) in the    | "Planned budget for Google Search ("DS3 - Google Ireland Ltd") in the     |
+  #   not exceed breach threshold   |  plan "{Media Plan Name}" has changed from {Previous IO Total}    | plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 5,000 to        |
+  #                                 | to {New IO Total} by {Publisher Name}, and requires internal      | USD 3,000 by Zanete Ence, and requires internal reapproval"               |
+  #                                 | reapproval"                                                       |                                                                           |
+  #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  # Downweights within plan         | "Planned budget for {Property} ({Insertion Order Name}) in the    | "Planned budget for Google Search ("DS3 - Google Ireland Ltd") in the     |
+  #                                 |  plan "{Media Plan Name}" has changed from {Previous IO Total}    | plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 5,000 to        |
+  #                                 | to {New IO Total} by {Publisher Name}. "                          | USD 3,000 by Zanete Ence"                                                 |
+  #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  # Cancelled properties / suppliers| "Planned budget for {Property} ({Insertion Order Name}) in the    | "Planned budget for Google Search ("DS3 - Google Ireland Ltd") in the     |
+  #  (downweights to 0)             |  plan "{Media Plan Name}" has changed from {Previous IO Total}    | plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 5,000 to        |
+  #                                 | to 0.00 by {Publisher Name}. "                                    | USD 0.00 by Zanete Ence"                                                  |
+  #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  # Changes to individual IO dates  | "Planned dates for {Property} ({Insertion Order Name}) in the     | "Planned dates for Google Search ("DS3 - Google Ireland Ltd") in          |
+  #                                 | plan "{Media Plan Name}" have changed from {Previous Date Range}  | Google Chrome EMEA Q2 2015 UK plan have changed from                      |
+  #                                 | to {New Date Range} by {Publisher Name}."                         | "1 Jan 2015 - 2 Jan 2015" to "2 Jan 2015 - 3 Jan 2015" by Zanete Ence."   |
+  #                                 | (Range is from Min IO date to Max IO date)                        |                                                                           |
+  #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
   Scenario: Notify Clients of published changes to approved plan
     And Client approvers receive a notification
