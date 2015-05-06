@@ -23,7 +23,7 @@ Scenario: Specify platform (OTD-2052)
     # Facebook
     # Direct Buy
     And "Platform" is mandatory
-      @todo - confirm if platform is the right label and if we need a tooltip
+#      @todo - confirm if platform is the right label and if we need a tooltip
 
 #to review
 Scenario: Publish Plan meta data with individual line publishing
@@ -33,5 +33,5 @@ Scenario: Publish Plan meta data with individual line publishing
     And later changes made to a few lines and plan meta data
   When user publish a selection of changed plan lines
   Then User is informed that Plan meta data changes will be published as well
-    @todo - Helen help confirm text
+#    @todo - Helen help confirm text
     And all Plan meta data changes are published along with selected lines

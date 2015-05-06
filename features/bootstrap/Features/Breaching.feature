@@ -225,6 +225,8 @@ Feature: Breach Scenarios
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-approvers-add-type" with "Internal"
     Then I wait for 2000
+    And I click the "Internal Approver" link
+    Then I wait for 2000
     Then I click the "Approver Field" link
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-approvers-add-person" with "<approver>"
@@ -246,7 +248,7 @@ Feature: Breach Scenarios
     Then I click the "Plan tab" link
     And I wait for 2000
     Then I click the "Editable Draft State" link
-    Then I wait for 2000
+    Then I wait for 5000
     Then I click the "First Plan Line Edit" link
     And I wait for 2000
     Then I click the "Edit Line Currency" link
@@ -266,7 +268,7 @@ Feature: Breach Scenarios
 
 #   ***EDIT FIRST MEDIA PLAN LINE SECOND TIME***
     Then I click the "Editable Draft State" link
-    Then I wait for 2000
+    Then I wait for 5000
     Then I click the "First Plan Line Edit" link
     And I wait for 2000
     Then I click the "Edit Cost Model" link

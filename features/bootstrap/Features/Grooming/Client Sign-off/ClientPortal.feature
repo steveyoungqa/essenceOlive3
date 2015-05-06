@@ -78,7 +78,7 @@ Scenario: Client views plan that he is to approve / reject
     And Plan line start and end dates, Media Type, Cost Model and Spend column aren't visible
     And there are no other actions on lines (no checkboxes / no edit links)
     And Breach terms are visible at the bottom of the plan
-     @todo - text to be confirmed with Helen
+#     @todo - text to be confirmed with Helen
 
 #to review
 Scenario: Client views a plan for which they have already giving feedback

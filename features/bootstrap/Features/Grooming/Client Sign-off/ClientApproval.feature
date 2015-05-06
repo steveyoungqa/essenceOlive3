@@ -68,8 +68,7 @@ Scenario: Remove Approvers while pending
   Then  allow them to remove all but the last pending approver
     And don't allow them to remove an approver who has "Approved" the plan
     And removed Approver gets a notification
-      @todo - Helen please confirm notification text
-      ""
+#TODO - Helen please confirm notification text
     And record in the removal in the history:
 #    --------------------------------------------------------------------------------------------------------------
 #    |Time     |User                     |Action                                                        |Details  |
@@ -159,8 +158,7 @@ Scenario: Full Client Approval
   When the last approver approves plan
   Then the plan status changes to "Client Approved"
     And Media Plan Manager is notified
-    @todo - need to cnfirm text
-    ""
+#    @todo - need to cnfirm text
     And an event is added to the Plan History
     #------------------------------------------------------------------------------------------
     #|Time     |User                     |Action                      |Details                |
@@ -176,8 +174,7 @@ Scenario: Client Rejects
   Then the plan status changes to "Client Rejected" status
     And feedback from other approvers is no longer expected
     And other approvers are notified
-      @todo - Helen, please write something here!
-      "[]"
+#      @todo - Helen, please write something here!
     And Media Plan Manager is notified
     And an event is added to the Plan History
     #------------------------------------------------------------------------------------------
@@ -192,7 +189,7 @@ Scenario: Version expired before Approval
     And Client approver has received a notificafiton email with a lilnk to the media plan
   When campaign manager publishes new changes that breaches
   Then Client approvers receive a notification about plan no longer needing approval
-    @todo - helen please confirm copy
+#    @todo - helen please confirm copy
     And Plan status changes to "Published"
 
 
