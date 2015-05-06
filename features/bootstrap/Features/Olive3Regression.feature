@@ -35,7 +35,7 @@ Feature: Olive 3 Regression Pack
     And I fill in "campaign-new-client" with "<client>"
     Then I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
-    Then I wait for 10000
+    Then I wait for 15000
     And I fill in "campaign-new-memo" with "Test Notes"
     Then I wait for 5000
     Then I click the "Campaign Save" link
