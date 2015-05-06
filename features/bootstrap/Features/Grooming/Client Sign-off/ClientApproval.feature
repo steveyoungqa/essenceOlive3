@@ -196,5 +196,10 @@ Scenario: Version expired before Approval
     And Plan status changes to "Published"
 
 
-#TO REVIEW
-Scenario: View Last Client Approved Version
+#(reviewed 6th May)
+Scenario: Version breached after approval
+  Given Client approval was given for a plan
+    And breaching changes to plan have been published
+    And plan is in "Published" state
+  When Client approver looks at the plan in Client Portal
+  Then they see the last approved verions

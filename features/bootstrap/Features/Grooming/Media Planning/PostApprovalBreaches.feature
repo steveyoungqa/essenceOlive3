@@ -34,9 +34,6 @@ Scenario: Publish Upweight by amount that breaches set thresholds (OTD-1988)
     # (The above description of what constitutes a breach is a footnote in the prompt)
     And on confirming, Media Plan status changes to "Published"
     And "Breach" flag becomes visible as a block icon between "Internally approved" and "Client Approval requested" statuses
-    And Media Plan Manager receives a notification, with dynamic values emphasised
-    # The status of the plan "*{Media plan name}*" has changed from *{Old Status value}* to *{New Status value}*
-    # e.g. "The status of the plan "Google Chrome EMEA Q2 2015 UK" has changed from Client Aproved to Published"
     And Olive saves an Event in the Plan history:
       # --------------------------------------------------------------------------------------------------
       # |Time     |User                     |Action                                    |Document| Notes  |
@@ -45,19 +42,12 @@ Scenario: Publish Upweight by amount that breaches set thresholds (OTD-1988)
     And unchanged Insertion Order status remains unaffected
     And changed Insertion Order status changes to "Amends Published"
     And changed Insertion Order supplier sign-off confirmation is reset (if supplier works with IOs)
-    And Media Plan Managers and Owners of changed Insertion Orders receive notification about budget change, with dynamic values emphasised
-    And multiple changes are listed in the same notification
-      @todo - review information in message
-      # "Planned budget for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" has changed from
-      # {Previous IO Total} to {New IO Total} by {Publisher Name}, and requires internal and client reapproval."
-      # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd")
-      # in the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 5,000 to USD 8,000 by Zanete Ence, and requires internal and client reapproval."
     And Olive saves an Event in the changed IOs' history:
       # ------------------------------------------------------------------------------------------------------------------
       # |Time     |User                     |Action                                                     |Document| Notes  |
       # ------------------------------------------------------------------------------------------------------------------
       # |Datetime |Currently Logged in User | Published budget upweight from [] to []                   |N/A     |        |
-
+      # |Datetime |Currently Logged in User | IO status changed  from [] to []                          |N/A     |        |
 
 Scenario: Publish Upweight by amount that doesn't breach thresholds (OTD-1988)
   Given Media Plan has been approved by client
@@ -77,12 +67,6 @@ Scenario: Publish Upweight by amount that doesn't breach thresholds (OTD-1988)
     And unchanged Insertion Order status remains unaffected
     And changed Insertion Order status changes to "Amends Published"
     And changed Insertion Order supplier sign-off confirmation is reset (if supplier works with IOs)
-    And Media Plan Manager and affected IO Owners receives a notification, with dynamic values emphasised
-      @todo - review information in message
-      # "Planned budget for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" has changed from
-      # {Previous IO Total} to {New IO Total} by {Publisher Name}, and requires internal approval"
-      # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd")
-      # in the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 5,000 to USD 8,000 by Zanete Ence, and requires internal reapproval."
     And Olive saves an Event in the changed IOs' history:
       # ------------------------------------------------------------------------------------------------------------
       # |Time     |User                     |Action                                             |Document | Notes  |
@@ -97,17 +81,11 @@ Scenario: Publish downweight (OTD-1988)
   Then Media Plan status remains unchanged
     And all Insertion Order status remains unaffected
     And changed Insertion Order supplier sign-off confirmation is reset (if supplier works with IOs)
-    And Media Plan Manager and affected IO Owners receives a notification, with dynamic values emphasised
-      # "Planned budget for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" has changed from
-      # {Previous IO Total} to {New IO Total} by {Publisher Name}."
-      # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd")
-      # in the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 5,000 to USD 3,000 by Zanete Ence."
     And Olive saves an Event in the changed IOs' history:
       # ----------------------------------------------------------------------------------------------------------
       # |Time     |User                     |Action                                           |Document | Notes  |
       # ----------------------------------------------------------------------------------------------------------
       # |Datetime |Currently Logged in User | Published budget downweight from [] to []       |N/A      |        |
-
 
 Scenario: Publish new property / supplier (OTD-1988)
   Given Media Plan has been approved by client
@@ -130,9 +108,6 @@ Scenario: Publish new property / supplier (OTD-1988)
     # (The above description of what constitutes a breach is a footnote in the prompt)
     And on confirming, Media Plan status changes to "Published"
     And "Breach" flag becomes visible as a block icon between "Internally approved" and "Client Approval requested" statuses
-    And Media Plan Manager receives a notification, with dynamic values emphasised
-      # The status of the plan "*{Media plan name}*" has changed from *{Old Status value}* to *{New Status value}*
-      # e.g. "The status of the plan "Google Chrome EMEA Q2 2015 UK" has changed from Client Aproved to Published"
     And Olive saves an Event in the Plan history:
       # --------------------------------------------------------------------------------------------------
       # |Time     |User                     |Action                                    |Document| Notes  |
@@ -141,18 +116,11 @@ Scenario: Publish new property / supplier (OTD-1988)
     And unchanged Insertion Order status remains unaffected
     And changed Insertion Order status changes to "Amends Published"
     And changed Insertion Order supplier sign-off confirmation is reset (if supplier works with IOs)
-    And Media Plan Managers and Owners of changed Insertion Orders receive notificaiton about budget change, with dynamic values emphasised
-      @todo - review information in message
-      # "Planned budget for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" has changed from
-      # {currency} 0 to {New IO Total} by {Publisher Name}, and requires internal and client reapproval."
-      # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd")
-      # in the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 0 to USD 3,000 by Zanete Ence, and requires internal and client reapproval."
     And Olive saves an Event in the changed IOs' history:
       # --------------------------------------------------------------------------------------------------
       # |Time     |User                     |Action                                     |Document| Notes  |
       # --------------------------------------------------------------------------------------------------
       # |Datetime |Currently Logged in User | Published with budget []                  |N/A     |        |
-
 
 Scenario: Publish Cancelled property / supplier (OTD-1988)
   Given Media Plan has been approved by client
@@ -162,18 +130,8 @@ Scenario: Publish Cancelled property / supplier (OTD-1988)
   Then user is presented with a prompt that Clients will be notified
       # "Client approvers will receive an email that {Insertion Order Name(s)} has/have been removed from the plan}"
     And Media Plan status remains unchanged
-    And Client approvers receive a notification
-    And Multiple notifications for the same plan are listed in the same email
-      @todo - Need a new scenario for when a published plan has changes that require both just notification as well as reapproval
-      # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}"
-      # "Planned budget for {Property} ({Insertion Order Name}) has changed from {Previous IO Total} to {New IO Total}. No action is required from you."
     And unchanged Insertion Order status remains unaffected
     And changed Insertion Order supplier sign-off confirmation is reset (if supplier works with IOs)
-    And Media Plan Manager and affected IO Owners receives a notification, with dynamic values emphasised
-      # "Planned budget for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" has changed from
-      # {Previous IO Total} to {currency} 0 by {Publisher Name}"
-      # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd")
-      # in the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 3,000 to USD 0 by Zanete Ence"
     And Olive saves an Event in the changed IOs' history:
       # --------------------------------------------------------------------------------------------------
       # |Time     |User                     |Action                                   |Document | Notes  |
@@ -188,18 +146,11 @@ Scenario: Publish Changes in plan line dates (OTD-1988)
   Then Media Plan status remains unchanged
     And all Insertion Order status remains unaffected
     And changed Insertion Order supplier sign-off confirmation is reset (if supplier works with IOs)
-    And Media Plan Manager and affected IO Owners receives a notification, with dynamic values emphasised
-      # "Planned dates for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" have changed from
-      # {Previous Date Range} to {New Date Range} by {Publisher Name}." (Range is from Min IO date to Max IO date)
-      # e.g. "Planned dates for Google Search ("DS3 - Google Ireland Ltd")
-      # in Google Chrome EMEA Q2 2015 UK plan have changed from "1 Jan 2015 - 2 Jan 2015" to "2 Jan 2015 - 3 Jan 2015" by Zanete Ence."
     And Olive saves an Event in the changed IOs' history:
       # -------------------------------------------------------------------------------------------------------------------------------
       # |Time     |User                     |Action                                                                |Document | Notes  |
       # -------------------------------------------------------------------------------------------------------------------------------
       # |Datetime |Currently Logged in User | Published date change from [Previous Date Range] to [New Date Range] |N/A      |        |
-
-
 
 Scenario: Publish increased Plan budget (OTD-2009)
   Given Media Plan has been approved by client
@@ -214,12 +165,6 @@ Scenario: Publish increased Plan budget (OTD-2009)
     # (The above description of what constitutes a breach is a footnote in the prompt)
     And on confirming, Media Plan status changes to "Published"
     And "Breach" flag becomes visible as a block icon between "Internally approved" and "Client Approval requested" statuses
-    And Media Plan Manager receives a notification about Media Plan Status change, with dynamic values emphasised
-      # "Total budget for the plan "{Media Plan Name}" has changed from
-      # {Previous Plan Budget} to {New Plan Budget} by {Publisher Name}, and requires internal and client reapproval.
-      # {Media plan name}  plan status has changed from *{Old Status value}* to *{New Status value}*"
-      # e.g. "Total budget for the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 2,000 to USD 3,000 by Zanete Ence, and requires internal and client reapproval.
-      # "Google Chrome EMEA Q2 2015 UK" plan status has changed from *{Old Status value}* to *{New Status value}*"
     And Olive saves 2 Events in the Plan history:
       # --------------------------------------------------------------------------------------------------
       # |Time     |User                     |Action                                             | Notes  |
@@ -234,12 +179,6 @@ Scenario: Publish decreased plan budget (OTD-2009)
   Then user is presented with a promt that Clients will be notified
       # "Client approvers will receive an email that the plan budget has been decreased from {Previous plan budget} to {New plan budget}"
     And on confirming, Media Plan status remains unchanged
-    And Client approvers receive a notification (multiple changes that require notification are listed in the same email)
-      # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}"
-      # "The plan budget for the plan "{Plan Name}" has changed from {Previous Plan Budget} to {New Plan budget}. No action is required from you."
-    And Media Plan Manager receives a notification about Media Plan budget change, with dynamic values emphasised
-      # "Total budget for the approved plan "{Media Plan Name}" has changed from
-      # {Previous Plan Budget} to {New Plan Budget} by {Publisher Name}.
     And Olive saves an Event in the Plan history:
       # --------------------------------------------------------------------------------------------------
       # |Time     |User                     |Action                                             | Notes  |
@@ -255,13 +194,6 @@ Scenario: Publish Changed plan dates (OTD-2009)
       # {Previous Date Range} to {New Date Range} by {Publisher Name}."
       # e.g. "Planned dates for the plan "Google Chrome EMEA Q2 2015 UK" have changed from "1 Jan 2015 - 2 Jan 2015" to "2 Jan 2015 - 3 Jan 2015" by Zanete Ence."
     And on confirming, Media Plan status remains unchanged
-    And Client approvers receive a notification
-      # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}"
-      # "The dates for the plan "{Plan Name}" have changed from {Previous Plan Date Range} to {New Plan Date Range}. No action is required from you."
-    And Media Plan Manager receives a notification about Media Plan date changes, with dynamic values emphasised
-      # "Planned dates for the plan "{Media Plan Name}" have changed from
-      # {Previous Date Range} to {New Date Range} by {Publisher Name}."
-      # e.g. "Planned dates for the plan "Google Chrome EMEA Q2 2015 UK" have changed from "1 Jan 2015 - 2 Jan 2015" to "2 Jan 2015 - 3 Jan 2015" by Zanete Ence."
     And Olive saves an Event in the Plan history:
       # --------------------------------------------------------------------------------------------------
       # |Time     |User                     |Action                                             | Notes  |
@@ -277,16 +209,120 @@ Scenario: Publish changes to breach thresholds (OTD-2009)
       # "You are about to publish changes to the breach thresholds. Client approvers will be notified. Do you wish to continue?
       # Cancel/Publish"
     And on confirming, Media Plan status remains unchanged
-    And Client approvers receive a notification
-      # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}
-      # The breach thresholds have been changed from {previous breach thresholds} to {new breach thresholds}. No action is required from you."
-      # e.g. "Dear {Client Approver}, this is a notification that changes have been published to the plan, "Google Chrome EMEA Q2 2015 UK"
-      # The breach thresholds have been changed from USD 100,000.00 or 20% to USD 100,000.00 or 95%. No action is required from you."
-    And Media Plan Manager receives a notification about Media Plan breach threshold changes, with dynamic values emphasised
-      # "Breach Thresholds for the approved plan "*{Media plan name}*""  have changed from *{Old Thresholds}* to *{New Thresholds}*"
-      # e.g. "Breach Thresholds for the approved plan "Google Chrome EMEA Q2 2015 UK" have changed from USD 100,000.00 or 20% to USD 100,000.00 or 95%"
     And Olive saves an Event in the Plan history:
       # --------------------------------------------------------------------------------------------------
       # |Time     |User                     |Action                                             | Notes  |
       # --------------------------------------------------------------------------------------------------
       # |Datetime |Currently Logged in User | Published Breach thresholds Changes from [] to [] |        |
+
+# TO DISCUSS - remove any notifications from the stories and handle separately as dismissable notifications
+Scenario: Notify Media Plan manager of published change impact
+  Given a media plan has been approved by the client
+    And changes are made to either plan meta data or budget allocations within plan
+  When changes are published
+  Then Media Plan Manager receives a notification (s) summarising changes, with dynamic values emphasised as outlined below:
+  #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  # Change                          |Notification                                                     | Example                                                               |
+  #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  # Plan Status change              | The status of the plan "*{Media plan name}*" has changed        | "The status of the plan "Google Chrome EMEA Q2 2015 UK" has changed   |
+  #                                 | from *{Old Status value}* to *{New Status value}*               | from Client Aproved to Published"                                     |
+  #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  # Plan budget changes             |
+  # Plan date changes               |
+  # Plan breach threshold changes   |
+  # New Properties / suppliers      |
+  # Upweights within plan           |
+  #   exceed breach threshold       |
+  # Upweights within plan           |
+  #   not exceed breach threshold   |
+  # Downweights within plan         |
+  # Cancelled properties / suppliers|
+  #   (downweights to 0)
+  # Changes to individual IO dates
+  #-----------------------------------------------------------
+    #
+    # e.g. "The status of the plan "Google Chrome EMEA Q2 2015 UK" has changed from Client Aproved to Published"
+    And Media Plan Manager receives a notification, with dynamic values emphasised
+    # The status of the plan "*{Media plan name}*" has changed from *{Old Status value}* to *{New Status value}*
+    # e.g. "The status of the plan "Google Chrome EMEA Q2 2015 UK" has changed from Client Aproved to Published"
+    And Media Plan Manager receives a notification about Media Plan Status change, with dynamic values emphasised
+      # "Total budget for the plan "{Media Plan Name}" has changed from
+      # {Previous Plan Budget} to {New Plan Budget} by {Publisher Name}, and requires internal and client reapproval.
+      # {Media plan name}  plan status has changed from *{Old Status value}* to *{New Status value}*"
+      # e.g. "Total budget for the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 2,000 to USD 3,000 by Zanete Ence, and requires internal and client reapproval.
+      # "Google Chrome EMEA Q2 2015 UK" plan status has changed from *{Old Status value}* to *{New Status value}*"
+    And Media Plan Manager receives a notification about Media Plan budget change, with dynamic values emphasised
+      # "Total budget for the approved plan "{Media Plan Name}" has changed from
+      # {Previous Plan Budget} to {New Plan Budget} by {Publisher Name}.
+    And Media Plan Manager receives a notification about Media Plan date changes, with dynamic values emphasised
+      # "Planned dates for the plan "{Media Plan Name}" have changed from
+      # {Previous Date Range} to {New Date Range} by {Publisher Name}."
+      # e.g. "Planned dates for the plan "Google Chrome EMEA Q2 2015 UK" have changed from "1 Jan 2015 - 2 Jan 2015" to "2 Jan 2015 - 3 Jan 2015" by Zanete Ence."
+    And Media Plan Manager receives a notification about Media Plan breach threshold changes, with dynamic values emphasised
+      # "Breach Thresholds for the approved plan "*{Media plan name}*""  have changed from *{Old Thresholds}* to *{New Thresholds}*"
+      # e.g. "Breach Thresholds for the approved plan "Google Chrome EMEA Q2 2015 UK" have changed from USD 100,000.00 or 20% to USD 100,000.00 or 95%"
+
+
+  And Media Plan Managers and Owners of changed Insertion Orders receive notification about budget change, with dynamic values emphasised
+  And multiple changes are listed in the same notification
+    @todo - review information in message
+    # "Planned budget for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" has changed from
+    # {Previous IO Total} to {New IO Total} by {Publisher Name}, and requires internal and client reapproval."
+    # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd #128")
+    # in the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 5,000 to USD 8,000 by Zanete Ence, and requires internal and client reapproval."
+  And Media Plan Manager and affected IO Owners receives a notification, with dynamic values emphasised
+    # "Planned budget for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" has changed from
+    # {Previous IO Total} to {New IO Total} by {Publisher Name}."
+    # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd")
+    # in the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 5,000 to USD 3,000 by Zanete Ence."
+  And Media Plan Managers and Owners of changed Insertion Orders receive notificaiton about budget change, with dynamic values emphasised
+    @todo - review information in message
+    # "Planned budget for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" has changed from
+    # {currency} 0 to {New IO Total} by {Publisher Name}, and requires internal and client reapproval."
+    # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd")
+    # in the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 0 to USD 3,000 by Zanete Ence, and requires internal and client reapproval."
+  And Media Plan Manager and affected IO Owners receives a notification, with dynamic values emphasised
+    # "Planned budget for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" has changed from
+    # {Previous IO Total} to {currency} 0 by {Publisher Name}"
+    # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd")
+    # in the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 3,000 to USD 0 by Zanete Ence"
+  And Media Plan Manager and affected IO Owners receives a notification, with dynamic values emphasised
+    # "Planned dates for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" have changed from
+    # {Previous Date Range} to {New Date Range} by {Publisher Name}." (Range is from Min IO date to Max IO date)
+    # e.g. "Planned dates for Google Search ("DS3 - Google Ireland Ltd")
+    # in Google Chrome EMEA Q2 2015 UK plan have changed from "1 Jan 2015 - 2 Jan 2015" to "2 Jan 2015 - 3 Jan 2015" by Zanete Ence."
+
+  Scenario: Notify Clients of published changes to approved plan
+    And Client approvers receive a notification
+    And Multiple notifications for the same plan are listed in the same email
+      @todo - Need a new scenario for when a published plan has changes that require both just notification as well as reapproval
+      # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}"
+      # "Planned budget for {Property} ({Insertion Order Name}) has changed from {Previous IO Total} to {New IO Total}. No action is required from you."
+    And Client approvers receive a notification (multiple changes that require notification are listed in the same email)
+        # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}"
+        # "The plan budget for the plan "{Plan Name}" has changed from {Previous Plan Budget} to {New Plan budget}. No action is required from you."
+    And Client approvers receive a notification
+      # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}"
+      # "The dates for the plan "{Plan Name}" have changed from {Previous Plan Date Range} to {New Plan Date Range}. No action is required from you."
+    And Client approvers receive a notification
+      # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}
+      # The breach thresholds have been changed from {previous breach thresholds} to {new breach thresholds}. No action is required from you."
+      # e.g. "Dear {Client Approver}, this is a notification that changes have been published to the plan, "Google Chrome EMEA Q2 2015 UK"
+      # The breach thresholds have been changed from USD 100,000.00 or 20% to USD 100,000.00 or 95%. No action is required from you."
+
+      Scenario: Notify IO owners of published changes in their IOs post approval
+        Given a media plan has been approved by the client
+          And changes are made to budget allocations within plan
+          And changes are  one or more of the following:
+          #-----------------------------------------------------------
+          # Change
+          #-----------------------------------------------------------
+          # New Properties / suppliers
+          # Upweights within plan that exceed breach threshold
+          # Upweights within plan that do not exceet breach threshold
+          # Downweights within plan
+          # Cancelled properties / suppliers (downweights to 0)
+          # Changes to individual IO dates
+          #-----------------------------------------------------------
+        When changes are published
+        Then affected existing or new IO Owners receive a notification (s) summarising changes, with dynamic values emphasised
