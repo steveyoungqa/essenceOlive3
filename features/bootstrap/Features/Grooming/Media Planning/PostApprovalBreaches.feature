@@ -310,19 +310,19 @@ Scenario: Notify Media Plan manager of published change impact
       # e.g. "Dear {Client Approver}, this is a notification that changes have been published to the plan, "Google Chrome EMEA Q2 2015 UK"
       # The breach thresholds have been changed from USD 100,000.00 or 20% to USD 100,000.00 or 95%. No action is required from you."
 
-      Scenario: Notify IO owners of published changes in their IOs post approval
-        Given a media plan has been approved by the client
-          And changes are made to budget allocations within plan
-          And changes are  one or more of the following:
-          #-----------------------------------------------------------
-          # Change
-          #-----------------------------------------------------------
-          # New Properties / suppliers
-          # Upweights within plan that exceed breach threshold
-          # Upweights within plan that do not exceet breach threshold
-          # Downweights within plan
-          # Cancelled properties / suppliers (downweights to 0)
-          # Changes to individual IO dates
-          #-----------------------------------------------------------
-        When changes are published
-        Then affected existing or new IO Owners receive a notification (s) summarising changes, with dynamic values emphasised
+  Scenario: Notify IO owners of published changes in their IOs post approval
+    Given a media plan has been approved by the client
+      And changes are made to budget allocations within plan
+      And changes are  one or more of the following:
+      #-----------------------------------------------------------
+      # Change
+      #-----------------------------------------------------------
+      # New Properties / suppliers
+      # Upweights within plan that exceed breach threshold
+      # Upweights within plan that do not exceet breach threshold
+      # Downweights within plan
+      # Cancelled properties / suppliers (downweights to 0)
+      # Changes to individual IO dates
+      #-----------------------------------------------------------
+    When changes are published
+    Then affected existing or new IO Owners receive a notification (s) summarising changes, with dynamic values emphasised
