@@ -15,4 +15,4 @@ Feature: Test Olive 3 Login
 
   Examples:
     |user                      |pass        |
-    |steve.automation@gmail.com|Warlock1990   |
+    |steve.automation@gmail.com|Regression1000   |
