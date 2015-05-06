@@ -30,14 +30,15 @@ Scenario: Request Client Approval
 # TBC - the text
 #(reviewed 28th April)
 Scenario: Notify Client Approver
-  Given Media Plan has been internally apprver
+  Given Media Plan has been internally approved
     And I have chosen Client approvers
   When I request approval
-  Then I am presented with a promt to confirm my action
-    And I see "You're about to send approval requests to [Apperover's names]. Are you sure"
+  Then I am presented with a prompt to confirm my action
+    And I see "[Client approver name] will be emailed a link to approve this plan from [Current Logged In User]. Are you sure you want to send this email? Cancel/Yes, send request"
     And All chosen Client approvers receive a notification email with a link to the Media plan
-    And I should see "Text tbc"
-    And plan status hanges to "Client Approval Requested"
+    And I should see "Approval request sent"
+    And plan status changes to "Client Approval Requested"
+    And "Request Client Approval" button changes to "Manage Approval Request"
     And an event is added to the Plan History
 #    -----------------------------------------------------------------------------------------------------------------
 #    |Time     |User                     |Action                                             |Details                |
@@ -45,66 +46,160 @@ Scenario: Notify Client Approver
 #    |Datetime |Currently Logged in User | Client Approval requested from [Approvers' names] | {message if available}|
 #    -----------------------------------------------------------------------------------------------------------------
 
-#TO REVIEW
-Scenario: Change Approvers while pending
+#(reviewed 1st May)
+Scenario: Add Approvers while pending
   Given Client approval was requested from two Client Approvers
     And one of them has already approved
-  When Campaign manager looks at the media plan last internally approved version
-  Then he can edit approvers by choosing another one
-    And he cannot delete chosen approvers
-    And on savem a new event is added to the Plan History
-#    ------------------------------------------------------------------------
-#    |Time     |User                     |Action                  |Details  |
-#    ------------------------------------------------------------------------
-#    |Datetime |Currently Logged in User | Client Approver changed from [Name of previous approver] to [Name of new approver] | N/A     |
+  When Campaign manager (anyone) looks at the media plan
+  Then they can add new approver
+    And receive a prompt to confirm email will be sent to Client ("[Client approver name] will be emailed a link to approve this plan from [Current Logged In User]. Are you sure you want to send this email? Cancel/Yes, send request")
+    And on request a new event is added to the Plan History
+#    ------------------------------------------------------------------------------------------------------
+#    |Time     |User                     |Action                                                |Details  |
+#    ------------------------------------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | Client Approval reqested from [Name of new approver] | N/A     |
+
+#(reviewed 1st May)
+Scenario: Remove Approvers while pending
+  Given Given Client approval was requested from two or more Client Approvers
+    And there is more than one pending approver
+    And the user is a "Campaign Manager"
+  When  they view the approver list
+  Then  allow them to remove all but the last pending approver
+    And don't allow them to remove an approver who has "Approved" the plan
+    And removed Approver gets a notification
+      @todo - Helen please confirm notification text
+      ""
+    And record in the removal in the history:
+#    --------------------------------------------------------------------------------------------------------------
+#    |Time     |User                     |Action                                                        |Details  |
+#    --------------------------------------------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | Client Approval reqest retracked from [Name of new approver] | N/A     |
+
+#(reviewed 1st May)
+Scenario: Popeye role
+  Given User account is set up in Olive
+  When Olive manager looks at the account details ("People" section)
+  Then he can choose "Popeye" as a Role and assign it to User account holder
+
+
+#(reviewed 1st May)
+Scenario: Remove Last pending Approver
+  Given Given Client approval was requested from two or more Client Approvers
+    And there is only one pending Approver
+    And the user is "Popeye"
+  When  they view the approver list
+  Then  allow them to remove the last pending approver
+    And receive a prompt to confirm the plan will be approved as all other approvers have approved ("Removing the last pending approver will automatically change this plan's status to Client Approved. Are you sure you want to do this? Cancel / Yes, remove approver")
+    And Plan changes status to "Client Approved"
+    And record in the removal in the history:
+#    -------------------------------------------------------------------------------------------------------------------
+#    |Time     |User                     |Action                                                              |Details  |
+#    -------------------------------------------------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | Client Approval reqest retracted from [Name of pending approver]   | N/A     |
+#    |Datetime |Currently Logged in User | Plan has been Approved by the client                               | N/A     |
+
+#(reviewed 1st May)
+  Scenario: Removes all Client Approvers
+    Given Given Client approval has one remaining client approver
+      And the approver status is "Pending"
+      And the user is "Popeye"
+    When  they view the approver list
+    Then  allow them to remove the last pending approver
+      And receive a promt to confirm the plan will go back to ("text tbc")
+      And Plan changes status to "Internally Approved"
+      And record in the removal in the history:
+#      ------------------------------------------------------------------------------------------
+#      |Time     |User                     |Action                                    |Details  |
+#      ------------------------------------------------------------------------------------------
+#      |Datetime |Currently Logged in User | All client approvers have been removed.  | N/A     |
+#      |Datetime |Currently Logged in User | Plan moved back to Internally Approved   | N/A     |
+
 
 #TO REVIEW
+Scenario: Attempt to remove Last Pending Approver without "Popeye" status
+  Given Given Client approval was requested from two or more Client Approvers
+    And there is one pending approver
+    And the user is a "Campaign Manager"
+  When  they select to remove the pending approver
+  Then  show an alert saying "You are not authorised to remove the last pending approver. Please add another client approver before removing this approver, or ask a *Popeye* user to remove the last approver."
+
+
+
+Scenario: Add another approver once it's approved
+
+
+#(reviewed 5th May)
 Scenario: Client gives feedback
-  Given Client approval was requested from two Client Approvers
-    And both have received a notificafiton email with a lilnk to the media plan
-    And none of them have already given feedback (approved / rejected)
-  When One of them clicks on the link in notifcation
-  Then he can see a Client view of the plan
-    And he can Approve or Reject the plan
-    And he can add a message (optional)
+  Given Client approval was requested
+    And Client approver received a notificafiton email with a lilnk to the media plan
+    And the Plan hasn't been rejected
+  When they clicks on the link in notifcation
+  Then they can see a Client view of the plan
+    And they can Approve or Reject the plan
+    And they can add a message (optional)
     And an event is added to the Plan History
-#    -----------------------------------------------------------------------------
-#    |Time     |User                     |Action         |Details                |
-#    -----------------------------------------------------------------------------
-#    |Datetime |Currently Logged in User | [Approved/Rejected] plan | {message if available}|
-#    -----------------------------------------------------------------------------
+#    ------------------------------------------------------------------------------------------
+#    |Time     |User                     |Action                      |Details                |
+#    ------------------------------------------------------------------------------------------
+#    |Datetime |Currently Logged in User | [Approved/Rejected] plan   | {message if available}|
+#    ------------------------------------------------------------------------------------------
 
-#TO REVIEW
+#(reviewed 5th May)
 Scenario: Partial Client Approval
-  Given Client approval was requested from two Client Approvers
-    And both have received a notificafiton email with a lilnk to the media plan
-    And none of them have already approved
-  When the first approver approves plan
+  Given Client approval was requested from multiple Client Approvers
+    And there is more than one pending approvals
+  When only one of them approves plan
   Then the plan still stays in "Client Approval Requested" status
 
-#TO REVIEW
+#(reviewed 5th May)
 Scenario: Full Client Approval
-  Given Client approval was requested from two Client Approvers
-    And both have received a notificafiton email with a lilnk to the media plan
-    And one of them has already approved
+  Given Client approval was requested from one or more Client Approvers
+    And one approval is still pending
   When the last approver approves plan
   Then the plan status changes to "Client Approved"
+    And Media Plan Manager is notified
+    @todo - need to cnfirm text
+    ""
+    And an event is added to the Plan History
+    #------------------------------------------------------------------------------------------
+    #|Time     |User                     |Action                      |Details                |
+    #------------------------------------------------------------------------------------------
+    #|Datetime |Currently Logged in User | Plan Client approved   | {message if available}|
+    #------------------------------------------------------------------------------------------
 
-#TO REVIEW
+#(reviewed 5th May)
 Scenario: Client Rejects
-  Given Client approval was requested from two Client Approvers
-    And both have received a notificafiton email with a lilnk to the media plan
-    And none of them have already approved
-  When the first approver rejects plan
+  Given Client approval was requested from one or more Client Approvers
+    And plan is not "Client Approved"
+  When the any approver rejects plan
   Then the plan status changes to "Client Rejected" status
     And feedback from other approvers is no longer expected
+    And other approvers are notified
+      @todo - Helen, please write something here!
+      "[]"
+    And Media Plan Manager is notified
+    And an event is added to the Plan History
+    #------------------------------------------------------------------------------------------
+    #|Time     |User                     |Action                      |Details                |
+    #------------------------------------------------------------------------------------------
+    #|Datetime |Currently Logged in User | [Rejected] plan   | {message if available}|
+    #------------------------------------------------------------------------------------------
 
-#TO REVIEW
+#(reviewed 5th May)
 Scenario: Version expired before Approval
   Given Client approval was requested
     And Client approver has received a notificafiton email with a lilnk to the media plan
-    And campaign manager has published new changes
-  When Client clicks on the link
+  When campaign manager publishes new changes that breaches
+  Then Client approvers receive a notification about plan no longer needing approval
+    @todo - helen please confirm copy
+    And Plan status changes to "Published"
 
-#TO REVIEW
-Scenario: View Last Client Approved Version
+
+#(reviewed 6th May)
+Scenario: Version breached after approval
+  Given Client approval was given for a plan
+    And breaching changes to plan have been published
+    And plan is in "Published" state
+  When Client approver looks at the plan in Client Portal
+  Then they see the last approved verions

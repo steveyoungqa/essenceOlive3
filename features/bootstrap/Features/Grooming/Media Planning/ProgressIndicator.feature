@@ -32,3 +32,21 @@ Scenario: Media plan has been rejected (OTD-1856)
 #  --------------------------------------------------------------
 #  |Internally Rejected       | Review the Plan + Notes (hover) |
 #  |Externally Rejects        | Review the Plan + Notes (hover) |
+
+#to review
+Scenario: FE - Hide spend when no platform integration available
+  Given I have set up plan lines for platforms without Olive 3 integration
+  When I look at the plan
+  Then Spend column in Plan view and spend to date in IO view doesn't display any value (not even 0.00 as it's very misleading)
+
+#TO FLESH OUT
+Scenario: FE - Display Plan history
+
+#TO FLESH OUT
+Scenario: FE - Display Approved plan that has IOs with missing Internall Approval or Supplier countersigned IO
+
+#TO FLESH OUT - prototype OTD-1976 ?
+Scenario: FE - Highlight Plan changes published since last approval
+
+#TO FLESH OUT
+Scenario: FE - Highlight Plan meta data changes published since last approval
