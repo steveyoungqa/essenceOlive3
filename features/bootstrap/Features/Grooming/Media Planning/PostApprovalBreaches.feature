@@ -26,7 +26,7 @@ Scenario: Publish Upweight by amount that breaches set thresholds (OTD-1988)
     #---------------------------------------
   When changes are published
   Then user is presented with a prompt that approval will be breached
-    @todo - Helen to tidy up text
+#    @todo - Helen to tidy up text
     # "The changes you are about to publish exceed the breach thresholds set for this plan ({breach threshold percent}% of total media or {breach absolute value}] {currency})*, or you have increased the plan budget or added a new supplier/property.
     # If you continue, you will need to request client approval for this new plan version. Do you wish to publish changes?
     # Cancel/Publish"
@@ -205,7 +205,7 @@ Scenario: Publish changes to breach thresholds (OTD-2009)
     And Draft media plan breach thresholds dates have been changed when compared to the last Client approved version
   When changes are published
   Then user is presented with a prompt that Clients will be notified
-      @todo - Decide how we roll this up with other notifications when plan is published
+#      @todo - Decide how we roll this up with other notifications when plan is published
       # "You are about to publish changes to the breach thresholds. Client approvers will be notified. Do you wish to continue?
       # Cancel/Publish"
     And on confirming, Media Plan status remains unchanged
@@ -265,7 +265,7 @@ Scenario: Notify Media Plan manager of published change impact
 
   And Media Plan Managers and Owners of changed Insertion Orders receive notification about budget change, with dynamic values emphasised
   And multiple changes are listed in the same notification
-    @todo - review information in message
+#    @todo - review information in message
     # "Planned budget for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" has changed from
     # {Previous IO Total} to {New IO Total} by {Publisher Name}, and requires internal and client reapproval."
     # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd #128")
@@ -276,7 +276,7 @@ Scenario: Notify Media Plan manager of published change impact
     # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd")
     # in the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 5,000 to USD 3,000 by Zanete Ence."
   And Media Plan Managers and Owners of changed Insertion Orders receive notificaiton about budget change, with dynamic values emphasised
-    @todo - review information in message
+#    @todo - review information in message
     # "Planned budget for {Property} ({Insertion Order Name}) in the plan "{Media Plan Name}" has changed from
     # {currency} 0 to {New IO Total} by {Publisher Name}, and requires internal and client reapproval."
     # e.g. "Planned budget for Google Search ("DS3 - Google Ireland Ltd")
@@ -295,7 +295,7 @@ Scenario: Notify Media Plan manager of published change impact
   Scenario: Notify Clients of published changes to approved plan
     And Client approvers receive a notification
     And Multiple notifications for the same plan are listed in the same email
-      @todo - Need a new scenario for when a published plan has changes that require both just notification as well as reapproval
+#      @todo - Need a new scenario for when a published plan has changes that require both just notification as well as reapproval
       # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}"
       # "Planned budget for {Property} ({Insertion Order Name}) has changed from {Previous IO Total} to {New IO Total}. No action is required from you."
     And Client approvers receive a notification (multiple changes that require notification are listed in the same email)
