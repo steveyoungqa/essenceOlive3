@@ -9,7 +9,7 @@ Feature: OAT-2 Untracked Spend
     And I fill in "Email" with "steve.automation@gmail.com"
     And I fill in "Passwd" with "Warlock1990"
     Then I press "signIn"
-    Then I wait for 3000
+    Then I wait for 5000
     Then I should see "Notifications"
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
@@ -183,7 +183,7 @@ Feature: OAT-2 Untracked Spend
 
 #   ***EDIT FIRST MEDIA PLAN LINE***
     Then I click the "Editable Draft State" link
-    Then I wait for 2000
+    Then I wait for 5000
     Then I click the "First Plan Line Edit" link
     And I wait for 2000
     Then I Select a Plan Line End Date of "2015-04-01"

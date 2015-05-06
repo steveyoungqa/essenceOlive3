@@ -38,15 +38,18 @@ Feature: DEBUG ONLY
     Then I click the "External Platforms Insertion Order" link
     And I click the "Link DS3" link
     And I wait for 2000
-    Then I click the "DS3 Account ID" link
+#    Then I click the "DS3 Account ID" link
     And I wait for 2000
-    Then I fill in the "DS3 Account ID" with "<ds3>"
-#    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
-    Then I wait for 8000
+#    Then I fill in the "DS3 Account ID" with "2604"
+#    And I wait for 2000
+    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
+    And I wait for 2000
+    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
+    And I wait for 2000
     And I click the link containing Text "<ds3>"
     Then I click the "External System Save" link
 
 
   Examples:
     |campaign |client|owner      |period |budget|clientLiable |initiative|buyType   |supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |regressionlocal|google|automation |q4-2015|100000|Client Liable|wildfire  |Direct Buy|Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |regressionlocal|google|automation |q4-2015|100000|Client Liable|wildfire  |Direct Buy|Google Ireland|2604|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|

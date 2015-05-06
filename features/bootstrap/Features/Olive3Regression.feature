@@ -180,6 +180,9 @@ Feature: Olive 3 Regression Pack
     And I click the "Link DS3" link
     And I wait for 2000
     And I fill in "mapping-externalSystem-ds3" with "<ds3>"
+    And I wait for 2000
+    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
+    And I wait for 2000
     Then I wait for 8000
     And I click the link containing Text "<ds3>"
     Then I click the "External System Save" link
@@ -187,7 +190,7 @@ Feature: Olive 3 Regression Pack
 #   ***MAP SEARCH CAMPAIGN***
     Then I click the "Plan Lines" link
     And I click the "Manage mappings" link
-    Then I wait for 15000
+    Then I wait for 35000
 
     Then I Map Search Campaign "<searchCampaign>"
     And I click the "Save Managed Entities" link
@@ -204,6 +207,8 @@ Feature: Olive 3 Regression Pack
     And I click the "Add Approver" link
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-approvers-add-type" with "Internal"
+    Then I wait for 2000
+    And I click the "Internal Approver" link
     Then I wait for 2000
     Then I click the "Approver Field" link
     Then I wait for 2000
@@ -225,7 +230,7 @@ Feature: Olive 3 Regression Pack
 
 #   ***EDIT FIRST MEDIA PLAN LINE***
     Then I click the "Editable Draft State" link
-    Then I wait for 2000
+    Then I wait for 5000
     Then I click the "First Plan Line Edit" link
     And I wait for 2000
     Then I click the "Edit Line Currency" link
@@ -287,14 +292,14 @@ Feature: Olive 3 Regression Pack
     Then I wait for 3000
     And I click the "Advanced Filter" link
     Then I wait for 2000
-    Then I click the "DS3 Advertiser Filter" link
-    And I fill in the "DS3 Advertiser Filter" with "<ds3Advert>"
+    Then I click the "Campaign Filter" link
+    And I fill in the "Campaign Filter" with "<campaign>"
     Then I wait for 2000
-    Then I click the link containing Text "<ds3Advert>"
+    Then I click the link containing Text "<campaign>"
     And I click the "Advanced Search Close" link
     Then I click the "Tracking Details" link
     And I wait for 5000
-    Then I should see "MAPPED"
+#    Then I should see "MAPPED"
 
 #   ***DELETE CAMPAIGN CLEAN UP***
     Then I click the "Navigation Header" link
@@ -305,8 +310,8 @@ Feature: Olive 3 Regression Pack
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign  |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |regressionlocal|google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |campaign  |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |regression|google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 
