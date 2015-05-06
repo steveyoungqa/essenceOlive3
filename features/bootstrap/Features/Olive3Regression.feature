@@ -18,24 +18,29 @@ Feature: Olive 3 Regression Pack
 
 #   ***CREATE CAMPAIGN***
     Then I click the "Navigation Header" link
+    Then I wait for 3000
     Then I click the "Campaigns" link
     Then I wait for 3000
     Then I fill in the "Campaign Search" with "<campaign>"
     Then I wait for 3000
     Then I select the Delete "<campaign>" checkbox
-    Then I wait for 5000
+    Then I wait for 10000
 
     Then I click the "Navigation Header" link
+    Then I wait for 3000
     Then I click the "Campaigns" link
     Then I wait for 3000
     Then I follow "campaign-add"
     Then I wait for 3000
 
-    And I fill in "campaign-new-name" with "<campaign>"
+    Then I fill in the "Campaign Name" with "<campaign>"
+#    And I fill in "campaign-new-name" with "<campaign>"
     And I fill in "campaign-new-client" with "<client>"
     Then I wait for 5000
+    Then I fill in "campaign-new-managingRegion" with "EMEA"
+    And I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
-    Then I wait for 15000
+    Then I wait for 10000
     And I fill in "campaign-new-memo" with "Test Notes"
     Then I wait for 5000
     Then I click the "Campaign Save" link
@@ -190,7 +195,7 @@ Feature: Olive 3 Regression Pack
 #   ***MAP SEARCH CAMPAIGN***
     Then I click the "Plan Lines" link
     And I click the "Manage mappings" link
-    Then I wait for 35000
+    Then I wait for 50000
 
     Then I Map Search Campaign "<searchCampaign>"
     And I click the "Save Managed Entities" link
@@ -302,6 +307,8 @@ Feature: Olive 3 Regression Pack
 #    Then I should see "MAPPED"
 
 #   ***DELETE CAMPAIGN CLEAN UP***
+    Then I Maximize the Browser Window
+    And I wait for 2000
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
     Then I wait for 3000

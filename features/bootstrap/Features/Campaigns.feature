@@ -35,6 +35,8 @@ Feature: P01 - Create new campaign
 #    And I fill in "campaign-new-name" with "<campaign>"
     And I fill in "campaign-new-client" with "<client>"
     Then I wait for 5000
+    Then I fill in "campaign-new-managingRegion" with "EMEA"
+    And I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
     Then I wait for 7000
     And I fill in "campaign-new-memo" with "Test Notes"
@@ -52,6 +54,8 @@ Feature: P01 - Create new campaign
     Then I fill in the "Campaign Name" with "<campaign>"
     And I fill in "campaign-new-client" with "<client>"
     Then I wait for 5000
+    Then I fill in "campaign-new-managingRegion" with "EMEA"
+    And I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
     Then I wait for 7000
     And I fill in "campaign-new-memo" with "Test Notes"
@@ -60,6 +64,8 @@ Feature: P01 - Create new campaign
     Then I should see text matching "Campaign with this Name and Client already exists."
 
 # ***DELETE CAMPAIGN CLEAN UP***
+    Then I Maximize the Browser Window
+    And I wait for 2000
     Then I click the "Navigation Header" link
     Then I wait for 3000
     Then I click the "Campaigns" link
@@ -70,6 +76,6 @@ Feature: P01 - Create new campaign
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign |client|owner      |
-    |campaigns|google|automation |
+    |campaign |client|owner      |region|
+    |campaigns|google|automation |EMEA  |
 
