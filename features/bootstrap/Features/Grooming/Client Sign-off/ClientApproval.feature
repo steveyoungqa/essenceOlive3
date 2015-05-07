@@ -215,7 +215,7 @@ Scenario: Version expired before Approval
     And Client approver has received a notificafiton email with a lilnk to the media plan
   When campaign manager publishes new changes that breaches
   Then Client approvers receive a notification about plan no longer needing approval
-    @todo - helen please confirm copy
+#    @todo - helen please confirm copy
     And Plan status changes to "Published"
 
 
