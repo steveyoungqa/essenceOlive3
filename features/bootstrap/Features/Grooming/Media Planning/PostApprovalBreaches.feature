@@ -242,8 +242,8 @@ Scenario: Notify Media Plan manager of published change impact
   #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
   # New Suppliers / Properties      | "Planned budget for {Property} ({Insertion Order Name}) in the    | "Planned budget for Google Search ("DS3 - Google Ireland Ltd #128") in    |
   #                                 | plan "{Media Plan Name}" has changed from 0.00 to                 | the plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 0.00 to     |
-  #                                 | {New IO Total} by {Publisher Name}, and requires internal and     | USD 8,000 by Zanete Ence, and requires internal and client reapproval."   |
-  #                                 | client reapproval."                                               |                                                                           |
+  #                                 | {New Total for supplier / property / lbe} by {Publisher Name},    | USD 8,000 by Zanete Ence, and requires internal and client reapproval."   |
+  #                                 | and requires internal and client reapproval."                     |                                                                           |
   #                                 | @todo - review information in message                             |                                                                           |
   #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
   # Upweights within plan           | "Planned budget for {Property} ({Insertion Order Name}) in the    | "Planned budget for Google Search ("DS3 - Google Ireland Ltd #128") in    |
@@ -271,9 +271,14 @@ Scenario: Notify Media Plan manager of published change impact
   #                                 | (Range is from Min IO date to Max IO date)                        |                                                                           |
   #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-  Scenario: Notify Clients of published changes to approved plan
-    And Client approvers receive a notification
-    And Multiple notifications for the same plan are listed in the same email
+
+Scenario: Notify Clients of published changes to approved plan
+  Given media plan has been approved by the client
+    And new changes for which the client has to be notified, have been made  (e.g. decrease in total budget, cancellations etc)
+    But there are no breaching changes
+  When these changes are published
+    Then Client approvers receive one email with a summary of these changes as outlined in table below
+
 #      @todo - Need a new scenario for when a published plan has changes that require both just notification as well as reapproval
       # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}"
       # "Planned budget for {Property} ({Insertion Order Name}) has changed from {Previous IO Total} to {New IO Total}. No action is required from you."
