@@ -84,6 +84,7 @@ Scenario: Add Approvers while pending
 
 #(reviewed 1st May)
 Scenario: Remove Approvers while pending
+  #prototype: http://mnnl4s.axshare.com/#p=1_2_3_media_plan_view__published_
   Given Given Client approval was requested from two or more Client Approvers
     And there is more than one pending approver
     And the user is a "Campaign Manager"
