@@ -89,7 +89,9 @@ class customTests extends CustomPage
         'Manage mappings' => array('xpath' => "//*[contains(text(),'Manage mappings')]"),
         'Mapping Search' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-ios-medialines-trackingcodes-search-basic']"),
         'Save Managed Entities' => array('xpath' => "//*[@class='page-actions table-actions']/a[@class='button add--button']"),
+        'Close Manage Mapping Panel' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-ios-medialines-trackingcodes-panel-close']"),
         'Close Mapped Panel' => array('xpath' => "//*[@class='button__icon button__icon--left icon icon--clear icon--lrg icon--cropped']"),
+
         'Plan tab' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Plan')]"),
         'Edit Plan Line' => array('xpath' => "//*[@class='table__actions ng-scope']//*[contains(text(),'Edit')]"),
         'Plan Line Delete' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-line-delete']"),
@@ -242,7 +244,7 @@ class customTests extends CustomPage
     {
         $element = $this->find('xpath', '//ancestor::tbody/tr[td//text()[contains(., "'.$campaign.'")]]//*[@class="custom-checkbox__icon icon icon--tick icon--md icon--cropped"]');
         if (isset($element)) {
-            $element->click();
+            $element->check();
             $this->getSession()->wait(5000);
         } else {
             throw new Exception('ERROR!! '.$campaign.' Checkbox not found!!');

@@ -195,15 +195,15 @@ Feature: Olive 3 Regression Pack
 #   ***MAP SEARCH CAMPAIGN***
     Then I click the "Plan Lines" link
     And I click the "Manage mappings" link
-#    Then I wait for 10000
 #    And I fill in the "Mapping Search" with "<searchCampaign>"
-    Then I wait for 30000
+    Then I wait for 35000
     Then I Map Search Campaign "<searchCampaign>"
     And I wait for 5000
     And I click the "Save Managed Entities" link
-    Then I wait for 8000
-
+    Then I click the "Close Manage Mapping Panel" link
+    And I wait for 3000
     Then I click the "Close Mapped Panel" link
+    And I wait for 2000
     Then I click the "Plan tab" link
 
     Then I click the "Publish Dropdown" link
@@ -291,32 +291,32 @@ Feature: Olive 3 Regression Pack
     Then I reload the page
     And I wait for 8000
 
-#   ***TRACKING MANAGEMENT***
-    Then I click the "Navigation Header" link
-    Then I click the "Tracking Management DS3" link
-    And I click the "Tracking Code Search Box" link
-    Then I fill in the "Tracking Code Search Box" with "<searchCampaign>"
-    Then I wait for 3000
-    And I click the "Advanced Filter" link
-    Then I wait for 2000
-    Then I click the "Campaign Filter" link
-    And I fill in the "Campaign Filter" with "<campaign>"
-    Then I wait for 2000
-    Then I click the link containing Text "<campaign>"
-    And I click the "Advanced Search Close" link
-    Then I click the "Tracking Details" link
-    And I wait for 5000
+##   ***TRACKING MANAGEMENT***
+#    Then I click the "Navigation Header" link
+#    Then I click the "Tracking Management DS3" link
+#    And I click the "Tracking Code Search Box" link
+#    Then I fill in the "Tracking Code Search Box" with "<searchCampaign>"
+#    Then I wait for 3000
+#    And I click the "Advanced Filter" link
+#    Then I wait for 2000
+#    Then I click the "Campaign Filter" link
+#    And I fill in the "Campaign Filter" with "<campaign>"
+#    Then I wait for 2000
+#    Then I click the link containing Text "<campaign>"
+#    And I click the "Advanced Search Close" link
+#    Then I click the "Tracking Details" link
+#    And I wait for 5000
 #    Then I should see "MAPPED"
 
-##   ***DELETE CAMPAIGN CLEAN UP***
-#    Then I Maximize the Browser Window
-#    And I wait for 2000
-#    Then I click the "Navigation Header" link
-#    Then I click the "Campaigns" link
-#    Then I wait for 3000
-#    Then I fill in "campaign-search-basic" with "<campaign>"
-#    Then I wait for 3000
-#    Then I select the Delete "<campaign>" checkbox
+#   ***DELETE CAMPAIGN CLEAN UP***
+    Then I Maximize the Browser Window
+    And I wait for 2000
+    Then I click the "Navigation Header" link
+    Then I click the "Campaigns" link
+    Then I wait for 3000
+    Then I fill in "campaign-search-basic" with "<campaign>"
+    Then I wait for 3000
+    Then I select the Delete "<campaign>" checkbox
 
   Examples:
     |campaign  |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
