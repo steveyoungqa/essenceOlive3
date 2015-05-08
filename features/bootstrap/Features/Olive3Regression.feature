@@ -196,7 +196,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "Plan Lines" link
     And I click the "Manage mappings" link
 #    And I fill in the "Mapping Search" with "<searchCampaign>"
-    Then I wait for 35000
+    Then I wait for 50000
     Then I Map Search Campaign "<searchCampaign>"
     And I wait for 5000
     And I click the "Save Managed Entities" link
