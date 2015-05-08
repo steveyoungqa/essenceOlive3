@@ -5,7 +5,7 @@ As Client Approver
 I want to view an outline of all budget allocations in a plan
 
 #to review
-Scenario: Client logs in
+Scenario: Client logs in (OTD-781)
   Given Client approval was requested
     And Client approver has received a notificafiton email with a lilnk to the media plan
     And Client is not logged in Olive 3
@@ -15,13 +15,13 @@ Scenario: Client logs in
     And he is then redirected to the Media Plan referenced in email notification
 
 #to review
-Scenario: Client views homepage
+Scenario: Client redirected to Campaign Management (OTD-781)
   Given Client approver has logged in Olive 3
   When they click on the Olive logo (or visit '/' in any other way)
   Then he is taken to the Campaign Management area
 
 #to review
-Scenario: Client views a list of campaigns that contain plans they can access
+Scenario: Client views a list of campaigns that contain plans they can access (OTD-768)
   Given Client has loged in Olive
   When they navigate to Campaign management
   Then they see list of all Campaigns for the Client in which there are plans they have been selected as client approvers (and never removed) and the plan is either in "Client approval requested" or Client approved at least once
@@ -38,7 +38,7 @@ Scenario: Client views a list of campaigns that contain plans they can access
     And each row is a clickable control that takes user to the details of that campaign
 
 #to review
-Scenario: Client views a list of plans that they can access
+Scenario: Client views a list of plans that they can access (OTD-768)
   Given Client approver has received many Plan approval requests
   When they follow one of those links
   Then they can navigate to Campaign of that plan
@@ -60,7 +60,7 @@ Scenario: Client views a list of plans that they can access
 
 
 #to review
-Scenario: Client views plan that he is to approve / reject
+Scenario: Client views plan that he is to approve / reject (OTD-292)
   Given Client approver has received many Plan approval requests
   When they view the plan
   Then they can see the buttons to approve or reject the plan at the top and the bottom of the plan
@@ -81,7 +81,7 @@ Scenario: Client views plan that he is to approve / reject
 #     @todo - text to be confirmed with Helen
 
 #to review
-Scenario: Client views a plan for which they have already giving feedback
+Scenario: Client views a plan for which they have already giving feedback (OTD-292)
   Given Client approver has already given feedback about a plan
   When they view it again
   Then instead of Approve / Reject buttons they see the plan status (client version)*
