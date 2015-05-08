@@ -1,5 +1,5 @@
-@debug
-Feature: DEBUG ONLY
+@tracking
+Feature: Tracking Management
 
   Background:
 
@@ -11,7 +11,7 @@ Feature: DEBUG ONLY
     Then I wait for 5000
     Then I should see "Notifications"
 
-  Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
+  Scenario Outline: Tracking Management
 
 #   ***CREATE CAMPAIGN***
     Then I click the "Navigation Header" link
@@ -31,7 +31,6 @@ Feature: DEBUG ONLY
     Then I wait for 3000
 
     Then I fill in the "Campaign Name" with "<campaign>"
-#    And I fill in "campaign-new-name" with "<campaign>"
     And I fill in "campaign-new-client" with "<client>"
     Then I wait for 5000
     Then I fill in "campaign-new-managingRegion" with "EMEA"
@@ -173,7 +172,59 @@ Feature: DEBUG ONLY
     Then I reload the page
     And I wait for 8000
 
+#   ***LINK INSERTION ORDER TO DS3***
+    Then I click the "Insertion Order tab" link
+    Then I wait for 4000
+    And I click the "View IO" link
+    And I wait for 4000
+    Then I click the "External Platforms Insertion Order" link
+    And I click the "Link DS3" link
+    And I wait for 2000
+    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
+    And I wait for 2000
+    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
+    And I wait for 2000
+    Then I wait for 8000
+    And I click the link containing Text "<ds3>"
+    Then I click the "External System Save" link
+
+#   ***MAP SEARCH CAMPAIGN***
+    Then I click the "Plan Lines" link
+    And I click the "Manage mappings" link
+    Then I wait for 50000
+
+    Then I Map Search Campaign "<searchCampaign>"
+    And I click the "Save Managed Entities" link
+    Then I wait for 3000
+
+    Then I click the "Close Mapped Panel" link
+    Then I click the "Plan tab" link
+
+    Then I click the "Publish Dropdown" link
+    And I click the "Published State" link
+
+#   ***TRACKING MANAGEMENT***
+    Then I click the "Navigation Header" link
+    Then I click the "Tracking Management DS3" link
+    And I click the "Tracking Code Search Box" link
+    Then I fill in the "Tracking Code Search Box" with "<searchCampaign>"
+    Then I wait for 3000
+    And I click the "Advanced Filter" link
+    Then I wait for 2000
+    Then I click the "Campaign Filter" link
+    And I fill in the "Campaign Filter" with "<campaign>"
+    Then I wait for 2000
+    Then I click the link containing Text "<campaign>"
+    And I click the "Advanced Search Close" link
+    Then I click the "Tracking Details" link
+    And I wait for 5000
+#    Then I should see "MAPPED"
+
 
   Examples:
-    |campaign |client|owner      |period |budget|clientLiable |initiative|buyType   |supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |notification|google|automation |q4-2015|100000|Client Liable|wildfire  |Direct Buy|Google Ireland|2604|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |campaign  |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |tracking  |google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+
+
+
+

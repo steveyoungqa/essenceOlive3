@@ -21,9 +21,19 @@ Scenario: Specify platform (OTD-2052)
     # LinkedIn
     # Twitter
     # Facebook
-    # Direct Buy
+    # Other
     And "Platform" is mandatory
-      #@todo - confirm if platform is the right label and if we need a tooltip
+    And if "Other" is selected do not include in the IO name
+    And if Platform name is mentioned in Supplier name do not include in the IO
+
+
+#to review
+Scenario: FE - Plan View grouping toggles columns shown
+  Given I have set up a media plan
+    And I have added lines for different sections / IOs / Channels
+  When I view the media plan
+  Then I see Section -> IO -> Channel as the default line grouping
+    And Channel as displayed as first column (whatever is the third level is displayed as the first column)
 
 #reviewed 6th May
 Scenario: Publish Plan meta data with individual line publishing
@@ -36,8 +46,16 @@ Scenario: Publish Plan meta data with individual line publishing
     #@todo - Helen help confirm text
     And all Plan meta data changes are published along with selected lines
 
+#to flesh out
+Scenario: FE - IO List View
+
 #to review
 Scenario: FE - Hide spend when no platform integration available
   Given I have set up plan lines for platforms without Olive 3 integration
   When I look at the plan
   Then Spend column in Plan view and spend to date in IO view doesn't display any value (not even 0.00 as it's very misleading)
+
+Scenario: Deleting lines after Client Approval
+  Given
+  When
+  Then User is notified that Line will be downweighted to 0.00 instead of deleted so that Client viewing approved plan can see the changes
