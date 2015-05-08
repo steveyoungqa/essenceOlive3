@@ -22,46 +22,15 @@ Scenario: View Last Internally Approved and Client Approved Versions of Insertio
     And changing option the plan displays a snapshot of all lines as they existed in that version
 
 
-#to review
-Scenario: FE - Highlight Plan changes in draft since last publish
+#to flesh out
+Scenario: FE - Highlight Plan line and meta data changes between different versions
   #prototype: http://mnnl4s.axshare.com/#p=1_2_4_media_plan_view__editable_draft_ (OTD-1976)
-  Given A published media plan exists
-    And changes have been made to plan lines in draft version
-    And these changes have not been published yet
-  When I look at the draft plan
+  Given A
+  When I look at the plan (any version)
   Then I see each different value marked with a highlight
-    And when I hover over the highlight i can see the currently published value, when and by whom the last change was made
-
-#to review
-Scenario: FE - Highlight Plan meta data changes in draft since last publish
-  Given A published media plan exists
-    And changes have been made to plan meta data in draft version
-    And these changes have not been published yet
-  When I look at the draft plan
-  Then I see each value with differences marked with a highlight
-    And when I hover over the highlight i can see the currently published value, when and by whom the last change was made
-
-#to review
-Scenario: FE - Highlight Plan changes published since last approval (OTD-788)
-  # @TODO - do we need to differentiate between client and internal approval
-  #prototype: http://mnnl4s.axshare.com/#p=1_2_4_media_plan_view__editable_draft_
-  Given A Client approved media plan exists
-    And breaching changes to plan lines have been published (e.g. new property/supplier or upweight that breaches thresholds)
-    And these changes have not been approved by client yet
-  When I look at the published plan
-  Then I see each different value marked with a highlight
-    And when I hover over the highlight i can see the currently last client approved value, when and by whom the last change was published
-
-#to review
-Scenario: FE - Highlight Plan meta data changes published since last approval
-  Given A Client approved media plan exists
-    And breaching changes have been published to plan meta data (e.g. total budget upweight)
-    And these changes have not been approved by client yet
-  When I look at the published plan
-  Then I see each value with differences marked with a highlight
-    And when I hover over the highlight i can see the currently last client approved value, when and by whom the last change was published
-
-
+    And when I hover over the highlight i can see the current value in each other existing version, when and by whom the last change was made
+    And Upweights / Downweights are indicated with colours red and green (TBC)
+    And Cancellations are shown as downweights to 0
 
 #to review
 Scenario: FE - Display Approved plan that has IOs with missing Internall Approval or Supplier countersigned IO
@@ -73,9 +42,6 @@ Scenario: FE - Display Approved plan that has IOs with missing Internall Approva
     And the warning displays a count of Insertion Orders with missing Internal approval or Suppleir countersign confirmation
     And (@todo - decide on some sort of indicator in the IO listing)
 
-
-
-
 #to review
 Scenario: FE - Display Plan history
   Given A media plan has been set up and published
@@ -83,9 +49,3 @@ Scenario: FE - Display Plan history
   When I look at the Media Plan
   Then I can see a "Plan History" tab
     And it displays each important workflow event recorded during its lifecycle such as (Internal Approval requested, Published upweight)
-
-
-Scenario: Remove 0 lines after Client Approval
-  Given
-  When
-  Then
