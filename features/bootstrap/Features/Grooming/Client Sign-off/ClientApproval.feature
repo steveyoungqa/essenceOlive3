@@ -36,12 +36,12 @@ Scenario: Notify Client Approver
   Then I am presented with a prompt to confirm my action
     And I see "[Client approver name] will be emailed a link to approve this plan from [Current Logged In User]. Are you sure you want to send this email? Cancel/Yes, send request"
     And All chosen Client approvers receive a notification email with a link to the Media plan
-      # Email Subject: Media approval requested: {Media Plan Name} (ID: {Media Plan ID})
+      # Email Subject: Media Plan approval requested: {Media Plan Name} (ID: {Media Plan ID})
       # Email Text:
       #
       # Dear {Approver name},
       #
-      # This is an automated email notifying you of the newly issued Media Plan '{Media Plan Name}'.
+      # This is an automated email notifying you of the newly issued Media Plan, "{Media Plan Name}".
       #
       # Please click [here|link to plan] to review and give your feedback.
       #
@@ -49,7 +49,7 @@ Scenario: Notify Client Approver
       # -------------------------------------
       # {link to plan as text}
       # -------------------------------------
-      # Please note that timely authorisation is required to secure media and no bookings can be guaranteed until Media plan is approved and a Publisher Insertion Order has been signed and returned
+      # Please note that timely authorisation is required to secure media and no bookings can be guaranteed until the Media Plan is approved and a Publisher Insertion Order has been signed and returned.
       #
       # Regards,
       # Olive
@@ -72,7 +72,7 @@ Scenario: Notify Client Approver
 #(reviewed 1st May)
 Scenario: Add Approvers while pending
   Given Client approval was requested from two Client Approvers
-    And one of them has already approved
+    And there is at least one pending approver
   When Campaign manager (anyone) looks at the media plan
   Then they can add new approver
     And receive a prompt to confirm email will be sent to Client ("[Client approver name] will be emailed a link to approve this plan from [Current Logged In User]. Are you sure you want to send this email? Cancel/Yes, send request")
@@ -84,31 +84,45 @@ Scenario: Add Approvers while pending
 
 #(reviewed 1st May)
 Scenario: Remove Approvers while pending
+  #prototype: http://mnnl4s.axshare.com/#p=1_2_3_media_plan_view__published_
   Given Given Client approval was requested from two or more Client Approvers
     And there is more than one pending approver
     And the user is a "Campaign Manager"
   When  they view the approver list
   Then  allow them to remove all but the last pending approver
     And don't allow them to remove an approver who has "Approved" the plan
-    And removed Approver gets a notification
-      #@todo - Helen please confirm notification text
-      #
+    And removed Approver gets a notification via email
+    # Email Subject: Media Plan approver change: {Media Plan Name} (ID: {Media Plan ID})
+    # Email Text:
+    #
+    # Dear {Approver name},
+    #
+    # This is an automated email notifying that the recently issued Media Plan, "{Media Plan Name}", no longer requires you to provide feedback.
+    #
+    # Regards,
+    # Olive
+    # -------------------------------------
+    # Essence
+    # www.essencedigital.com
+    # -------------------------------------
+    # This email may be confidential or privileged. If you received this communication by mistake, please don't forward it to anyone else, please erase all copies and attachments and please let me know that it went to the wrong person. Thank you.
+    #
     And record in the removal in the history:
       #    --------------------------------------------------------------------------------------------------------------
       #    |Time     |User                     |Action                                                        |Details  |
       #    --------------------------------------------------------------------------------------------------------------
-      #    |Datetime |Currently Logged in User | Client Approval reqest retracked from [Name of new approver] | N/A     |
+      #    |Datetime |Currently Logged in User | Client Approval request retracted from [Name of new approver] | N/A     |
 
 #(reviewed 1st May)
 Scenario: Popeye role
   Given User account is set up in Olive
-  When Olive manager looks at the account details ("People" section)
-  Then he can choose "Popeye" as a Role and assign it to User account holder
+  When An Olive Super Admin looks at the account details ("People" section)
+  Then he can choose "Popeye" as a Role and assign it to a User account holder
 
 
 #(reviewed 1st May)
-Scenario: Remove Last pending Approver
-  Given Given Client approval was requested from two or more Client Approvers
+Scenario: Remove last pending Approver
+  Given Client approval was requested from two or more Client Approvers
     And there is only one pending Approver
     And the user is "Popeye"
   When  they view the approver list
@@ -124,12 +138,12 @@ Scenario: Remove Last pending Approver
 
 #(reviewed 1st May)
   Scenario: Removes all Client Approvers
-    Given Given Client approval has one remaining client approver
+    Given Client approval has one remaining Client Approver
       And the approver status is "Pending"
       And the user is "Popeye"
     When  they view the approver list
     Then  allow them to remove the last pending approver
-      And receive a promt to confirm the plan will go back to ("text tbc")
+      And receive a prompt to confirm the plan will go back to ("Removing all Client Approvers will revert this plan's status to Internally Approved. Do you wish to proceed? Cancel/Yes, remove Approver")
       And Plan changes status to "Internally Approved"
       And record in the removal in the history:
         #      ------------------------------------------------------------------------------------------
@@ -145,11 +159,11 @@ Scenario: Attempt to remove Last Pending Approver without "Popeye" status
     And there is one pending approver
     And the user is a "Campaign Manager"
   When  they select to remove the pending approver
-  Then  show an alert saying "You are not authorised to remove the last pending approver. Please add another client approver before removing this approver, or ask a *Popeye* user to remove the last approver."
+  Then  show an alert saying "You are not authorised to remove the last pending Approver. Please add another Client Approver before removing this Approver, or ask a *Popeye* user to remove the last Approver."
 
 
 
-Scenario: Add another approver once it's approved
+Scenario: Add another approver once a plan is approved
 
 
 #(reviewed 5th May)
@@ -157,8 +171,8 @@ Scenario: Client gives feedback
   Given Client approval was requested
     And Client approver received a notificafiton email with a lilnk to the media plan
     And the Plan hasn't been rejected
-  When they clicks on the link in notifcation
-  Then they can see a Client view of the plan
+  When they click on the link in the notification
+  Then they can see a Client View of the plan
     And they can Approve or Reject the plan
     And they can add a message (optional)
     And an event is added to the Plan History
@@ -181,26 +195,52 @@ Scenario: Full Client Approval
     And one approval is still pending
   When the last approver approves plan
   Then the plan status changes to "Client Approved"
-    And Media Plan Manager is notified
-      #@todo - need to cnfirm text
-      #""
+    And Media Plan Manager is notified via email
+    # Email Subject: Media Plan Approved: {Media Plan Name} (ID: {Media Plan ID})
+    # Email Text:
+    #
+    # Dear {Media Plan Manager},
+    #
+    # This is an automated email notifying that the recently issued Media Plan, "{Media Plan Name}", has been approved by all Client Approvers.
+    #
+    # Regards,
+    # Olive
+    # -------------------------------------
+    # Essence
+    # www.essencedigital.com
+    # -------------------------------------
+    # This email may be confidential or privileged. If you received this communication by mistake, please don't forward it to anyone else, please erase all copies and attachments and please let me know that it went to the wrong person. Thank you.
+    #
     And an event is added to the Plan History
       #------------------------------------------------------------------------------------------
       #|Time     |User                     |Action                      |Details                |
       #------------------------------------------------------------------------------------------
-      #|Datetime |Currently Logged in User | Plan Client approved   | {message if available}|
+      #|Datetime |Currently Logged in User | Plan Client Approved       | {message if available}|
       #------------------------------------------------------------------------------------------
 
 #(reviewed 5th May)
 Scenario: Client Rejects
   Given Client approval was requested from one or more Client Approvers
     And plan is not "Client Approved"
-  When the any approver rejects plan
+  When an approver rejects the plan
   Then the plan status changes to "Client Rejected" status
     And feedback from other approvers is no longer expected
-    And other approvers are notified
-      #@todo - Helen, please write something here!
-      #"[]"
+    And other approvers are notified via email
+    # Email Subject: Media Plan Rejected: {Media Plan Name} (ID: {Media Plan ID})
+    # Email Text:
+    #
+    # Dear {Client Approver},
+    #
+    # This is an automated email notifying that the recently issued Media Plan, "{Media Plan Name}", has been rejected. If your feedback was still pending, you will no longer be able to provide feedback on this version.
+    #
+    # Regards,
+    # Olive
+    # -------------------------------------
+    # Essence
+    # www.essencedigital.com
+    # -------------------------------------
+    # This email may be confidential or privileged. If you received this communication by mistake, please don't forward it to anyone else, please erase all copies and attachments and please let me know that it went to the wrong person. Thank you.
+    #
     And Media Plan Manager is notified
     And an event is added to the Plan History
       #------------------------------------------------------------------------------------------
@@ -212,10 +252,25 @@ Scenario: Client Rejects
 #(reviewed 5th May)
 Scenario: Version expired before Approval
   Given Client approval was requested
-    And Client approver has received a notificafiton email with a lilnk to the media plan
-  When campaign manager publishes new changes that breaches
-  Then Client approvers receive a notification about plan no longer needing approval
-#    @todo - helen please confirm copy
+    And Client approver has received a notification email with a link to the media plan
+    And Approval is pending
+  When campaign manager publishes new changes that breach the plan
+  Then Client Approvers receive a notification via email about the plan no longer needing approval
+  # Email Subject: Media Plan changed: {Media Plan Name} (ID: {Media Plan ID})
+  # Email Text:
+  #
+  # Dear {Client Approver},
+  #
+  # This is an automated email notifying that the recently issued Media Plan, "{Media Plan Name}", has been changed. If your feedback was still pending, you will no longer be able to provide feedback on this version.
+  #
+  # Regards,
+  # Olive
+  # -------------------------------------
+  # Essence
+  # www.essencedigital.com
+  # -------------------------------------
+  # This email may be confidential or privileged. If you received this communication by mistake, please don't forward it to anyone else, please erase all copies and attachments and please let me know that it went to the wrong person. Thank you.
+  #
     And Plan status changes to "Published"
 
 
