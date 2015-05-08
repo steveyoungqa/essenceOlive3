@@ -18,6 +18,7 @@ Scenario: View Last Internally Approved and Client Approved Versions of Plan (OT
 #to flesh out
 Scenario: FE - Highlight Plan line and meta data changes between different versions
   #prototype: http://mnnl4s.axshare.com/#p=1_2_4_media_plan_view__editable_draft_ (OTD-1976)
+  #screenshots in OTD-2064
   Given A
   When I look at the plan (any version)
   Then I see each different value marked with a highlight
@@ -27,6 +28,7 @@ Scenario: FE - Highlight Plan line and meta data changes between different versi
 
 #to review
 Scenario: FE - Display Approved plan that has IOs with missing Internall Approval or Supplier countersigned IO
+  #Screenshots in https://essencedigital.atlassian.net/browse/OTD-2063
   Given Client Approved Plan exists
     And changes have been made and published
     And these changes have caused Internal approval or Supplier contersign to be revoked from some Insertion Orders

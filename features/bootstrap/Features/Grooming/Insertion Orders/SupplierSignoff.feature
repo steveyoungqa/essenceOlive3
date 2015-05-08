@@ -35,7 +35,7 @@ Scenario: If the IO is Breached or Changed due to the Plan changing (OTD-2014)
     And changes are being made to the entire plan
     And the changes affect this IO
   When the changes to the IO are published
-    And the IO is invalidated
+    And the IO supplier counter signature is invalidated
   Then remove the Supplier approval against the IO
     And A new event is added to the history
 #    ------------------------------------------------------------------------------
@@ -46,10 +46,10 @@ Scenario: If the IO is Breached or Changed due to the Plan changing (OTD-2014)
 #(reviewed 23th April)
 Scenario: If the IO is Breached or Changed due to a plan line changing (OTD-2014)
   Given the IO was Supplier IO approvaed
-    And changes are being made to an individual plan line
+    And changes are being made to an individual plan line (changed Budget or Dates, also consider currency as budget meaning changes if combined with different currency)
     And the changes affect this IO
   When the changes to the IO are published
-    And the IO is invalidated
+    And the IO  supplier counter signature is invalidated
   Then remove the Supplier approval against the IO
     And A new event is added to the history
 #    ------------------------------------------------------------------------------
