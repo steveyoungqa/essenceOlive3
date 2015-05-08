@@ -87,6 +87,7 @@ class customTests extends CustomPage
         'Link DS3' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-ios-ds3-link']"),
         'Plan Lines' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Plan Lines')]"),
         'Manage mappings' => array('xpath' => "//*[contains(text(),'Manage mappings')]"),
+        'Mapping Search' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-ios-medialines-trackingcodes-search-basic']"),
         'Save Managed Entities' => array('xpath' => "//*[@class='page-actions table-actions']/a[@class='button add--button']"),
         'Close Mapped Panel' => array('xpath' => "//*[@class='button__icon button__icon--left icon icon--clear icon--lrg icon--cropped']"),
         'Plan tab' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Plan')]"),
