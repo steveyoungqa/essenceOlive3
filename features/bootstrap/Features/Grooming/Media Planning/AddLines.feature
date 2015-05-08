@@ -24,7 +24,6 @@ Scenario: Specify platform (OTD-2052)
     # Other
     And "Platform" is mandatory
     And if "Other" is selected do not include in the IO name
-    And if Platform name is mentioned in Supplier name do not include in the IO
 
 
 #reviewed 6th May

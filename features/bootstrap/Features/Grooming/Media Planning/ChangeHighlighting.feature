@@ -5,7 +5,7 @@ In order to understand what has changed between different versions of the plan a
 As Campaign Manager
 I want to see differences between versions or missing information highlighted
 
-#to review
+#reviewed 8th May
 Scenario: View Last Internally Approved and Client Approved Versions of Plan (OTD-1178)
   Given A media plan has been internally or client approved
     When I view the plan in Olive
@@ -13,13 +13,6 @@ Scenario: View Last Internally Approved and Client Approved Versions of Plan (OT
     And When I select that option the plan displays a snapshot of all lines as they existed in that version
     And When I select that option the IO tab lists all Ios and their content as it was at the time of approval
     And When I select that option the Purchase Order and Invoice Tabs display the same information as selecting "Published" option
-
-#to review
-Scenario: View Last Internally Approved and Client Approved Versions of Insertion Orders (OTD-1178)
-  Given A media plan has been internally or client approved
-    When I view the Insertion Order in Olive
-  Then I can see a dropdown (?) (@todo - confirm) with the following options: "Draft", "Published", "Last Internally approved", "Last Client Approved"
-    And changing option the plan displays a snapshot of all lines as they existed in that version
 
 
 #to flesh out
@@ -49,3 +42,12 @@ Scenario: FE - Display Plan history
   When I look at the Media Plan
   Then I can see a "Plan History" tab
     And it displays each important workflow event recorded during its lifecycle such as (Internal Approval requested, Published upweight)
+
+
+#beyond mvp
+#to review
+Scenario: View Last Internally Approved and Client Approved Versions of Insertion Orders (OTD-1178)
+  Given A media plan has been internally or client approved
+    When I view the Insertion Order in Olive
+  Then I can see a dropdown (?) (@todo - confirm) with the following options: "Draft", "Published", "Last Internally approved", "Last Client Approved"
+    And changing option the plan displays a snapshot of all lines as they existed in that version

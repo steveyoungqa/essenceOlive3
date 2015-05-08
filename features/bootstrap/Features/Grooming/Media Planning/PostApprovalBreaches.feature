@@ -220,7 +220,7 @@ Scenario: Notify Media Plan manager of published change impact (OTD-782)
   Given a media plan has been approved by the client
     And changes are made to either plan meta data or budget allocations within plan
   When changes are published
-  Then Media Plan Manager receives a notification (s) summarising changes, with dynamic values emphasised as outlined in table below
+  Then Media Plan Manager receives notifications with "medium" priority, with dynamic values emphasised as outlined in table below
     And they can dismiss the notification without taking any action
     And if multiple changes are published at the same time, each one is represented in its own notification
   #=================================================================================================================================================================================|

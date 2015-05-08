@@ -22,6 +22,7 @@ Scenario: Client redirected to Campaign Management (OTD-781)
 
 #reviewed 7th May
 Scenario: Client views a list of campaigns that contain plans they can access (OTD-768)
+  #prototype: http://mnnl4s.axshare.com/#p=1_2_3_7b_cliant_campaign_view_-_campaigns
   Given Client has loged in Olive
   When they navigate to Campaign management
   Then they see list of all Campaigns for the Client in which there are plans they have been selected as client approvers (and never removed) and the plan is either in "Client approval requested" status or was "Client approved" at least once
@@ -36,9 +37,11 @@ Scenario: Client views a list of campaigns that contain plans they can access (O
     # Rejected (Contains a rejected plan but none of the above)
     # Approved (contains only approved plans)
     And each row is a clickable control that takes user to the details of that campaign
+    And Advanced filters do not contain "Client" dropdown
 
 #reviewed 7th May
 Scenario: Client views a list of plans that they can access (OTD-768)
+  #prototype: http://mnnl4s.axshare.com/#p=1_2_3_7a_cliant_campaign_view_-_media_plans
   Given Client approver has received more than one Plan approval requests
   When they follow one of those links
   Then they can navigate to Campaign of that plan
@@ -91,5 +94,8 @@ Scenario: Client views a plan for which they have already giving feedback (OTD-2
   Given Client approver has already given feedback about a plan
   When they view it again
   Then instead of Approve / Reject buttons they see the Plan status (client version)*
+    # Pending other approver feedback (plans that still requires other approver feedback but not from the currently logged in user)
+    # Rejected
+    # Approved
     And the message that was captured at the time of requesting approval
     And they can see when they gave feedback and the message they left at the time

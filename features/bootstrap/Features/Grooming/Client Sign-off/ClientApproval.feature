@@ -26,6 +26,16 @@ Scenario: Request Client Approval (OTD-762)
     And I cannot select the same approver more than once
     And I can add a message
     And I can request Client Approval
+    And I should see feedback toast with text "Approval request sent"
+    And plan status changes to "Client Approval Requested"
+    And "Request Client Approval" button changes to "Manage Approval Request"
+    And an event is added to the Plan History
+      #    -----------------------------------------------------------------------------------------------------------------
+      #    |Time     |User                     |Action                                             |Details                |
+      #    -----------------------------------------------------------------------------------------------------------------
+      #    |Datetime |Currently Logged in User | Client Approval requested from [Approvers' names] | {message if available}|
+      #    -----------------------------------------------------------------------------------------------------------------
+
 
 #(reviewed 28th April)
 Scenario: Notify Client Approver (OTD-765)
@@ -58,16 +68,6 @@ Scenario: Notify Client Approver (OTD-765)
       # www.essencedigital.com
       # -------------------------------------
       # This email may be confidential or privileged. If you received this communication by mistake, please don't forward it to anyone else, please erase all copies and attachments and please let me know that it went to the wrong person. Thank you.
-      #
-    And I should see feedback toast with text "Approval request sent"
-    And plan status changes to "Client Approval Requested"
-    And "Request Client Approval" button changes to "Manage Approval Request"
-    And an event is added to the Plan History
-      #    -----------------------------------------------------------------------------------------------------------------
-      #    |Time     |User                     |Action                                             |Details                |
-      #    -----------------------------------------------------------------------------------------------------------------
-      #    |Datetime |Currently Logged in User | Client Approval requested from [Approvers' names] | {message if available}|
-      #    -----------------------------------------------------------------------------------------------------------------
 
 #(reviewed 1st May)
 Scenario: Add Approvers while pending
@@ -215,7 +215,7 @@ Scenario: Version expired before Approval (OTD-767)
   Given Client approval was requested
     And Client approver has received a notificafiton email with a lilnk to the media plan
   When campaign manager publishes new changes that breaches
-  Then Client approvers receive a notification about plan no longer needing approval
+  Then pending (or all? @todo - helen please confirm) Client approvers receive a notification about plan no longer needing approval
 #    @todo - helen please confirm copy
     And Plan status changes to "Published"
 
