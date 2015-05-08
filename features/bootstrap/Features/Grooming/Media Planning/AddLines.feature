@@ -27,8 +27,8 @@ Scenario: Specify platform (OTD-2052)
     And if Platform name is mentioned in Supplier name do not include in the IO
 
 
-#to review
-Scenario: FE - Plan View grouping toggles columns shown
+#reviewed 6th May
+Scenario: FE - Plan line grouping (OTD-573)
   Given I have set up a media plan
     And I have added lines for different sections / IOs / Channels
   When I view the media plan
@@ -36,7 +36,7 @@ Scenario: FE - Plan View grouping toggles columns shown
     And Channel as displayed as first column (whatever is the third level is displayed as the first column)
 
 #reviewed 6th May
-Scenario: Publish Plan meta data with individual line publishing
+Scenario: Publish Plan meta data with individual line publishing (OTD-2053)
   Given Media Plan has been set up
     And lines have been added to it
     And the whole plan has been published
@@ -47,7 +47,7 @@ Scenario: Publish Plan meta data with individual line publishing
     And all Plan meta data changes are published along with selected lines
 
 #to flesh out
-Scenario: FE - IO List View
+Scenario: FE - IO List View without grid view
 
 #to review
 Scenario: FE - Hide spend when no platform integration available

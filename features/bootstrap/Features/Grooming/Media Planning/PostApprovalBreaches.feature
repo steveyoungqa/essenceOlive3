@@ -216,7 +216,7 @@ Scenario: Publish changes to breach thresholds (OTD-2009)
       # |Datetime |Currently Logged in User | Published Breach thresholds Changes from [] to [] |        |
 
 # TO DISCUSS
-Scenario: Notify Media Plan manager of published change impact
+Scenario: Notify Media Plan manager of published change impact (OTD-782)
   Given a media plan has been approved by the client
     And changes are made to either plan meta data or budget allocations within plan
   When changes are published
@@ -272,7 +272,7 @@ Scenario: Notify Media Plan manager of published change impact
   #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 
-Scenario: Notify Clients of published changes to approved plan
+Scenario: Notify Clients of published changes to approved plan (OTD-783)
   Given media plan has been approved by the client
     And new changes for which the client has to be notified, have been made  (e.g. decrease in total budget, cancellations etc)
     But there are no breaching changes

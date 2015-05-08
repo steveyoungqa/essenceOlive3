@@ -5,7 +5,7 @@ As Client Approver
 I want to view an outline of all budget allocations in a plan
 
 #to review
-Scenario: Client logs in
+Scenario: Client logs in (OTD-781)
   Given Client approval was requested
     And Client Approver has received a notification email with a link to the media plan
     And Client is not logged in to Olive 3
@@ -14,18 +14,18 @@ Scenario: Client logs in
     And he can log in with his Google account
     And he is then redirected to the Media Plan referenced in the email notification
 
-#to review
-Scenario: Client views Olive home page
-  Given Client approver has logged in to Olive 3
+#reviewed 7th May
+Scenario: Client redirected to Campaign Management (OTD-781)
+  Given Client approver has logged in Olive 3
   When they click on the Olive logo (or visit '/' in any other way)
   Then they are taken to the Campaign Management area
 
-#to review
-Scenario: Client views a list of campaigns that contain plans they can access
-  Given Client has logged in Olive
-  When they navigate to Campaign Management
-  Then they see list of all Campaigns for the Client in which there are plans they have been selected as Client Approvers (and never removed) and the plan is either in "Client Approval Requested" status or was "Client Approved" at least once
-    And campaigns are sorted by most recent first
+#reviewed 7th May
+Scenario: Client views a list of campaigns that contain plans they can access (OTD-768)
+  Given Client has loged in Olive
+  When they navigate to Campaign management
+  Then they see list of all Campaigns for the Client in which there are plans they have been selected as client approvers (and never removed) and the plan is either in "Client approval requested" status or was "Client approved" at least once
+    And campaigns are sorted by latest first
     And they can see the Name and Status (client version*) of that campaign
     And Status is one of these values:
     #--------------
@@ -37,8 +37,8 @@ Scenario: Client views a list of campaigns that contain plans they can access
     # Approved (contains only approved plans)
     And each row is a clickable control that takes user to the details of that campaign
 
-#to review
-Scenario: Client views a list of plans that they can access
+#reviewed 7th May
+Scenario: Client views a list of plans that they can access (OTD-768)
   Given Client approver has received more than one Plan approval requests
   When they follow one of those links
   Then they can navigate to Campaign of that plan
@@ -59,8 +59,8 @@ Scenario: Client views a list of plans that they can access
     And each row is a clickable control that takes user to the latest version for which client approval was requested
 
 
-#to review
-Scenario: Client views plan that he has been requested to approve or reject
+#reviewed 7th May
+Scenario: Client views plan that he is to approve / reject (OTD-292)
   Given Client approver has received more than one Plan approval requests
   When they view the plan
   Then they can see the buttons to Approve or Reject the Plan at the top and the bottom of the plan
@@ -86,8 +86,8 @@ Scenario: Client views plan that he has been requested to approve or reject
     # authorised to redistribute budget assigned to individual purchases within the overall Media Plan budget without further approval from the client
     # but subject to no individual addition representing more than {Breach %} of the total budget approved in this Media Plan.
 
-#to review
-Scenario: Client views a Plan for which they have already given feedback
+#reviewed 7th May
+Scenario: Client views a plan for which they have already giving feedback (OTD-292)
   Given Client approver has already given feedback about a plan
   When they view it again
   Then instead of Approve / Reject buttons they see the Plan status (client version)*
