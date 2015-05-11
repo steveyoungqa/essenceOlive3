@@ -21,6 +21,7 @@ Scenario: Specify platform (OTD-2052)
     # LinkedIn
     # Twitter
     # Facebook
+    # TubeMogul
     # Other
     And "Platform" is mandatory
     And if "Other" is selected do not include in the IO name
@@ -40,9 +41,9 @@ Scenario: Publish Plan meta data with individual line publishing (OTD-2053)
     And lines have been added to it
     And the whole plan has been published
     And later changes made to a few lines and plan meta data
-  When user publish a selection of changed plan lines
+  When user publishes a selection of changed plan lines
   Then User is informed that Plan meta data changes will be published as well
-    #@todo - Helen help confirm text
+    # "Changes you have made to the Media Plan details will also be published at the same time as these lines"
     And all Plan meta data changes are published along with selected lines
 
 #to flesh out
@@ -52,7 +53,7 @@ Scenario: FE - IO List View without grid view
 Scenario: FE - Hide spend when no platform integration available
   Given I have set up plan lines for platforms without Olive 3 integration
   When I look at the plan
-  Then Spend column in Plan view and spend to date in IO view doesn't display any value (not even 0.00 as it's very misleading)
+  Then Spend column in Plan view and spend to date in IO view does not display any value (not even 0.00 as it is very misleading)
 
 Scenario: Deleting lines after Client Approval
   Given
