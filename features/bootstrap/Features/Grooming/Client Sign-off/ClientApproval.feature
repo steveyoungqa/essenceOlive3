@@ -59,7 +59,7 @@ Scenario: Notify Client Approver (OTD-765)
       # -------------------------------------
       # {link to plan as text}
       # -------------------------------------
-      # Please note that timely authorisation is required to secure media and no bookings can be guaranteed until Media plan is approved and a Publisher Insertion Order has been signed and returned
+      # Please note that timely authorisation is required to secure media and no bookings can be guaranteed until Media plan is approved and a Publisher Insertion Order has been signed and returned.
       #
       # Regards,
       # Olive
