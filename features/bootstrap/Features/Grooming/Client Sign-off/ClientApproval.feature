@@ -46,7 +46,7 @@ Scenario: Notify Client Approver (OTD-765)
   Then I am presented with a prompt to confirm my action
     And I see "[Client approver name] will be emailed a link to approve this plan from [Current Logged In User]. Are you sure you want to send this email? Cancel/Yes, send request"
     And All chosen Client approvers receive a notification email with a link to the Media plan
-      # Email Subject: Media approval requested: {Media Plan Name} (ID: {Media Plan ID})
+      # Email Subject: Media Plan approval requested: {Media Plan Name} (ID: {Media Plan ID})
       # Email Text:
       #
       # Dear {Approver name},
