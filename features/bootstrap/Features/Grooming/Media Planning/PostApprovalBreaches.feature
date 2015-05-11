@@ -277,22 +277,39 @@ Scenario: Notify Clients of published changes to approved plan (OTD-783)
     And new changes for which the client has to be notified, have been made  (e.g. decrease in total budget, cancellations etc)
     But there are no breaching changes
   When these changes are published
-    Then Client approvers receive one email with a summary of these changes as outlined in table below
+    Then Client approvers receive one email with a summary of these changes as outlined below  # (header, list of changes, fotter)
+    # Email Subject:
+    # Body Text:
+    # (header)
+    # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}"
+    # (list each notification that applies)
+    #=================================================================================================================================================================================|
+    # Change                          |Notification                                                       | Example                                                                   |
+    #=================================================================================================================================================================================|
+    # Plan budget changes             | "Total budget for the plan "{Media Plan Name}"                    |
+    #  (downweight)                   | has changed from {Previous Plan Budget} to {New Plan Budget}.     |
+    #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    # Plan date changes               | "Planned dates for the plan "{Media Plan Name}"                   |                                                                           |
+    #                                 | has changed from {Previous Date Range} to {New Date Range}.       |                                                                           |
+    #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    # Plan breach threshold changes   | "The breach thresholds for the plan "{Media Plan Name}"           |                                                                           |
+    #                                 | has changed from {Previous Trheshold %} to {New Threshold %}.     |                                                                           |
+    #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    # Cancelled properties / suppliers| "Planned budget for {Property} ({Insertion Order Name}) in the    | "Planned budget for Google Search ("DS3 - Google Ireland Ltd") in the     |
+    #  (downweights to 0)             |  plan "{Media Plan Name}" has changed from {Previous IO Total}    | plan "Google Chrome EMEA Q2 2015 UK" has changed from USD 5,000 to        |
+    #                                 | to 0.00. "                                                        | USD 0.00"                                                                 |
+    #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-#      @todo - Need a new scenario for when a published plan has changes that require both just notification as well as reapproval
-      # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}"
-      # "Planned budget for {Property} ({Insertion Order Name}) has changed from {Previous IO Total} to {New IO Total}. No action is required from you."
-    And Client approvers receive a notification (multiple changes that require notification are listed in the same email)
-        # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}"
-        # "The plan budget for the plan "{Plan Name}" has changed from {Previous Plan Budget} to {New Plan budget}. No action is required from you."
-    And Client approvers receive a notification
-      # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}"
-      # "The dates for the plan "{Plan Name}" have changed from {Previous Plan Date Range} to {New Plan Date Range}. No action is required from you."
-    And Client approvers receive a notification
-      # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}
-      # The breach thresholds have been changed from {previous breach thresholds} to {new breach thresholds}. No action is required from you."
-      # e.g. "Dear {Client Approver}, this is a notification that changes have been published to the plan, "Google Chrome EMEA Q2 2015 UK"
-      # The breach thresholds have been changed from USD 100,000.00 or 20% to USD 100,000.00 or 95%. No action is required from you."
+    # (footer)
+    # Please note that no action is required from you.
+    #
+    # Regards,
+    # Olive
+    # -------------------------------------
+    # Essence
+    # www.essencedigital.com
+    # -------------------------------------
+    # This email may be confidential or privileged. If you received this communication by mistake, please don't forward it to anyone else, please erase all copies and attachments and please let me know that it went to the wrong person. Thank you.
 
   Scenario: Notify IO owners of published changes in their IOs post approval
     Given a media plan has been approved by the client
