@@ -195,7 +195,7 @@ Scenario: Full Client Approval (OTD-294)
   When the last approver approves plan
   Then the plan status changes to "Client Approved"
     And Media Plan Manager is notified via email
-      # Email Subject: Media Plan Approved: {Media Plan Name} (ID: {Media Plan ID})
+      # Email Subject: Media Plan Approved: {Media Plan Name} (ID: {Media Plan ID}) (No action required)
       # Email Text:
       #
       # Dear {Media Plan Manager},
@@ -225,7 +225,7 @@ Scenario: Client Rejects (OTD-294)
   Then the plan status changes to "Client Rejected" status
     And feedback from other approvers is no longer expected
     And other approvers are notified
-      # Email Subject: Media Plan Rejected: {Media Plan Name} (ID: {Media Plan ID})
+      # Email Subject: Media Plan Rejected: {Media Plan Name} (ID: {Media Plan ID}) (No action required)
       # Email Text:
       #
       # Dear {Client Approver},
@@ -255,7 +255,7 @@ Scenario: Version expired before Approval (OTD-767)
     And Approval is pending
   When campaign manager publishes new changes that breach the plan
   Then pending Client approvers receive a notification about plan no longer needing approval
-      # Email Subject: Media Plan changed: {Media Plan Name} (ID: {Media Plan ID})
+      # Email Subject: Media Plan changed: {Media Plan Name} (ID: {Media Plan ID}) (No action required)
       # Email Text:
       #
       # Dear {Client Approver},
