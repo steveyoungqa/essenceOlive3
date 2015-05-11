@@ -12,7 +12,7 @@ Feature: Olive 3 Regression Pack
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
     Then I wait for 5000
-    Then I should see "Notifications"
+#    Then I should see "Notifications"
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
