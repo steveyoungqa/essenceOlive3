@@ -6,9 +6,7 @@ I want Olive to detect the impact my published changes have on them and update s
 Scenario: Configure Breach thresholds (OTD-773)
   Given media Plan Exists
   When I edit media plan details
-  Then I see a field "Breach threshold (as absolute amount in Plan currency)" and I can specify a numeric amount. This amount indicates the change threshold which cannot be exceeded when publishing new spend with a specific supplier / property / liable entity post plan approval group.
-    And by default the "Breach threshold (as absolute amount in Plan currency)" is set to 10,000.00
-    And I see a field "Breach threshold (percent of Total Plan budget)" and I can specify a numeric amount between 0 and 100. This indicates the change threshold amount as a % of Total Plan budget which cannot be exceeded when publishing new spend with a specific supplier / property / liable entity post plan approval group.
+  Then I see a field "Breach threshold (percent of Total Plan budget)" and I can specify a numeric amount between 0 and 100. This indicates the change threshold amount as a % of Total Plan budget which cannot be exceeded when publishing new spend with a specific supplier / property / liable entity post plan approval group.
     And by default the "Breach threshold (percent of Total Plan budget)" is set to %20
 
 Scenario: Publish Upweight by amount that breaches set thresholds (OTD-1988)
@@ -26,12 +24,13 @@ Scenario: Publish Upweight by amount that breaches set thresholds (OTD-1988)
     #---------------------------------------
   When changes are published
   Then user is presented with a prompt that approval will be breached
-#    @todo - Helen to tidy up text
-    # "The changes you are about to publish exceed the breach thresholds set for this plan ({breach threshold percent}% of total media or {breach absolute value}] {currency})*, or you have increased the plan budget or added a new supplier/property.
-    # If you continue, you will need to request client approval for this new plan version. Do you wish to publish changes?
-    # Cancel/Publish"
-    # *Plans require client reapproval if the plan budget is increased; a supplier or property is added to the plan; or the total upweights of a single property with the same supplier and liability exceeds the agreed % of the last approved total media plan budget, or the agreed fixed threshold amount, whichever is reached first."
-    # (The above description of what constitutes a breach is a footnote in the prompt)
+    # The changes you are about to publish will invalidate client plan approval due to the following:
+    # (list each breach that applies)
+    # -- The total upweights of a single property under the same supplier and liability exceeds ({breach threshold}%) of the last approved total plan budget.
+    # -- The total plan budget has increased.
+    # -- A new supplier or property has been added to the plan.
+    # If you continue, you will need to request client approval for this new version of the plan. Do you wish to publish changes?
+    # Cancel/Publish
     And on confirming, Media Plan status changes to "Published"
     And "Breach" flag becomes visible as a block icon between "Internally approved" and "Client Approval requested" statuses
     And Olive saves an Event in the Plan history:
@@ -54,14 +53,14 @@ Scenario: Publish Upweight by amount that doesn't breach thresholds (OTD-1988)
     And Breach thresholds have been configured
     And Campaign hasn't ended yet (Media Plan End date is in the future)
     And there are upweights in totals of group of lines (grouping outlined below) but none lead to an increase that exceeds breach thresholds when compared to last client approved version
-    # --------------------------------------
-    # If platform is not DBM, then gorup by:
-    # * Supplier
-    # * Property
-    # * Liable (Client or Essence)
-    # Otherwise (for DBM - bespoke)
-    # * Insertion Order
-    #---------------------------------------
+      # --------------------------------------
+      # If platform is not DBM, then group by:
+      # * Supplier
+      # * Property
+      # * Liable (Client or Essence)
+      # Otherwise (for DBM - bespoke)
+      # * Insertion Order
+      #---------------------------------------
   When changes are published
   Then Media Plan status remains unchanged
     And unchanged Insertion Order status remains unaffected
@@ -101,11 +100,13 @@ Scenario: Publish new property / supplier (OTD-1988)
     #---------------------------------------
   When changes are published
   Then user is presented with a prompt that approval will be breached
-    # "The changes you are about to publish exceed the breach thresholds set for this plan ({breach threshold percent}% of total media or {breach absolute value}] {currency})*.
-    # If you continue, you will need to request client approval for this new plan version. Do you wish to publish changes?
-    # Cancel/Publish"
-    # *Plans require client reapproval if a supplier or property is added to the plan, or the total upweights of a single property with the same supplier and liability exceeds the agreed % of the last approved total media plan budget, or the agreed fixed threshold amount, whichever is reached first."
-    # (The above description of what constitutes a breach is a footnote in the prompt)
+    # The changes you are about to publish will invalidate client plan approval due to the following:
+    # (list each breach that applies)
+    # -- The total upweights of a single property under the same supplier and liability exceeds ({breach threshold}%) of the last approved total plan budget.
+    # -- The total plan budget has increased.
+    # -- A new supplier or property has been added to the plan.
+    # If you continue, you will need to request client approval for this new version of the plan. Do you wish to publish changes?
+    # Cancel/Publish
     And on confirming, Media Plan status changes to "Published"
     And "Breach" flag becomes visible as a block icon between "Internally approved" and "Client Approval requested" statuses
     And Olive saves an Event in the Plan history:
@@ -158,11 +159,13 @@ Scenario: Publish increased Plan budget (OTD-2009)
     And Draft media plan total budget has been increased when compared to the last Client approved version
   When changes are published
   Then user is presented with a prompt that approval will be breached
-    # "The changes you are about to publish exceed the breach thresholds set for this plan ({breach threshold percent}% of total media or {breach absolute value}] {currency})*, or you have increased the plan budget or added a new supplier/property.
-    # If you continue, you will need to request client approval for this new plan version. Do you wish to publish changes?
-    # Cancel/Publish"
-    # *Plans require client reapproval if the plan budget is increased; a supplier or property is added to the plan; or the total upweights of a single property with the same supplier and liability exceeds the agreed % of the last approved total media plan budget, or the agreed fixed threshold amount, whichever is reached first."
-    # (The above description of what constitutes a breach is a footnote in the prompt)
+      # The changes you are about to publish will invalidate client plan approval due to the following:
+      # (list each breach that applies)
+      # -- The total upweights of a single property under the same supplier and liability exceeds ({breach threshold}%) of the last approved total plan budget.
+      # -- The total plan budget has increased.
+      # -- A new supplier or property has been added to the plan.
+      # If you continue, you will need to request client approval for this new version of the plan. Do you wish to publish changes?
+      # Cancel/Publish
     And on confirming, Media Plan status changes to "Published"
     And "Breach" flag becomes visible as a block icon between "Internally approved" and "Client Approval requested" statuses
     And Olive saves 2 Events in the Plan history:
@@ -277,22 +280,42 @@ Scenario: Notify Clients of published changes to approved plan (OTD-783)
     And new changes for which the client has to be notified, have been made  (e.g. decrease in total budget, cancellations etc)
     But there are no breaching changes
   When these changes are published
-    Then Client approvers receive one email with a summary of these changes as outlined in table below
-
-#      @todo - Need a new scenario for when a published plan has changes that require both just notification as well as reapproval
-      # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}"
-      # "Planned budget for {Property} ({Insertion Order Name}) has changed from {Previous IO Total} to {New IO Total}. No action is required from you."
-    And Client approvers receive a notification (multiple changes that require notification are listed in the same email)
-        # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}"
-        # "The plan budget for the plan "{Plan Name}" has changed from {Previous Plan Budget} to {New Plan budget}. No action is required from you."
-    And Client approvers receive a notification
-      # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}"
-      # "The dates for the plan "{Plan Name}" have changed from {Previous Plan Date Range} to {New Plan Date Range}. No action is required from you."
-    And Client approvers receive a notification
-      # "Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}
-      # The breach thresholds have been changed from {previous breach thresholds} to {new breach thresholds}. No action is required from you."
-      # e.g. "Dear {Client Approver}, this is a notification that changes have been published to the plan, "Google Chrome EMEA Q2 2015 UK"
-      # The breach thresholds have been changed from USD 100,000.00 or 20% to USD 100,000.00 or 95%. No action is required from you."
+    Then Client approvers receive one email with a summary of these changes as outlined below  # (header, list of changes, footer)
+    # Email Subject: Changes to Media Plan: {Media Plan Name} (ID: {Media Plan ID}) (No action required)
+    # Body Text:
+    # (header)
+    # Dear {Client Approver}, this is a notification that changes have been published to the plan, "{Media Plan Name}".
+    # (list each notification that applies)
+    #=================================================================================================================================================================================|
+    # Change                          |Notification                                                       | Example                                                                   |
+    #=================================================================================================================================================================================|
+    # Plan budget changes             | "Total Plan Budget has changed from                               | "Total Plan Budget has changed from USD 5,000 to USD 4,000."              |
+    #  (downweight)                   | {Previous Plan Budget} to {New Plan Budget}."                     |                                                                           |
+    #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    # Plan date changes               | "Planned Dates have changed from                                  | "Planned Dates have changed from "1 Jan 2015 - 2 Jan 2015" to             |
+    #                                 | has changed from {Previous Date Range} to {New Date Range}."      | "2 Jan 2015 - 3 Jan 2015"."                                                 |
+    #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    # Plan breach threshold changes   | "The Breach Threshold has changed from                            | "The Breach Threshold has changed from 10% to 20%.                        |
+    #                                 | {Previous Trheshold %} to {New Threshold %}.                      |                                                                           |
+    #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    # Cancelled properties / suppliers| "Planned Budget for {Property} ({Insertion Order Name})           | "Planned budget for Google Search ("DS3 - Google Ireland Ltd")            |
+    #  (downweights to 0)             |  has changed from {Previous IO Total} to {currency} 0.00          | has changed from USD 5,000 to USD 0.00 and has been cancelled.            |
+    #                                 |  and has been cancelled."                                         |                                                                           |
+    #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    #
+    # (footer)
+    # No action is required from you, but you can view the revised Media Plan [here|link to plan].
+    #
+    # If clicking the above link does not work, please copy and paste the following into the address bar of your browser:
+    # {link to plan as text}
+    #
+    # Regards,
+    # Olive
+    # -------------------------------------
+    # Essence
+    # www.essencedigital.com
+    # -------------------------------------
+    # This email may be confidential or privileged. If you received this communication by mistake, please don't forward it to anyone else, please erase all copies and attachments and please let me know that it went to the wrong person. Thank you.
 
   Scenario: Notify IO owners of published changes in their IOs post approval
     Given a media plan has been approved by the client
