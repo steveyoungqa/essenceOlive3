@@ -304,7 +304,7 @@ Scenario: Notify Clients of published changes to approved plan (OTD-783)
     #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
     #
     # (footer)
-    # No action is required from you, but you can view the revised Plan [here|link to plan].
+    # No action is required from you, but you can view the revised Media Plan [here|link to plan].
     #
     # If clicking the above link does not work, please copy and paste the following into the address bar of your browser:
     # {link to plan as text}
