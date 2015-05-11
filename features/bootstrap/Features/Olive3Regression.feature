@@ -17,14 +17,16 @@ Feature: Olive 3 Regression Pack
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
 #   ***CREATE CAMPAIGN***
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I click the "Navigation Header" link
-    Then I wait for 3000
+#    Then I wait for 3000
     Then I click the "Campaigns" link
     Then I wait for 3000
     Then I fill in the "Campaign Search" with "<campaign>"
     Then I wait for 3000
     Then I select the Delete "<campaign>" checkbox
-    Then I wait for 10000
+    And I wait for xpath "//*[@class='toast-message success--message show']" to disappear
+#    Then I wait for 10000
 
     Then I click the "Navigation Header" link
     Then I wait for 3000
@@ -40,7 +42,7 @@ Feature: Olive 3 Regression Pack
     Then I fill in "campaign-new-managingRegion" with "EMEA"
     And I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
-    Then I wait for 10000
+    And I wait for xpath "//*[@id='campaign-new-owner-steve-automation']" to appear
     And I fill in "campaign-new-memo" with "Test Notes"
     Then I wait for 5000
     Then I click the "Campaign Save" link
@@ -54,9 +56,10 @@ Feature: Olive 3 Regression Pack
     Then I click the "External System Save" link
   # The above doesnt click External Save - it takes focus off the form dropdown in the previous step
     Then I click the "External System Save" link
-    Then I wait for 5000
+#    Then I wait for 5000
 
 #   ***CREATE MEDIA PLAN***
+    Then I wait for xpath "//*[@class='md-header-items']//*[contains(text(),'Media Plans')]" to appear
     Then I click the "Media Plans" link
     Then I follow "campaign-marketbudgets-add"
     Then I wait for 3000
@@ -119,9 +122,10 @@ Feature: Olive 3 Regression Pack
     Given I select Edit for the existing Campaign "<campaign>"
     Then I wait for 5000
     Then I reload the page
-    And I wait for 8000
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 #   ***ADD MEDIA PLAN LINE**
+    Then I wait for xpath "//*[@class='ng-scope']/div[@class='ng-scope']/ol-list[@class='ng-isolate-scope']/table[@class='standard-table table__records-editable']/tbody[@class='ng-scope']//*[@class='ol-list-item ol-drag-preview ng-scope']" to appear
     Then I click the "Media Plan Whole Column" link
     Then I wait for 5000
     And I select the Media Plan linked to Campaign of "<campaign>"
@@ -166,17 +170,20 @@ Feature: Olive 3 Regression Pack
     Then I click the "Save Media Plan Line" link
     Then I wait for 5000
     Then I reload the page
-    And I wait for 8000
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 #   ***PUBLISH MEDIA PLAN***
+#    Then I wait for css element "campaign-marketbudgets-mediaplan-publish" to appear
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     When I click the "Publish Media Plan" link
     Then I wait for 2000
 #    NEED TO SORT THIS
 #    Then I should see "Media Plan published successfully"
     Then I reload the page
-    And I wait for 8000
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 #   ***LINK INSERTION ORDER TO DS3***
+    Then I wait for xpath "//*[@class='md-header-items']//*[contains(text(),'Insertion orders')]" to appear
     Then I click the "Insertion Order tab" link
     Then I wait for 4000
     And I click the "View IO" link
@@ -195,8 +202,10 @@ Feature: Olive 3 Regression Pack
 #   ***MAP SEARCH CAMPAIGN***
     Then I click the "Plan Lines" link
     And I click the "Manage mappings" link
+    Then I wait for xpath "//*[@class='checkbox-cell ng-scope']" to appear
 #    And I fill in the "Mapping Search" with "<searchCampaign>"
     Then I wait for 50000
+
     Then I Map Search Campaign "<searchCampaign>"
     And I wait for 5000
     And I click the "Save Managed Entities" link
@@ -228,7 +237,7 @@ Feature: Olive 3 Regression Pack
     And I click the "Request Approval" link
     Then I wait for 2000
     Then I reload the page
-    And I wait for 8000
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 #   ***FEEDBACK & APPROVE***
     Then I click the "Set Status" link
@@ -256,7 +265,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 3000
     And I should see "Amends Published"
     Then I reload the page
-    And I wait for 8000
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 #   ***ADD KPI***
     Then I click the "Navigation Header" link
@@ -289,7 +298,7 @@ Feature: Olive 3 Regression Pack
     Then I fill in the "Weighting" with "10"
     And I click the "Tag Save" link
     Then I reload the page
-    And I wait for 8000
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 ##   ***TRACKING MANAGEMENT***
 #    Then I click the "Navigation Header" link

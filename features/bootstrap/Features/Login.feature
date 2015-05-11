@@ -10,8 +10,9 @@ Feature: Test Olive 3 Login
     And I fill in "Passwd" with "<pass>"
     Then I press "signIn"
     Then I wait for 3000
-    Then I should see "Notifications"
-
+    Given I wait for text "Notifications" to appear
+    And I wait for css element "#root-content > section.content-main.ng-scope > div > section > div.tasklist__controller > h1" to appear
+    And I wait for xpath "//*[@class='header__logo']" to appear
 
   Examples:
     |user                      |pass        |

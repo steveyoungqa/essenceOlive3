@@ -18,6 +18,7 @@ class customTests extends CustomPage
         'Navigation Header' => array('xpath' => "//*[@class='menu-close icon icon--med icon--tables']"), //ID Needed
         'Campaigns' => array('xpath' => "//*[@id='site-navigation-campaigns']"),
         'Campaign Name' => array('xpath' => "//*[@id='campaign-new-name']"),
+        'Campaign Owner' => array('xpath' => "//*[@id='campaign-new-owner']"),
         'Campaign Save' => array('xpath' => "//*[@id='campaign-new-save']"),
         'Campaign Delete' => array('xpath' => "//*[@id='campaign-delete']"),
         'editExistingCampaign' => array('xpath' => "//*[contains(@id,'actionbuttons')]"),
@@ -299,6 +300,56 @@ class customTests extends CustomPage
     public function maximizeWindow ()
     {
         $this->getSession()->resizeWindow(1440,800);
+    }
+
+    public function waitForXpathAppear ($xpath, $appear)
+    {
+        $this->waitForXpathNode($xpath, $appear == 'appear');
+        $this->getSession()->wait(2000);
+    }
+
+    public function waitForCssAppear ($element, $appear)
+    {
+        $xpath = $this->getSession()->getSelectorsHandler()->selectorToXpath('css', $element);
+        $this->waitForXpathNode($xpath, $appear == 'appear');
+    }
+
+    public function waitForTextAppear ($text, $appear)
+    {
+        $this->waitForXpathNode(".//*[contains(normalize-space(string(text())), \"$text\")]", $appear == 'appear');
+    }
+
+    private function waitPeriod($fn, $timeout = 30000)
+    {
+        $start = microtime(true);
+        $end = $start + $timeout / 1000.0;
+        while (microtime(true) < $end) {
+            if ($fn($this)) {
+                return;
+            }
+        }
+        throw new \Exception("waitFor timed out");
+    }
+
+    private function waitForXpathNode($xpath, $appear)
+    {
+        $this->waitPeriod(function($context) use ($xpath, $appear) {
+            try {
+                $nodes = $context->getSession()->getDriver()->find($xpath);
+                if (count($nodes) > 0) {
+//                    assertEquals(1, count($nodes), "more than one element matched '$xpath'");
+                    $visible = $nodes[0]->isVisible();
+                    return $appear ? $visible : !$visible;
+                } else {
+                    return !$appear;
+                }
+            } catch (WebDriver\Exception $e) {
+                if ($e->getCode() == WebDriver\Exception::NO_SUCH_ELEMENT) {
+                    return !$appear;
+                }
+                throw $e;
+            }
+        });
     }
 
 }

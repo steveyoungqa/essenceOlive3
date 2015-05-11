@@ -238,4 +238,41 @@ class pageContext extends PageObjectContext
         $custom->maximizeWindow();
     }
 
+    /**
+     * @Given /^I wait for xpath "([^"]+)" to (appear|disappear)$/
+     */
+    public function iWaitForXpath($text, $appear)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->waitForXpathAppear($text, $appear);
+    }
+
+    /**
+     * @Given /^I wait for css element "([^"]+)" to (appear|disappear)$/
+     */
+    public function iWaitForCssElement($element, $appear)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->waitForCssAppear($element, $appear);
+    }
+
+    /**
+     * @Given /^I wait for text "([^"]+)" to (appear|disappear)$/
+     */
+    public function iWaitForText($text, $appear)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->waitForTextAppear($text, $appear);
+
+    }
+
 }
