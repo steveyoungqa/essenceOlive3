@@ -27,32 +27,52 @@ Scenario: Specify platform (OTD-2052)
     And if "Other" is selected do not include in the IO name
 
 #reviewed 11th May
-Scenario: Specify Unit cost and volume (OTD-2072)
+Scenario: Specify Unit cost and Quantity (OTD-2072)
   Given I'm adding a new or edit existing "Media" plan line
     And I have specified "Direct Buy" as buy type
     And And selected one of the "Negotiated" (not biddable) Cost models
-    # either Fixed Cost, Fixed CPM, Fixed CPC, Fixed CPA
+    # either Fixed CPM, Fixed CPC, Fixed CPA, Fixed Cost
   When I'm looking at the plan line
-  Then I can add "Unit cost" (without discount) @todo - clarify with Alex
+  Then I can add "Unit cost"
+    And if I've selected "Fixed Cost", "Unit cost" is forced to be the same as "Budget"
     And I cannot save the plan line without Unit cost provided
-    And I can see "Volume" as a calculated field using the following:
+    And I can see "Quantity" as a calculated field using the following:
     # ==================================================
-    # Cost Model  | Volume                             |
+    # Cost Model  | Quantity                           |
     # ==================================================
-    # Fixed Cost, | Gross Amount / Unit Cost           |
-    # Fixed CPC,  |                                    |
+    # Fixed CPC,  | Gross Amount / Unit Cost           |
     # Fixed CPA   |                                    |
     # -------------------------------------------------|
-    # Fixed CPM    | (Gross Amount / Unit Cost) * 1000 |
+    # Fixed CPM   | (Gross Amount / Unit Cost) * 1000  |
     # -------------------------------------------------|
+    # Fixed Cost  | 1                                  |
+    #--------------------------------------------------|
 
 #reviewed 11th May
-Scenario: Specify Event number for "Fixed CPA"
+Scenario: Specify Event number for "Fixed CPA" (OTD-2073)
   Given a Media plan is set up
     And I'm adding a new "Media" plan line
   When Select "Fixed CPA" as Cost Model
   Then I can choose a supported "Event" number from the following options: 1, 2, 9
   # NOTE - please remove Fixed CPV from the options as part of the story as there's no mapping for it to Olive 2 commissio metrics
+
+#to flesh out
+Scenario: Store Net Budget instead of Gross
+
+#to flesh out
+Scenario: Re-organise Plan line fields to incorporate Unit Cost and Quantity
+# based on https://docs.google.com/presentation/d/138vGhxIlJKhS7j_zZ0w7ikLKRU79rjiqsrGhuAbgovY/edit#slide=id.p
+# - discount always visible
+# - % by default
+# - one amount appears to be used for both
+# - no need to show the discount amount
+# - make sure net budget is stored
+# - display Gross just under budget as soon as discount applied
+#NEW Handle Fixed CPM, CPC, CPA
+# - show NET unit cost and quantity
+# - if discount applied - auto-calculate and show Gross unit cost
+#NEW - Handle Fixed Cost
+# - do not show NET unit cost but assume it to be the same as net budget,
 
 #reviewed 6th May
 Scenario: FE - Plan line grouping (OTD-573)
