@@ -12,7 +12,6 @@ Feature: Olive 3 Regression Pack
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
     Then I wait for 5000
-#    Then I should see "Notifications"
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
@@ -43,7 +42,6 @@ Feature: Olive 3 Regression Pack
     And I fill in "campaign-new-memo" with "Test Notes"
     Then I wait for 5000
     Then I click the "Campaign Save" link
-#    Then I wait for 8000
 
 #   ***LINK TO EXTERNAL PLATFORM***
     And I wait for xpath "//*[contains(text(),'External platforms')]" to appear
@@ -103,7 +101,6 @@ Feature: Olive 3 Regression Pack
 
 #    Then I click the "Media Plan Save" link
     Then I click the "Media Plan Long Save" link
-#    Then I wait for 5000
 
 #   ***LINK TO GOOGLE INITIATIVE***
     And I wait for xpath "//*[contains(@class,'active--panel')]//*[contains(text(),'External platforms')]" to appear
@@ -113,12 +110,12 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the link containing ID "<initiative>"
     Then I click the "Save Mapped Account" link
-    Then I wait for 10000
+#    Then I wait for 10000
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
     Then I wait for 3000
     Given I select Edit for the existing Campaign "<campaign>"
-#    Then I wait for 5000
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -127,8 +124,8 @@ Feature: Olive 3 Regression Pack
     Then I click the "Media Plan Whole Column" link
     Then I wait for 5000
     And I select the Media Plan linked to Campaign of "<campaign>"
-    Then I wait for 5000
-
+#    Then I wait for 5000
+    And I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-line-add']" to appear
     Then I click the "Add Media Plan Line" link
     Then I wait for 2000
     And I click the "Cost Type Media" link
@@ -166,7 +163,6 @@ Feature: Olive 3 Regression Pack
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
-#    Then I wait for 5000
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -185,6 +181,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 4000
     And I click the "View IO" link
     And I wait for 4000
+    And I wait for xpath "//*[@class='md-header-items-container']//*[contains(text(),'External platforms')]" to appear
     Then I click the "External Platforms Insertion Order" link
     And I wait for xpath "//*[@id='campaign-marketbudgets-versions-ios-ds3-link']" to appear
     And I click the "Link DS3" link
@@ -200,8 +197,6 @@ Feature: Olive 3 Regression Pack
     Then I click the "Plan Lines" link
     And I click the "Manage mappings" link
     Then I wait for xpath "//*[@class='custom-checkbox']/span[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']" to appear
-#    And I fill in the "Mapping Search" with "<searchCampaign>"
-#    Then I wait for 50000
 
     Then I Map Search Campaign "<searchCampaign>"
     And I wait for 5000
@@ -232,7 +227,6 @@ Feature: Olive 3 Regression Pack
     Then I click the "Save Approver" link
     Then I wait for 2000
     And I click the "Request Approval" link
-#    Then I wait for 2000
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -250,7 +244,6 @@ Feature: Olive 3 Regression Pack
     And I click the link containing Text "Australian Dollar"
     Then I wait for 2000
     Then I click the "Save Media Plan Line" link
-#    Then I wait for 5000
 
 #   ***PUBLISH AND ACCEPT BREACH***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
@@ -285,7 +278,8 @@ Feature: Olive 3 Regression Pack
     And I click the "Conversion Type" link
     And I fill in the "Conversion Type" with "<conversion>"
     And I click the link containing Text "<conversion>"
-    Then I wait for 5000
+#    Then I wait for 5000
+    And I wait for xpath "//*[@id='campaign-events-tags-new-activityGroup']" to appear
     And I click the "Activity Category" link
     And I fill in the "Activity Category" with "<activity>"
     And I click the link containing Text "<activity>"

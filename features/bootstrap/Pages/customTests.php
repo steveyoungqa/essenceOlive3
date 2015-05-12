@@ -321,7 +321,7 @@ class customTests extends CustomPage
         $this->waitForXpathNode(".//*[contains(normalize-space(string(text())), \"$text\")]", $appear == 'appear');
     }
 
-    private function waitPeriod($fn, $timeout = 40000)
+    private function waitPeriod($fn, $timeout = 50000)
     {
         $start = microtime(true);
         $end = $start + $timeout / 1000.0;
