@@ -79,7 +79,9 @@ class customTests extends CustomPage
 
 
         'Plan Line Description' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-description']"),
-        'Save Media Plan Line' => array('xpath' => "//a[@id='campaign-marketbudgets-versions-lines-new-save']"),
+        'Save Media Plan Line' => array('xpath' => "//*[@id='save']"),
+        'Save Media Plan Line And Publish' => array('xpath' => "//*[@id='save-and-publish']"),
+
         'Save Edited Media Plan Line' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-medialines-save']"),
         'Publish Media Plan' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-publish']"),
         'External Platforms Insertion Order' => array('xpath' => "//*[@class='md-header-items-container']//*[contains(text(),'External platforms')]"),
@@ -141,7 +143,7 @@ class customTests extends CustomPage
 ////       THESE FOUR FOLLOWING IDS - XPATHS ARE NOT RECOGNISED SINCE DEV CHANGES TO MEDIA PLAN - SARAH TO INVESTIGATE:
         'KPI Type Long Path' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[2]"),
         'Market Long Path' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[4]"),
-        'Media Plan Long Save' => array('xpath' => "//*[@class='tiered__panel-inner']/div[@class='ng-scope']/div[@class='tiered__panel-details ng-scope']/div[@class='ng-isolate-scope']/div[@class='tiered__actions ng-scope']//*[contains(text(),'Save')]"),
+        'Media Plan Long Save' => array('xpath' => "//*[@class='tiered__panel-details ng-scope']/div[@class='ng-isolate-scope']//*[contains(text(),'Save')]"),
         'Use Olive 2 MAFs' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[11]/label[2]/span[1]"),
 
         'First Plan Line Edit' => array('xpath' => "//*[@class='ng-scope'][1]/td//*[contains(text(),'Edit')]"),
