@@ -135,7 +135,7 @@ Scenario: O2 - Autogenerate Negotiated cost Booking Lines from Olive 3 Plan line
       # Fixed CPA - Event 1   | #11
       # Fixed CPA - Event 2   | #44
       # Fixed CPA - Event 9   | #15
-    And it uses Olive 3 PLan Line "Volume" as Booking line Amount ("bkl_amount")
+    And it uses Olive 3 PLan Line "Quantity" as Booking line Amount ("bkl_amount")
     And it always uses "SUPPLIER" as "bkl_stats" source
     And it uses Plan line "Start date" and "End date" to populate "bkl_start_date" and "bkl_end_date_fin", "bkl_end_date_del" respectively
     And it generates a child forecast line (except cap flag) with the same information as its parent booking line for each Olive 2 placement,
