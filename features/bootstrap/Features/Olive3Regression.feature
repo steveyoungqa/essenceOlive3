@@ -11,7 +11,6 @@ Feature: Olive 3 Regression Pack
     And I fill in "Email" with "steve.automation@gmail.com"
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
-    Then I wait for 5000
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
@@ -110,7 +109,6 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the link containing ID "<initiative>"
     Then I click the "Save Mapped Account" link
-#    Then I wait for 10000
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
@@ -124,7 +122,6 @@ Feature: Olive 3 Regression Pack
     Then I click the "Media Plan Whole Column" link
     Then I wait for 5000
     And I select the Media Plan linked to Campaign of "<campaign>"
-#    Then I wait for 5000
     And I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-line-add']" to appear
     Then I click the "Add Media Plan Line" link
     Then I wait for 2000
@@ -155,6 +152,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
     Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100000"
+
 #   ***APPLY BUDGET DISCOUNT***
     Then I click the "Discount Applied" checkbox
     And I wait for 2000
@@ -170,17 +168,17 @@ Feature: Olive 3 Regression Pack
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     When I click the "Publish Media Plan" link
     Then I wait for 2000
-#    NEED TO SORT THIS
-#    Then I should see "Media Plan published successfully"
-    Then I reload the page
+    And I wait for text "Media Plan published successfully" to appear
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
+    Then I reload the page
 
 #   ***LINK INSERTION ORDER TO DS3***
     Then I wait for xpath "//*[@class='md-header-items']//*[contains(text(),'Insertion orders')]" to appear
     Then I click the "Insertion Order tab" link
-    Then I wait for 4000
+#    Then I wait for 4000
+    And I wait for xpath "//*[@class='button button__label-only']//*[contains(text(),'View IO')]" to appear
     And I click the "View IO" link
-    And I wait for 4000
+#    And I wait for 4000
     And I wait for xpath "//*[@class='md-header-items-container']//*[contains(text(),'External platforms')]" to appear
     Then I click the "External Platforms Insertion Order" link
     And I wait for xpath "//*[@id='campaign-marketbudgets-versions-ios-ds3-link']" to appear
@@ -237,7 +235,8 @@ Feature: Olive 3 Regression Pack
 
 #   ***EDIT FIRST MEDIA PLAN LINE***
     Then I click the "Editable Draft State" link
-    Then I wait for 5000
+#    Then I wait for 5000
+    And I wait for xpath "//*[@class='ng-scope'][1]/td//*[contains(text(),'Edit')]" to appear
     Then I click the "First Plan Line Edit" link
     And I wait for 2000
     Then I click the "Edit Line Currency" link
@@ -248,13 +247,13 @@ Feature: Olive 3 Regression Pack
 #   ***PUBLISH AND ACCEPT BREACH***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     When I click the "Publish Media Plan" link
-    Then I wait for 3000
-    Then I should see "Publishing this media plan you will require further internal approval for the amends you have made"
+#    Then I wait for 3000
+    Then I wait for text "Publishing this media plan you will require further internal approval for the amends you have made" to appear
     And I click the "Continue & Publish" link
-    Then I wait for 2000
-    Then I should see "Media Plan published successfully"
-    Then I wait for 3000
-    And I should see "Amends Published"
+#    Then I wait for 2000
+    Then I wait for text "Media Plan published successfully" to appear
+#    Then I wait for 3000
+    And I wait for text "Amends Published" to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -278,7 +277,6 @@ Feature: Olive 3 Regression Pack
     And I click the "Conversion Type" link
     And I fill in the "Conversion Type" with "<conversion>"
     And I click the link containing Text "<conversion>"
-#    Then I wait for 5000
     And I wait for xpath "//*[@id='campaign-events-tags-new-activityGroup']" to appear
     And I click the "Activity Category" link
     And I fill in the "Activity Category" with "<activity>"
