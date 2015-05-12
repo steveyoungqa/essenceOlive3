@@ -53,6 +53,28 @@ Scenario: Olive 2 Campaign Doesn't exist (OTD-1928)
     And Olive 2 validates the content
     And Olive 2 T-Sheet upload generates Campaigns, Budget Periods and Purchase Orders from Information
 
+#to review
+Scenario: O2 - Create separate Off-network and House-Ads Campaigns (OTD-2084)
+    Given a new O3 style t-sheet has been prepared for a completely new "Google" campaign (Trafic not set up)
+      And an O3 tsheet has never been uploaded for it before
+      And it has references to a mixture of liable entities (Client and Essence)
+    When Campaign Manager uploads Olive 3 T-sheet without any Olive 2 Campaign IDs
+    Then  for "Google" campaigns Olive 2 T-sheet upload generates a Campaign per Liable entity named and labelled as outlined below:
+      # Client            | Liable Entity       | Campaign Naming Convention    | Budget Period Data      |
+      # --------------------------------------------------------------------------------------------------|
+      # Google            | Client Liable       | {Campaign Name}               | Label: {MP Label}       |
+      #                   |                     | {MP Goal Type}                | Budget Type: House Ads  |
+      #                   |                     | "House Ads"                   |                         |
+      #                   |                     | {MP Period}                   |                         |
+      #                   |                     | {MP Market Code}              |                         |
+      # --------------------------------------------------------------------------------------------------|
+      # Google            | Essence Liable      | {Campaign Name}               | Label: {MP Label}       |
+      #                   |                     | {MP Goal Type}                | Budget Type: Off-Network|
+      #                   |                     | "Off-Network"                 |                         |
+      #                   |                     | {MP Period}                   |                         |
+      #                   |                     | {MP Market Code}              |                         |
+      #----------------------------------------------------------------------------------------------------
+
 #reviewed 5th May
 Scenario: Olive 2 Budget Period doesn't exist but Placements, Bookings and Campaign already set up and trafficked in the previous quarter (OTD-2001)
   Given I have already set up Campaigns / Bookings in Olive 2
