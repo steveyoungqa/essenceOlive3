@@ -189,6 +189,7 @@ Feature: Olive 3 Regression Pack
     And I click the "View IO" link
     And I wait for 4000
     Then I click the "External Platforms Insertion Order" link
+    And I wait for xpath "//*[@id='campaign-marketbudgets-versions-ios-ds3-link']" to appear
     And I click the "Link DS3" link
     And I wait for 2000
     And I fill in "mapping-externalSystem-ds3" with "<ds3>"
@@ -202,9 +203,9 @@ Feature: Olive 3 Regression Pack
 #   ***MAP SEARCH CAMPAIGN***
     Then I click the "Plan Lines" link
     And I click the "Manage mappings" link
-    Then I wait for xpath "//*[@class='checkbox-cell ng-scope']" to appear
+    Then I wait for xpath "//*[@class='custom-checkbox']/span[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']" to appear
 #    And I fill in the "Mapping Search" with "<searchCampaign>"
-    Then I wait for 50000
+#    Then I wait for 50000
 
     Then I Map Search Campaign "<searchCampaign>"
     And I wait for 5000
