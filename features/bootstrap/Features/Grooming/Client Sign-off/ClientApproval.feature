@@ -4,17 +4,17 @@ In order to ensure I'm authorised to buy the media outlined in the plan
 As Campaign Manager
 I want to get Client approval
 
-#(mentioned 28th April)
+#mentioned 28th April - in sprint 29 [11th May] -
 Scenario: Implement Plan Event History (OTD-775)
 
-# (reviewed 28th April)
+#reviewed 28th April - in sprint 29 [11th May] - accepted 13th May
 Scenario: Add a Client Approver Account (OTD-771)
   Given a Client contact can approve a Plan on Clients behalf
   When Olive Admin views Client Contact Details (People - Edit details)
   Then Olive Admin can choose a "Client Plan Approver" role and assign it to the Client contact
 
 #Client Approval Requested
-#(reviewed 28th April)
+#reviewed 28th April - in sprint 29 [11th May] -
 Scenario: Request Client Approval (OTD-762)
   #prototype: http://mnnl4s.axshare.com/#p=1_2_3_media_plan_view__published_
   Given Media plan has been internally approved
@@ -37,7 +37,7 @@ Scenario: Request Client Approval (OTD-762)
       #    -----------------------------------------------------------------------------------------------------------------
 
 
-#(reviewed 28th April)
+#reviewed 28th April - in sprint 29 [11th May] -
 Scenario: Notify Client Approver (OTD-765)
   #prototype: http://mnnl4s.axshare.com/#p=1_2_3_media_plan_view__published_
   Given Media Plan has been internally approved
@@ -68,6 +68,140 @@ Scenario: Notify Client Approver (OTD-765)
       # www.essencedigital.com
       # -------------------------------------
       # This email may be confidential or privileged. If you received this communication by mistake, please don't forward it to anyone else, please erase all copies and attachments and please let me know that it went to the wrong person. Thank you.
+
+  #reviewed 5th May - in sprint 29 [11th May] -
+  Scenario: Client gives feedback (OTD-769)
+    Given Client approval was requested
+      And Client approver received a notificafiton email with a lilnk to the media plan
+      And the Plan hasn't been rejected
+    When they clicks on the link in notification
+    Then they can see a Client view of the plan
+      And they can Approve or Reject the plan
+      And they can add a message (optional)
+      And an event is added to the Plan History
+        #    ------------------------------------------------------------------------------------------
+        #    |Time     |User                     |Action                      |Details                |
+        #    ------------------------------------------------------------------------------------------
+        #    |Datetime |Currently Logged in User | [Approved/Rejected] plan   | {message if available}|
+        #    ------------------------------------------------------------------------------------------
+
+  #reviewed 5th May - in sprint 29 [11th May] -
+  Scenario: Partial Client Approval (OTD-294)
+    Given Client approval was requested from multiple Client Approvers
+      And there is more than one pending approvals
+    When only one of them approves plan
+    Then the plan still stays in "Client Approval Requested" status
+
+  #reviewed 5th May - in sprint 29 [11th May] -
+  Scenario: Full Client Approval (OTD-294)
+    Given Client approval was requested from one or more Client Approvers
+      And one approval is still pending
+    When the last approver approves plan
+    Then the plan status changes to "Client Approved"
+      And Media Plan Manager is notified via email
+        # Email Subject: Media Plan Approved: {Media Plan Name} (ID: {Media Plan ID}) (No action required)
+        # Email Text:
+        #
+        # Dear {Media Plan Manager},
+        #
+        # This is an automated email notifying that the recently issued Media Plan, "{Media Plan Name}", has been approved by all Client Approvers.
+        #
+        # Regards,
+        # Olive
+        # -------------------------------------
+        # Essence
+        # www.essencedigital.com
+        # -------------------------------------
+        # This email may be confidential or privileged. If you received this communication by mistake, please don't forward it to anyone else, please erase all copies and attachments and please let me know that it went to the wrong person. Thank you.
+        #
+      And an event is added to the Plan History
+        #------------------------------------------------------------------------------------------
+        #|Time     |User                     |Action                      |Details                |
+        #------------------------------------------------------------------------------------------
+        #|Datetime |Currently Logged in User | Plan Client Approved   | {message if available}|
+        #------------------------------------------------------------------------------------------
+
+  #reviewed 5th May - in sprint 29 [11th May] -
+  Scenario: Client Rejects (OTD-769)
+    Given Client approval was requested from one or more Client Approvers
+      And plan is not "Client Approved"
+    When a Client Approver rejects the plan
+    Then the plan status changes to "Client Rejected" status
+      And feedback from other approvers is no longer expected
+      And other approvers are notified
+        # Email Subject: Media Plan Rejected: {Media Plan Name} (ID: {Media Plan ID}) (No action required)
+        # Email Text:
+        #
+        # Dear {Client Approver},
+        #
+        # This is an automated email notifying that the recently issued Media Plan, "{Media Plan Name}", has been rejected. If your feedback was still pending, you will no longer be able to provide feedback on this version.
+        #
+        # Regards,
+        # Olive
+        # -------------------------------------
+        # Essence
+        # www.essencedigital.com
+        # -------------------------------------
+        # This email may be confidential or privileged. If you received this communication by mistake, please don't forward it to anyone else, please erase all copies and attachments and please let me know that it went to the wrong person. Thank you.
+        #
+      And Media Plan Manager is notified
+      And an event is added to the Plan History
+        #------------------------------------------------------------------------------------------
+        #|Time     |User                     |Action                      |Details                |
+        #------------------------------------------------------------------------------------------
+        #|Datetime |Currently Logged in User | [Rejected] plan   | {message if available}|
+        #------------------------------------------------------------------------------------------
+
+#to be reviewed
+Scenario: Version changed before Approval
+# as per flow: https://docs.google.com/presentation/d/1kfVC7tLbzNUZO_W20_k8IKkkEH3l_7ZtI769Br2l8Js/edit#slide=id.g9d920b67a_0_115
+  Given Client Approval was requested
+    And Approval is pending
+  When campiagn manager publishes new changes that do not breach terms
+  Then Cients who view the version for approval can see and approve published changes as part of the first approval request
+    #in other words - no need to create a new version or request new approval
+
+#(reviewed 5th May)
+Scenario: Version breached before Approval (OTD-767)
+#as per flow: https://docs.google.com/presentation/d/1kfVC7tLbzNUZO_W20_k8IKkkEH3l_7ZtI769Br2l8Js/edit#slide=id.g9d920b67a_0_0
+  Given Client approval was requested
+    And Client approver has received a notification email with a link to the media plan
+    And Approval is pending
+  When campaign manager publishes new changes that breach the plan
+  Then pending Client approvers receive a notification about plan no longer needing approval
+      # Email Subject: Media Plan changed: {Media Plan Name} (ID: {Media Plan ID}) (No action required)
+      # Email Text:
+      #
+      # Dear {Client Approver},
+      #
+      # This is an automated email notifying that the recently issued Media Plan, "{Media Plan Name}", has been changed. If your feedback was still pending, you will no longer be able to provide feedback on this version.
+      #
+      # Regards,
+      # Olive
+      # -------------------------------------
+      # Essence
+      # www.essencedigital.com
+      # -------------------------------------
+      # This email may be confidential or privileged. If you received this communication by mistake, please don't forward it to anyone else, please erase all copies and attachments and please let me know that it went to the wrong person. Thank you.
+      #
+    And Plan status changes to "Published"
+
+#to be reviewed
+Scenario: Version changed after Approval
+#as per flow: https://docs.google.com/presentation/d/1kfVC7tLbzNUZO_W20_k8IKkkEH3l_7ZtI769Br2l8Js/edit#slide=id.g9d920b67a_0_93
+  Given Client approval was given for a plan
+    And minor (non-breaching) changes have been published
+  When Client approver looks at the plan in Client Portal
+  Then they see the last approved version with the published changes included
+
+#reviewed 6th May
+Scenario: Version breached after approval (OTD-786)
+#as per flow: https://docs.google.com/presentation/d/1kfVC7tLbzNUZO_W20_k8IKkkEH3l_7ZtI769Br2l8Js/edit#slide=id.g9d920b67a_0_55
+  Given Client approval was given for a plan
+    And breaching changes to plan have been published
+    And plan is in "Published" state
+  When Client approver looks at the plan in Client Portal
+  Then they see the last approved verions
 
 #(reviewed 1st May)
 Scenario: Add Approvers while pending
@@ -163,120 +297,3 @@ Scenario: Attempt to remove Last Pending Approver without "Popeye" status
 
 #TO FLESH OUT
 Scenario: Add another approver once a plan is approved
-
-
-#(reviewed 5th May)
-Scenario: Client gives feedback (OTD-769)
-  Given Client approval was requested
-    And Client approver received a notificafiton email with a lilnk to the media plan
-    And the Plan hasn't been rejected
-  When they clicks on the link in notification
-  Then they can see a Client view of the plan
-    And they can Approve or Reject the plan
-    And they can add a message (optional)
-    And an event is added to the Plan History
-      #    ------------------------------------------------------------------------------------------
-      #    |Time     |User                     |Action                      |Details                |
-      #    ------------------------------------------------------------------------------------------
-      #    |Datetime |Currently Logged in User | [Approved/Rejected] plan   | {message if available}|
-      #    ------------------------------------------------------------------------------------------
-
-#(reviewed 5th May)
-Scenario: Partial Client Approval (OTD-294)
-  Given Client approval was requested from multiple Client Approvers
-    And there is more than one pending approvals
-  When only one of them approves plan
-  Then the plan still stays in "Client Approval Requested" status
-
-#(reviewed 5th May)
-Scenario: Full Client Approval (OTD-294)
-  Given Client approval was requested from one or more Client Approvers
-    And one approval is still pending
-  When the last approver approves plan
-  Then the plan status changes to "Client Approved"
-    And Media Plan Manager is notified via email
-      # Email Subject: Media Plan Approved: {Media Plan Name} (ID: {Media Plan ID}) (No action required)
-      # Email Text:
-      #
-      # Dear {Media Plan Manager},
-      #
-      # This is an automated email notifying that the recently issued Media Plan, "{Media Plan Name}", has been approved by all Client Approvers.
-      #
-      # Regards,
-      # Olive
-      # -------------------------------------
-      # Essence
-      # www.essencedigital.com
-      # -------------------------------------
-      # This email may be confidential or privileged. If you received this communication by mistake, please don't forward it to anyone else, please erase all copies and attachments and please let me know that it went to the wrong person. Thank you.
-      #
-    And an event is added to the Plan History
-      #------------------------------------------------------------------------------------------
-      #|Time     |User                     |Action                      |Details                |
-      #------------------------------------------------------------------------------------------
-      #|Datetime |Currently Logged in User | Plan Client Approved   | {message if available}|
-      #------------------------------------------------------------------------------------------
-
-#(reviewed 5th May)
-Scenario: Client Rejects (OTD-294)
-  Given Client approval was requested from one or more Client Approvers
-    And plan is not "Client Approved"
-  When a Client Approver rejects the plan
-  Then the plan status changes to "Client Rejected" status
-    And feedback from other approvers is no longer expected
-    And other approvers are notified
-      # Email Subject: Media Plan Rejected: {Media Plan Name} (ID: {Media Plan ID}) (No action required)
-      # Email Text:
-      #
-      # Dear {Client Approver},
-      #
-      # This is an automated email notifying that the recently issued Media Plan, "{Media Plan Name}", has been rejected. If your feedback was still pending, you will no longer be able to provide feedback on this version.
-      #
-      # Regards,
-      # Olive
-      # -------------------------------------
-      # Essence
-      # www.essencedigital.com
-      # -------------------------------------
-      # This email may be confidential or privileged. If you received this communication by mistake, please don't forward it to anyone else, please erase all copies and attachments and please let me know that it went to the wrong person. Thank you.
-      #
-    And Media Plan Manager is notified
-    And an event is added to the Plan History
-      #------------------------------------------------------------------------------------------
-      #|Time     |User                     |Action                      |Details                |
-      #------------------------------------------------------------------------------------------
-      #|Datetime |Currently Logged in User | [Rejected] plan   | {message if available}|
-      #------------------------------------------------------------------------------------------
-
-#(reviewed 5th May)
-Scenario: Version expired before Approval (OTD-767)
-  Given Client approval was requested
-    And Client approver has received a notification email with a link to the media plan
-    And Approval is pending
-  When campaign manager publishes new changes that breach the plan
-  Then pending Client approvers receive a notification about plan no longer needing approval
-      # Email Subject: Media Plan changed: {Media Plan Name} (ID: {Media Plan ID}) (No action required)
-      # Email Text:
-      #
-      # Dear {Client Approver},
-      #
-      # This is an automated email notifying that the recently issued Media Plan, "{Media Plan Name}", has been changed. If your feedback was still pending, you will no longer be able to provide feedback on this version.
-      #
-      # Regards,
-      # Olive
-      # -------------------------------------
-      # Essence
-      # www.essencedigital.com
-      # -------------------------------------
-      # This email may be confidential or privileged. If you received this communication by mistake, please don't forward it to anyone else, please erase all copies and attachments and please let me know that it went to the wrong person. Thank you.
-      #
-    And Plan status changes to "Published"
-
-
-#(reviewed 6th May)
-Scenario: Version breached after approval (OTD-786)
-  Given Client approval was given for a plan
-    And breaching changes to plan have been published
-    And plan is in "Published" state
-  When Client approver looks at the plan in Client Portal
-  Then they see the last approved verions
