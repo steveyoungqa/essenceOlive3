@@ -48,7 +48,7 @@ Scenario: FE - Display Approved plan that has IOs with missing Internal Approval
   When I look at the Plan (any version)
   Then I see Insertion Order tab marked with a warning highlight
     And the warning displays a count of Insertion Orders with missing Internal approval or Suppleir countersign confirmation
-    And (@todo - decide on some sort of indicator in the IO listing)
+    And #(@todo - decide on some sort of indicator in the IO listing)
 
 #to review
 Scenario: FE - Display Plan history
