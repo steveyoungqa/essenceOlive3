@@ -64,5 +64,5 @@ Scenario: FE - Display Plan history
 Scenario: View Last Internally Approved and Client Approved Versions of Insertion Orders (OTD-1178)
   Given A media plan has been internally or client approved
     When I view the Insertion Order in Olive
-  Then I can see a dropdown (?) (@todo - confirm) with the following options: "Draft", "Published", "Last Internally approved", "Last Client Approved"
+  Then I can see a dropdown (?) #(@todo - confirm) with the following options: "Draft", "Published", "Last Internally approved", "Last Client Approved"
     And changing option the plan displays a snapshot of all lines as they existed in that version
