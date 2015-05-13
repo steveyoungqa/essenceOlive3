@@ -5,7 +5,7 @@ In order to understand what has changed between different versions of the plan a
 As Campaign Manager
 I want to see differences between versions or missing information highlighted
 
-#reviewed 8th May
+#reviewed 8th May - in sprint 29 [11th May] -
 Scenario: View Last Internally Approved and Client Approved Versions of Plan (OTD-1178)
   Given A media plan has been internally or client approved
     When I view the plan in Olive
@@ -15,19 +15,32 @@ Scenario: View Last Internally Approved and Client Approved Versions of Plan (OT
     And When I select that option the Purchase Order and Invoice Tabs display the same information as selecting "Published" option
 
 
-#to flesh out
-Scenario: FE - Highlight Plan line and meta data changes between different versions
+#to review
+Scenario: FE - Highlight Plan changes in draft when compared to others
   #prototype: http://mnnl4s.axshare.com/#p=1_2_4_media_plan_view__editable_draft_ (OTD-1976)
   #screenshots in OTD-2064
-  Given A
-  When I look at the plan (any version)
-  Then I see each different value marked with a highlight
+  Given I have set up a Media plan
+    And It has been Client approved
+    And I have since published changes which have been Internally approved
+    And I have later published more breaching changes
+    And after publishing also made changes to the draft plan
+  When I look at the plan darft version
+  Then I see each value that is different when compared to any of the existing other versions (Published, Internally Approved, Client Approved) marked with a highlight
     And when I hover over the highlight i can see the current value in each other existing version, when and by whom the last change was made
-    And Upweights / Downweights are indicated with colours red and green (TBC)
+    And Upweights / Downweights are indicated with colours red and green only in client
     And Cancellations are shown as downweights to 0
+    # list out all changes?
 
 #to review
-Scenario: FE - Display Approved plan that has IOs with missing Internall Approval or Supplier countersigned IO
+Scenario: FE - Highlight Plan changes in Published when compared to others
+
+#to review
+Scenario: FE - Highlight Plan changes in Internally Approved when compared to Client Approved
+
+
+
+#to review
+Scenario: FE - Display Approved plan that has IOs with missing Internal Approval or Supplier countersigned IO
   #Screenshots in https://essencedigital.atlassian.net/browse/OTD-2063
   Given Client Approved Plan exists
     And changes have been made and published

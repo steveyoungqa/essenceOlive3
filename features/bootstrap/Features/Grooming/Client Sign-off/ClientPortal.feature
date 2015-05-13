@@ -99,3 +99,9 @@ Scenario: Client views a plan for which they have already giving feedback (OTD-2
     # Approved
     And the message that was captured at the time of requesting approval
     And they can see when they gave feedback and the message they left at the time
+
+  #to flesh out
+  Scenario: FE - Highlight minor changes since approval Client view of Last Approved version
+
+  #to flesh out 
+  Scenario: FE - Highlight changes between Client Approval Requested vs Last Approved version
