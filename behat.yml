@@ -22,7 +22,7 @@ staging:
 uat:
     extensions:
         Behat\MinkExtension\Extension:
-            base_url: 'http://ess-lon-olive-web-001s.essence.internal.com:7001/'
+            base_url: 'https://o-uat.essencedigital.com/'
 
 test:
     extensions:

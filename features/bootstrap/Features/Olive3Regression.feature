@@ -34,7 +34,7 @@ Feature: Olive 3 Regression Pack
     Then I fill in the "Campaign Name" with "<campaign>"
     And I fill in "campaign-new-client" with "<client>"
     Then I wait for 5000
-    Then I fill in "campaign-new-managingRegion" with "EMEA"
+    Then I fill in "campaign-new-managingRegion" with "<region>"
     And I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
     And I wait for xpath "//*[@id='campaign-new-owner-steve-automation']" to appear
@@ -71,6 +71,7 @@ Feature: Olive 3 Regression Pack
     And I click the "Close Add Period" link
 
     Then I fill in "campaign-marketbudgets-new-period" with "<period>"
+    And I wait for text "<period>" to appear
     Then I wait for 2000
     Then I click the link containing ID "<period>"
     Then I wait for 2000
@@ -114,8 +115,6 @@ Feature: Olive 3 Regression Pack
     Then I click the "Campaigns" link
     Then I wait for 3000
     Given I select Edit for the existing Campaign "<campaign>"
-    Then I reload the page
-    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 #   ***ADD MEDIA PLAN LINE**
     Then I wait for xpath "//*[@class='ng-scope']/div[@class='ng-scope']/ol-list[@class='ng-isolate-scope']/table[@class='standard-table table__records-editable']/tbody[@class='ng-scope']//*[@class='ol-list-item ol-drag-preview ng-scope']" to appear
@@ -235,7 +234,6 @@ Feature: Olive 3 Regression Pack
 
 #   ***EDIT FIRST MEDIA PLAN LINE***
     Then I click the "Editable Draft State" link
-#    Then I wait for 5000
     And I wait for xpath "//*[@class='ng-scope'][1]/td//*[contains(text(),'Edit')]" to appear
     Then I click the "First Plan Line Edit" link
     And I wait for 2000
@@ -247,12 +245,9 @@ Feature: Olive 3 Regression Pack
 #   ***PUBLISH AND ACCEPT BREACH***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     When I click the "Publish Media Plan" link
-#    Then I wait for 3000
     Then I wait for text "Publishing this media plan you will require further internal approval for the amends you have made" to appear
     And I click the "Continue & Publish" link
-#    Then I wait for 2000
     Then I wait for text "Media Plan published successfully" to appear
-#    Then I wait for 3000
     And I wait for text "Amends Published" to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
@@ -260,7 +255,9 @@ Feature: Olive 3 Regression Pack
 #   ***ADD KPI***
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
-    Then I wait for 2000
+    Then I wait for 3000
+    Then I fill in the "Campaign Search" with "<campaign>"
+    Then I wait for 3000
     Given I select Edit for the existing Campaign "<campaign>"
     And I click the "Default KPIs" link
     Then I click the "Add KPI" link
@@ -318,8 +315,8 @@ Feature: Olive 3 Regression Pack
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign  |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |regression|google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |campaign  |client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |regression|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

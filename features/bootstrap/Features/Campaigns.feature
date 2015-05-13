@@ -10,19 +10,18 @@ Feature: P01 - Create new campaign
     And I fill in "Email" with "steve.automation@gmail.com"
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
-    Then I wait for 3000
-    Then I should see "Notifications"
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
+#   ***CREATE CAMPAIGN***
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I click the "Navigation Header" link
-    Then I wait for 3000
     Then I click the "Campaigns" link
     Then I wait for 3000
     Then I fill in the "Campaign Search" with "<campaign>"
     Then I wait for 3000
     Then I select the Delete "<campaign>" checkbox
-    Then I wait for 10000
+    And I wait for xpath "//*[@class='toast-message success--message show']" to disappear
 
     Then I click the "Navigation Header" link
     Then I wait for 3000
@@ -32,32 +31,32 @@ Feature: P01 - Create new campaign
     Then I wait for 3000
 
     Then I fill in the "Campaign Name" with "<campaign>"
-#    And I fill in "campaign-new-name" with "<campaign>"
     And I fill in "campaign-new-client" with "<client>"
     Then I wait for 5000
-    Then I fill in "campaign-new-managingRegion" with "EMEA"
+    Then I fill in "campaign-new-managingRegion" with "<region>"
     And I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
-    Then I wait for 7000
+    And I wait for xpath "//*[@id='campaign-new-owner-steve-automation']" to appear
     And I fill in "campaign-new-memo" with "Test Notes"
     Then I wait for 5000
     Then I click the "Campaign Save" link
-    Then I wait for 8000
 
 #   Campaign Duplicate Name Check
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I click the "Navigation Header" link
     Then I wait for 3000
     Then I click the "Campaigns" link
     Then I wait for 3000
     Then I follow "campaign-add"
     Then I wait for 3000
+
     Then I fill in the "Campaign Name" with "<campaign>"
     And I fill in "campaign-new-client" with "<client>"
     Then I wait for 5000
     Then I fill in "campaign-new-managingRegion" with "EMEA"
     And I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
-    Then I wait for 7000
+    And I wait for xpath "//*[@id='campaign-new-owner-steve-automation']" to appear
     And I fill in "campaign-new-memo" with "Test Notes"
     Then I wait for 5000
     Then I click the "Campaign Save" link
@@ -70,7 +69,6 @@ Feature: P01 - Create new campaign
     Then I wait for 3000
     Then I click the "Campaigns" link
     Then I wait for 3000
-
     Then I fill in "campaign-search-basic" with "<campaign>"
     Then I wait for 3000
     Then I select the Delete "<campaign>" checkbox

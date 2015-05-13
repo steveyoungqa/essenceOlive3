@@ -10,20 +10,18 @@ Feature: Olive 3 Regression Pack
     And I fill in "Email" with "steve.automation@gmail.com"
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
-    Then I wait for 3000
-    Then I should see "Notifications"
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
 #   ***CREATE CAMPAIGN***
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I click the "Navigation Header" link
-    Then I wait for 3000
     Then I click the "Campaigns" link
     Then I wait for 3000
     Then I fill in the "Campaign Search" with "<campaign>"
     Then I wait for 3000
     Then I select the Delete "<campaign>" checkbox
-    Then I wait for 10000
+    And I wait for xpath "//*[@class='toast-message success--message show']" to disappear
 
     Then I click the "Navigation Header" link
     Then I wait for 3000
@@ -33,35 +31,35 @@ Feature: Olive 3 Regression Pack
     Then I wait for 3000
 
     Then I fill in the "Campaign Name" with "<campaign>"
-#    And I fill in "campaign-new-name" with "<campaign>"
     And I fill in "campaign-new-client" with "<client>"
     Then I wait for 5000
-    Then I fill in "campaign-new-managingRegion" with "EMEA"
+    Then I fill in "campaign-new-managingRegion" with "<region>"
     And I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
-    Then I wait for 7000
+    And I wait for xpath "//*[@id='campaign-new-owner-steve-automation']" to appear
     And I fill in "campaign-new-memo" with "Test Notes"
     Then I wait for 5000
     Then I click the "Campaign Save" link
-    Then I wait for 8000
 
-# ***LINK TO EXTERNAL PLATFORM***
+#   ***LINK TO EXTERNAL PLATFORM***
+    And I wait for xpath "//*[contains(text(),'External platforms')]" to appear
     Then I click the "External Platforms Market Level" link
     And I click the "Google Sub Product" link
     Then I fill in "mapping-externalSystem-googleSubProduct" with "Wildfire - E15"
     Then I wait for 5000
     Then I click the "External System Save" link
-     # The above link doesnt click External Save - it takes focus off the form dropdown in the previous step
+  # The above doesnt click External Save - it takes focus off the form dropdown in the previous step
     Then I click the "External System Save" link
-    Then I wait for 5000
 
-# ***CREATE MEDIA PLAN***
+#   ***CREATE MEDIA PLAN***
+    Then I wait for xpath "//*[@class='md-header-items']//*[contains(text(),'Media Plans')]" to appear
     Then I click the "Media Plans" link
     Then I follow "campaign-marketbudgets-add"
     Then I wait for 3000
     And I fill in "campaign-marketbudgets-new-label" with "Test Label"
     Then I wait for 2000
 
+#    Then I click the "KPI Type" link
     Then I click the "KPI Type Long Path" link
     Then I click the "KPI Brand" link
     Then I wait for 2000
@@ -72,10 +70,12 @@ Feature: Olive 3 Regression Pack
     And I click the "Close Add Period" link
 
     Then I fill in "campaign-marketbudgets-new-period" with "<period>"
+    And I wait for text "<period>" to appear
     Then I wait for 2000
     Then I click the link containing ID "<period>"
     Then I wait for 2000
 
+#    Then I click the "Media Plan Market" link
     Then I click the "Market Long Path" link
     Then I wait for 2000
     Then I click the "Market USA" link
@@ -98,29 +98,29 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the link containing ID "<owner>"
 
+#    Then I click the "Media Plan Save" link
     Then I click the "Media Plan Long Save" link
-    Then I wait for 5000
 
-# ***LINK TO GOOGLE INITIATIVE***
+#   ***LINK TO GOOGLE INITIATIVE***
+    And I wait for xpath "//*[contains(@class,'active--panel')]//*[contains(text(),'External platforms')]" to appear
     Then I click the "External Platforms Post Create Plan" link
     Then I click the "Link Google Initiative" link
     Then I fill in "mapping-externalSystem-googleInitiative" with "<initiative>"
     Then I wait for 2000
     Then I click the link containing ID "<initiative>"
     Then I click the "Save Mapped Account" link
-    Then I wait for 10000
-
-# ***ADD MEDIA PLAN LINE**
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
     Then I wait for 3000
     Given I select Edit for the existing Campaign "<campaign>"
-    Then I wait for 5000
+
+#   ***ADD MEDIA PLAN LINE**
+    Then I wait for xpath "//*[@class='ng-scope']/div[@class='ng-scope']/ol-list[@class='ng-isolate-scope']/table[@class='standard-table table__records-editable']/tbody[@class='ng-scope']//*[@class='ol-list-item ol-drag-preview ng-scope']" to appear
     Then I click the "Media Plan Whole Column" link
     Then I wait for 5000
     And I select the Media Plan linked to Campaign of "<campaign>"
-    Then I wait for 5000
-
+    And I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-line-add']" to appear
     Then I click the "Add Media Plan Line" link
     Then I wait for 2000
     And I click the "Cost Type Media" link
@@ -180,15 +180,17 @@ Feature: Olive 3 Regression Pack
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
     Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100"
+
 #   ***APPLY BUDGET DISCOUNT***
     Then I click the "Discount Applied" checkbox
     And I wait for 2000
     And I click the "Discount Amount Tab" link
     Then I fill in the "Discount Amount" with "50"
-    And I fill in the "Plan Line Description" with "<description1>"
+    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
-    Then I wait for 5000
+    Then I reload the page
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 # ***ADD 2ND MEDIA PLAN LINE **
     Then I click the "Add Media Plan Line" link
@@ -233,10 +235,10 @@ Feature: Olive 3 Regression Pack
     And I click the link containing Text "British Pound"
     And I click the "Unknown Budget" checkbox
     And I fill in the "Plan Line Description" with "<description2>"
-#    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Plan Line 2"
-
     Then I click the "Save Media Plan Line" link
-    Then I wait for 5000
+    Then I reload the page
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
+
 
 # ***CHECK INDIVIDUAL INSERTION ORDERS ARE CREATED DUE TO A MIX OF SET AND UNKNOWN BUDGET *
     Then I click the "Insertion Order tab" link
@@ -253,18 +255,14 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the link containing Text "Essence LON"
     Then I wait for 2000
-#    And I click the "Unknown Budget" checkbox
-#    And I wait for 2000
-    And I should see text matching "Client Liable"
-    Then I click the "Save Edited Media Plan Line" link
-    Then I wait for 5000
+    Then I click the "Save Media Plan Line" link
 
 # ***PUBLISH MEDIA PLAN***
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     When I click the "Publish Media Plan" link
-    Then I wait for 1000
-#    This needs to be sorted
-#    Then I should see "Media Plan published successfully"
-    Then I wait for 5000
+    Then I wait for text "Media Plan published successfully" to appear
+    Then I reload the page
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 #   DELETE PLAN LINES
     Then I click the "Editable Draft State" link
@@ -272,16 +270,18 @@ Feature: Olive 3 Regression Pack
     Then I delete Media Plan Line with a description of"<description2>"
 
 # ***DELETE CAMPAIGN CLEAN UP***
+    Then I Maximize the Browser Window
+    And I wait for 2000
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
-    Then I wait for 2000
+    Then I wait for 3000
     Then I fill in "campaign-search-basic" with "<campaign>"
     Then I wait for 3000
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign      |client|owner      |period |budget|clientLiable |initiative|buyType   |supplier      |description1|description2|ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |planlinetests |google|automation |q42015 |100000|Client Liable|wildfire  |Direct Buy|Google Ireland|Plan Line 1 |Plan Line 2 |700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |campaign      |client|owner      |region |period |budget|clientLiable |initiative|buyType   |supplier      |description1|description2|ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |planlinetests |google|automation |EMEA   |q42015 |100000|Client Liable|wildfire  |Direct Buy|Google Ireland|Plan Line 1 |Plan Line 2 |700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

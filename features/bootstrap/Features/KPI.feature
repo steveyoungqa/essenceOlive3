@@ -9,19 +9,18 @@ Feature: Olive 3 Regression Pack
     And I fill in "Email" with "steve.automation@gmail.com"
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
-    Then I wait for 3000
-    Then I should see "Notifications"
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
+
 #   ***CREATE CAMPAIGN***
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I click the "Navigation Header" link
-    Then I wait for 3000
     Then I click the "Campaigns" link
     Then I wait for 3000
     Then I fill in the "Campaign Search" with "<campaign>"
     Then I wait for 3000
     Then I select the Delete "<campaign>" checkbox
-    Then I wait for 10000
+    And I wait for xpath "//*[@class='toast-message success--message show']" to disappear
 
     Then I click the "Navigation Header" link
     Then I wait for 3000
@@ -31,22 +30,22 @@ Feature: Olive 3 Regression Pack
     Then I wait for 3000
 
     Then I fill in the "Campaign Name" with "<campaign>"
-#    And I fill in "campaign-new-name" with "<campaign>"
     And I fill in "campaign-new-client" with "<client>"
     Then I wait for 5000
-    Then I fill in "campaign-new-managingRegion" with "EMEA"
+    Then I fill in "campaign-new-managingRegion" with "<region>"
     And I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
-    Then I wait for 7000
+    And I wait for xpath "//*[@id='campaign-new-owner-steve-automation']" to appear
     And I fill in "campaign-new-memo" with "Test Notes"
     Then I wait for 5000
     Then I click the "Campaign Save" link
-    Then I wait for 8000
 
-# ***ADD KPI***
+#   ***ADD KPI***
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
-    Then I wait for 2000
+    Then I wait for 3000
+    Then I fill in the "Campaign Search" with "<campaign>"
+    Then I wait for 3000
     Given I select Edit for the existing Campaign "<campaign>"
     And I click the "Default KPIs" link
     Then I click the "Add KPI" link
@@ -58,11 +57,12 @@ Feature: Olive 3 Regression Pack
     Then I click the "Conversion Source Field" link
     Then I click the link containing Text "Google Floodlights"
     And I click the "Event Save" link
+    And I wait for 3000
     Then I click the "Add Tag" link
     And I click the "Conversion Type" link
     And I fill in the "Conversion Type" with "<conversion>"
     And I click the link containing Text "<conversion>"
-    Then I wait for 5000
+    And I wait for xpath "//*[@id='campaign-events-tags-new-activityGroup']" to appear
     And I click the "Activity Category" link
     And I fill in the "Activity Category" with "<activity>"
     And I click the link containing Text "<activity>"
@@ -72,7 +72,10 @@ Feature: Olive 3 Regression Pack
     And I click the link containing Text "<tag>"
     Then I fill in the "Weighting" with "10"
     And I click the "Tag Save" link
+    Then I reload the page
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
+#   ***DELETE CAMPAIGN CLEAN UP***
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
     Then I wait for 3000
@@ -81,5 +84,5 @@ Feature: Olive 3 Regression Pack
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-  |campaign|client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-  |kpi     |google|automation |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+  |campaign|client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+  |kpi     |google|automation |EMEA   |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|

@@ -81,8 +81,6 @@ class customTests extends CustomPage
         'Plan Line Description' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-description']"),
         'Save Media Plan Line' => array('xpath' => "//*[@id='save']"),
         'Save Media Plan Line And Publish' => array('xpath' => "//*[@id='save-and-publish']"),
-
-        'Save Edited Media Plan Line' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-medialines-save']"),
         'Publish Media Plan' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-publish']"),
         'External Platforms Insertion Order' => array('xpath' => "//*[@class='md-header-items-container']//*[contains(text(),'External platforms')]"),
         'Insertion Order tab' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Insertion orders')]"),
@@ -144,7 +142,7 @@ class customTests extends CustomPage
         'KPI Type Long Path' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[2]"),
         'Market Long Path' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[4]"),
         'Media Plan Long Save' => array('xpath' => "//*[@class='tiered__panel-details ng-scope']/div[@class='ng-isolate-scope']//*[contains(text(),'Save')]"),
-        'Use Olive 2 MAFs' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[11]/label[2]/span[1]"),
+        'Use Olive 2 MAFs' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[12]/label[2]/span[1]"),
 
         'First Plan Line Edit' => array('xpath' => "//*[@class='ng-scope'][1]/td//*[contains(text(),'Edit')]"),
         'Continue & Publish' => array('xpath' => "//*[@class='toast-message error--message show']//*[contains(text(),'Continue & Publish')]"),

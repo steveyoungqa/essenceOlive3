@@ -5,6 +5,11 @@
 error screenshots
 screenshots
 bin
-vendor
+vendor/behat
+vendor/composer
+vendor/instaclick
+vendor/se
+vendor/sensiolabs
+vendor/symfony
 composer.lock
 composer.phar

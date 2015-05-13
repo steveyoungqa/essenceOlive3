@@ -195,7 +195,7 @@ Feature: OAT-2 Untracked Spend
     Then I wait for 2000
 
     Then I wait for 2000
-    Then I click the "Save Edited Media Plan Line" link
+    Then I click the "Save Media Plan Line" link
     Then I wait for 5000
 
     Then I click the "Olive Header Logo" link
