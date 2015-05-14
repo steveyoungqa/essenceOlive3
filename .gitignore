@@ -4,5 +4,7 @@
 /.vagrant
 error screenshots
 screenshots
-
-
+bin
+vendor
+composer.lock
+composer.phar
