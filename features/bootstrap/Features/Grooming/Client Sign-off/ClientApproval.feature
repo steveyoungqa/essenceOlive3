@@ -152,7 +152,7 @@ Scenario: Notify Client Approver (OTD-765)
         #|Datetime |Currently Logged in User | [Rejected] plan   | {message if available}|
         #------------------------------------------------------------------------------------------
 
-#to be reviewed
+#reviewed 14th May -
 Scenario: Version changed before Approval
 # as per flow: https://docs.google.com/presentation/d/1kfVC7tLbzNUZO_W20_k8IKkkEH3l_7ZtI769Br2l8Js/edit#slide=id.g9d920b67a_0_115
   Given Client Approval was requested
@@ -160,6 +160,13 @@ Scenario: Version changed before Approval
   When campiagn manager publishes new changes that do not breach terms
   Then Cients who view the version for approval can see and approve published changes as part of the first approval request
     #in other words - no need to create a new version or request new approval
+    #Example
+    * Request approval with a version with Facebook line has a budget of 10,000
+    * Before Approval received, I publish changes to the facebook line, it is now 11,000, not a breaching change
+    * Client views the plan for approval - they see 11,000
+    * client approves 11,000
+    # While request is pending, breaches checked against the snapshot of Client approval requested version at the time of requessting
+    # Once Client has approved, breaches are checked against the snapshot version that was approved at the time of approved
 
 #(reviewed 5th May)
 Scenario: Version breached before Approval (OTD-767)
@@ -193,6 +200,9 @@ Scenario: Version changed after Approval
     And minor (non-breaching) changes have been published
   When Client approver looks at the plan in Client Portal
   Then they see the last approved version with the published changes included
+  * Client approved 10,000 for Facebook
+  * AM published changes - upweight by 1,000
+  * Client goes to view plan - they see 11,000 against Facebook
 
 #reviewed 6th May
 Scenario: Version breached after approval (OTD-786)
@@ -202,6 +212,25 @@ Scenario: Version breached after approval (OTD-786)
     And plan is in "Published" state
   When Client approver looks at the plan in Client Portal
   Then they see the last approved verions
+  * CLient approves 10,000 Facebook
+  * Am publishes 5,000 upweight - needs re-apprval internally
+  * Client sees 10,000 for Facebook
+  * AM internally approves the upweight
+  * Client sees 15,000
+  * AM publishes 1,000 upweight - needs re-approval internally AND client re-approval
+  * Client sees 15,000
+  * a) AM Approves upweight to 16,00 - plan is breached and needs Client re-approval
+  * a) Client sees 15,000
+  * a) AM requests client approval
+  * a) Client sees 16,000 and highlight that it's different from:
+  *     Last approved: 10,000 (beause otherwise the difference might not be big enough to cause a breach and could be confusing)
+  *     Last auto-approved: 15,000
+  * b) AM Rejects upweight to 16,00
+  * b) Client still sees 15,000
+  * b) AM resets back to 14,000 - plan is still breached
+  *
+
+
 
 #(reviewed 1st May)
 Scenario: Add Approvers while pending

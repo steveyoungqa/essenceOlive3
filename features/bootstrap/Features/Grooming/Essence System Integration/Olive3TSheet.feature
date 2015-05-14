@@ -43,6 +43,8 @@ Scenario: New Format T-Sheet (OTD-2001)
 #       | Media Plan ID is a recognised Olive 3 Pulbisehd Media Plan ID| "Media Plan ID not recognised. Please ensure it's published"|
 #       | Plan Line belongs to Media Plan                              | "Plan Line belongs to a different Media Plan.               |
 #       |                                                              | Please ensure IDs are correct"                              |
+#       | Plan Line iD is a recognised Media Line (not service)        | "Plan Line ID refers to a service line, please ensure       |
+#       |                                                              | you use Media Line ids"                                     |
 
 #reviewed 5th May
 Scenario: Olive 2 Campaign Doesn't exist (OTD-1928)
@@ -162,6 +164,7 @@ Scenario: O2 - Autogenerate Negotiated cost Booking Lines from Olive 3 Plan line
     And it uses Plan line "Start date" and "End date" to populate "bkl_start_date" and "bkl_end_date_fin", "bkl_end_date_del" respectively
     And it generates a child forecast line (except cap flag) with the same information as its parent booking line for each Olive 2 placement,
     And it uses Olive 3 plan line "Unit cost" to populate "fcl_cost"
+    And if the Cost model is "Fixed Cost" then Olive 2 picks one of all placements under the booking and only applies the "Unit cost" to one of the forecast lines
 
   #to review
   Scenario: O2 - Sync O3 changes to Olive 2 T-sheet entities
