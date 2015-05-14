@@ -163,6 +163,19 @@ Scenario: O2 - Autogenerate Negotiated cost Booking Lines from Olive 3 Plan line
     And it generates a child forecast line (except cap flag) with the same information as its parent booking line for each Olive 2 placement,
     And it uses Olive 3 plan line "Unit cost" to populate "fcl_cost"
 
+  #to review
+  Scenario: O2 - Sync O3 changes to Olive 2 T-sheet entities
+    Given Olive 2 has auto-generated entities as a result of O3 T-sheet upload
+      And changes have been published to the source entities in Olive 3
+    When x time has passed since last sync
+    Then Olive 2 detects published changes
+      And updates Olive 2 counterparts accordingly
+      # Campaigns
+      # Budget Periods
+      # Purchase Orders
+      # Placements
+      # Booking Lines
+      # Forecast Lines
 
 #to flesh out
-Scenario: O2 - Sync O3 changes to Olive 2 T-sheet entities
+Scenario: Handle DBM lines - Placement property should be Invite Media
