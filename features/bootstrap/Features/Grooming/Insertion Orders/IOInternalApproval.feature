@@ -3,14 +3,14 @@ In order to manage media sign-off for deals independently of each other
 As Campaign Manager
 I want to be able to internally approve individual IOs
 
-#(reviewed 23th April)
+#reviewed 23th April - in sprint 28 [27th April] - accepted 11th May
 Scenario: View IO Event History (OTD-2013)
   Given An IO exists
     And there have been some events (such as Approval requests, post approval amount chages etc)
   When I look at the IO details page (both: draft and published)
   Then Display the Time, Username, Actio (prototye_)
 
-#(reviewed 23th April)
+#reviewed 23th April - in sprint 28, 29 [27th April] -
 Scenario: Require Internal Approval (OTD-2006)
   Given the IO has been published
   When the user wants to submit for Internal Approval
@@ -29,7 +29,7 @@ Scenario: Require Internal Approval (OTD-2006)
 #      ------------------------------------------------------------------------------
 #      |Datetime |Currently Logged in User | IO Submitted for Approval | N/A    |        |
 
-#(reviewed 23th April)
+#reviewed 23th April - in sprint 28, 29 [27th April] -
 Scenario: IO Approved (OTD-1914)
   Given the IO is still in the "Internal Approval Requested" state
   When  they approve the IO
@@ -40,7 +40,7 @@ Scenario: IO Approved (OTD-1914)
 #    ------------------------------------------------------------------------------
 #    |Datetime |Currently Logged in User | IO Approved               | N/A    |        |
 
-#(reviewed 23th April)
+#reviewed 23th April - - in sprint 28, 29 [27th April] - 
 Scenario: IO Rejected (OTD-1914)
   Given the IO is still in the "Internal Approval Requested" state
   When  they reject the IO
@@ -50,3 +50,6 @@ Scenario: IO Rejected (OTD-1914)
 #    |Time     |User                     |Action                     |Document| Notes  |
 #    ------------------------------------------------------------------------------
 #    |Datetime |Currently Logged in User | IO Rejected               | N/A    |        |
+
+#to review
+Scenario: Restrict internal IO approval (OTD-1913)
