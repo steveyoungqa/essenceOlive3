@@ -149,64 +149,46 @@ Feature: Breach Scenarios
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
     Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100000"
+
+#   ***APPLY BUDGET DISCOUNT***
+    Then I click the "Discount Applied" checkbox
+    And I wait for 2000
+    And I click the "Discount Amount Tab" link
+    Then I fill in the "Discount Amount" with "50"
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
+
     Then I click the "Save Media Plan Line" link
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
-## ***ADD 2ND MEDIA PLAN LINE **
-#    Then I click the "Add Media Plan Line" link
-#    Then I wait for 2000
-#    And I click the "Cost Type Media" link
-#
-#    Then I click the "Buy Type" link
-#    Then I wait for 2000
-#    And I fill in the "Buy Type" with "<buyType>"
-#    Then I wait for 2000
-#
-#    Then I click the "Line Channel" link
-#    And I fill in the "Line Channel" with "Display"
-#    Then I wait for 2000
-#    Then I click the "Section" link
-#    Then I wait for 2000
-#    And I fill in "campaign-marketbudgets-versions-lines-new-vertical" with "Custom Section"
-#    Then I wait for 2000
-#    Then I click the "Supplier" link
-#    Then I wait for 2000
-#    Then I fill in the "Supplier" with "<supplier>"
-#    Then I wait for 2000
-#    Then I click the "Platform" link
-#    Then I click the "Platform DS3" link
-#    Then I wait for 2000
-#    Then I click the "Property" link
-#    And I click the link containing Text "Google Search"
-#    Then I wait for 2000
-#    Then I click the "Media Type" link
-#    Then I wait for 2000
-#
-#    And I click the link containing Text "Link / text ad"
-#    Then I wait for 2000
-#    Then I click the "Cost Model" link
-#    And I click the link containing Text "Biddable CPC"
-#    Then I select a Plan Line Start Date of "2015-04-04"
-#    Then I wait for 2000
-#    Then I Select a Plan Line End Date of "2015-04-04"
-#    Then I wait for 2000
-#
-#    Then I click the "Line Currency" link
-#    And I click the link containing Text "British Pound"
-#    And I click the "Unknown Budget" checkbox
-#    And I fill in the "Plan Line Description" with "<description2>"
-#    Then I click the "Save Media Plan Line" link
-#    Then I reload the page
-#    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
-
-# ***PUBLISH MEDIA PLAN***
+#   ***PUBLISH MEDIA PLAN***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     When I click the "Publish Media Plan" link
-    Then I wait for text "Media Plan published successfully" to appear
-    Then I reload the page
+    Then I wait for 2000
+    And I wait for text "Media Plan published successfully" to appear
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
+    Then I reload the page
+
+#   ***LINK INSERTION ORDER TO DS3***
+    Then I wait for xpath "//*[@class='md-header-items']//*[contains(text(),'Insertion orders')]" to appear
+    Then I click the "Insertion Order tab" link
+#    Then I wait for 4000
+    And I wait for xpath "//*[@class='button button__label-only']//*[contains(text(),'View IO')]" to appear
+    And I click the "View IO" link
+#    And I wait for 4000
+    And I wait for xpath "//*[@class='md-header-items-container']//*[contains(text(),'External platforms')]" to appear
+    Then I click the "External Platforms Insertion Order" link
+    And I wait for xpath "//*[@id='campaign-marketbudgets-versions-ios-ds3-link']" to appear
+    And I click the "Link DS3" link
+    And I wait for 2000
+    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
+    And I wait for 2000
+    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
+    Then I wait for 8000
+    And I click the link containing Text "<ds3>"
+    Then I click the "External System Save" link
+    Then I click the "Publish Dropdown" link
+    And I click the "Published State" link
 
 
 #   ***REQUEST APPROVAL***
