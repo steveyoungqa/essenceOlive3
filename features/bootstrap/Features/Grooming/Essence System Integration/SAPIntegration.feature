@@ -42,8 +42,8 @@ Scenario: Handle incorrect PO Supplier after Plan Approval
     And Locate Purchase Order by supplying the "Olive 3 PO ID"
     And Choose a new "Supplier" for it
     And Cofirm they're happy to proceed: "This will update the Supplier for related Insertion Order {Insertion Order Name},
-      cancel Existing PO in Olive 3 and {Liable Entity} SAP, generate a new one in Olive 3 and export it to {Liable Entity} SAP.
-      This cannot be undone. Are you sure you want to proceed? Yes / Cancel "
+#      cancel Existing PO in Olive 3 and {Liable Entity} SAP, generate a new one in Olive 3 and export it to {Liable Entity} SAP.
+#      This cannot be undone. Are you sure you want to proceed? Yes / Cancel "
     And on confirm, Related Insertion Order Supplier is updated to new selection
     And "CANCEL" request is posted to B1I
     And if B1IF has responded with success, new Purchase order is generated for the new supplier
