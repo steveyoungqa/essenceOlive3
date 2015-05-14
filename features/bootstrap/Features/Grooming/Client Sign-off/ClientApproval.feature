@@ -161,10 +161,10 @@ Scenario: Version changed before Approval
   Then Cients who view the version for approval can see and approve published changes as part of the first approval request
     #in other words - no need to create a new version or request new approval
     #Example
-    * Request approval with a version with Facebook line has a budget of 10,000
-    * Before Approval received, I publish changes to the facebook line, it is now 11,000, not a breaching change
-    * Client views the plan for approval - they see 11,000
-    * client approves 11,000
+#    * Request approval with a version with Facebook line has a budget of 10,000
+#    * Before Approval received, I publish changes to the facebook line, it is now 11,000, not a breaching change
+#    * Client views the plan for approval - they see 11,000
+#    * client approves 11,000
     # While request is pending, breaches checked against the snapshot of Client approval requested version at the time of requessting
     # Once Client has approved, breaches are checked against the snapshot version that was approved at the time of approved
 
