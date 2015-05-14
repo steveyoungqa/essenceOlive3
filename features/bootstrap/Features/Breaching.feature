@@ -10,7 +10,7 @@ Feature: Breach Scenarios
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
 
-  Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
+  Scenario Outline: Breaching stories and edge cases
 
 #   ***CREATE CAMPAIGN***
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
@@ -172,10 +172,8 @@ Feature: Breach Scenarios
 #   ***LINK INSERTION ORDER TO DS3***
     Then I wait for xpath "//*[@class='md-header-items']//*[contains(text(),'Insertion orders')]" to appear
     Then I click the "Insertion Order tab" link
-#    Then I wait for 4000
     And I wait for xpath "//*[@class='button button__label-only']//*[contains(text(),'View IO')]" to appear
     And I click the "View IO" link
-#    And I wait for 4000
     And I wait for xpath "//*[@class='md-header-items-container']//*[contains(text(),'External platforms')]" to appear
     Then I click the "External Platforms Insertion Order" link
     And I wait for xpath "//*[@id='campaign-marketbudgets-versions-ios-ds3-link']" to appear
@@ -187,9 +185,23 @@ Feature: Breach Scenarios
     Then I wait for 8000
     And I click the link containing Text "<ds3>"
     Then I click the "External System Save" link
+
+#   ***MAP SEARCH CAMPAIGN***
+    Then I click the "Plan Lines" link
+    And I click the "Manage mappings" link
+    Then I wait for xpath "//*[@class='custom-checkbox']/span[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']" to appear
+
+    Then I Map Search Campaign "<searchCampaign>"
+    And I wait for 5000
+    And I click the "Save Managed Entities" link
+    Then I click the "Close Manage Mapping Panel" link
+    And I wait for 3000
+    Then I click the "Close Mapped Panel" link
+    And I wait for 2000
+    Then I click the "Plan tab" link
+
     Then I click the "Publish Dropdown" link
     And I click the "Published State" link
-
 
 #   ***REQUEST APPROVAL***
     Then I click the "Manage Approval" link
@@ -232,7 +244,7 @@ Feature: Breach Scenarios
     Then I wait for text "Publishing this media plan you will require further internal approval for the amends you have made" to appear
     And I click the "Continue & Publish" link
     Then I wait for text "Media Plan published successfully" to appear
-    And I wait for text "Amends Published" to appear
+#    And I wait for text "Amends Published" to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -266,7 +278,7 @@ Feature: Breach Scenarios
     Then I click the "Set Status" link
     And I fill in the "Feedback Notes" with "Reject Amends Regression Test"
     Then I click the "Reject" link
-    Then I should see "Amends Internally Rejected"
+#    Then I should see "Amends Internally Rejected"
     And I wait for 2000
 
 #   ***DELETE CAMPAIGN CLEAN UP***
@@ -280,8 +292,8 @@ Feature: Breach Scenarios
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign|client|owner      |region |period |budget|clientLiable |initiative|buyType   |supplier      |description1|description2|approver   |
-    |breach  |google|automation |EMEA   |q42015 |100000|Client Liable|wildfire  |Direct Buy|Google Ireland|Plan Line 1 |Plan Line 2 |Steve Young|
+    |campaign  |client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |breach|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

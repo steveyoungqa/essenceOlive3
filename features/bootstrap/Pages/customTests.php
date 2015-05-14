@@ -81,6 +81,7 @@ class customTests extends CustomPage
         'Plan Line Description' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-description']"),
         'Save Media Plan Line' => array('xpath' => "//*[@id='save']"),
         'Save Media Plan Line And Publish' => array('xpath' => "//*[@id='save-and-publish']"),
+        'Publish Selected' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-line-move'][2]"),
         'Publish Media Plan' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-publish']"),
         'External Platforms Insertion Order' => array('xpath' => "//*[@class='md-header-items-container']//*[contains(text(),'External platforms')]"),
         'Insertion Order tab' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Insertion orders')]"),

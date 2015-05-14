@@ -1,8 +1,6 @@
-@regression
-Feature: Olive 3 Regression Pack
-  Create new campaign, Add Media Plan, Add Media Plan Line & Service with Discount Applied,
-  Publish Media Plan, Insertion Order, Map to DS3, Map to Search Campaign, Approval Process,
-  Edit Media PLan, Breach Media Plan, Conversion Evens, Tagging, Tracking Management & Mapping Status
+@insertion
+Feature: Breach Scenarios
+  OTD-1914 Individual IO Approval
 
   Background:
 
@@ -12,7 +10,7 @@ Feature: Olive 3 Regression Pack
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
 
-  Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
+  Scenario Outline: Individual IO Approval
 
 #   ***CREATE CAMPAIGN***
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
@@ -163,158 +161,19 @@ Feature: Olive 3 Regression Pack
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
-#   ***PUBLISH MEDIA PLAN***
+#   ***PUBLISH INDIVIDUAL LINE***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
-    When I click the "Publish Media Plan" link
+    When I click the "Publish Selected" link
     Then I wait for 2000
     And I wait for text "Media Plan published successfully" to appear
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I reload the page
 
-#   ***LINK INSERTION ORDER TO DS3***
-    Then I wait for xpath "//*[@class='md-header-items']//*[contains(text(),'Insertion orders')]" to appear
-    Then I click the "Insertion Order tab" link
-    And I wait for xpath "//*[@class='button button__label-only']//*[contains(text(),'View IO')]" to appear
-    And I click the "View IO" link
-    And I wait for xpath "//*[@class='md-header-items-container']//*[contains(text(),'External platforms')]" to appear
-    Then I click the "External Platforms Insertion Order" link
-    And I wait for xpath "//*[@id='campaign-marketbudgets-versions-ios-ds3-link']" to appear
-    And I click the "Link DS3" link
-    And I wait for 2000
-    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
-    And I wait for 2000
-    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
-    Then I wait for 8000
-    And I click the link containing Text "<ds3>"
-    Then I click the "External System Save" link
 
-#   ***MAP SEARCH CAMPAIGN***
-    Then I click the "Plan Lines" link
-    And I click the "Manage mappings" link
-    Then I wait for xpath "//*[@class='custom-checkbox']/span[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']" to appear
-
-    Then I Map Search Campaign "<searchCampaign>"
-    And I wait for 5000
-    And I click the "Save Managed Entities" link
-    Then I click the "Close Manage Mapping Panel" link
-    And I wait for 3000
-    Then I click the "Close Mapped Panel" link
-    And I wait for 2000
-    Then I click the "Plan tab" link
-
-    Then I click the "Publish Dropdown" link
-    And I click the "Published State" link
-
-#   ***REQUEST APPROVAL***
-    Then I click the "Manage Approval" link
-    And I click the "Add Approver" link
-    Then I wait for 2000
-    And I fill in "campaign-marketbudgets-versions-approvers-add-type" with "Internal"
-    Then I wait for 2000
-    And I click the "Internal Approver" link
-    Then I wait for 2000
-    Then I click the "Approver Field" link
-    Then I wait for 2000
-    And I fill in "campaign-marketbudgets-versions-approvers-add-person" with "<approver>"
-    Then I wait for 2000
-    Then I click the link containing Text "<approver>"
-    Then I wait for 2000
-    Then I click the "Save Approver" link
-    Then I wait for 2000
-    And I click the "Request Approval" link
-    Then I reload the page
-    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
-
-#   ***FEEDBACK & APPROVE***
-    Then I click the "Set Status" link
-    And I fill in the "Feedback Notes" with "Regression Testing feedback test"
-    Then I click the "Approve" link
-
-#   ***EDIT FIRST MEDIA PLAN LINE***
-    Then I click the "Editable Draft State" link
-    And I wait for xpath "//*[@class='ng-scope'][1]/td//*[contains(text(),'Edit')]" to appear
-    Then I click the "First Plan Line Edit" link
-    And I wait for 2000
-    Then I click the "Edit Line Currency" link
-    And I click the link containing Text "Australian Dollar"
-    Then I wait for 2000
-    Then I click the "Save Media Plan Line" link
-
-#   ***PUBLISH AND ACCEPT BREACH***
-    Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
-    When I click the "Publish Media Plan" link
-    Then I wait for text "Publishing this media plan you will require further internal approval for the amends you have made" to appear
-    And I click the "Continue & Publish" link
-    Then I wait for text "Media Plan published successfully" to appear
-#    And I wait for text "Amends Published" to appear
-    Then I reload the page
-    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
-
-#   ***ADD KPI***
-    Then I click the "Navigation Header" link
-    Then I click the "Campaigns" link
-    Then I wait for 3000
-    Then I fill in the "Campaign Search" with "<campaign>"
-    Then I wait for 3000
-    Given I select Edit for the existing Campaign "<campaign>"
-    And I click the "Default KPIs" link
-    Then I click the "Add KPI" link
-    Then I wait for 2000
-    And I fill in the "KPI Event Type" with "Brand"
-    Then I wait for 2000
-    And I fill in the "KPI Event Number" with "20"
-    And I fill in the "KPI Event Name" with "Regression Event"
-    Then I click the "Conversion Source Field" link
-    Then I click the link containing Text "Google Floodlights"
-    And I click the "Event Save" link
-    And I wait for 3000
-    Then I click the "Add Tag" link
-    And I click the "Conversion Type" link
-    And I fill in the "Conversion Type" with "<conversion>"
-    And I click the link containing Text "<conversion>"
-    And I wait for xpath "//*[@id='campaign-events-tags-new-activityGroup']" to appear
-    And I click the "Activity Category" link
-    And I fill in the "Activity Category" with "<activity>"
-    And I click the link containing Text "<activity>"
-    And I click the "Activity Tag" link
-    And I fill in the "Activity Tag" with "<tag>"
-    Then I wait for 3000
-    And I click the link containing Text "<tag>"
-    Then I fill in the "Weighting" with "10"
-    And I click the "Tag Save" link
-    Then I reload the page
-    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
-
-##   ***TRACKING MANAGEMENT***
-#    Then I click the "Navigation Header" link
-#    Then I click the "Tracking Management DS3" link
-#    And I click the "Tracking Code Search Box" link
-#    Then I fill in the "Tracking Code Search Box" with "<searchCampaign>"
-#    Then I wait for 3000
-#    And I click the "Advanced Filter" link
-#    Then I wait for 2000
-#    Then I click the "Campaign Filter" link
-#    And I fill in the "Campaign Filter" with "<campaign>"
-#    Then I wait for 2000
-#    Then I click the link containing Text "<campaign>"
-#    And I click the "Advanced Search Close" link
-#    Then I click the "Tracking Details" link
-#    And I wait for 5000
-#    Then I should see "MAPPED"
-
-#   ***DELETE CAMPAIGN CLEAN UP***
-    Then I Maximize the Browser Window
-    And I wait for 2000
-    Then I click the "Navigation Header" link
-    Then I click the "Campaigns" link
-    Then I wait for 3000
-    Then I fill in "campaign-search-basic" with "<campaign>"
-    Then I wait for 3000
-    Then I select the Delete "<campaign>" checkbox
 
   Examples:
     |campaign  |client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |regression|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |individual|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 
