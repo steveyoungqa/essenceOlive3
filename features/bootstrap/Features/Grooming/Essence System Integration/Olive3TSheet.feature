@@ -143,43 +143,43 @@ Scenario: O2 - Autogenerate Negotiated cost Booking Lines from Olive 3 Plan line
     And if the Cost model is "Fixed Cost" then Olive 2  DOESN'T SET a cap flag "bkl_cap" and amount "bkl_amount"
     And if the Cost model is "Fixed Cost" then Olive 2 picks one of all placements under the booking and only applies the "Unit cost" to one of the forecast lines
     And it pickst the placement based on its "Placement Type" rank, highest first (Rank 1 = Highest rank):
-      # ============================================
-      # PLT_ID  |	PLT_NAME	                 | Rank
-      # ============================================
-      #  79	    | Masthead	                 | 1
-      #  20	    | ushdown	                   | 2
-      #  11	    | P	Reskin	                 | 3
-      #  86	    | Bespoke takeover	         | 4
-      #  89	    | Expandable banner	         | 5
-      #  22	    | Overlay	                   | 6
-      #  18	    | Hockey Stick	             | 7
-      #  24	    | Interstitial	             | 8
-      #  116	  | Lightbox	                 | 9
-      #  67	    | In-stream video	           | 10
-      #  93	    | In-stream video (skippable)| 11
-      #  75	    | YouTube Promoted Video	   | 12
-      #  117	  | YouTube Preferred	         | 13
-      #  96	    | Other video	               | 14
-      #  85	    | Audio Ad	                 | 15
-      #  87	    | Email (Newsletter)	       | 16
-      #  88	    | Email (Solus)	             | 17
-      #  19	    | Poll	                     | 18
-      #  90	    | Facebook ASU	             | 19
-      #  91	    | Facebook Reachblock	       | 20
-      #  92	    | Facebook Sponsored Story	 | 21
-      #  97	    | PPC Search Ad	             | 22
-      #  98	    | Promoted Account	         | 23
-      #  99	    | Promoted Trend	           | 24
-      #  100	  | Promoted Tweet	           | 25
-      #  43	    | Advertorial	               | 26
-      #  95	    | Notification / Alert	     | 27
-      #  101	  | Standard Banner	           | 28
-      #  103	  | Text & image ad	           | 29
-      #  94	    | Link / text ad	           | 30
-      #  61	    |	Companion banner	         | 31
-      #  102	  | Synced Banner	             | 32
-      #  104	  | Tracking Tag	             | 33
-      #  105	  | Untracked	                 | 34
+      # ====================================
+      # ID  | Rk | PLT_NAME
+      # ====================================
+      # 79  | 1  | Masthead
+      # 20  | 2  | Pushdown
+      # 11  | 3  | Reskin
+      # 86  | 4  | Bespoke takeover
+      # 89  | 5  | Expandable banner
+      # 22  | 6  | Overlay
+      # 18  | 7  | Hockey Stick
+      # 24  | 8  | Interstitial
+      # 116 | 9  | Lightbox
+      # 67  | 10 | In-stream video
+      # 93  | 11 | In-stream video (skippable)
+      # 75  | 12 | YouTube Promoted Video
+      # 117 | 13 | YouTube Preferred
+      # 96  | 14 | Other video
+      # 85  | 15 | Audio Ad
+      # 87  | 16 | Email (Newsletter)
+      # 88  | 17 | Email (Solus)
+      # 19  | 18 | Poll
+      # 90  | 19 | Facebook ASU
+      # 91  | 20 | Facebook Reachblock
+      # 92  | 21 | Facebook Sponsored Story
+      # 97  | 22 | PPC Search Ad
+      # 98  | 23 | Promoted Account
+      # 99  | 24 | Promoted Trend
+      # 100 | 25 | Promoted Tweet
+      # 43  | 26 | Advertorial
+      # 95  | 27 | Notification / Alert
+      # 101 | 28 | Standard Banner
+      # 103 | 29 | Text & image ad
+      # 94  | 30 | Link / text ad
+      # 61  | 31 | Companion banner
+      # 102 | 32 | Synced Banner
+      # 104 | 33 | Tracking Tag
+      # 105 | 34 | Untracked
       #------------------------------------------
 
 
