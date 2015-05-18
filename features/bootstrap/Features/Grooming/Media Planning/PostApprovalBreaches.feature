@@ -9,6 +9,30 @@ Scenario: Configure Breach thresholds (OTD-773)
   Then I see a field "Breach threshold (percent of Total Plan budget)" and I can specify a numeric amount between 0 and 100. This indicates the change threshold amount as a % of Total Plan budget which cannot be exceeded when publishing new spend with a specific supplier / property / liable entity post plan approval group.
     And by default the "Breach threshold (percent of Total Plan budget)" is set to %20
 
+
+Scenario: Detect impact of changes to be published / approved
+  # CLient approves 10,000 Facebook
+  # Am publishes 5,000 upweight - needs re-apprval internally
+  # Client sees 10,000 for Facebook
+  # AM internally approves the upweight
+  # Client sees 15,000
+  # AM publishes 1,000 upweight - needs re-approval internally AND client re-approval
+  # Client sees 15,000
+  # a) AM Approves upweight to 16,00 - plan is breached and needs Client re-approval
+  # a) Client sees 15,000
+  # a) AM requests client approval
+  # a) Client sees 16,000 and highlight that it's different from:
+  #     Last approved: 10,000 (beause otherwise the difference might not be big enough to cause a breach and could be confusing)
+  #     Last auto-approved: 15,000
+  # b) AM Rejects upweight to 16,00
+  # b) Client still sees 15,000
+  # ba) AM resets back to 14,000 and publishes - plan changes are checked against last client approved and Client plan status is re-stated to APproved!!!
+  # ba) Client sees 14,000
+  # bb) AM resets to 15,500 and publishes -
+  # bb) Client Sees 15,000
+  # bb) AM internally approves the upweight
+  # bb) Client sees 15,500
+
 Scenario: Publish Upweight by amount that breaches set thresholds (OTD-1988)
   Given Media Plan has been approved by client
     And Breach thresholds have been configured
@@ -152,6 +176,8 @@ Scenario: Publish Changes in plan line dates (OTD-1988)
       # |Time     |User                     |Action                                                                |Document | Notes  |
       # -------------------------------------------------------------------------------------------------------------------------------
       # |Datetime |Currently Logged in User | Published date change from [Previous Date Range] to [New Date Range] |N/A      |        |
+
+
 
 Scenario: Publish increased Plan budget (OTD-2009)
   Given Media Plan has been approved by client

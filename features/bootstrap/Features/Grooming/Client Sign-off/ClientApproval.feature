@@ -212,6 +212,9 @@ Scenario: Version breached after approval (OTD-786)
     And plan is in "Published" state
   When Client approver looks at the plan in Client Portal
   Then they see the last approved verions
+
+
+
     # CLient approves 10,000 Facebook
     # Am publishes 5,000 upweight - needs re-apprval internally
     # Client sees 10,000 for Facebook
@@ -227,8 +230,12 @@ Scenario: Version breached after approval (OTD-786)
     #     Last auto-approved: 15,000
     # b) AM Rejects upweight to 16,00
     # b) Client still sees 15,000
-    # b) AM resets back to 14,000 - plan is still breached
-    # TBC
+    # ba) AM resets back to 14,000 and publishes - plan changes are checked against last client approved and Client plan status is re-stated to APproved!!!
+    # ba) Client sees 14,000
+    # bb) AM resets to 15,500 and publishes -
+    # bb) Client Sees 15,000
+    # bb) AM internally approves the upweight
+    # bb) Client sees 15,500
 
 
 
