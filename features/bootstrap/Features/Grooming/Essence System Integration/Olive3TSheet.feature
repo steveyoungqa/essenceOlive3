@@ -140,10 +140,51 @@ Scenario: O2 - Autogenerate Negotiated cost Booking Lines from Olive 3 Plan line
     And it uses Plan line "Start date" and "End date" to populate "bkl_start_date" and "bkl_end_date_fin", "bkl_end_date_del" respectively
     And it generates a child forecast line (except cap flag) with the same information as its parent booking line for each Olive 2 placement,
     And it uses Olive 3 plan line "Unit cost" to populate "fcl_cost"
-    And if the Cost model is "Fixed Cost" then Olive 2 picks one of all placements under the booking and only applies the "Unit cost" to one of the forecast lines
     And if the Cost model is "Fixed Cost" then Olive 2  DOESN'T SET a cap flag "bkl_cap" and amount "bkl_amount"
+    And if the Cost model is "Fixed Cost" then Olive 2 picks one of all placements under the booking and only applies the "Unit cost" to one of the forecast lines
+    And it pickst the placement based on its "Placement Type" rank, highest first (Rank 1 = Highest rank):
+      # ============================================
+      # PLT_ID  |	PLT_NAME	                 | Rank
+      # ============================================
+      #  79	    | Masthead	                 | 1
+      #  20	    | ushdown	                   | 2
+      #  11	    | P	Reskin	                 | 3
+      #  86	    | Bespoke takeover	         | 4
+      #  89	    | Expandable banner	         | 5
+      #  22	    | Overlay	                   | 6
+      #  18	    | Hockey Stick	             | 7
+      #  24	    | Interstitial	             | 8
+      #  116	  | Lightbox	                 | 9
+      #  67	    | In-stream video	           | 10
+      #  93	    | In-stream video (skippable)| 11
+      #  75	    | YouTube Promoted Video	   | 12
+      #  117	  | YouTube Preferred	         | 13
+      #  96	    | Other video	               | 14
+      #  85	    | Audio Ad	                 | 15
+      #  87	    | Email (Newsletter)	       | 16
+      #  88	    | Email (Solus)	             | 17
+      #  19	    | Poll	                     | 18
+      #  90	    | Facebook ASU	             | 19
+      #  91	    | Facebook Reachblock	       | 20
+      #  92	    | Facebook Sponsored Story	 | 21
+      #  97	    | PPC Search Ad	             | 22
+      #  98	    | Promoted Account	         | 23
+      #  99	    | Promoted Trend	           | 24
+      #  100	  | Promoted Tweet	           | 25
+      #  43	    | Advertorial	               | 26
+      #  95	    | Notification / Alert	     | 27
+      #  101	  | Standard Banner	           | 28
+      #  103	  | Text & image ad	           | 29
+      #  94	    | Link / text ad	           | 30
+      #  61	    |	Companion banner	         | 31
+      #  102	  | Synced Banner	             | 32
+      #  104	  | Tracking Tag	             | 33
+      #  105	  | Untracked	                 | 34
+      #------------------------------------------
 
-  #reviewed 18th May -
+
+
+  #reviewed 18th May - in sprint 29 [11th May] -
   Scenario: Do not enforce Client POs for Client Liable Plan lines (OTD-2104)
     Given I've prepared an O3 t-sheet
       And it references an Olive 3 plan line that is "Client Liable"
@@ -152,6 +193,7 @@ Scenario: O2 - Autogenerate Negotiated cost Booking Lines from Olive 3 Plan line
     Then it lets me upload and leaves any Client PO references in O2 Purchase Orders and Budget Periods blank (or sets to "house-ads")
 
   #to review!!! - edge case with existing campaigs multiple plan lines against one booking for fixed
+  # - in sprint 29 [11th May] -
   Scenario: Ignore booking column and autogenerate (OTD-2105)
     Given Given I've prepared an O3 t-sheet
     When I'm uploading the t-sheet into Olive 3
@@ -161,7 +203,7 @@ Scenario: O2 - Autogenerate Negotiated cost Booking Lines from Olive 3 Plan line
       And uses Plan line creator and last publisher as created and last changed events
 
   #reviewed 18th May - in sprint 30 [22nd May] -
-  Scenario: O2 - Sync O3 changes to Olive 2 T-sheet entities (13)
+  Scenario: O2 - Sync O3 changes to Olive 2 T-sheet entities (OTD-2106)
     Given Olive 2 has auto-generated entities as a result of O3 T-sheet upload
       And changes have been published to the source entities in Olive 3
     When x time has passed since last sync

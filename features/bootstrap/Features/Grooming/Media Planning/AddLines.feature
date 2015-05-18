@@ -57,10 +57,10 @@ Scenario: Specify Event number for "Fixed CPA" (OTD-2073)
   # NOTE - please remove Fixed CPV from the options as part of the story as there's no mapping for it to Olive 2 commissio metrics
 
 #to flesh out
-Scenario: Store Net Budget instead of Gross
+Scenario: Store Net Budget instead of Gross (OTD-2111)
 
 #to flesh out
-Scenario: Re-organise Plan line fields to incorporate Unit Cost and Quantity
+Scenario: Re-organise Plan line fields to incorporate Unit Cost and Quantity (OTD-2110)
 # based on https://docs.google.com/presentation/d/138vGhxIlJKhS7j_zZ0w7ikLKRU79rjiqsrGhuAbgovY/edit#slide=id.p
 # - discount always visible
 # - % by default
