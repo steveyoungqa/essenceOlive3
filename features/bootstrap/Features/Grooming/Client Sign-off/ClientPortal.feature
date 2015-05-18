@@ -103,5 +103,6 @@ Scenario: Client views a plan for which they have already giving feedback (OTD-2
   #to flesh out
   Scenario: FE - Highlight minor changes since approval Client view of Last Approved version
 
-  #to flesh out 
+  #to flesh out
   Scenario: FE - Highlight changes between Client Approval Requested vs Last Approved version
+    
