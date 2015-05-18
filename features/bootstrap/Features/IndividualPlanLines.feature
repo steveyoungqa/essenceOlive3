@@ -1,4 +1,4 @@
-@insertion
+@individual
 Feature: Breach Scenarios
   OTD-1914 Individual IO Approval
 
@@ -208,9 +208,11 @@ Feature: Breach Scenarios
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     Then I should not see text matching "Publish Selected"
     Then I select Media Plan Line checkbox with a description of "PublishMeOnly"
-    And I wait for 2000
+    And I wait for 5000
     When I click the "Publish Selected" link
     Then I wait for 2000
+    Then I reload the page
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I click the "Publish Dropdown" link
     And I click the "Published State" link
     Then I should see text matching "<description2>"
