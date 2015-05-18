@@ -79,6 +79,7 @@ class customTests extends CustomPage
 
 
         'Plan Line Description' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-description']"),
+        'Add Another' => array('xpath' => "//*[@class='custom-checkbox optional-nextstep']/span[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']"),
         'Save Media Plan Line' => array('xpath' => "//*[@id='save']"),
         'Save Media Plan Line And Publish' => array('xpath' => "//*[@id='save-and-publish']"),
         'Publish Selected' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-line-move'][2]"),
@@ -239,6 +240,16 @@ class customTests extends CustomPage
 //            $this->getElement('Delete Yes')->click();
         } else {
             echo("\033[01;36m '.$description.' was not found so doesn't need to be deleted\033[0m");
+        }
+    }
+
+    public function selectMediaPlanLineCheckbox ($description)
+    {
+        $element = $this->find('xpath', '//ancestor::tbody/tr[td//text()[contains(., "'.$description.'")]]//*[@class="custom-checkbox__icon icon icon--tick icon--md icon--cropped"]');
+        if (isset($element)) {
+            $element->click();
+        } else {
+            echo("\033[01;36m '.$description.' checkbox was not found\033[0m");
         }
     }
 
