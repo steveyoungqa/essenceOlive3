@@ -158,16 +158,17 @@ Feature: Breach Scenarios
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
-    Then I reload the page
-    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
+#    Then I reload the page
+#    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 #   ***PUBLISH INDIVIDUAL LINE***
-    Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
-    When I click the "Publish Selected" link
-    Then I wait for 2000
-    And I wait for text "Media Plan published successfully" to appear
-    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
-    Then I reload the page
+#    Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
+    Then I should not see text matching "Publish Selected"
+#    When I click the "Publish Selected" link
+#    Then I wait for 2000
+#    And I wait for text "Media Plan published successfully" to appear
+#    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
+#    Then I reload the page
 
 
 

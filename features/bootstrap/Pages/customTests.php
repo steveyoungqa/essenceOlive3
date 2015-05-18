@@ -29,7 +29,7 @@ class customTests extends CustomPage
         'External System Save' => array('xpath' => "//*[@class='ng-isolate-scope']//*[@class='form-standard ng-pristine ng-valid']//*[@class='tiered__actions']//*[@id='mapping-externalSystem-save']"),
         'Media Plans' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Media Plans')]"),
         'KPI Type' => array('xpath' => "//*[@id='campaign-marketbudgets-new-kpiType']"),
-        'Add New Period' => array('xpath' => "//*[@class='form__input']//*[@class='button add--button ng-scope']"),
+        'Add New Period' => array('xpath' => "//*[@class='form__input ng-isolate-scope'][3]/span/span[@class='button add--button ng-scope']"),
         'New Period Save' => array('xpath' => "//a[@id='campaign-marketbudgets-new-periods-new-save']"),
         'Close Add Period' => array('xpath' => "//*[@id='campaign-marketbudgets-new-periods-new-panel-close']"),
         'Media Plan Market' => array('xpath' => "//*[@id='campaign-marketbudgets-new-market']"),
