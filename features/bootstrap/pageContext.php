@@ -138,6 +138,20 @@ class pageContext extends PageObjectContext
     }
 
     /**
+     * Locate a checkbox based on ancestor xpath  $description
+     *
+     * @Then /^I select Media Plan Line checkbox with a description of "([^"]*)"$/
+     */
+    public function selectMediaPlanLineCheckbox($description)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->selectMediaPlanLineCheckbox($description);
+    }
+
+    /**
      * Edit Existing Campaign
      *
      * @Given /^I select Edit for the existing Campaign "([^"]*)"$/

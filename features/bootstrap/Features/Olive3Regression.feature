@@ -275,6 +275,7 @@ Feature: Olive 3 Regression Pack
     And I wait for xpath "//*[@id='campaign-events-tags-new-activityGroup']" to appear
     And I click the "Activity Category" link
     And I fill in the "Activity Category" with "<activity>"
+    And I wait for 3000
     And I click the link containing Text "<activity>"
     And I click the "Activity Tag" link
     And I fill in the "Activity Tag" with "<tag>"
