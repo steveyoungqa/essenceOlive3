@@ -40,7 +40,7 @@ Scenario: IO Approved (OTD-1914)
 #    ------------------------------------------------------------------------------
 #    |Datetime |Currently Logged in User | IO Approved               | N/A    |        |
 
-#reviewed 23th April - - in sprint 28, 29 [27th April] - 
+#reviewed 23th April - - in sprint 28, 29 [27th April] -
 Scenario: IO Rejected (OTD-1914)
   Given the IO is still in the "Internal Approval Requested" state
   When  they reject the IO
@@ -50,6 +50,50 @@ Scenario: IO Rejected (OTD-1914)
 #    |Time     |User                     |Action                     |Document| Notes  |
 #    ------------------------------------------------------------------------------
 #    |Datetime |Currently Logged in User | IO Rejected               | N/A    |        |
+
+
+
+#to review
+Scenario: Impact of Individual IO Internal Approval requests on Plan and Other Insertion orders
+  # Start with 2 Published iOs
+  Given There is a "Published" Media Plan
+    And two published Insertion Orders exist (A and B)
+    And User requests Internal Approval of one of the Insertion Orders (A)
+  Then Plan is still in a "Published" State
+    And Internal Status for Insertion Order A changes to "Internal Approval Requested"
+    And Internal Status for insertion Order B remains "Published"
+
+#to review
+Scenario: Impact of Publishing upweights to Other Insertion orders
+  # Start with 2 Published iOs
+  Given There is aMedia Plan with two Insertion Orders (A and B)
+    And One Insertion Order (A) is in  "Internal Approval Requested" or later state
+    And budget is upweighted for a line in the other Insertion Order (B)
+  When Changes are published
+    And Internal Status for Insertion Order A hasn't changed
+    And Status for Insertion ORder B is "Published"
+    And Supplier Countersign confirmation for Insertion Order B has been revoked
+
+#to review
+Scenario: Impact of Publishing downweights to Insertion orders
+  # Start with 2 Published iOs
+  Given There is Media Plan with two Insertion Orders (A and B)
+    And One Insertion Order (A) is in  "Internal Approval Requested" or later state
+    And one or more changes to line in the other Insertion Order (B) is made (changes outlined below)
+    # Budget up
+  When Changes are published
+    And Internal Status for Insertion Order A hasn't changed
+    And Internal Status for insertion ORder B hasn't changed
+    And Supplier Countersign confirmation for Insertion Order B has been revoked
+
+
+#to review
+Scenario: Allow re-requesting internal approval for Insertion Orders
+  #relates to OTD-2006
+  Given a request for Insertion Order approval has been made
+    And the request is still pending (IO in "Internal approval requested" state)
+  When I look at the Insertion Order "Approvals" tab
+  Then I can select other internal approvers and request their approval as per (OTD-2006) until Insertion Order is "Internally Approved"
 
 #to review
 Scenario: Restrict internal IO approval (OTD-1913)

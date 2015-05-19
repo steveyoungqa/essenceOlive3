@@ -7,6 +7,15 @@ I want to set everything up and get the media plan internally reviewed
 #Published - delivered historically
 Scenario: Publish Entire Draft
 
+#to review
+Scenario: Publishing All changes when no changes are made in the Draft version
+  Given There is a published Media Plan
+    And there the Darft version isn't different from currently latest Published version
+  When I look at the plan in Draft view
+  Then I shouldn't see a "Publish All Changes" button
+    And in case it's still rendered on my screen while someone else has published the changes, and I click it, instead of "Plan succesffully published", I should see a notification "All changes already published"
+    And the button should disappear
+
 # - in sprint 28,29 -
 Scenario: Publish Individual Line (OTD-1912)
 

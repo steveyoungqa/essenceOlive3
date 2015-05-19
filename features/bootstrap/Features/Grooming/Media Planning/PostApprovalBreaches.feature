@@ -9,10 +9,6 @@ Scenario: Configure Breach thresholds (OTD-773)
   Then I see a field "Breach threshold (percent of Total Plan budget)" and I can specify a numeric amount between 0 and 100. This indicates the change threshold amount as a % of Total Plan budget which cannot be exceeded when publishing new spend with a specific supplier / property / liable entity post plan approval group.
     And by default the "Breach threshold (percent of Total Plan budget)" is set to %20
 
-
-Scenario:  Detect impact of workflow events on Other Insertion orders
-  # 
-
 Scenario: Detect impact of changes to be published / approved on Client Approval Status
   # Start with a Client Approval requested for a plan a line of $ 10,000 on Facebook
   # CLient approves a line of $ 10,000 Facebook
@@ -238,7 +234,7 @@ Scenario: Publish changes to breach thresholds (OTD-2009)
     And Draft media plan breach thresholds dates have been changed when compared to the last Client approved version
   When changes are published
   Then user is presented with a prompt that Clients will be notified
-#      @todo - Decide how we roll this up with other notifications when plan is published
+      # @todo - Decide how we roll this up with other notifications when plan is published
       # "You are about to publish changes to the breach thresholds. Client approvers will be notified. Do you wish to continue?
       # Cancel/Publish"
     And on confirming, Media Plan status remains unchanged
@@ -363,3 +359,123 @@ Scenario: Notify Clients of published changes to approved plan (OTD-783)
       #-----------------------------------------------------------
     When changes are published
     Then affected existing or new IO Owners receive a notification (s) summarising changes, with dynamic values emphasised
+
+
+#### STATUS CHANGE TESTS
+Scenario: New Property
+Given A Media Plan is Client Approved
+  And it has two Insertion orders for suppliers "AOL" and "Channel 5", both "Internally Approved" and both "Supplier Confirmed"
+  And I have added a new Property "Tech Crunch" into Draft version
+  And it is added to an Insertion Order for "AOL"
+When I publish these changes
+Then the "AOL" Insertion Order Internal Status changes to "Published"
+  And "AOL" Insertion Order Supplier Confirmation is revoked
+  And the Media Plan Status changes to "Published"
+  And "Channel 5" Insertion Order Internal Status remains "Internally Approved"
+  And "Channel 5" Insertion Order Supplier Confirmation remains
+
+Scenario: Breaching Upweight
+  Given A Media Plan of a "$100" is "Client Approved"
+    And I have set the breach threshold to be "20%"
+    And it has two Insertion orders as outlined below
+    # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
+    # ==================================================================================|
+    # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+    # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |
+    And I have upweighted a line in "AOL" Insertion Order by $30
+  When I publish these changes
+  Then the Media Plan Status changes to "Published"
+    And Insertion Order statuses and budgets are as outlined below
+    # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
+    # ==================================================================================|
+    # AOL         | $60       | TechCrunch  | Published           | Not confirmed       |
+    # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           |
+
+
+Scenario: Upweight / Downweight with no effect
+  Given A Media Plan of a "$100" is "Client Approved"
+    And I have set the breach threshold to be "20%"
+    And it has 3 Insertion orders as outlined below
+    # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
+    # ==================================================================================|
+    # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+    # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+    # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |
+    And I have upweighted a line in 1st "AOL" Insertion Order by $20
+    And I have downweighted a line in 2nd "AOL" Insertion Order by $20
+    #the total change for supplier / property is 0$ - no client or internal re-approval required, just supplier confirmation
+  When I publish these changes
+  Then the Media Plan Status remains to "Client Approved"
+    And Insertion Order statuses and budgets are as outlined below
+    # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
+    # ==================================================================================|
+    # AOL         | $30       | TechCrunch  | Internally Approved | Not confirmed       |
+    # AOL         | $30       | TechCrunch  | Internally Approved | Not confirmed       |
+    # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |
+
+
+Scenario: Upweight / Downweight with Internal Re-approval
+  Given A Media Plan of a "$100" is "Client Approved"
+    And I have set the breach threshold to be "20%"
+    And it has 3 Insertion orders as outlined below
+    # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
+    # ==================================================================================|
+    # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+    # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+    # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |
+    And I have upweighted a line in 1st "AOL" Insertion Order by $25
+    And I have downweighted a line in 2nd "AOL" Insertion Order by $10
+    #the total change for supplier / property is only 15$ - not breaching but upweight requires internal re-approval
+  When I publish these changes
+  Then the Media Plan Status remains to "Client Approved"
+    And Insertion Order statuses and budgets are as outlined below
+    # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
+    # ==================================================================================|
+    # AOL         | $30       | TechCrunch  | Published           | Not confirmed       |
+    # AOL         | $30       | TechCrunch  | Internally Approved | Not confirmed       |
+    # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |
+
+Scenario: Breaching Move within IO
+  Given A Media Plan of a "$100" is "Client Approved"
+    And I have set the breach threshold to be "20%"
+    And it has 2 Insertion orders as outlined below
+    # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
+    # ==================================================================================|
+    # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+    #             | $30       | Last.Fm     |                     |                     |
+    # ----------------------------------------------------------------------------------
+    # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |
+    And I have upweighted a "TechCrunch" line by "$25"
+    And I have downweighted "LastFM" line by "$25"
+    #the total of iO remains unchanged but breaching thresholds for supplier / property
+    #- requires internal re-approval and client re-approval
+  When I publish these changes
+  Then the Media Plan Status changes to "Published"
+    And Insertion Order statuses and budgets are as outlined below
+    # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
+    # ==================================================================================|
+    # AOL         | $55       | TechCrunch  | Published           | Not confirmed       |
+    #             | $5        | Last.Fm     |                     |                     |
+    # ----------------------------------------------------------------------------------
+    # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |
+
+  Scenario: Upweight / Downweight with localised impact (only 2 out of 3 IOs)
+    Given A Media Plan of a "$100" is "Client Approved"
+      And I have set the breach threshold to be "20%"
+      And it has 3 Insertion orders as outlined below
+      # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
+      # ==================================================================================|
+      # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+      # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+      # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |
+      And I have upweighted a line in 1st "AOL" Insertion Order by $20
+      And I have downweighted a line in 2nd "AOL" Insertion Order by $20
+      #the total change for supplier / property is 0$ - no client or internal re-approval required, just supplier confirmation
+    When I publish these changes
+    Then the Media Plan Status remains to "Client Approved"
+      And Insertion Order statuses and budgets are as outlined below
+      # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
+      # ==================================================================================|
+      # AOL         | $30       | TechCrunch  | Internally Approved | Not confirmed       |
+      # AOL         | $30       | TechCrunch  | Internally Approved | Not confirmed       |
+      # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |

@@ -5,7 +5,8 @@ As Campaign Manager
 I want Insertion Orders to be automatically exported to SAP as Purchase Orders and any Invoices processed against them to be visible in Olive 3
 
 #to review
-Scenario: Create a PO in SAP
+Scenario: Purchase Orders are exported as NEW on Client Approval
+  #activity added during campaign running is exported as new pos on client re-approval
   Given A Media Plan is set up and published
     And there are Essence Liable plan lines
     And Purchase Orders have been generated at the time of plan publishing
@@ -16,19 +17,65 @@ Scenario: Create a PO in SAP
     And If export has not been successful, Olive records reason for failure in PO Sync History
 
 #to review
-Scenario: Update POs in SAP
-  # when re-approval is required - wait for it
-  # when it's minor publish - export on publish
+Scenario: PO downweights are exported on Publish after approval
+  Given A Media Plan is set up and Client Approved
+    And Essence Liable Purchase Orders have been exported to SAP
+    And changes are made to plan that would cause a PO total to be less than what was originally exported (no internal approval needed)
+  When changes are "Published"
+  Then PO totals are updated in Olive 3
+    And Olive exports new amount to SAP
+    And Olive logs the export event in PO Sync history
+    And If export is successful, Olive displays the SAP ID as "External ID"
+    And If export has not been successful, Olive records reason for failure in PO Sync History
 
+#to review
+Scenario: Minor PO Upweights are exported on IO internal approval
+  Given A Media Plan is set up and Client Approved
+    And Essence Liable Purchase Orders have been exported to SAP
+    And changes are made to plan that would cause a PO total to be greater than what was originally exported
+    And Client approval isn't breached (however internal approval needed)
+  When changes are "Internally approved"
+  Then PO totals are updated in Olive 3
+    And Olive exports new amount to SAP
+    And Olive logs the export event in PO Sync history
+    And If export is successful, Olive displays the SAP ID as "External ID"
+    And If export has not been successful, Olive records reason for failure in PO Sync History
+
+
+#to reivew
+Scenario: Major PO upweights are exported to SAP on Client  re-approval
+  Given A Media Plan is set up and Client Approved
+    And Essence Liable Purchase Orders have been exported to SAP
+    And changes are made to plan that would cause a PO total to be greater than what was originally exported
+    And Client approval is breached (re-approval needed)
+  When changes are "Re-approved by Client"
+  Then PO totals are updated in Olive 3
+    And Olive exports new amount to SAP
+    And Olive logs the export event in PO Sync history
+    And If export is successful, Olive displays the SAP ID as "External ID"
+    And If export has not been successful, Olive records reason for failure in PO Sync History
+
+#to review
+Scenario: Do not allow changing Supplier/Currency/Liable Entity after Approval
+  Given A Media Plan is set up and Client Approved
+    And Essence Liable Purchase Orders have been exported to SAP
+  When I edit these lines in Media Plan
+  Then I cannot change their Supplier, Currency or Liable Entity or Delete (forced to downweight to 0 and raise a new line)
+
+#to review
 Scenario: Cancel POs in SAP
  Given a Purchase Order has been Exported to SAP
   And changes to plan have since been published
-  And these changes have resulted in Purchase Order total being 0.00
+  And these changes would resulted in Purchase Order total being 0.00
   And Purchase Order has not been invoiced yet
+When changes are "Published"
+Then PO totals are updated in Olive 3
+  And Olive exports "CANCEL" messageg to SAP
+  And Olive logs the export event in PO Sync history
+  And If export is successful, Olive displays the SAP ID as "External ID"
+  And If export has not been successful, Olive records reason for failure in PO Sync History
 
-Scenario: Do not allow changing Supplier/Currency/Liable Entity after Approval
-
-#to flesh out
+#to review
 Scenario: Handle incorrect PO Supplier after Plan Approval
   Given Media Plan has been approved
     And a Insertion Order for e.g. "Yahoo! UK Ltd." has been raised
@@ -41,9 +88,10 @@ Scenario: Handle incorrect PO Supplier after Plan Approval
   Then Olive admin can access restricted Interface "SAP Integration Management" #(enough to be just a hidden url for now )
     And Locate Purchase Order by supplying the "Olive 3 PO ID"
     And Choose a new "Supplier" for it
-    And Cofirm they're happy to proceed: "This will update the Supplier for related Insertion Order {Insertion Order Name},
-#      cancel Existing PO in Olive 3 and {Liable Entity} SAP, generate a new one in Olive 3 and export it to {Liable Entity} SAP.
-#      This cannot be undone. Are you sure you want to proceed? Yes / Cancel "
+    And Cofirm they're happy to proceed:
+    # "This will update the Supplier for related Insertion Order {Insertion Order Name},
+    #  cancel Existing PO in Olive 3 and {Liable Entity} SAP, generate a new one in Olive 3 and export it to {Liable Entity} SAP.
+    #  This cannot be undone. Are you sure you want to proceed? Yes / Cancel "
     And on confirm, Related Insertion Order Supplier is updated to new selection
     And "CANCEL" request is posted to B1I
     And if B1IF has responded with success, new Purchase order is generated for the new supplier
