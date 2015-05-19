@@ -10,8 +10,12 @@ Scenario: Configure Breach thresholds (OTD-773)
     And by default the "Breach threshold (percent of Total Plan budget)" is set to %20
 
 
-Scenario: Detect impact of changes to be published / approved
-  # CLient approves 10,000 Facebook
+Scenario:  Detect impact of workflow events on Other Insertion orders
+  # 
+
+Scenario: Detect impact of changes to be published / approved on Client Approval Status
+  # Start with a Client Approval requested for a plan a line of $ 10,000 on Facebook
+  # CLient approves a line of $ 10,000 Facebook
   # Am publishes 5,000 upweight - needs re-apprval internally
   # Client sees 10,000 for Facebook
   # AM internally approves the upweight
