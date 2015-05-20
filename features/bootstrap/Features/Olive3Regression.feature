@@ -68,11 +68,12 @@ Feature: Olive 3 Regression Pack
     Then I click the "Add New Period" link
     And I fill in "campaign-marketbudgets-new-periods-new-name" with "<period>"
     Then I click the "New Period Save" link
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-new-periods-new-panel-close']" to appear
     And I click the "Close Add Period" link
 
     Then I fill in "campaign-marketbudgets-new-period" with "<period>"
-    And I wait for text "<period>" to appear
     Then I wait for 2000
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-new-period-<period>']" to appear
     Then I click the link containing ID "<period>"
     Then I wait for 2000
 

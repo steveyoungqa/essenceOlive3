@@ -43,6 +43,7 @@ Feature: Breach Scenarios
 #   ***LINK TO EXTERNAL PLATFORM***
     And I wait for xpath "//*[contains(text(),'External platforms')]" to appear
     Then I click the "External Platforms Market Level" link
+    And I wait for xpath "//a[@id='campaign-google-sub-product-link']" to appear
     And I click the "Google Sub Product" link
     Then I fill in "mapping-externalSystem-googleSubProduct" with "Wildfire - E15"
     Then I wait for 5000
@@ -66,11 +67,12 @@ Feature: Breach Scenarios
     Then I click the "Add New Period" link
     And I fill in "campaign-marketbudgets-new-periods-new-name" with "<period>"
     Then I click the "New Period Save" link
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-new-periods-new-panel-close']" to appear
     And I click the "Close Add Period" link
 
     Then I fill in "campaign-marketbudgets-new-period" with "<period>"
-    And I wait for text "<period>" to appear
     Then I wait for 2000
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-new-period-<period>']" to appear
     Then I click the link containing ID "<period>"
     Then I wait for 2000
 
@@ -134,7 +136,9 @@ Feature: Breach Scenarios
     Then I click the "Platform DS3" link
     Then I wait for 2000
     Then I click the "Property" link
-    And I click the link containing Text "Google Search"
+    And I fill in the "Property" with "<property1>"
+    And I wait for 2000
+    And I click the link containing Text "<property1>"
     Then I wait for 2000
     Then I click the "Media Type" link
     And I click the link containing Text "Search Text Ad"
@@ -149,15 +153,8 @@ Feature: Breach Scenarios
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
     Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100000"
-
-#   ***APPLY BUDGET DISCOUNT***
-    Then I click the "Discount Applied" checkbox
-    And I wait for 2000
-    And I click the "Discount Amount Tab" link
-    Then I fill in the "Discount Amount" with "50"
-    And I wait for 2000
-    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
-#    Then I click the "Add Another" checkbox
+    Then I wait for 2000
+    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<line1>"
     Then I click the "Save Media Plan Line" link
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
@@ -177,8 +174,11 @@ Feature: Breach Scenarios
     Then I click the "Platform DS3" link
     Then I wait for 2000
     Then I click the "Property" link
-    And I click the link containing Text "Google Search"
-    Then I wait for 2000
+    And I fill in the "Property" with "<property2>"
+    And I fill in the "Property" with "<property2>"
+    And I wait for 2000
+    And I click the link containing Text "<property2>"
+    And I wait for 2000
     Then I click the "Media Type" link
     And I click the link containing Text "Search Text Ad"
     Then I wait for 2000
@@ -192,14 +192,46 @@ Feature: Breach Scenarios
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
     Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100000"
+    Then I wait for 2000
+    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<line2>"
+    Then I click the "Save Media Plan Line" link
+    Then I reload the page
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
-#   ***APPLY BUDGET DISCOUNT***
-    Then I click the "Discount Applied" checkbox
-    And I wait for 2000
-    And I click the "Discount Amount Tab" link
-    Then I fill in the "Discount Amount" with "50"
-    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<description2>"
+     # ***ADD 3RD MEDIA PLAN LINE **
+    Then I click the "Add Media Plan Line" link
+    Then I wait for 2000
+    And I click the "Cost Type Media" link
+    Then I click the "Line Channel" link
+    And I click the "Line Channel Search" link
+    Then I click the "Section" link
+    And I click the link containing Text "Default"
+    Then I wait for 2000
+    Then I click the "Supplier" link
+    And I click the link containing Text "<supplier>"
+    Then I click the "Platform" link
+    Then I click the "Platform DS3" link
+    Then I wait for 2000
+    Then I click the "Property" link
+    And I fill in the "Property" with "<property2>"
+    And I fill in the "Property" with "<property2>"
+    And I wait for 5000
+    And I click the link containing Text "<property2>"
+    Then I click the "Media Type" link
+    And I click the link containing Text "Search Text Ad"
+    Then I wait for 2000
+    Then I click the "Cost Model" link
+    And I click the link containing Text "Biddable CPC"
+    Then I select a Plan Line Start Date of "2015-04-04"
+    Then I wait for 2000
+    Then I Select a Plan Line End Date of "2015-04-04"
+    Then I wait for 2000
 
+    Then I click the "Line Currency" link
+    And I click the link containing Text "British Pound"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100000"
+    Then I wait for 2000
+    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<line3>"
     Then I click the "Save Media Plan Line" link
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
@@ -207,7 +239,7 @@ Feature: Breach Scenarios
 #   ***PUBLISH INDIVIDUAL LINE***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     Then I should not see text matching "Publish Selected"
-    Then I select Media Plan Line checkbox with a description of "PublishMeOnly"
+    Then I select Media Plan Line checkbox with a description of "<line2>"
     And I wait for 5000
     When I click the "Publish Selected" link
     Then I wait for 2000
@@ -215,13 +247,26 @@ Feature: Breach Scenarios
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I click the "Publish Dropdown" link
     And I click the "Published State" link
-    Then I should see text matching "<description2>"
+    Then I wait for text "<description2>" to appear
+
+#    ***PUBLISH INDIVIDUAL LINE***
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
+    Then I should not see text matching "Publish Selected"
+    Then I select Media Plan Line checkbox with a description of "<line3>"
+    And I wait for 5000
+    When I click the "Publish Selected" link
+    Then I wait for 2000
+    Then I reload the page
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
+    Then I click the "Publish Dropdown" link
+    And I click the "Published State" link
+    Then I wait for text "<description2>" to appear
 
 
 
   Examples:
-    |campaign  |client|owner      |region |period |budget|clientLiable |initiative|supplier      |description2 |>ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |individual|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|PublishMeOnly|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |campaign  |client|owner      |region |period |budget|clientLiable |initiative|property1|property2|supplier      |line1       |line2      |line3      |>ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |individual|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |YouTube  |GDN      |Google Ireland|YouTubeDraft|GDN1Publish|GDN2Publish|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 
