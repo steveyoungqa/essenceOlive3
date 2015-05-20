@@ -271,30 +271,112 @@ Scenario: Publish one downweight in multiple line changes with changed Market
      # Google Ireland Ltd.   | GDN      | $15            |  $15        |
      # ----------------------------------------------------------------|
      #                                    $55               $40
-  And I'm on the plan line edit form of the second line
-When I hit Save & Publish
-Then User is asked to confirm Meta Data change publishing (the rest assumes they have confirmed)
-  And Media Plan status remains to "Published" and data updates as outlined below:
-    # ---------------------------------------------------------------------------------------------------------------|
-    # Version      | Total Budget | Market           | Allocated | Unallocated | Num IOs | Num M Lines | Num S lines |
-    # ---------------------------------------------------------------------------------------------------------------|
-    # Draft        | $100         | United Kingdom   | *$55*     | *$45*       | 1       | 3           | 0           |
-    # Published    | $100         | United Kingdom   | $30       | $70         | 1       | 3           | 0           |
-    # ---------------------------------------------------------------------------------------------------------------|
-  And Individual Plan line Data change as outlined below
-    # ----------------------------------------------------------------|
-    # Supplier              | Property | Draft Budget   | Publ. Budget|
-    # ----------------------------------------------------------------|
-    # Google Ireland Ltd.   | GDN      | *$30*          |   $5        |
-    # Google Ireland Ltd.   | GDN      | $10            |  $10        |
-    # Google Ireland Ltd.   | GDN      | $15            |  $15        |
-    # ----------------------------------------------------------------|
-    #                                    $55               $30
+     And I'm on the plan line edit form of the second line
+  When I hit Save & Publish
+  Then User is asked to confirm Meta Data change publishing (the rest assumes they have confirmed)
+    And Media Plan status remains to "Published" and data updates as outlined below:
+      # ---------------------------------------------------------------------------------------------------------------|
+      # Version      | Total Budget | Market           | Allocated | Unallocated | Num IOs | Num M Lines | Num S lines |
+      # ---------------------------------------------------------------------------------------------------------------|
+      # Draft        | $100         | United Kingdom   | *$55*     | *$45*       | 1       | 3           | 0           |
+      # Published    | $100         | United Kingdom   | $30       | $70         | 1       | 3           | 0           |
+      # ---------------------------------------------------------------------------------------------------------------|
+    And Individual Plan line Data change as outlined below
+      # ----------------------------------------------------------------|
+      # Supplier              | Property | Draft Budget   | Publ. Budget|
+      # ----------------------------------------------------------------|
+      # Google Ireland Ltd.   | GDN      | *$30*          |   $5        |
+      # Google Ireland Ltd.   | GDN      | $10            |  $10        |
+      # Google Ireland Ltd.   | GDN      | $15            |  $15        |
+      # ----------------------------------------------------------------|
+      #                                    $55               $30`
 
 # publish multiple with meta data changes
 # plan: local impact: label (S3)
 # plan: reporting/client impact: KPI Type  (S2) - have a feeling these shouldn't be so easily changeable
 # line: downweights
+Scenario: Publish multiple lines with changed MP Label
+ Given I have set up a media plan
+   And it's in a "Published" state as outlined below:
+     # ----------------------------------------------------------------------------------------------------------|
+     # Version      | Total Budget | Label       | Allocated | Unallocated | Num IOs | Num M Lines | Num S lines |
+     # ----------------------------------------------------------------------------------------------------------|
+     # Draft        | $100         | *Awareness* | *$95*     |  *$5*       | 1       | 4           | 0           |
+     # Published    | $100         | Brand       | $80       | $20         | 1       | 4           | 0           |
+     # ----------------------------------------------------------------------------------------------------------|
+   And it contains a plan line as per below:
+     # ----------------------------------------------------------------|
+     # Supplier              | Property | Draft Budget   | Publ. Budget|
+     # ----------------------------------------------------------------|
+     # Google Ireland Ltd.   | GDN      | *$25*          |  $20        |
+     # Google Ireland Ltd.   | GDN      | *$10*          |  $20        |
+     # Google Ireland Ltd.   | GDN      | *$40*          |  $20        |
+     # Google Ireland Ltd.   | GDN      |  $20           |  $20        |
+     # ----------------------------------------------------------------|
+     #                                    $95               $80
+    And I'm on the draft view of the plan
+    And I have selected the first 2 lines
+  When I hit Publish Selected
+  Then User is asked to confirm Meta Data change publishing (the rest assumes they have confirmed)
+    And Media Plan status remains to "Published" and data updates as outlined below:
+      # ---------------------------------------------------------------------------------------------------------------|
+      # Version      | Total Budget | Label            | Allocated | Unallocated | Num IOs | Num M Lines | Num S lines |
+      # ---------------------------------------------------------------------------------------------------------------|
+      # Draft        | $100         | Awareness        | *$95*     |  *$5*       | 1       | 4           | 0           |
+      # Published    | $100         | Awareness        |  $75      | $25         | 1       | 4           | 0           |
+      # ---------------------------------------------------------------------------------------------------------------|
+    And Individual Plan line Data change as outlined below
+      # ----------------------------------------------------------------|
+      # Supplier              | Property | Draft Budget   | Publ. Budget|
+      # ----------------------------------------------------------------|
+      # Google Ireland Ltd.   | GDN      |  $25           |  $25        |
+      # Google Ireland Ltd.   | GDN      |  $10           |  $10        |
+      # Google Ireland Ltd.   | GDN      | *$40*          |  $20        |
+      # Google Ireland Ltd.   | GDN      |  $20           |  $20        |
+      # ----------------------------------------------------------------|
+      #                                    $95               $75
+
+Scenario: Publish Multiple with changed KPI Type
+  Given I have set up a media plan
+    And it's in a "Published" state as outlined below:
+      # ----------------------------------------------------------------------------------------------------------|
+      # Version      | Total Budget | KPI Type    | Allocated | Unallocated | Num IOs | Num M Lines | Num S lines |
+      # ----------------------------------------------------------------------------------------------------------|
+      # Draft        | $100         | *DR*        | $80       | $20         | 1       | 4           | 0           |
+      # Published    | $100         | Brand       | $80       | $20         | 1       | 4           | 0           |
+      # ----------------------------------------------------------------------------------------------------------|
+    And it contains a plan line as per below:
+      # ----------------------------------------------------------------|
+      # Supplier              | Property | Draft Budget   | Publ. Budget|
+      # ----------------------------------------------------------------|
+      # Google Ireland Ltd.   | GDN      | *$30*          |  $20        |
+      # Google Ireland Ltd.   | GDN      | *$10*          |  $20        |
+      # Google Ireland Ltd.   | GDN      | *$40*          |  $20        |
+      # Google Ireland Ltd.   | GDN      |  *$0*          |  $20        |
+      # ----------------------------------------------------------------|
+      #                                     $80              $80
+     And I'm on the draft view of the plan
+     And I have selected the first 2 lines
+   When I hit Publish Selected
+   Then User is asked to confirm Meta Data change publishing (the rest assumes they have confirmed)
+     And Media Plan status remains to "Published" and data updates as outlined below:
+       # ----------------------------------------------------------------------------------------------------------|
+       # Version      | Total Budget | KPI Type    | Allocated | Unallocated | Num IOs | Num M Lines | Num S lines |
+       # ----------------------------------------------------------------------------------------------------------|
+       # Draft        | $100         | DR          | $80       | $20         | 1       | 4           | 0           |
+       # Published    | $100         | DR          | $80       | $20         | 1       | 4           | 0           |
+       # ----------------------------------------------------------------------------------------------------------|
+     And Individual Plan line Data change as outlined below
+       # ----------------------------------------------------------------|
+       # Supplier              | Property | Draft Budget   | Publ. Budget|
+       # ----------------------------------------------------------------|
+       # Google Ireland Ltd.   | GDN      |  $30           |  $30        |
+       # Google Ireland Ltd.   | GDN      |  $10           |  $10        |
+       # Google Ireland Ltd.   | GDN      | *$40*          |  $20        |
+       # Google Ireland Ltd.   | GDN      |  *$0*          |  $20        |
+       # ----------------------------------------------------------------|
+       #                                     $80              $80
+
 
 # publish one with notifications (S2)
 # plan: dates, total budget downweight
