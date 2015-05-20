@@ -1,6 +1,29 @@
 # S1 - S4 = severity
 # if these fail we have a problem 1 - big, 4 - small
 
+#################
+# DEFAULTS - unless otherwise stated
+################
+# Plan:
+#   Market: DE,
+#   Currency: EUR,
+#   Budget: 100,
+#   Liable Entity: Essece LON,
+#   Dates: 01-04-2015 - 30-06-2015,
+#   Manager: {yoursel},
+#   Label: blank,
+#   KPI Type: DR,
+#   Breach Threshold: 20%,
+#   Use MAFs: no
+#   Harvest: 7776118 - Essence Technology, Olive 3
+#   Initiative: Q2-2014 1001018 GSA Awareness
+#
+# Media Line:
+# Supplier           | Property      | Section     | Channel   | Media Type        | Buy Type | Platform | Currency | Cost Model   | Liable Entity | NET Unit Cost | Discount |
+# ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+# Ebuzzing Inc       | Teads         | Off Network | Display   | Standard Banners  | Direct   | --       | GBP      | Fixed CPM    | Essence LON   | 0.10          | 15%      |
+# Google Ireland Ltd.| Google Search | House Ads   | Search    | Search Text Ad    | Biddable | DS3      | USD      | Biddable CPC | Client        | --            | --       |
+
 # First time publishes (S3)
 Scenario: Publish new line, only one in IO
   Given I have set up a "Draft" media plan as outlined below
@@ -12,11 +35,11 @@ Scenario: Publish new line, only one in IO
     # ---------------------------------------------------------------------------------------------|
     And it has never been published before
     And I have set up 1 plan line as outlined below my Media Plan
-    # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    # Supplier              | Property          | Draft Budget | Publ. Budget  | Int appr. Budget   | Clt. appr. Budget | IO Internal Status | IO Supplier Status |
-    # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    # Google Ireland Ltd.   | GDN               | $10          |  --           |  --                |  --               | Draft              | Not Confirmed      |
-    # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    # ----------------------------------------------------------------|
+    # Supplier              | Property | Draft Budget | Publ. Budget  |
+    # ----------------------------------------------------------------|
+    # Google Ireland Ltd.   | GDN      | $10          |  --           |
+    # ----------------------------------------------------------------|
     And I'm on the plan line edit form
   When I hit Save & Publish
   Then Then Media Plan status changes to "Published"
@@ -27,11 +50,11 @@ Scenario: Publish new line, only one in IO
     # Published    | $100         | $10       | $90         | 1       | 1           | 0            |
     # ---------------------------------------------------------------------------------------------|
     And Plan line Data and IO status changes as outlined below
-      # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
-      # Supplier              | Property          | Draft Budget | Publ. Budget  | Int appr. Budget   | Clt. appr. Budget | IO Internal Status | IO Supplier Status |
-      # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
-      # Google Ireland Ltd.   | GDN               | $10          |  $10          |  --                |  --               | Published          | Not Confirmed      |
-      # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
+      # -----------------------------------------------------------------|
+      # Supplier              | Property  | Draft Budget | Publ. Budget  |
+      # -----------------------------------------------------------------|
+      # Google Ireland Ltd.   | GDN       | $10          |  $10          |
+      # -----------------------------------------------------------------|
 
 Scenario: Publish new Line, out of two, never published IO
   Given I have set up a "Draft" media plan as outlined below
@@ -69,8 +92,6 @@ Scenario: Publish new Line, out of two, never published IO
       # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 Scenario: Publish new line, out of two in IO (the other one has already been published before)
-  # Number of IOs: 1
-  # Number of lines: 2
   Given I have set up a media plan
     And it's in a "Published" state as outlined below:
       # ---------------------------------------------------------------------------------------------|
@@ -80,13 +101,13 @@ Scenario: Publish new line, out of two in IO (the other one has already been pub
       # Published    | $100         | $10       | $90         | 1       | 1           | 0            |
       # ---------------------------------------------------------------------------------------------|
     And it contains plan lines as per below:
-      # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
-      # Supplier              | Property          | Draft Budget | Publ. Budget  | Int appr. Budget   | Clt. appr. Budget | IO Internal Status | IO Supplier Status |
-      # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
-      # Google Ireland Ltd.   | GDN               | $10          |  $10          |  --                |  --               | Published          | Not Confirmed      |
-      # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
-      # Google Ireland Ltd.   | GDN               | $10          |  --           |  --                |  --               | Published          | Not Confirmed      |
-      # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
+      # -------------------------------------------------------------------------|
+      # Supplier              | Property          | Draft Budget | Publ. Budget  |
+      # -------------------------------------------------------------------------|
+      # Google Ireland Ltd.   | GDN               | $10          |  $10          |
+      # -------------------------------------------------------------------------|
+      # Google Ireland Ltd.   | GDN               | $10          |  --           |
+      # -------------------------------------------------------------------------|
     And I'm on the draft view of the plan
     And I have selected 2nd plan line
   When when I hit "Publish Selected"
@@ -98,18 +119,100 @@ Scenario: Publish new line, out of two in IO (the other one has already been pub
     # Published    | $100         | $20       | $80         | 1       | 2           | 0            |
     # ---------------------------------------------------------------------------------------------|
     And Plan line Data and IO status changes as outlined below
-      # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
-      # Supplier              | Property          | Draft Budget | Publ. Budget  | Int appr. Budget   | Clt. appr. Budget | IO Internal Status | IO Supplier Status |
-      # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
-      # Google Ireland Ltd.   | GDN               | $10          |  $10          |  --                |  --               | Published          | Not Confirmed      |
-      # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
-      # Google Ireland Ltd.   | GDN               | $10          |  $10          |  --                |  --               | Published          | Not Confirmed      |
-      # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
+      # -------------------------------------------------------------------------|
+      # Supplier              | Property          | Draft Budget | Publ. Budget  |
+      # -------------------------------------------------------------------------|
+      # Google Ireland Ltd.   | GDN               | $10          |  $10          |
+      # -------------------------------------------------------------------------|
+      # Google Ireland Ltd.   | GDN               | $10          |  $10          |
+      # -------------------------------------------------------------------------|
 
 # Second time publishes (S4)
 Scenario: Publish change of Channel / media type on existing line, only one in IO
+  Given I have set up a media plan
+    And it's in a "Published" state as outlined below:
+      # ---------------------------------------------------------------------------------------------|
+      # Version      | Total Budget | Allocated | Unallocated | Num IOs | Num M Lines | Num S lines  |
+      # ---------------------------------------------------------------------------------------------|
+      # Draft        | £100         | £10       | £90         | 1       | 1           | 0            |
+      # Published    | £100         | £10       | £90         | 1       | 1           | 0            |
+      # ---------------------------------------------------------------------------------------------|
+    And it contains a plan line as per below:
+      # ----------------------------------------------------------------------------------------------------------------------|
+      # Supplier         | Property | Draft Channel / Media Type | Publ. Channel / Media Type  | Draft Budget | Publ. Budget  |
+      # ----------------------------------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc     | Teads    | *Display / In-Stream*      | Display / Standard Banners  | £10          |  £10          |
+      # ----------------------------------------------------------------------------------------------------------------------|
+    And I'm on the draft view of the plan
+    And I have selected the plan line
+  When when I hit "Publish Selected"
+  Then Media Plan status and data remains the same
+    And Plan line Data and IO status changes as outlined below
+      # ----------------------------------------------------------------------------------------------------------------------|
+      # Supplier         | Property | Draft Channel / Media Type | Publ. Channel / Media Type  | Draft Budget | Publ. Budget  |
+      # ----------------------------------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc     | Teads    | *Display / In-Stream*      | *Display / In-Stream*       | £10          |  £10          |
+      # ----------------------------------------------------------------------------------------------------------------------|
+
 Scenario: Publish change of Buy type in existing line, out of two in IO (both have been published before)
+  Given I have set up a media plan
+    And it's in a "Published" state as outlined below:
+      # ---------------------------------------------------------------------------------------------|
+      # Version      | Total Budget | Allocated | Unallocated | Num IOs | Num M Lines | Num S lines  |
+      # ---------------------------------------------------------------------------------------------|
+      # Draft        | £100         | £20       | £80         | 1       | 2           | 0            |
+      # Published    | £100         | £20       | £80         | 1       | 2           | 0            |
+      # ---------------------------------------------------------------------------------------------|
+    And it contains a plan line as per below:
+      # ---------------------------------------------------------------------------------------------|
+      # Supplier         | Property | Draft Buy Type | Publ. Buy Type | Draft Budget | Publ. Budget  |
+      # ---------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc     | Teads    | *Direct*       | Biddable       | £10          |  £10          |
+      # ---------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc     | Teads    | Direct         | Direct         | £10          |  £10          |
+      # ---------------------------------------------------------------------------------------------|
+    And I'm on the draft view of the plan
+    And I have selected the 1st plan line
+  When when I hit "Publish Selected"
+  Then Media Plan status and data remains the same
+    And Plan line Data and IO status changes as outlined below
+    # ----------------------------------------------------------------------------------------------|
+    # Supplier         | Property | Draft Buy Type | Publ. Buy Type  | Draft Budget | Publ. Budget  |
+    # ----------------------------------------------------------------------------------------------|
+    # Ebuzzing Inc     | Teads    | Direct         | Direct          | £10          |  £10          |
+    # ----------------------------------------------------------------------------------------------|
+    # Ebuzzing Inc     | Teads    | Direct         | Direct          | £10          |  £10          |
+    # ----------------------------------------------------------------------------------------------|
+
 Scenario: Publish change in Cost model of existing line, out of two in IO (only this one has been published before)
+  Given I have set up a media plan
+    And it's in a "Published" state as outlined below:
+      # ---------------------------------------------------------------------------------------------|
+      # Version      | Total Budget | Allocated | Unallocated | Num IOs | Num M Lines | Num S lines  |
+      # ---------------------------------------------------------------------------------------------|
+      # Draft        | £100         | £20       | £80         | 1       | 2           | 0            |
+      # Published    | £100         | £10       | £90         | 1       | 1           | 0            |
+      # ---------------------------------------------------------------------------------------------|
+    And it contains a plan line as per below:
+      # ------------------------------------------------------------------------------------------------|
+      # Supplier         | Property | Draft Cost Model| Publ. Cost Model | Draft Budget | Publ. Budget  |
+      # ------------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc     | Teads    | *Fixed CPM*     | Fixed CPC        | £10          |  £10          |
+      # ------------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc     | Teads    | Direct          | --               | £10          |  --           |
+      # ------------------------------------------------------------------------------------------------|
+    And I'm on the draft view of the plan
+    And I have selected the 1st plan line
+  When when I hit "Publish Selected"
+  Then Media Plan status and data remains the same
+    And Plan line Data and IO status changes as outlined below
+    # ------------------------------------------------------------------------------------------------|
+    # Supplier         | Property | Draft Cost Model| Publ. Cost Model | Draft Budget | Publ. Budget  |
+    # ------------------------------------------------------------------------------------------------|
+    # Ebuzzing Inc     | Teads    | *Fixed CPM*     | Fixed CPM        | £10          |  £10          |
+    # ------------------------------------------------------------------------------------------------|
+    # Ebuzzing Inc     | Teads    | Direct          | --               | £10          |  --           |
+    # ------------------------------------------------------------------------------------------------|
 
 # service lines
 # unknown budget
