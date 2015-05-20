@@ -18,7 +18,7 @@ Scenario: Publishing All changes when no changes are made in the Draft version
 
 # - in sprint 28,29 -
 Scenario: Publish Individual Line (OTD-1912)
-
+  
 # - in sprint 28,29 -
 Scenario: Publish a set of Lines (OTD-1912)
 
