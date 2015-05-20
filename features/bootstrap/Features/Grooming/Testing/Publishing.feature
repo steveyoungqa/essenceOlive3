@@ -218,13 +218,82 @@ Scenario: Publish change in Cost model of existing line, out of two in IO (only 
 # unknown budget
 
 # publish one with meta data changes (S3)
-# plan: local impact: Manager, label (S3)
-# plan: reporting/client impact: Market, KPI Type  (S2) - have a feeling these shouldn't be so easily changeable
+# plan: local impact: Manager (S3)
+# plan: reporting/client impact: Market  (S2) - have a feeling these shouldn't be so easily changeable
 # line: downweights
+Scenario: Publish downweight with changed Plan manager
+  Given I have set up a media plan
+    And it's in a "Published" state as outlined below:
+      # ------------------------------------------------------------------------------------------------------------|
+      # Version      | Total Budget | Managed By   | Allocated | Unallocated | Num IOs | Num M Lines | Num S lines  |
+      # ------------------------------------------------------------------------------------------------------------|
+      # Draft        | $100         | *{Yourself}* | *$10*     | *$90*       | 1       | 1           | 0            |
+      # Published    | $100         | Zanete Ence  | $50       | $50         | 1       | 1           | 0            |
+      # ------------------------------------------------------------------------------------------------------------|
+    And it contains a plan line as per below:
+      # ----------------------------------------------------------------|
+      # Supplier              | Property | Draft Budget | Publ. Budget  |
+      # ----------------------------------------------------------------|
+      # Google Ireland Ltd.   | GDN      | *$10*          |  $50        |
+      # ----------------------------------------------------------------|
+    And I'm on the plan line edit form
+  When I hit Save & Publish
+  Then User is asked to confirm Meta Data change publishing (the rest assumes they have confirmed)
+    And Media Plan status remains to "Published" and data updates as outlined below:
+      # ------------------------------------------------------------------------------------------------------------|
+      # Version      | Total Budget | Managed By   | Allocated | Unallocated | Num IOs | Num M Lines | Num S lines  |
+      # ------------------------------------------------------------------------------------------------------------|
+      # Draft        | $100         | {Yourself}   | $10       | $90         | 1       | 1           | 0            |
+      # Published    | $100         | {Yourself}   | $10       | $90         | 1       | 1           | 0            |
+      # ------------------------------------------------------------------------------------------------------------|
+    And Individual Plan line Data change as outlined below
+      # ----------------------------------------------------------------|
+      # Supplier              | Property | Draft Budget | Publ. Budget  |
+      # ----------------------------------------------------------------|
+      # Google Ireland Ltd.   | GDN      | $10          |  $10          |
+      # ----------------------------------------------------------------|
+
+Scenario: Publish one downweight in multiple line changes with changed Market
+ Given I have set up a media plan
+   And it's in a "Published" state as outlined below:
+     # ---------------------------------------------------------------------------------------------------------------|
+     # Version      | Total Budget | Market           | Allocated | Unallocated | Num IOs | Num M Lines | Num S lines |
+     # ---------------------------------------------------------------------------------------------------------------|
+     # Draft        | $100         | *United Kingdom* | *$55*     | *$45*       | 1       | 3           | 0           |
+     # Published    | $100         | Ukraine          | $40       | $60         | 1       | 3           | 0           |
+     # ---------------------------------------------------------------------------------------------------------------|
+   And it contains a plan line as per below:
+     # ----------------------------------------------------------------|
+     # Supplier              | Property | Draft Budget   | Publ. Budget|
+     # ----------------------------------------------------------------|
+     # Google Ireland Ltd.   | GDN      | *$30*          |   $5        |
+     # Google Ireland Ltd.   | GDN      | *$10*          |  $20        |
+     # Google Ireland Ltd.   | GDN      | $15            |  $15        |
+     # ----------------------------------------------------------------|
+     #                                    $55               $40
+  And I'm on the plan line edit form of the second line
+When I hit Save & Publish
+Then User is asked to confirm Meta Data change publishing (the rest assumes they have confirmed)
+  And Media Plan status remains to "Published" and data updates as outlined below:
+    # ---------------------------------------------------------------------------------------------------------------|
+    # Version      | Total Budget | Market           | Allocated | Unallocated | Num IOs | Num M Lines | Num S lines |
+    # ---------------------------------------------------------------------------------------------------------------|
+    # Draft        | $100         | United Kingdom   | *$55*     | *$45*       | 1       | 3           | 0           |
+    # Published    | $100         | United Kingdom   | $30       | $70         | 1       | 3           | 0           |
+    # ---------------------------------------------------------------------------------------------------------------|
+  And Individual Plan line Data change as outlined below
+    # ----------------------------------------------------------------|
+    # Supplier              | Property | Draft Budget   | Publ. Budget|
+    # ----------------------------------------------------------------|
+    # Google Ireland Ltd.   | GDN      | *$30*          |   $5        |
+    # Google Ireland Ltd.   | GDN      | $10            |  $10        |
+    # Google Ireland Ltd.   | GDN      | $15            |  $15        |
+    # ----------------------------------------------------------------|
+    #                                    $55               $30
 
 # publish multiple with meta data changes
-# plan: local impact: Manager, label (S3)
-# plan: reporting/client impact: Market, KPI Type  (S2) - have a feeling these shouldn't be so easily changeable
+# plan: local impact: label (S3)
+# plan: reporting/client impact: KPI Type  (S2) - have a feeling these shouldn't be so easily changeable
 # line: downweights
 
 # publish one with notifications (S2)
