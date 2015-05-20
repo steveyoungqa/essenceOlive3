@@ -4,7 +4,7 @@ In order to outline media buys and budget allocations across channels
 As Campaign Manager
 I want to add line items to my plan
 
-#reviewed 6th May
+#reviewed 6th May - in sprint 29 [11th May] -
 Scenario: Specify platform (OTD-2052)
   Given a Media plan is set up
   When I go to add a new or edit existing plan line of type "Media"
@@ -26,7 +26,7 @@ Scenario: Specify platform (OTD-2052)
     And "Platform" is mandatory
     And if "Other" is selected do not include in the IO name
 
-#reviewed 11th May
+#reviewed 11th May - in sprint 29 [11th May] -
 Scenario: Specify Unit cost and Quantity (OTD-2072)
   Given I'm adding a new or edit existing "Media" plan line
     And I have specified "Direct Buy" as buy type
@@ -48,7 +48,7 @@ Scenario: Specify Unit cost and Quantity (OTD-2072)
     # Fixed Cost  | 1                                  |
     #--------------------------------------------------|
 
-#reviewed 11th May
+#reviewed 11th May - in sprint 29 [11th May] -
 Scenario: Specify Event number for "Fixed CPA" (OTD-2073)
   Given a Media plan is set up
     And I'm adding a new "Media" plan line
@@ -56,25 +56,80 @@ Scenario: Specify Event number for "Fixed CPA" (OTD-2073)
   Then I can choose a supported "Event" number from the following options: 1, 2, 9
   # NOTE - please remove Fixed CPV from the options as part of the story as there's no mapping for it to Olive 2 commissio metrics
 
-#to flesh out
-Scenario: Store Net Budget instead of Gross (OTD-2111)
+#reviewed 20th May 2015 - in sprint 29 [11th May] -
+# in order to minimise confusion when calculating actual spend in DS scripts and
+# pass on the correct FCL cost to Olive 2 T-sheet autognerated fcls
+# to reliably show people the actual value that's being used
+Scenario: Store Net Budget instead of Gross (OTD-2111) 3
+  Given A media Plan line is added
+    And its a "FIXED" type of cost model (Fixed CPC, Fixed CPM etc)
+    And Discount is applied
+  When I look at the plan line in the database
+  Then The stored values I see are "NET Budget" and "NET Unit Cost" #includes migrating existing
 
-#to flesh out
-Scenario: Re-organise Plan line fields to incorporate Unit Cost and Quantity (OTD-2110)
-# based on https://docs.google.com/presentation/d/138vGhxIlJKhS7j_zZ0w7ikLKRU79rjiqsrGhuAbgovY/edit#slide=id.p
-# - discount always visible
-# - % by default
-# - one amount appears to be used for both
-# - no need to show the discount amount
-# - make sure net budget is stored
-# - display Gross just under budget as soon as discount applied
-#NEW Handle Fixed CPM, CPC, CPA
-# - show NET unit cost and quantity
-# - if discount applied - auto-calculate and show Gross unit cost
-#NEW - Handle Fixed Cost
-# - do not show NET unit cost but assume it to be the same as net budget,
 
-#reviewed 6th May
+
+#reviewed 20th May 2015
+Scenario: Re-organise Plan line fields to incorporate Unit Cost and Quantity (OTD-2110) 8
+  # based on https://docs.google.com/presentation/d/138vGhxIlJKhS7j_zZ0w7ikLKRU79rjiqsrGhuAbgovY/edit#slide=id.p
+  # - discount always visible
+  # - % by default
+  # - one amount appears to be used for both
+  # - no need to show the discount amount
+  # - make sure net budget is stored
+  Given A media Plan is set up
+  When I Add a new plan line or edit an exisitng
+  Then Net Budget placeholder text says "Net"
+    And Unit placeholder text says "Net" (visible when "Direct Buy" selected as Buy Type)
+    And Discount field is always visible
+    And % is selected by Default
+    And it's empty by default which indicates that Discount is not applied
+    And I cannot see a Discount toggle checkbox
+    And I cannot see the actually calculated discount amount when % is used
+
+#reviewed 20th May 2015
+Scenario: Display Gross Budget when Discount applied (OTD-2110)
+  # - display Gross just under budget as soon as discount applied
+  # - if discount applied - auto-calculate and show Gross unit cost
+  Given A I need to set up a media Plan with Discount applied
+  When I add or edit it
+  Then I can enter a discount in the field
+    And see "Gross" budget automatically calculated and displayed as a read-only label below "Net Budget" field
+    And see "Gross" unit cost automatically calculated and displayed as a read-only label below "Net Unit Cost" field
+
+#reviewed 20th May 2015
+Scenario: Display Unit Cost and Quantity when "Direct Buy" (OTD-2110)
+  #NEW Handle Fixed CPM, CPC, CPA
+  # - show NET unit cost and quantity
+  # - do not show NET unit cost but assume it to be the same as net budget,
+  # NEW - Handle Fixed Cost
+  Given A I need to set up a media Plan with Fixed price (Fixed CPC, FIxed CPM etc) (except Fixed Cost)
+  # (except because we do not want to see the quantity as it's always 1 and the pricing units are confusing)
+  When I add or edit it
+  Then I can enter a net "unit cost"
+    And see quantity automatically calculated and displayed as a read-only label below "Unit Cost" field
+    And I can see the pricing units (impressions or clicks etc) associated with Cost model displayed next to the value
+
+#reviewed 20th May 2015
+Scenario: One field appears to be used when toggling between discount types (OTD-2110)
+  Given I have added a media plan line for Fixed CPM
+    And Discount is applied
+    And I'm on the line details form
+    And I have entered an amount in the discount field as outlined below
+    #| Cost Model | Net Budget | Net Unit Cost | Discount Type | Value in Discount Field | Quantity | Gross Budget |
+    # =============================================================================================================|
+    #|Fixed CPM   | 3,016.60   | 19.55         | %             | 15                      |  154302  | 3,548.94     |
+  When I use a toggle from % to Amount and vice versa
+  Then the amount I have entered remains in the discount field
+    And the calculated values update accordingly:
+    #| Cost Model | Net Budget | Net Unit Cost | Discount Type | Value in Discount Field | Quantity | Gross Budget |
+    # =============================================================================================================|
+    #|Fixed CPM   | 3,016.60   | 19.55         | Amount        | 15                      |  154302  | 3,031.60     |
+
+
+
+
+#reviewed 6th May - in sprint 28 [27th April] -
 Scenario: FE - Plan line grouping (OTD-573)
   Given I have set up a media plan
     And I have added lines for different sections / IOs / Channels
@@ -82,7 +137,7 @@ Scenario: FE - Plan line grouping (OTD-573)
   Then I see Section -> IO -> Channel as the default line grouping
     And Channel as displayed as first column (whatever is the third level is displayed as the first column)
 
-#reviewed 6th May
+#reviewed 6th May - in sprint 29 [11th May] -
 Scenario: Publish Plan meta data with individual line publishing (OTD-2053)
   Given Media Plan has been set up
     And lines have been added to it

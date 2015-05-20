@@ -19,16 +19,17 @@ Scenario: Download O3 Plan with Line IDs for T-sheet (OTD-1921)
 
 #(reviewed 5th May)
 #in Olive 2
-Scenario: New Format T-Sheet (OTD-2001) - in sprint 27 [13th April] -
+Scenario: New Format T-Sheet (OTD-2001) - in sprint 27 [13th April]
+  # OTD-2123 in sprint 29
   Given Campaign financial information is due to be managed thorugh Olive 3 as of new quarter
     And the plan and all lines are set up and published in Olive 3
     And Media Detail (T-sheet) relating to that plan is ready to be trafficked
   When AdOps member log into Olive 2
   Then he can find an upload form that accepts a new format T-sheet with the following changes:
-#      ----------------------------------------------------------------------------------------------
-#      |Campaign ID                    | Campaign Name                    | PO ID     | Media Plan ID          | Plan Line ID          |
-#      ----------------------------------------------------------------------------------------------
-#      |Olive 2 Campaign ID (optional) | Olive 2 Campaign name (optional) |*REMOVE*  | Olive 3 Media Plan ID  | Olive 3 Plan Line ID  |
+#      -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#      |Campaign ID                    | Campaign Name                    | PO ID     | Media Plan ID         | Media Plan Name         | Plan Line ID          | BOOKING
+#      ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#      |Olive 2 Campaign ID (optional) | Olive 2 Campaign name (optional) |*REMOVE*  | Olive 3 Media Plan ID  | Olive 3 Media PLan Name | Olive 3 Plan Line ID  | *REMOVE*
 #      ----------------------------------------------------------------------------------------------
     And it is clearly labelled as "Olive 3 T-Sheet" in a section "Olive 3 AdOps Mapping"
     And on upload Olive 2 validates the T-Sheet format to ensure all columns are there
@@ -41,6 +42,8 @@ Scenario: New Format T-Sheet (OTD-2001) - in sprint 27 [13th April] -
 #       | If Campaign ID not provided, allow upload anyway             |                                                             |
 #       | Plan Line ID is a recognised Olive 3 published plan line     | "Plan Line ID not recognised. Please ensure it's pubished"  |
 #       | Media Plan ID is a recognised Olive 3 Pulbisehd Media Plan ID| "Media Plan ID not recognised. Please ensure it's published"|
+#       | Media PLan Name is a recognised Olive 3 Media plan and       | "Media Plan ID and Media Plan  Name do not match data       |
+#       |    matches the ID provided                                   |    in Olive 3"                                              |
 #       | Plan Line belongs to Media Plan                              | "Plan Line belongs to a different Media Plan.               |
 #       |                                                              | Please ensure IDs are correct"                              |
 #       | Plan Line iD is a recognised Media Line (not service)        | "Plan Line ID refers to a service line, please ensure       |
@@ -76,6 +79,11 @@ Scenario: O2 - Create separate Off-network and House-Ads Campaigns (OTD-2084)
       #                   |                     | {MP Period}                   |                         |
       #                   |                     | {MP Market Code}              |                         |
       #----------------------------------------------------------------------------------------------------
+
+#to review    
+Scenario: Separate House ads and Offnetwork Total Budgets
+  # * How to split the Budget when splitting campaigns - leave as edge case?
+  # weight the sums of line items in each and attribute portions of total budget accordingly
 
 #reviewed 5th May - in sprint 28 [27th April] -
 Scenario: Olive 2 Budget Period doesn't exist but Placements, Bookings and Campaign already set up and trafficked in the previous quarter (OTD-2001)
