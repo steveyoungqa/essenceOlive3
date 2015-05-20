@@ -55,7 +55,7 @@ Scenario: See a list of Inputs by Type
 
 #to review
 Scenario: Set up Tracking/SDK type of Input (OTD-2119)
-  Given I have set up a Campaign for "Google" with a Name ""
+  Given I have set up a Campaign for "Google"
     And I have created a new "Input"
     And I have chosen type "Tracking Tag / SDK"
   When I look at the edit form of the "Input"
@@ -80,8 +80,12 @@ Scenario: Set up Tracking/SDK type of Input (OTD-2119)
       And choose a value type of one of the following:
        # Post Click
        # Post Impression
-       # Post
+       # Post Click Revenue
+       # Post Impression Revenue
        # TO CONFIRM WITH SEAN - can we actually automatically detect what is available and offer that once theyve picked a source?
+       # e.g.
+       # Conversions
+       # Total count
       And an unique Identifier within the source
       And specify a weight in a range from -1 to 1 #-1 would subtract the values from the total of Input
         #todo @Helen - what's the copy for  tooltip here?
@@ -105,13 +109,13 @@ Scenario: Set up Tracking/SDK type of Input (OTD-2119)
         # | ??   | Dwell Time                   | seconds         | ??                | ??
 
   #to review
-  Scenario: Integrate with Google Floodlights (OTD-2120)
+  Scenario: Integrate with DCM Floodlights (OTD-2120)
 
   #to review
   Scenario: Integrate with AdWords Pixels (OTD-2120)
 
   #to review
-  Scenario: Integrate with Mobile Passback (OTD-2120)
+  Scenario: Integrate with Play Mobile Passback (OTD-2120)
 
   #to review
   Scenario: Migrate existing event mappings to new structure (OTD-2121)
