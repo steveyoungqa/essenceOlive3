@@ -340,7 +340,7 @@ class customTests extends CustomPage
                 return;
             }
         }
-        throw new \Exception("waitFor timed out");
+        throw new \Exception("Waited for Element but it timed out after 50 seconds");
     }
 
     private function waitForXpathNode($xpath, $appear)
