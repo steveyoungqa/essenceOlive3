@@ -218,9 +218,7 @@ Scenario: Publish change in Cost model of existing line, out of two in IO (only 
 # unknown budget
 
 # publish one with meta data changes (S3)
-# plan: local impact: Manager (S3)
-# plan: reporting/client impact: Market  (S2) - have a feeling these shouldn't be so easily changeable
-# line: downweights
+# plan: local impact: Manager
 Scenario: Publish downweight with changed Plan manager
   Given I have set up a media plan
     And it's in a "Published" state as outlined below:
@@ -253,6 +251,8 @@ Scenario: Publish downweight with changed Plan manager
       # Google Ireland Ltd.   | GDN      | $10          |  $10          |
       # ----------------------------------------------------------------|
 
+# publish one with meta data changes (S2)
+# plan: reporting/client impact: Market - have a feeling these shouldn't be so easily changeable
 Scenario: Publish one downweight in multiple line changes with changed Market
  Given I have set up a media plan
    And it's in a "Published" state as outlined below:
@@ -291,10 +291,8 @@ Scenario: Publish one downweight in multiple line changes with changed Market
       # ----------------------------------------------------------------|
       #                                    $55               $30`
 
-# publish multiple with meta data changes
-# plan: local impact: label (S3)
-# plan: reporting/client impact: KPI Type  (S2) - have a feeling these shouldn't be so easily changeable
-# line: downweights
+# publish multiple with meta data changes (S3)
+# plan: local impact: label
 Scenario: Publish multiple lines with changed MP Label
  Given I have set up a media plan
    And it's in a "Published" state as outlined below:
@@ -336,6 +334,8 @@ Scenario: Publish multiple lines with changed MP Label
       # ----------------------------------------------------------------|
       #                                    $95               $75
 
+# publish multiple with meta data changes (S2)
+# plan: reporting/client impact: KPI Type   - have a feeling these shouldn't be so easily changeable
 Scenario: Publish Multiple with changed KPI Type
   Given I have set up a media plan
     And it's in a "Published" state as outlined below:
@@ -377,21 +377,135 @@ Scenario: Publish Multiple with changed KPI Type
        # ----------------------------------------------------------------|
        #                                     $80              $80
 
+# Internal approval requested ??
 
-# publish one with notifications (S2)
-# plan: dates, total budget downweight
+# Internally approved
+# publish one with line breaches internally (S1) - internesting one - not sure what the plan status should be
+# internal: less discount
+Scenario: Publish a discount decrease causing an upweight after Internal Approval
+  Given I have set up a media plan
+    And it's in an "Internally Approved" state as outlined below:
+      # --------------------------------------------------------------------------------------------------------|
+      # Version       | Total Budget | Allocated | Unallocated | Breach % |Num IOs | Num M Lines | Num S lines  |
+      # --------------------------------------------------------------------------------------------------------|
+      # Draft         | £100         | *£90*     | *£10*       | 20%      | 1      | 1           | 0            |
+      # Published     | £100         |  £85      |  £15        | 20%      | 1      | 1           | 0            |
+      # Int. Approved | £100         |  £85      |  £15        | 20%      | 1      | 1           | 0            |
+      # --------------------------------------------------------------------------------------------------------|
+    And it contains a plan line below:
+      # --------------------------------------------------------------------------------------------------------------------------------|
+      # Supplier         | Property | Draft Gross Budget | Draft Discount | Publ. Gross Budget  | Publ. Discount  | Status              |
+      # --------------------------------------------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc     | Teads    | £100               | *10%*          | £100                |  15%            | Internally Approved |
+      # --------------------------------------------------------------------------------------------------------------------------------|
+    And I'm on the details panel of the plan line
+  When when I hit "Save & Publish"
+  Then Media Plan status remains "Internally Approved" # I think it should becayse the change isn't causing a client kind of breach
+    And Plan line Data and IO status changes as outlined below
+      # --------------------------------------------------------------------------------------------------------|
+      # Version       | Total Budget | Allocated | Unallocated | Breach % |Num IOs | Num M Lines | Num S lines  |
+      # --------------------------------------------------------------------------------------------------------|
+      # Draft         | £100         | £90       | £10         | 20%      | 1      | 1           | 0            |
+      # Published     | £100         | £90       | £10         | 20%      | 1      | 1           | 0            |
+      # Int. Approved | £100         | £90       | £10         | 20%      | 1      | 1           | 0            |
+      # --------------------------------------------------------------------------------------------------------|
+    And Individual Plan line Data change as outlined below
+      # --------------------------------------------------------------------------------------------------------------------------------|
+      # Supplier         | Property | Draft Gross Budget | Draft Discount | Publ. Gross Budget  | Publ. Discount  | Status              |
+      # --------------------------------------------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc     | Teads    | £100               | 10%            | £100                |  10%            | Published           |
+      # --------------------------------------------------------------------------------------------------------------------------------|
+
+# publish multiple with line breaches internally (S1)
+# internal: move between props
+Scenario: Publish a move within IO causing an upweight for more than published budget would allow
+  Given I have set up a media plan
+    And it's in an "Internally Approved" state as outlined below:
+      # --------------------------------------------------------------------------------------------------------|
+      # Version       | Total Budget | Allocated | Unallocated | Breach % |Num IOs | Num M Lines | Num S lines  |
+      # --------------------------------------------------------------------------------------------------------|
+      # Draft         | £100         | *£95*     | *£5*        | 20%      | 2      | 3           | 0            |
+      # Published     | £100         | £100      |  £0         | 20%      | 2      | 3           | 0            |
+      # Int. Approved | £100         | £100      |  £0         | 20%      | 2      | 3           | 0            |
+      # --------------------------------------------------------------------------------------------------------|
+    And it contains 3 plan line below:
+      # --------------------------------------------------------------------------------------|
+      # Supplier         | Property      | Draft Budget | Publ. Budget  | Status              |
+      # --------------------------------------------------------------------------------------|
+      # Aol UK Ltd       | TechCrunch    | *£25*        | £50           | Internally Approved |
+      # Aol UK Ltd       | About.me      | *£60*        | £30           | Internally Approved |
+      # --------------------------------------------------------------------------------------|
+      # Ebuzzing Inc     | Teads         | *£10*        | £20           | Internally Approved |
+      # --------------------------------------------------------------------------------------|
+      #                                  |  £95         | £100
+    And I'm on the draft view of the plan
+    And I have selected the first two lines
+  When when I hit "Publish Selected"
+  Then I get an error saying the Planned amount exceeds Total Budget
+
+Scenario: Publish a move within IO causing an upweight for internal re-approval
+  Given I have set up a media plan
+    And it's in an "Internally Approved" state as outlined below:
+      # --------------------------------------------------------------------------------------------------------|
+      # Version       | Total Budget | Allocated | Unallocated | Breach % |Num IOs | Num M Lines | Num S lines  |
+      # --------------------------------------------------------------------------------------------------------|
+      # Draft         | £100         | *£90*     | *£10*       | 20%      | 2      | 3           | 0            |
+      # Published     | £100         |  £95      |  £5         | 20%      | 2      | 3           | 0            |
+      # Int. Approved | £100         |  £95      |  £5         | 20%      | 2      | 3           | 0            |
+      # --------------------------------------------------------------------------------------------------------|
+    And it contains 3 plan line below:
+      # ----------------------------------------------------------------------------------------------------------|
+      # Supplier         | Property      | Draft Budget | Publ. Budget  | Int. appr. Budget | Status              |
+      # ----------------------------------------------------------------------------------------------------------|
+      # Aol UK Ltd       | TechCrunch    | *£25*        | £50           | £50               | Internally Approved |
+      # Aol UK Ltd       | About.me      | *£55*        | £30           | £30               | Internally Approved |
+      # ----------------------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc     | Teads         | *£10*        | £15           | £15               | Internally Approved |
+      # ----------------------------------------------------------------------------------------------------------|
+      #                                  |  £90         | £95           | £95
+    And I'm on the draft view of the plan
+    And I have selected all 3  lines
+  When when I hit "Publish Selected"
+  Then I get an warning saying that Internal approval will be breached (?) (£25 move is more than 20%)
+  Then Media Plan status changes to "Published"
+    And Plan line Data and IO status changes as outlined below
+      # --------------------------------------------------------------------------------------------------------|
+      # Version       | Total Budget | Allocated | Unallocated | Breach % |Num IOs | Num M Lines | Num S lines  |
+      # --------------------------------------------------------------------------------------------------------|
+      # Draft         | £100         | £90       | £10         | 20%      | 1      | 1           | 0            |
+      # Published     | £100         | £90       | £10         | 20%      | 1      | 1           | 0            |
+      # Int. Approved | £100         | £95       |  £5         | 20%      | 1      | 1           | 0            |
+      # --------------------------------------------------------------------------------------------------------|
+    And Individual Plan line Data change as outlined below
+    # ----------------------------------------------------------------------------------------------------------|
+    # Supplier         | Property      | Draft Budget | Publ. Budget  | Int. appr. Budget | Status              |
+    # ----------------------------------------------------------------------------------------------------------|
+    # Aol UK Ltd       | TechCrunch    | £25          | *£25*         | £50               | Amends Published    |
+    # Aol UK Ltd       | About.me      | £55          | *£55*         | £30               | Amends Published    |
+    # ----------------------------------------------------------------------------------------------------------|
+    # Ebuzzing Inc     | Teads         | £10          | £10           | £10               | Internally Approved |
+    # ----------------------------------------------------------------------------------------------------------|
+    #                                  |  £90         | £90           | £90
+
+# CLIENT APPROVAL REQUESTED ??
+
+# CLIENT APPROVED
+# publish one with notifications to clients (S2)
+# plan: total budget downweight, dates
 # line, cancels, deletes
+Scenario: Publish deleted line with Total Budget Downweight
+Scenario: Publish cancelled IO with Plan end date extended (multiple notifications for Client)
 
 # publish multiple with notifications (S2)
 # plan: dates, total budget downweight
 # line: cancels, deletes
+Scenario: Publish multiple deleted lines with Total budget downweight
+Scenario: Publish multiple downweights to 0 with Plan Start Date set earlier
 
-# publish one with line breaches (S1)
-# internal: less discount
+# publish one with line breaches client approval (S1)
 # client: upweight
 
-# publish multiple with line breaches (S1)
-# internal: less discount
+# publish multiple with line breaches client approval (S1)
 # client: upweight
 
 # publish one with breaching meta data (S1)
