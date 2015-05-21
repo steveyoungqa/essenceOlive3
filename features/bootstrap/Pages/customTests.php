@@ -65,6 +65,7 @@ class customTests extends CustomPage
         'Platform DS3' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-externalSystem-ds3']"),
         'Platform DBM' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-externalSystem-dbm']"),
         'Property' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-indicativeProperty']"),
+        'Property Edit' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-medialines-indicativeProperty']"),
         'Media Type' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-indicativeMediaType']"),
         'Cost Model' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-costModel']"),
         'Edit Cost Model' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-medialines-costModel']"),
@@ -79,6 +80,7 @@ class customTests extends CustomPage
 
 
         'Plan Line Description' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-description']"),
+        'Plan Line Description Update' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-medialines-description']"),
         'Add Another' => array('xpath' => "//*[@class='custom-checkbox optional-nextstep']/span[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']"),
         'Save Media Plan Line' => array('xpath' => "//*[@id='save']"),
         'Save Media Plan Line And Publish' => array('xpath' => "//*[@id='save-and-publish']"),
@@ -147,6 +149,8 @@ class customTests extends CustomPage
         'Use Olive 2 MAFs' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[12]/label[2]/span[1]"),
 
         'First Plan Line Edit' => array('xpath' => "//*[@class='ng-scope'][1]/td//*[contains(text(),'Edit')]"),
+        'Second Plan Line Edit' => array('xpath' => "//*[@class='ng-scope'][2]/td//*[contains(text(),'Edit')]"),
+        'Third Plan Line Edit' => array('xpath' => "//*[@class='ng-scope'][3]/td//*[contains(text(),'Edit')]"),
         'Continue & Publish' => array('xpath' => "//*[@class='toast-message error--message show']//*[contains(text(),'Continue & Publish')]"),
         );
 
