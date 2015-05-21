@@ -82,8 +82,17 @@ Scenario: O2 - Create separate Off-network and House-Ads Campaigns (OTD-2084)
 
 #to flesh out
 Scenario: O2 - Separate House ads and Offnetwork Total Budgets (OTD-2127)
-  # * How to split the Budget when splitting campaigns - leave as edge case?
   # weight the sums of line items in each and attribute portions of total budget accordingly
+  Given I have set up a Media plan in Olive 3
+    And it contains a mixture of Essence and Client liable plan lines
+    And I have used these plan lines as IDs in the Olive 3 T-sheet
+    And I have uploaded this T-sheet in Olive 2
+  When Olive generates separate budget periods for House Ads and Off Network lines (OTD-2084)
+  Then It assigns a proportion of Total Budget as the Campaign Budget Period Budget as per calculations below
+   using a ratio of the Total budget (converted in Media Plan currency)
+    # House Ads: sum of Client Liable lines converted in Media Plan currency) * Total Media Plan Budget in Olive 3 / Total Allocated Budget in Olive 3
+    # Off-Network: Total Budget in Olive 3 - Campaign Budget Period BUdget of House Ads Budget period
+
 
 #reviewed 5th May - in sprint 28 [27th April] -
 Scenario: Olive 2 Budget Period doesn't exist but Placements, Bookings and Campaign already set up and trafficked in the previous quarter (OTD-2001)
@@ -219,15 +228,16 @@ Scenario: O2 - Ensure Booking is never linked to more than one plan line during 
 #reviewed 21st May - in sprint 30 [22nd May] -
 Scenario: O2 - Do not create dummy lines for certain platforms (OTD-2129)
   Given I have selected one of "Biddable" Cost models for plan lines in olive 3
-    And the property of these lines is one of the following:
-     # GDN
+    And the platform of these lines is one of the following:
      # DBM
+     # DS3
+     # GDN
      # AdMob
      # YouTube
-     # Google Search
      # Facebook
      # Twitter
-     # iAd Workbench
+
+     # (iAd Workbench) ??
     And I have added ids of these lines in O3 T-sheet
   When I'm uploading the T-sheet in Olive 2
   Then There are no dummy Booking and Forecast lines created for the related placements
