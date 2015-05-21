@@ -123,6 +123,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 5000
     And I select the Media Plan linked to Campaign of "<campaign>"
     And I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-line-add']" to appear
+
     Then I click the "Add Media Plan Line" link
     Then I wait for 2000
     And I click the "Cost Type Media" link
