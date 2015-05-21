@@ -73,20 +73,22 @@ Scenario: Set up Tracking/SDK type of Input (OTD-2119)
     When I view Input Details
     Then I can associate Tracking Tags with it
       And I can choose a tracking tag "Source"
+       # ALL (option if we do not get the sources identified in time)
        # DCM Floodlights
        # AdWords Pixels
-       # Play Mobile Passback (? sean to confirm the name)
+       # Celtra
+       # Play Passback
+       # ....
       And pick a Tag from a list of integrated tags for the selected source
-      And choose a value type of one of the following:
+       # Play Passback - NPU - free conversion
+       # Play passback - NPU - paid conversion
+       # {a specific floodligh }
+       # ....
+      And choose a value type of one of the following (source specific, might not apply):
        # Post Click
        # Post Impression
        # Post Click Revenue
        # Post Impression Revenue
-       # TO CONFIRM WITH SEAN - can we actually automatically detect what is available and offer that once theyve picked a source?
-       # e.g.
-       # Conversions
-       # Total count
-      And an unique Identifier within the source
       And specify a weight in a range from -1 to 1 #-1 would subtract the values from the total of Input
         #todo @Helen - what's the copy for  tooltip here?
       And by default the weight is populated with 1
@@ -109,13 +111,9 @@ Scenario: Set up Tracking/SDK type of Input (OTD-2119)
         # | ??   | Dwell Time                   | seconds         | ??                | ??
 
   #to review
-  Scenario: Integrate with DCM Floodlights (OTD-2120)
+  Scenario: Integrate with Olive 2 Dash supporting Input sources (OTD-2121)
 
-  #to review
-  Scenario: Integrate with AdWords Pixels (OTD-2120)
-
-  #to review
-  Scenario: Integrate with Play Mobile Passback (OTD-2120)
+  Scenario: Integrate with Olive 3 Dash supporting Input sources (OTD-2121)
 
   #to review
   Scenario: Migrate existing event mappings to new structure (OTD-2121)

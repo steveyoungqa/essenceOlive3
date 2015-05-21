@@ -377,6 +377,7 @@ Scenario: Breaching Move within IO
         # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
 # TO BE CONTINUED
+
 Scenario: Upweight / Downweight with localised impact (only 2 out of 3 IOs)
   Given A Media Plan of a "$100" is "Client Approved"
     And I have set the breach threshold to be "20%"
@@ -397,3 +398,20 @@ Scenario: Upweight / Downweight with localised impact (only 2 out of 3 IOs)
     # AOL         | $30       | TechCrunch  | Internally Approved | Not confirmed       |
     # AOL         | $30       | TechCrunch  | Internally Approved | Not confirmed       |
     # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |
+
+
+#unbreach
+# unbreach that needs internal reapproval
+
+# client approved plan for $100
+# upweight total budget post approval to $120
+# client approval is breached
+# Plan changess to "Published" @ todo a story - recognise meta data that breaches internally 
+# Client sees $100 (last approved version)
+# Last internally approved - $100
+# Request internal approval
+# a - INternally approve
+# a - Plan satus changes to "Internally approved"
+# a - Client sees $100 (last approved version)
+# a - Last internally approved - $120
+# a - publish total budget downwegight to $100 & minor upweight in plan for $5
