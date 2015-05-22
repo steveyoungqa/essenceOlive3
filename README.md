@@ -51,7 +51,7 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
 
  eg. Olive 3 Regression tests on Test
  ```sh
- bin/behat --tags=regression --expand --profile=test
+ bin/behat --tags=guestRegression --expand --profile=test
  ```
 
  ```
@@ -65,7 +65,7 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
  
  eg. Other Test Packs Tags:
  ```sh
- @regression
+
  @campaign
  @kpi
  @login
@@ -73,7 +73,7 @@ Behat is an open source behavior-driven development framework for PHP 5.3+ using
 
   
  eg:
- bin/behat --tags=regression --expand --profile=uat
+ bin/behat --tags=guestRegression --expand --profile=uat
  ```
  
  To supress Depreceated PHP messages:
