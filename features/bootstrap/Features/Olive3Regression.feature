@@ -8,7 +8,9 @@ Feature: Olive 3 Regression Pack
 
     Given I am on "/login"
     Then I press "Sign in with Google"
+    And I wait for xpath "//*[@id='Email']" to appear
     And I fill in "Email" with "steve.automation@gmail.com"
+    And I wait for xpath "//*[@id='Passwd']" to appear
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
 
@@ -168,7 +170,6 @@ Feature: Olive 3 Regression Pack
 #   ***PUBLISH MEDIA PLAN***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     When I click the "Publish Media Plan" link
-    Then I wait for 2000
     And I wait for text "Media Plan published successfully" to appear
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I reload the page

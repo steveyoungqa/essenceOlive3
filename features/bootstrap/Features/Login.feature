@@ -6,7 +6,9 @@ Feature: Test Olive 3 Login
 
     Given I am on "/login"
     Then I press "Sign in with Google"
+    And I wait for xpath "//*[@id='Email']" to appear
     And I fill in "Email" with "<user>"
+    And I wait for xpath "//*[@id='Passwd']" to appear
     And I fill in "Passwd" with "<pass>"
     Then I press "signIn"
     Then I wait for 3000
@@ -18,3 +20,4 @@ Feature: Test Olive 3 Login
   Examples:
     |user                      |pass          |
     |steve.automation@gmail.com|Regression1000|
+
