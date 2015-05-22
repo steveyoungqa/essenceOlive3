@@ -120,7 +120,7 @@ Feature: Olive 3 Regression Pack
     Given I select Edit for the existing Campaign "<campaign>"
 
 #   ***ADD MEDIA PLAN LINE**
-    Then I wait for xpath "//*[@class='ng-scope']/div[@class='ng-scope']/ol-list[@class='ng-isolate-scope']/table[@class='standard-table table__records-editable']/tbody[@class='ng-scope']//*[@class='ol-list-item ol-drag-preview ng-scope']" to appear
+    Then I wait for xpath "//*[@class='button button__label-only']" to appear
     Then I click the "Media Plan Whole Column" link
     Then I wait for 5000
     And I select the Media Plan linked to Campaign of "<campaign>"
@@ -321,7 +321,7 @@ Feature: Olive 3 Regression Pack
 
   Examples:
     |campaign  |client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
-    |stevefix  |google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
+    |regression  |google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
 
 
 
