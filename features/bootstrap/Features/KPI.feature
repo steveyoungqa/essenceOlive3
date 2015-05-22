@@ -57,16 +57,20 @@ Feature: Olive 3 Regression Pack
     And I fill in the "KPI Event Number" with "20"
     And I fill in the "KPI Event Name" with "Regression Event"
     Then I click the "Conversion Source Field" link
-    Then I click the link containing Text "Google Floodlights"
+    Then I fill in the "Conversion Source Field" with "<conversionSource>"
+    And I wait for text "<conversionSource>" to appear
+    Then I click the link containing Text "<conversionSource>"
     And I click the "Event Save" link
     And I wait for 3000
     Then I click the "Add Tag" link
     And I click the "Conversion Type" link
+    And I wait for text "<conversion>" to appear
     And I fill in the "Conversion Type" with "<conversion>"
     And I click the link containing Text "<conversion>"
     And I wait for xpath "//*[@id='campaign-events-tags-new-activityGroup']" to appear
     And I click the "Activity Category" link
     And I fill in the "Activity Category" with "<activity>"
+    And I wait for 3000
     And I click the link containing Text "<activity>"
     And I click the "Activity Tag" link
     And I fill in the "Activity Tag" with "<tag>"
@@ -86,5 +90,5 @@ Feature: Olive 3 Regression Pack
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-  |campaign|client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-  |kpi     |google|automation |EMEA   |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+  |campaign|client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
+  |kpi     |google|automation |EMEA   |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|

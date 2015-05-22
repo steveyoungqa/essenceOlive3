@@ -164,6 +164,7 @@ Feature: Olive 3 Regression Pack
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
+    Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 #   ***PUBLISH MEDIA PLAN***
@@ -267,11 +268,14 @@ Feature: Olive 3 Regression Pack
     And I fill in the "KPI Event Number" with "20"
     And I fill in the "KPI Event Name" with "Regression Event"
     Then I click the "Conversion Source Field" link
-    Then I click the link containing Text "Google Floodlights"
+    Then I fill in the "Conversion Source Field" with "<conversionSource>"
+    And I wait for text "<conversionSource>" to appear
+    Then I click the link containing Text "<conversionSource>"
     And I click the "Event Save" link
     And I wait for 3000
     Then I click the "Add Tag" link
     And I click the "Conversion Type" link
+    And I wait for text "<conversion>" to appear
     And I fill in the "Conversion Type" with "<conversion>"
     And I click the link containing Text "<conversion>"
     And I wait for xpath "//*[@id='campaign-events-tags-new-activityGroup']" to appear
@@ -316,8 +320,8 @@ Feature: Olive 3 Regression Pack
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign       |client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |guestregression|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |campaign       |client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
+    |guestregression|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
 
 
 
