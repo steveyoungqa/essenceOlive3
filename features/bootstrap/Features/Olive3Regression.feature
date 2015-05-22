@@ -170,7 +170,7 @@ Feature: Olive 3 Regression Pack
 #   ***PUBLISH MEDIA PLAN***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     When I click the "Publish Media Plan" link
-    And I wait for text "Media Plan published successfully" to appear
+    And I wait for text "Media Plan Lines published successfully" to appear
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I reload the page
 
@@ -318,7 +318,7 @@ Feature: Olive 3 Regression Pack
 
   Examples:
     |campaign  |client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |regression|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |stevefix  |google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

@@ -167,7 +167,7 @@ Feature: Breach Scenarios
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     When I click the "Publish Media Plan" link
     Then I wait for 2000
-    And I wait for text "Media Plan published successfully" to appear
+    And I wait for text "Media Plan Lines published successfully" to appear
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I reload the page
 
@@ -267,7 +267,7 @@ Feature: Breach Scenarios
     Then I should see "Publishing this media plan you will require further internal approval for the amends you have made"
     And I click the "Continue & Publish" link
     Then I wait for 2000
-    Then I should see "Media Plan published successfully"
+    Then I should see "Media Plan Lines published successfully"
     Then I wait for 3000
 
 # ***REQUEST APPROVAL***
