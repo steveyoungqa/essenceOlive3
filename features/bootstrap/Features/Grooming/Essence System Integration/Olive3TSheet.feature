@@ -89,7 +89,7 @@ Scenario: O2 - Separate House ads and Offnetwork Total Budgets (OTD-2127)
     And I have uploaded this T-sheet in Olive 2
   When Olive generates separate budget periods for House Ads and Off Network lines (OTD-2084)
   Then It assigns a proportion of Total Budget as the Campaign Budget Period Budget as per calculations below
-   using a ratio of the Total budget (converted in Media Plan currency)
+#   using a ratio of the Total budget (converted in Media Plan currency)
     # House Ads: sum of Client Liable lines converted in Media Plan currency) * Total Media Plan Budget in Olive 3 / Total Allocated Budget in Olive 3
     # Off-Network: Total Budget in Olive 3 - Campaign Budget Period BUdget of House Ads Budget period
 
