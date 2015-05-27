@@ -200,7 +200,7 @@ Scenario: O2 - Autogenerate Negotiated cost Booking Lines from Olive 3 Plan line
 
 
 
-#reviewed 18th May - in sprint 29 [11th May] -
+#reviewed 18th May - in sprint 29 [11th May] - accepted
 Scenario: Do not enforce Client POs for Client Liable Plan lines (OTD-2104)
   Given I've prepared an O3 t-sheet
     And it references an Olive 3 plan line that is "Client Liable"
@@ -208,22 +208,68 @@ Scenario: Do not enforce Client POs for Client Liable Plan lines (OTD-2104)
   When I'm uploading the t-sheet into Olive 3
   Then it lets me upload and leaves any Client PO references in O2 Purchase Orders and Budget Periods blank (or sets to "house-ads")
 
-#reviewed - in sprint 29 [11th May] -
+#to review - in sprint 30 [25th May] -
+Scenario: O2 - Allow specifying the Booking for a new or existing placement through t-sheet (OTD-2148)
+  Given I have prepared an O3 T-sheet as illustrated below:
+      # PLACEMENT       | O3 Plan Line       | Booking Name        |
+      # ===========================================================|
+      # Existing Pla A  | Biddable line #123 | Existing Booking A  |
+      # Existing Pla B  | Biddable line #123 | Existing Booking B  |
+      # New Pla C       | Biddable line #123 | Existing Booking B  |
+      # New Pla D       | Biddable line #123 | New Booking D       |
+    And "Existing Pla A" and "Existing Pla B" already exist in Olive 2
+    And "New Pla C" and "New Pla D" are new Placements
+    And "Existing Booking A" and "Existing Booking B" already exist in Olive 2
+    And "New Booking D" booking doesn't exist
+    And "Biddable line #123" is an Olive 3 plan line that uses a "VARIABLE" pricing type cost model
+  When I upload this t-Sheet into Olive 2
+  Then Olive 2 creates "New Pla C" in the "Existing Booking B"
+    And Olive 2 creates "New Pla D" in "New Booking D"
+
+#to review - in sprint 30 [25th May] -
+Scenario: O2 - Ensure 1-to-1 relationship between Bookings and FIXED pricing type cost model O3 Plan Lines (OTD-2148)
+  Given I have prepared an O3 T-sheet for an existing campaign as illustrated below:
+      # PLACEMENT       | O3 Plan Line    | Booking Name         |
+      # =========================================================|
+      # Existing Pla A  | FIXED line #123 | Existing Booking A   |
+      # Existing Pla B  | FIXED line #123 | Existing Booking B   |
+      # New Pla C       | FIXED line #123 | Existing Booking B   |
+      # New Pla D       | FIXED line #123 | New Booking D        |
+    And "Existing Pla A" and "Existing Pla B" already exist in Olive 2
+    And "New Pla C" and "New Pla D" are new Placements
+    And "Existing Booking A" and "Existing Booking B" already exist in Olive 2
+    And "New Booking D" booking doesn't exist
+    And "FIXED line #123" is an Olive 3 plan line that uses a "FIXED" pricing type cost model, e.g. one of the below:
+      #Fixed CPC
+      #Fixed CPM
+      #Fixed CPA
+      #Fixed Cost
+  When I upload this t-Sheet into Olive 2
+  Then Olive 2 throws an error indicating the line number in T-sheet and the following text
+    # "Placements under Olive 3 Plan lines with fixed pricing type Cost Model cannot be separated into different Olive 2 bookings.
+    # Please ensure all rows for this Olive 3 plan line ID reference the same Booking Name"
+
+#reviewed 21st May - in sprint 30 [25th May] -
+Scenario: O2 - Ensure Booking is never linked to more than one plan line during a time (OTD-2128)
+  #moving placements between bookings does not need to be supported in T-sheet
+  Given a T-sheet contains 2 placements that belong to the same booking (new or existing)
+    And it is referenced to by 2 different Olive 3 plan lines that overlap
+  When I try to upload that T-sheet in Olive 2
+  Then Olive 2 throws an error indicating the line number in T-sheet and the following text
+    # "Placements that belong to different Olive 3 Plan lines running during the same time period
+    # cannot be grouped under one Olive 2 Booking"
+
+#reviewed - in sprint 29 [11th May] - accepted
 Scenario: O2 - Ignore booking column and autogenerate (OTD-2105)
   Given Given I've prepared an O3 t-sheet
+    And I have left the "Booking Name" column blank
   When I'm uploading the t-sheet into Olive 3
   Then Olive 2 autogenerates a booking for each plan line
     And records a reference to the Olive 3 "Plan line ID"
     And names it as per convention using Olive 3 {"PLan Line ID"} - {"Property"} - {first 20 chars from "Plan Line description"}
     And uses Plan line creator and last publisher as created and last changed events
 
-#reviewed 21st May - in sprint 30 [22nd May] -
-Scenario: O2 - Ensure Booking is never linked to more than one plan line during a time (OTD-2128)
-  #moving placements between bookings does not need to be supported in T-sheet
-  Given a T-sheet contains 2 placements that belong to the same booking (new or existing)
-    And it is referenced to by 2 different Olive 3 plan lines that overlap
-  When I try to upload that T-sheet in Olive 2
-  Then Olive 2 throws an error indicating the line number in T-sheet and the following text "Placements that belong to different Olive 3 Plan lines running during the same time period cannot be grouped under one Olive 2 Booking"
+
 
 #reviewed 21st May - in sprint 30 [22nd May] -
 Scenario: O2 - Do not create dummy lines for certain platforms (OTD-2129)
