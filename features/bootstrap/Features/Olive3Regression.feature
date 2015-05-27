@@ -8,7 +8,9 @@ Feature: Olive 3 Regression Pack
 
     Given I am on "/login"
     Then I press "Sign in with Google"
+    And I wait for xpath "//*[@id='Email']" to appear
     And I fill in "Email" with "steve.automation@gmail.com"
+    And I wait for xpath "//*[@id='Passwd']" to appear
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
 
@@ -118,7 +120,7 @@ Feature: Olive 3 Regression Pack
     Given I select Edit for the existing Campaign "<campaign>"
 
 #   ***ADD MEDIA PLAN LINE**
-    Then I wait for xpath "//*[@class='ng-scope']/div[@class='ng-scope']/ol-list[@class='ng-isolate-scope']/table[@class='standard-table table__records-editable']/tbody[@class='ng-scope']//*[@class='ol-list-item ol-drag-preview ng-scope']" to appear
+    Then I wait for xpath "//*[@class='button button__label-only']" to appear
     Then I click the "Media Plan Whole Column" link
     Then I wait for 5000
     And I select the Media Plan linked to Campaign of "<campaign>"
@@ -168,8 +170,7 @@ Feature: Olive 3 Regression Pack
 #   ***PUBLISH MEDIA PLAN***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     When I click the "Publish Media Plan" link
-    Then I wait for 2000
-    And I wait for text "Media Plan published successfully" to appear
+    And I wait for text "Media Plan Lines published successfully" to appear
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I reload the page
 
@@ -267,11 +268,14 @@ Feature: Olive 3 Regression Pack
     And I fill in the "KPI Event Number" with "20"
     And I fill in the "KPI Event Name" with "Regression Event"
     Then I click the "Conversion Source Field" link
-    Then I click the link containing Text "Google Floodlights"
+    Then I fill in the "Conversion Source Field" with "<conversionSource>"
+    And I wait for text "<conversionSource>" to appear
+    Then I click the link containing Text "<conversionSource>"
     And I click the "Event Save" link
     And I wait for 3000
     Then I click the "Add Tag" link
     And I click the "Conversion Type" link
+    And I wait for text "<conversion>" to appear
     And I fill in the "Conversion Type" with "<conversion>"
     And I click the link containing Text "<conversion>"
     And I wait for xpath "//*[@id='campaign-events-tags-new-activityGroup']" to appear
@@ -316,8 +320,8 @@ Feature: Olive 3 Regression Pack
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign  |client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |regression|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |campaign  |client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
+    |regression  |google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
 
 
 

@@ -6,11 +6,11 @@ Feature: OAT-2 Untracked Spend
 
     Given I am on "/login"
     Then I press "Sign in with Google"
+    And I wait for xpath "//*[@id='Email']" to appear
     And I fill in "Email" with "steve.automation@gmail.com"
+    And I wait for xpath "//*[@id='Passwd']" to appear
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
-    Then I wait for 5000
-    Then I should see "Notifications"
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
@@ -157,7 +157,7 @@ Feature: OAT-2 Untracked Spend
 #   ***PUBLISH MEDIA PLAN***
     When I click the "Publish Media Plan" link
     Then I wait for 3000
-    Then I should see "Media Plan published successfully"
+    Then I should see "Media Plan Lines published successfully"
     Then I wait for 2000
 
 #   ***LINK INSERTION ORDER TO DS3***

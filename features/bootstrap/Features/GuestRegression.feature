@@ -1,7 +1,8 @@
-@planlines
+@guestRegression
 Feature: Olive 3 Regression Pack
-  Create new campaign, Add Media Plan, Add Media Plan Line & Service
-  OAT-99, OAT-111, OAT-62, OAT-72, OAT-102, OAT-28, OAT-17, OTD-1908
+  Create new campaign, Add Media Plan, Add Media Plan Line & Service with Discount Applied,
+  Publish Media Plan, Insertion Order, Map to DS3, Map to Search Campaign, Approval Process,
+  Edit Media PLan, Breach Media Plan, Conversion Evens, Tagging, Tracking Management & Mapping Status
 
   Background:
 
@@ -69,11 +70,12 @@ Feature: Olive 3 Regression Pack
     Then I click the "Add New Period" link
     And I fill in "campaign-marketbudgets-new-periods-new-name" with "<period>"
     Then I click the "New Period Save" link
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-new-periods-new-panel-close']" to appear
     And I click the "Close Add Period" link
 
     Then I fill in "campaign-marketbudgets-new-period" with "<period>"
-    And I wait for text "<period>" to appear
     Then I wait for 2000
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-new-period-<period>']" to appear
     Then I click the link containing ID "<period>"
     Then I wait for 2000
 
@@ -123,35 +125,17 @@ Feature: Olive 3 Regression Pack
     Then I wait for 5000
     And I select the Media Plan linked to Campaign of "<campaign>"
     And I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-line-add']" to appear
+
     Then I click the "Add Media Plan Line" link
     Then I wait for 2000
     And I click the "Cost Type Media" link
-   
-    Then I click the "Buy Type" link
-    Then I wait for 2000
-    Then I should see text matching "Programmatic - PMP"
-    Then I should see text matching "Programmatic - Preferred deal"
-    Then I should see text matching "Programmatic - Open Exchange"
-    Then I should see text matching "Programmatic - Guaranteed"
-    Then I should see text matching "Biddable"
-    Then I should see text matching "Direct Buy"
-    And I fill in the "Buy Type" with "<buyType>"
-    Then I wait for 2000
-
     Then I click the "Line Channel" link
-    And I fill in the "Line Channel" with "Display"
-    Then I wait for 2000
+    And I click the "Line Channel Search" link
     Then I click the "Section" link
-    Then I wait for 2000
-    Then I double click the "Section Edit" link
-    Then I wait for 2000
-    Then I fill in the "Section Edit Input" with "Custom Section"
-    Then I wait for 2000
-    And I click the "Confirm Section Edit" link
+    And I click the link containing Text "Default"
     Then I wait for 2000
     Then I click the "Supplier" link
     And I click the link containing Text "<supplier>"
-    Then I should see text matching "<clientLiable>"
     Then I click the "Platform" link
     Then I click the "Platform DS3" link
     Then I wait for 2000
@@ -159,18 +143,7 @@ Feature: Olive 3 Regression Pack
     And I click the link containing Text "Google Search"
     Then I wait for 2000
     Then I click the "Media Type" link
-    Then I wait for 2000
-    Then I should see text matching "Link / text ad"
-    Then I should see text matching "Text & image ad"
-    Then I should see text matching "Expandable banner"
-    Then I should see text matching "Lightbox"
-    Then I should see text matching "Synced Roadblock"
-    Then I should see text matching "Overlay"
-    Then I should see text matching "Bespoke takeover"
-    Then I should see text matching "Advertorial"
-    Then I should see text matching "Interstitial"
-
-    And I click the link containing Text "Link / text ad"
+    And I click the link containing Text "Search Text Ad"
     Then I wait for 2000
     Then I click the "Cost Model" link
     And I click the link containing Text "Biddable CPC"
@@ -181,7 +154,7 @@ Feature: Olive 3 Regression Pack
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100000"
 
 #   ***APPLY BUDGET DISCOUNT***
     Then I click the "Discount Applied" checkbox
@@ -194,84 +167,149 @@ Feature: Olive 3 Regression Pack
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
-# ***ADD 2ND MEDIA PLAN LINE **
-    Then I click the "Add Media Plan Line" link
-    Then I wait for 2000
-    And I click the "Cost Type Media" link
-
-    Then I click the "Buy Type" link
-    Then I wait for 2000
-    And I fill in the "Buy Type" with "<buyType>"
-    Then I wait for 2000
-
-    Then I click the "Line Channel" link
-    And I fill in the "Line Channel" with "Display"
-    Then I wait for 2000
-    Then I click the "Section" link
-    Then I wait for 2000
-    And I fill in "campaign-marketbudgets-versions-lines-new-vertical" with "Custom Section"
-    Then I wait for 2000
-    Then I click the "Supplier" link
-    Then I wait for 2000
-    Then I fill in the "Supplier" with "<supplier>"
-    Then I wait for 2000
-    Then I click the "Platform" link
-    Then I click the "Platform DS3" link
-    Then I wait for 2000
-    Then I click the "Property" link
-    And I click the link containing Text "Google Search"
-    Then I wait for 2000
-    Then I click the "Media Type" link
-    Then I wait for 2000
-
-    And I click the link containing Text "Link / text ad"
-    Then I wait for 2000
-    Then I click the "Cost Model" link
-    And I click the link containing Text "Biddable CPC"
-    Then I select a Plan Line Start Date of "2015-04-04"
-    Then I wait for 2000
-    Then I Select a Plan Line End Date of "2015-04-04"
-    Then I wait for 2000
-
-    Then I click the "Line Currency" link
-    And I click the link containing Text "British Pound"
-    And I click the "Unknown Budget" checkbox
-    And I fill in the "Plan Line Description" with "<description2>"
-    Then I click the "Save Media Plan Line" link
-    Then I reload the page
-    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
-
-
-# ***CHECK INDIVIDUAL INSERTION ORDERS ARE CREATED DUE TO A MIX OF SET AND UNKNOWN BUDGET *
-    Then I click the "Insertion Order tab" link
-    Then I wait for 4000
-    Then I should see "2 found"
-
-#   ***EDIT FIRST MEDIA PLAN LINE***
-    Then I click the "Plan tab" link
-    Then I Maximize the Browser Window
-    And I wait for 2000
-    Then I click the "First Plan Line Edit" link
-    Then I wait for 4000
-    Then I click the "Liable Entity" link
-    Then I wait for 2000
-    Then I click the link containing Text "Essence LON"
-    Then I wait for 2000
-    Then I click the "Save Media Plan Line" link
-
-# ***PUBLISH MEDIA PLAN***
+#   ***PUBLISH MEDIA PLAN***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     When I click the "Publish Media Plan" link
-    Then I wait for text "Media Plan Lines published successfully" to appear
+    And I wait for text "Media Plan Lines published successfully" to appear
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
+    Then I reload the page
+
+#   ***LINK INSERTION ORDER TO DS3***
+    Then I wait for xpath "//*[@class='md-header-items']//*[contains(text(),'Insertion orders')]" to appear
+    Then I click the "Insertion Order tab" link
+    And I wait for xpath "//*[@class='button button__label-only']//*[contains(text(),'View IO')]" to appear
+    And I click the "View IO" link
+    And I wait for xpath "//*[@class='md-header-items-container']//*[contains(text(),'External platforms')]" to appear
+    Then I click the "External Platforms Insertion Order" link
+    And I wait for xpath "//*[@id='campaign-marketbudgets-versions-ios-ds3-link']" to appear
+    And I click the "Link DS3" link
+    And I wait for 2000
+    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
+    And I wait for 2000
+    And I fill in "mapping-externalSystem-ds3" with "<ds3>"
+    Then I wait for 8000
+    And I click the link containing Text "<ds3>"
+    Then I click the "External System Save" link
+
+#   ***MAP SEARCH CAMPAIGN***
+    Then I click the "Plan Lines" link
+    And I click the "Manage mappings" link
+    Then I wait for xpath "//*[@class='custom-checkbox']/span[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']" to appear
+
+    Then I Map Search Campaign "<searchCampaign>"
+    And I wait for 5000
+    And I click the "Save Managed Entities" link
+    Then I click the "Close Manage Mapping Panel" link
+    And I wait for 3000
+    Then I click the "Close Mapped Panel" link
+    And I wait for 2000
+    Then I click the "Plan tab" link
+
+    Then I click the "Publish Dropdown" link
+    And I click the "Published State" link
+
+#   ***REQUEST APPROVAL***
+    Then I click the "Manage Approval" link
+    And I click the "Add Approver" link
+    Then I wait for 2000
+    And I fill in "campaign-marketbudgets-versions-approvers-add-type" with "Internal"
+    Then I wait for 2000
+    And I click the "Internal Approver" link
+    Then I wait for 2000
+    Then I click the "Approver Field" link
+    Then I wait for 2000
+    And I fill in "campaign-marketbudgets-versions-approvers-add-person" with "<approver>"
+    Then I wait for 2000
+    Then I click the link containing Text "<approver>"
+    Then I wait for 2000
+    Then I click the "Save Approver" link
+    Then I wait for 2000
+    And I click the "Request Approval" link
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
-#   DELETE PLAN LINES
-    Then I click the "Editable Draft State" link
-    Then I wait for 2000
-    Then I delete Media Plan Line with a description of"<description2>"
+#   ***FEEDBACK & APPROVE***
+    Then I click the "Set Status" link
+    And I fill in the "Feedback Notes" with "Regression Testing feedback test"
+    Then I click the "Approve" link
 
-# ***DELETE CAMPAIGN CLEAN UP***
+#   ***EDIT FIRST MEDIA PLAN LINE***
+    Then I click the "Editable Draft State" link
+    And I wait for xpath "//*[@class='ng-scope'][1]/td//*[contains(text(),'Edit')]" to appear
+    Then I click the "First Plan Line Edit" link
+    And I wait for 2000
+    Then I click the "Edit Line Currency" link
+    And I click the link containing Text "Australian Dollar"
+    Then I wait for 2000
+    Then I click the "Save Media Plan Line" link
+
+#   ***PUBLISH AND ACCEPT BREACH***
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
+    When I click the "Publish Media Plan" link
+    Then I wait for text "Publishing this media plan you will require further internal approval for the amends you have made" to appear
+    And I click the "Continue & Publish" link
+    Then I wait for text "Media Plan published successfully" to appear
+#    And I wait for text "Amends Published" to appear
+    Then I reload the page
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
+
+#   ***ADD KPI***
+    Then I click the "Navigation Header" link
+    Then I click the "Campaigns" link
+    Then I wait for 3000
+    Then I fill in the "Campaign Search" with "<campaign>"
+    Then I wait for 3000
+    Given I select Edit for the existing Campaign "<campaign>"
+    And I click the "Default KPIs" link
+    Then I click the "Add KPI" link
+    Then I wait for 2000
+    And I fill in the "KPI Event Type" with "Brand"
+    Then I wait for 2000
+    And I fill in the "KPI Event Number" with "20"
+    And I fill in the "KPI Event Name" with "Regression Event"
+    Then I click the "Conversion Source Field" link
+    Then I fill in the "Conversion Source Field" with "<conversionSource>"
+    And I wait for text "<conversionSource>" to appear
+    Then I click the link containing Text "<conversionSource>"
+    And I click the "Event Save" link
+    And I wait for 3000
+    Then I click the "Add Tag" link
+    And I click the "Conversion Type" link
+    And I wait for text "<conversion>" to appear
+    And I fill in the "Conversion Type" with "<conversion>"
+    And I click the link containing Text "<conversion>"
+    And I wait for xpath "//*[@id='campaign-events-tags-new-activityGroup']" to appear
+    And I click the "Activity Category" link
+    And I fill in the "Activity Category" with "<activity>"
+    And I wait for 3000
+    And I click the link containing Text "<activity>"
+    And I click the "Activity Tag" link
+    And I fill in the "Activity Tag" with "<tag>"
+    Then I wait for 3000
+    And I click the link containing Text "<tag>"
+    Then I fill in the "Weighting" with "10"
+    And I click the "Tag Save" link
+    Then I reload the page
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
+
+##   ***TRACKING MANAGEMENT***
+#    Then I click the "Navigation Header" link
+#    Then I click the "Tracking Management DS3" link
+#    And I click the "Tracking Code Search Box" link
+#    Then I fill in the "Tracking Code Search Box" with "<searchCampaign>"
+#    Then I wait for 3000
+#    And I click the "Advanced Filter" link
+#    Then I wait for 2000
+#    Then I click the "Campaign Filter" link
+#    And I fill in the "Campaign Filter" with "<campaign>"
+#    Then I wait for 2000
+#    Then I click the link containing Text "<campaign>"
+#    And I click the "Advanced Search Close" link
+#    Then I click the "Tracking Details" link
+#    And I wait for 5000
+#    Then I should see "MAPPED"
+
+#   ***DELETE CAMPAIGN CLEAN UP***
     Then I Maximize the Browser Window
     And I wait for 2000
     Then I click the "Navigation Header" link
@@ -282,8 +320,8 @@ Feature: Olive 3 Regression Pack
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign      |client|owner      |region |period |budget|clientLiable |initiative|buyType   |supplier      |description1|description2|ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |planlinetests |google|automation |EMEA   |q42015 |100000|Client Liable|wildfire  |Direct Buy|Google Ireland|Plan Line 1 |Plan Line 2 |700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |campaign       |client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
+    |guestregression|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
 
 
 

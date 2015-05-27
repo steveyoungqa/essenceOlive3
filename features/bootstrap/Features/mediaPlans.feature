@@ -6,7 +6,9 @@ Feature: Olive 3 Media Plan Creation
 
     Given I am on "/login"
     Then I press "Sign in with Google"
+    And I wait for xpath "//*[@id='Email']" to appear
     And I fill in "Email" with "steve.automation@gmail.com"
+    And I wait for xpath "//*[@id='Passwd']" to appear
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
 
