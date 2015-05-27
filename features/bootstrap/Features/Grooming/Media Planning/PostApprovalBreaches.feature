@@ -26,6 +26,7 @@ Scenario: Detect impact of changes to be published / approved on Client Approval
   #     Last auto-approved: 15,000
   # b) AM Rejects upweight to 16,00
   # b) Client still sees 15,000
+   # UNBREACH - BEYOND MVP!!!
   # ba) AM resets back to 14,000 and publishes - plan changes are checked against last client approved and Client plan status is re-stated to APproved!!!
   # ba) Client sees 14,000
   # bb) AM resets to 15,500 and publishes -

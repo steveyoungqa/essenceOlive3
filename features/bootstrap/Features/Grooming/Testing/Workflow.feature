@@ -1,3 +1,4 @@
+# PLAN LINE CHANGE RELATED
 Scenario: New Property
   Given A Media Plan of a "$100" is "Client Approved"
     And it has two Insertion orders as outlined below
@@ -9,6 +10,7 @@ Scenario: New Property
     And I have added a new Property "Last Fm" for "$5" into Draft version for "AOL" Insertion Order
   When I publish these changes
   Then the Media Plan Status changes to "Published"
+    And Breach flag is set
     And Insertion Order statuses and budgets are as outlined below
     # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
     # ===================================================================================================================
@@ -29,6 +31,7 @@ Scenario: New Property
       And I request Internal Approval of "AOL" Insertion Order
     When Internal Approver approves the Insertion Order
     Then the Media Plan Status changes "Internally Approved" #as there are no other IOs that aren't in that state
+      And Breach flag is still set
       And Insertion Order statuses and budgets are as outlined below
       # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
       # ===================================================================================================================
@@ -48,7 +51,8 @@ Scenario: New Property
       # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
       And I request Internal Approval of "AOL" Insertion Order
     When Internal Approver rejectes the changes
-    Then the Media Plan Status changes "Internally Rejected" #??? does it? or is it published? @zanete to confirm with indicator behaviour
+    Then the Media Plan Status changes "Published"
+      And Breach flag is still set
       And Insertion Order statuses and budgets are as outlined below
       # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
       # ===================================================================================================================
@@ -69,6 +73,7 @@ Scenario: New Property
       And I request Client Re-Approval of the Plan
     When All Plan approvers approve the Plan
     Then the Media Plan Status changes "Client Approved"
+      And Breach flag is still unset
       And Insertion Order statuses and budgets are as outlined below
       # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
       # ===================================================================================================================
@@ -89,6 +94,7 @@ Scenario: New Property
         And I request Client Re-Approval of the Plan
       When a Client approver rejects the Plan
       Then the Media Plan Status changes "Client Rejected"
+        And Breach flag is still set
         And Insertion Order statuses and budgets are as outlined below
         # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
         # ===================================================================================================================
@@ -109,6 +115,7 @@ Scenario: Breaching Upweight
     And I have upweighted a line in "AOL" Insertion Order by $30
   When I publish these changes
   Then the Media Plan Status changes to "Published"
+    And Breach flag is set
     And Insertion Order statuses and budgets are as outlined below
     # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
     # ===================================================================================================================
@@ -125,6 +132,7 @@ Scenario: Breaching Upweight
       And I request Internal Approval of "AOL" Insertion Order
     When Internal Approver approves the Insertion Order
     Then the Media Plan Status changes "Internally Approved" #as there are no other IOs that aren't in that state
+      And Breach flag is still set
       And Insertion Order statuses and budgets are as outlined below
       # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
       # ===================================================================================================================
@@ -141,7 +149,8 @@ Scenario: Breaching Upweight
         # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
         And I request Internal Approval of "AOL" Insertion Order
       When Internal Approver rejects the Insertion Order
-      Then the Media Plan Status changes "Published" #???? does it
+      Then the Media Plan Status changes "Published"
+        And Breach flag is still set
         And Insertion Order statuses and budgets are as outlined below
         # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
         # ===================================================================================================================
@@ -175,6 +184,7 @@ Scenario: Breaching Upweight
       And I request Client re-approval of Plan
     When a Client Approver rejects the Plan
     Then the Media Plan Status changes "Client Rejected"
+      And Breach flag is still set
       And Insertion Order statuses and budgets are as outlined below
       # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
       # ===================================================================================================================
@@ -283,6 +293,7 @@ Scenario: Breaching Move within IO
     #- requires internal re-approval and client re-approval
   When I publish these changes
   Then the Media Plan Status changes to "Published"
+    And Breach flag is set
     And Insertion Order statuses and budgets are as outlined below
     # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
     # ==================================================================================================================|
@@ -304,6 +315,7 @@ Scenario: Breaching Move within IO
         And I request Internal Approval of "AOL" Insertion Order
       When Internal Approver approves the Insertion Order
       Then the Media Plan Status changes "Internally Approved" # as there are no IOs in other status
+        And Breach flag is still set
         And Insertion Order statuses and budgets are as outlined below
         # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
         # ==================================================================================================================|
@@ -326,6 +338,7 @@ Scenario: Breaching Move within IO
         And I request Internal Approval of "AOL" Insertion Order
       When Internal Approver rejects the Insertion Order
       Then the Media Plan Status remains "Published"
+        And Breach flag is still set
         And Insertion Order statuses and budgets are as outlined below
         # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
         # ==================================================================================================================|
@@ -367,7 +380,8 @@ Scenario: Breaching Move within IO
         # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
         And I request Client re-approval of Plan
       When all Client Approvers approve Plan
-      Then the Media Plan Status remains "Client Rejected"
+      Then the Media Plan Status changes to "Client Rejected"
+        And Breach flag is still set
         And Insertion Order statuses and budgets are as outlined below
         # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
         # ==================================================================================================================|
@@ -391,7 +405,7 @@ Scenario: Upweight / Downweight with localised impact (only 2 out of 3 IOs)
     And I have downweighted a line in 2nd "AOL" Insertion Order by $20
     #the total change for supplier / property is 0$ - no client or internal re-approval required, just supplier confirmation
   When I publish these changes
-  Then the Media Plan Status remains to "Client Approved"
+  Then the Media Plan Status remains "Client Approved"
     And Insertion Order statuses and budgets are as outlined below
     # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
     # ==================================================================================|
@@ -399,19 +413,80 @@ Scenario: Upweight / Downweight with localised impact (only 2 out of 3 IOs)
     # AOL         | $30       | TechCrunch  | Internally Approved | Not confirmed       |
     # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |
 
+# META DATA RELATED
 
-#unbreach
-# unbreach that needs internal reapproval
+Scenario: Publish Total budget upweight post approval
+  Given A Media Plan of a "$100" is "Client Approved"
+    And it has 3 Insertion orders as outlined below
+    # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
+    # ==================================================================================|
+    # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+    # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+    # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |
+    And I have increased the total budget to "$120"
+  When I publish these changes
+  Then the Media Plan Status changes to "Published"
+    And Breach flag is set
+    And Insertion Order Statuses and budgets remain unchanged
 
-# client approved plan for $100
-# upweight total budget post approval to $120
-# client approval is breached
-# Plan changess to "Published" @ todo a story - recognise meta data that breaches internally 
-# Client sees $100 (last approved version)
-# Last internally approved - $100
-# Request internal approval
-# a - INternally approve
-# a - Plan satus changes to "Internally approved"
-# a - Client sees $100 (last approved version)
-# a - Last internally approved - $120
-# a - publish total budget downwegight to $100 & minor upweight in plan for $5
+  Scenario: Internally approve Total budget upweight
+    Given A Media Plan of a "$120" is "Published" after having been approved by Client
+      And Breach flag is set due to published budget upweight
+      And it has 3 Insertion orders as outlined below
+      # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
+      # ==================================================================================|
+      # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+      # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+      # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |
+      And I have requested internal approval on plan
+    When Internal Approver approves plan
+    Then the Media Plan Status changes to "Internally Approved"
+      And Breach flag is still set
+      And Insertion Order Statuses and budgets remain unchanged
+
+  Scenario: Internally reject Total Budget upweight
+    Given A Media Plan of a "$120" is "Published" after having been approved by Client
+      And Breach flag is set due to published budget upweight
+      And it has 3 Insertion orders as outlined below
+      # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
+      # ==================================================================================|
+      # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+      # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+      # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |
+      And I have requested internal approval on plan
+    When Internal Approver rejects plan
+    Then the Media Plan Status remains "Published" #@todo - decide - how could we show that it's actually Internally rejected when it wasn't a breaching change
+      And a reject icon is displayed in the progress indicator # @todo - verify where - between publish and internal approval requested?
+      And Breach flag is still set
+      And Insertion Order Statuses and budgets remain unchanged
+
+  Scenario: Client approves Total budget upweight
+    Given A Media Plan of a "$120" is "Internally Approved" after having been approved by Client once
+      And Breach flag is set due to budget upweight
+      And it has 3 Insertion orders as outlined below
+      # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
+      # ==================================================================================|
+      # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+      # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+      # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |
+      And I have requested client approval on plan
+    When all Client Approvers approve plan
+    Then the Media Plan Status changes to "Client Approved"
+      And Breach flag is no longer set
+      And Insertion Order Statuses and budgets remain unchanged
+
+  Scenario: Client rejects Total budget upweight
+    Given A Media Plan of a "$120" is "Internally Approved" after having been approved by Client once
+      And Breach flag is set due to budget upweight
+      And it has 3 Insertion orders as outlined below
+      # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
+      # ==================================================================================|
+      # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+      # AOL         | $30       | TechCrunch  | Internally Approved | Supplier Confirmed  |
+      # Channel 5   | $10       | Channel 5   | Internally Approved | Supplier Confirmed  |
+      And I have requested client approval on plan
+    When one Client Approver reject plan
+    Then the Media Plan Status changes back to "Internally Approved"
+      And Breach flag is still set
+      And a reject icon is displayed in the progress indicator # @todo - verify?
+      And Insertion Order Statuses and budgets remain unchanged

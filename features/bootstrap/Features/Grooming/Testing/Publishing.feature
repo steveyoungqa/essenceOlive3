@@ -447,7 +447,7 @@ Scenario: Publish a move causing an upweight exceeding original published budget
 # Internal approval requested @todo
 
 # Internally approved
-# publish one with line breaches internally (S1) - 
+# publish one with line breaches internally (S1) -
 # internal: less discount
 Scenario: Publish a discount decrease causing an upweight after Internal Approval
   Given I have set up a media plan
@@ -467,7 +467,7 @@ Scenario: Publish a discount decrease causing an upweight after Internal Approva
       # --------------------------------------------------------------------------------------------------------------------------------|
     And I'm on the details panel of the plan line
   When when I hit "Save & Publish"
-  Then Media Plan status changes to "Published" # I think it should becayse the change isn't causing a client kind of breach
+  Then Media Plan status changes to "Published"
     And Plan Data updates as outlined below
       # --------------------------------------------------------------------------------------------------------|
       # Version       | Total Budget | Allocated | Unallocated | Breach % |Num IOs | Num M Lines | Num S lines  |
@@ -483,7 +483,7 @@ Scenario: Publish a discount decrease causing an upweight after Internal Approva
       # Ebuzzing Inc     | Teads    | £100               | 10%            | £100                |  10%            | Amends Published    |
       # --------------------------------------------------------------------------------------------------------------------------------|
 
-# publish multiple with line breaches internally (S1) - very weird one, need Helen to advise
+# publish multiple with line breaches internally (S1)
 # internal: move between props
 Scenario: Publish a move within IO causing an upweight for internal re-approval
   Given I have set up a media plan
@@ -509,7 +509,7 @@ Scenario: Publish a move within IO causing an upweight for internal re-approval
     And I have selected all 3 lines
   When when I hit "Publish Selected"
   Then I get an warning saying that Internal approval will be breached (?) (£5 upweight for supplier / property is enough to require re-approval)
-  Then Media Plan status remains "Internally Approved"
+  Then Media Plan status remains "Published"
     And Plan Data changes as outlined below
       # --------------------------------------------------------------------------------------------------------|
       # Version       | Total Budget | Allocated | Unallocated | Breach % |Num IOs | Num M Lines | Num S lines  |
@@ -571,6 +571,12 @@ Scenario: Publish a move within DBM IO not causing a breach
       #                                            | £90          | £90           | £90
 
 # CLIENT APPROVAL REQUESTED @todo
+Scenario: Publish no impact changes
+  #appear in all versions immediatelly
+Scenario: Publish internal approval breaching changes
+  #appear in client version after internal approval
+Scenario: Publish client approval breaching changes
+  #clients are no longer required to re-approve
 
 # CLIENT APPROVED
 # publish one with notifications to clients (S2)
