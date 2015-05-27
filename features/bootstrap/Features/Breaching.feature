@@ -229,6 +229,9 @@ Feature: Breach Scenarios
     Then I click the "Set Status" link
     And I fill in the "Feedback Notes" with "Regression Testing feedback test"
     Then I click the "Approve" link
+    Then I reload the page
+    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
+
 
 #   ***EDIT FIRST MEDIA PLAN LINE***
     Then I click the "Editable Draft State" link
@@ -267,7 +270,7 @@ Feature: Breach Scenarios
     Then I should see "Publishing this media plan you will require further internal approval for the amends you have made"
     And I click the "Continue & Publish" link
     Then I wait for 2000
-    Then I should see "Media Plan Lines published successfully"
+    Then I should see "Media Plan published successfully"
     Then I wait for 3000
 
 # ***REQUEST APPROVAL***
