@@ -232,9 +232,10 @@ Feature: Breach Scenarios
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<line3>"
     Then I click the "Save Media Plan Line" link
     Then I reload the page
-    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
+    Then I wait for xpath "//*[contains(text(),'Default')]" to appear
 
 #   ***PUBLISH INDIVIDUAL LINE***
+    And I wait for text "<line2>" to appear
     Then I select Media Plan Line checkbox with a description of "<line2>"
     And I wait for 5000
     When I click the "Publish Selected" link
@@ -242,7 +243,7 @@ Feature: Breach Scenarios
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
-#    ***PUBLISH INDIVIDUAL LINE***
+#   ***PUBLISH INDIVIDUAL LINE***
     Then I click the "Editable Draft State" link
     And I wait for xpath "//*[@class='ng-scope'][3]/td//*[contains(text(),'Edit')]" to appear
     Then I select Media Plan Line checkbox with a description of "<line3>"
@@ -252,7 +253,7 @@ Feature: Breach Scenarios
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
-    #   ***REQUEST APPROVAL***
+#   ***REQUEST APPROVAL***
     Then I click the "Manage Approval" link
     And I click the "Add Approver" link
     Then I wait for 2000
@@ -277,7 +278,7 @@ Feature: Breach Scenarios
     And I fill in the "Feedback Notes" with "Regression Testing feedback test"
     Then I click the "Approve" link
 
-    #***EDIT THIRD MEDIA PLAN LINE***
+#***EDIT THIRD MEDIA PLAN LINE***
     Then I click the "Editable Draft State" link
     And I wait for xpath "//*[@class='ng-scope'][3]/td//*[contains(text(),'Edit')]" to appear
     Then I click the "Third Plan Line Edit" link
@@ -291,6 +292,7 @@ Feature: Breach Scenarios
     Then I click the "Save Media Plan Line" link
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
+    And I wait for 5000
 
 #    ***RE-PUBLISH INDIVIDUAL LINE***
     Then I select Media Plan Line checkbox with a description of "<line2update>"
