@@ -11,6 +11,7 @@ Feature: Breach Scenarios
     And I wait for xpath "//*[@id='Passwd']" to appear
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
+    And I Maximize the Browser Window
 
   Scenario Outline: Individual IO Approval
 
