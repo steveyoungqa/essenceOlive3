@@ -249,6 +249,20 @@ Scenario: O2 - Ensure 1-to-1 relationship between Bookings and FIXED pricing typ
     # "Placements under Olive 3 Plan lines with fixed pricing type Cost Model cannot be separated into different Olive 2 bookings.
     # Please ensure all rows for this Olive 3 plan line ID reference the same Booking Name"
 
+#to review
+Scenario: Supplier Mismatch handling
+  #UAT outcome - Olive shouldn't let me uplaod a T-sheet where existing Placement is under a booking with mismatching Supplier
+    Given I have prepared a t-sheet
+      # Placement 		  | Booking 				    | Supplier of Booking | Plan Line 	| Supplier of Plan Line |
+      # --------------------------------------------------------------------------------------------------|
+      # Existing Pla A 	| Existing Booking A	| Supplier A				  | O3 line 	  | Supplier B				    |
+    When I upload this T-sheet in Olive 2
+    Then Olive 2 throws an error indicating the line number in T-sheet and the folowing text
+      # "Supplier mismatch. Plan Line Supplier is {Supplier legal entity}, but Supplier of existing booking and in T-sheet is {Supplier legal Entity}.
+      # Please ensure they match"
+
+
+
 #reviewed 21st May - in sprint 30 [25th May] -
 Scenario: O2 - Ensure Booking is never linked to more than one plan line during a time (OTD-2128)
   #moving placements between bookings does not need to be supported in T-sheet
