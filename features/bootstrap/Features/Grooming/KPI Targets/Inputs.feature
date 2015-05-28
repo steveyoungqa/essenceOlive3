@@ -4,6 +4,19 @@ In order to specify meta information about where Olive should be looking for per
 As a Campaign Manager
 I want to define inputs at Campaign level
 
+
+Scenario: New campaign page
+   - rename the Default KPI to Meaurement
+   - have the button that takes to Tracking Tag / SDK Inputs page
+
+Scenario: Tracking Tag/SDK Input edit page
+- combine event input + activities tags into single page
+- clien specific
+
+Scenario: No custom Inputs on media Plan level
+- remove custom KPIs on media plan
+
+
 #to review
 Scenario: Set up an input and choose a type (OTD-2119)
   Given I have set up a Campaign
@@ -84,6 +97,7 @@ Scenario: Set up Tracking/SDK type of Input (OTD-2119)
        # Play passback - NPU - paid conversion
        # {a specific floodligh }
        # ....
+      And I cannot choose a tag that is used by another client
       And choose a value type of one of the following (source specific, might not apply):
        # Post Click
        # Post Impression

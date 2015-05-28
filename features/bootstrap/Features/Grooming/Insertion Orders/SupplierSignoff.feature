@@ -98,3 +98,156 @@ Scenario: Spend against supplier confirmed cancelled IOs (OTD-1973)
   Then I can see a warning icon against the spending lines on the left side (as indicated in attached screenshot)
     And On hover over the warning I see a message saying: "This plan line is spending against cancelled IO. Please resolve"
     And IO Owner and Media Plan manager receives a persistent (until issue fixed) notification on the homepage saying: "Spend against Lines in IO [IO Label] that have been confirmed as cancelled by Supplier. Please resolve" with a link to the problem IO
+
+
+# TESTS
+Scenario: Add a New Line
+  Given I have set up a new media Plan
+    And I have published the plan
+    And Supplier Sign-off has been confirmed on the generated IO
+    And I have added a new line in draft mode
+  When I publish these changes
+  Then Supplier countersign confirmation is revoked
+    And an event is added to IO History
+      # 'New Line added leading to invalidated Supplier confirmation'
+
+Scenario: Delete Line (-failed manual test)
+  Given I have set up a new media Plan
+    And I have published the plan
+    And Supplier Sign-off has been confirmed on the generated IO
+    And I have deleted one of the lines in Draft plan
+  When I publish these changes
+  Then Supplier countersign confirmation is revoked
+    And an event is added to IO History
+      # 'Line deleted leading to invalidated Supplier confirmation'
+
+Scenario: Change Budget
+  Given I have set up a new media Plan
+    And I have published the plan
+    And Supplier Sign-off has been confirmed on the generated IO
+    And I have changed net budget on the line in draft plan
+  When I publish these changes
+  Then Supplier countersign confirmation is revoked
+    And an event is added to IO History
+      # 'Line changed leading to invalidated Supplier confirmation'
+
+Scenario: Change Start Date
+  Given I have set up a new media Plan
+    And I have published the plan
+    And Supplier Sign-off has been confirmed on the generated IO
+    And I have changed the start date of line in draft plan
+  When I publish these changes
+  Then Supplier countersign confirmation is revoked
+    And an event is added to IO History
+      # 'Line changed leading to invalidated Supplier confirmation'
+
+Scenario: Change End Date
+  Given I have set up a new media Plan
+    And I have published the plan
+    And Supplier Sign-off has been confirmed on the generated IO
+    And I have changed the end date of line in draft plan
+  When I publish these changes
+  Then Supplier countersign confirmation is revoked
+    And an event is added to IO History
+      # 'Line changed leading to invalidated Supplier confirmation'
+
+Scenario: Change Cost Model (failed manual test)
+  Given I have set up a new media Plan
+    And I have published the plan
+    And Supplier Sign-off has been confirmed on the generated IO
+    And I have changed the cost model of line in draft plan
+  When I publish these changes
+  Then Supplier countersign confirmation is revoked
+    And an event is added to IO History
+      # 'Line changed leading to invalidated Supplier confirmation'
+
+Scenario: Change Discount
+  Given I have set up a new media Plan
+    And I have published the plan
+    And Supplier Sign-off has been confirmed on the generated IO
+    And I have changed the discount of line in draft plan
+  When I publish these changes
+  Then Supplier countersign confirmation is revoked
+    And an event is added to IO History
+      # 'Line changed leading to invalidated Supplier confirmation'
+
+Scenario: Change Unit Cost (failed manual test)
+  Given I have set up a new media Plan
+    And I have published the plan
+    And Supplier Sign-off has been confirmed on the generated IO
+    And I have changed the unit cost of line in draft plan
+  When I publish these changes
+  Then Supplier countersign confirmation is revoked
+    And an event is added to IO History
+      # 'Line changed leading to invalidated Supplier confirmation'
+
+Scenario: Change Property (failed manual test)
+  Given I have set up a new media Plan
+    And I have published the plan
+    And Supplier Sign-off has been confirmed on the generated IO
+    And I have changed the property of line in draft plan
+  When I publish these changes
+  Then Supplier countersign confirmation is revoked
+    And an event is added to IO History
+      # 'Line changed leading to invalidated Supplier confirmation'
+
+Scenario: Change Currency
+  Given I have set up a new media Plan (2 lines)
+    And I have published the plan
+    And Supplier Sign-off has been confirmed on the generated IO
+    And I have changed the currency  of one line in draft plan
+  When I publish these changes
+  Then Plan data changes as outlined
+    And Supplier countersign confirmation is revoked from old IO
+    And an event is added to Old IO History
+      # 'Line moved leading to invalidated Supplier confirmation'
+
+Scenario: Change Supplier (failed manual test)
+  Given I have set up a new media Plan (3 lines - diff suppliers)
+    And I have published the plan
+    And Supplier Sign-off has been confirmed on the generated IOs
+    And I have changed the Supplier  of one line in draft plan
+    And moved the line into the other IO
+  When I publish these changes
+  Then Plan data changes as outlined
+    And Supplier countersign confirmation is revoked from both IOs
+    And an event is added to Old IO History
+      # 'Line moved leading to invalidated Supplier confirmation'"
+
+Scenario: Change IO
+  Given I have set up a new media Plan (3 lines - same supplier)
+    And I have published the plan
+    And Supplier Sign-off has been confirmed on the generated IOs
+    And I have changed the Supplier  of one line in draft plan
+    And moved the line into the other IO
+  When I publish these changes
+  Then Supplier countersign confirmation is revoked from both IOs
+    And an event is added to Old IO History
+      # 'Line moved leading to invalidated Supplier confirmation'"
+
+Scenario: Change Liable Entity
+  Given I have set up a new media Plan (3 lines - diff liable entities)
+    And I have published the plan
+    And Supplier Sign-off has been confirmed on the generated IOs
+    And I have changed the Liable Entity  of one line in draft plan
+    And moved the line into the other IO
+  When I publish these changes
+  Then Supplier countersign confirmation is revoked from both IOs
+    And an event is added to Old IO History
+    # 'Line moved leading to invalidated Supplier confirmation'"
+
+Scenario: Change Platform
+  Given I have set up a new media Plan
+    And I have published the plan
+    And Supplier Sign-off has been confirmed on the generated IO
+    And I have changed the platform of line in draft plan
+  When I publish these changes
+  Then Supplier countersign confirmation remains intact
+
+Scenario: Change Description
+  Given I have set up a new media Plan
+    And I have published the plan
+    And Supplier Sign-off has been confirmed on the generated IO
+    And I have changed the description of line in draft plan
+  When I publish these changes
+  Then Supplier countersign confirmation remains intact
