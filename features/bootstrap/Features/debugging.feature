@@ -13,44 +13,28 @@ Feature: Olive 3 Regression Pack
     And I wait for xpath "//*[@id='Passwd']" to appear
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
+    Then I Maximize the Browser Window
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
-#   ***CREATE CAMPAIGN***
-    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
     Then I wait for 3000
-    Then I fill in the "Campaign Search" with "<campaign>"
-    Then I wait for 3000
-    Then I select the Delete "<campaign>" checkbox
-    And I wait for xpath "//*[@class='toast-message success--message show']" to disappear
+    Given I select Edit for the existing Campaign "<campaign>"
 
-    Then I click the "Navigation Header" link
-    Then I wait for 3000
-    Then I click the "Campaigns" link
-    Then I wait for 3000
-    Then I follow "campaign-add"
-    Then I wait for 3000
-
-    Then I fill in the "Campaign Name" with "<campaign>"
-    And I fill in "campaign-new-client" with "<client>"
+#   ***ADD MEDIA PLAN LINE**
+    Then I wait for xpath "//*[@class='button button__label-only']" to appear
+    Then I click the "Media Plan Whole Column" link
     Then I wait for 5000
-    Then I fill in "campaign-new-managingRegion" with "EMEA"
-    And I wait for 5000
-    And I fill in "campaign-new-owner" with "<owner>"
-    And I wait for xpath "//*[@id='campaign-new-owner-steve-automation']" to appear
-    And I fill in "campaign-new-memo" with "Test Notes"
-    Then I wait for 5000
-    Then I click the "Campaign Save" link
-
+    And I select the Media Plan linked to Campaign of "<campaign>"
+    And I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-line-add']" to appear
 
 
 
 
   Examples:
-    |campaign  |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |purchaseorders|google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |campaign|client|owner      |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |debug   |google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

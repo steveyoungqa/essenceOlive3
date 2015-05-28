@@ -10,6 +10,7 @@ Feature: Setup Campaign, Media Plan, Plan Lines, Insertion Order to perform test
     And I wait for xpath "//*[@id='Passwd']" to appear
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
+    And I Maximize the Browser Window
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 
