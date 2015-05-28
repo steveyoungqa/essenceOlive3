@@ -111,7 +111,7 @@ Scenario: Add a New Line
     And an event is added to IO History
       # 'New Line added leading to invalidated Supplier confirmation'
 
-Scenario: Delete Line (-failed manual test)
+Scenario: Delete Line (failed manual test, couldn't publish deleted line)
   Given I have set up a new media Plan
     And I have published the plan
     And Supplier Sign-off has been confirmed on the generated IO
@@ -251,3 +251,11 @@ Scenario: Change Description
     And I have changed the description of line in draft plan
   When I publish these changes
   Then Supplier countersign confirmation remains intact
+
+#Changes on IO
+Scenario: Change Supplier
+Scenario: Change Currency
+Scenario: Change Liable Entity
+Scenario: Change Platform
+Scenario: Cancel Completely by moving all lines out
+Scenario: Cancel Compeltely by deleting all lines (untested)
