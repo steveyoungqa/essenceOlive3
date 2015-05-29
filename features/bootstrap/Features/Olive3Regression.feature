@@ -48,12 +48,17 @@ Feature: Olive 3 Regression Pack
 #   ***LINK TO EXTERNAL PLATFORM***
     And I wait for xpath "//*[contains(text(),'External platforms')]" to appear
     Then I click the "External Platforms Market Level" link
+    Then I click the "DBM Advertiser" link
+    And I click the "External System Cancel" link
+    Then I click the "DS3 Advertiser" link
+    And I click the "External System Cancel" link
     And I click the "Google Sub Product" link
-    Then I fill in "mapping-externalSystem-googleSubProduct" with "Wildfire - E15"
+    Then I fill in "mapping-externalSystem-googleSubProduct" with "<initiative>"
     Then I wait for 5000
     Then I click the "External System Save" link
   # The above doesnt click External Save - it takes focus off the form dropdown in the previous step
     Then I click the "External System Save" link
+    And I should see text matching "You have linked the campaign to Google Sub-Product"
 
 #   ***CREATE MEDIA PLAN***
     Then I wait for xpath "//*[@class='md-header-items']//*[contains(text(),'Media Plans')]" to appear
@@ -162,6 +167,10 @@ Feature: Olive 3 Regression Pack
     And I wait for 2000
     And I click the "Discount Amount Tab" link
     Then I fill in the "Discount Amount" with "50"
+    And I click the "Discount Percentage" link
+    And I wait for 2000
+    Then I fill in the "Discount Amount" with "10"
+    Then I should see "amount Total"
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
@@ -324,7 +333,7 @@ Feature: Olive 3 Regression Pack
 
   Examples:
     |campaign  |client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
-    |regression  |google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
+    |alec      |google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
 
 
 
