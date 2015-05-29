@@ -99,12 +99,12 @@ Feature: Olive 3 Media Plan Creation
     And I fill in "campaign-marketbudgets-new-owner" with "<owner>"
     Then I wait for 2000
     Then I click the link containing ID "<owner>"
-    Then I should see an "Use Olive 2 MAFs" X-Path element
-    Then I click the "Use Olive 2 MAFs" checkbox
+#    Then I should see an "Use Olive 2 MAFs" X-Path element
+#    Then I click the "Use Olive 2 MAFs" checkbox
     Then I click the "Media Plan Long Save" link
     And I wait for xpath "//*[contains(@class,'active--panel')]//*[contains(text(),'External platforms')]" to appear
 
-    Then I should see text matching "true"
+#    Then I should see text matching "true"
 
 # ***DELETE CAMPAIGN CLEAN UP***
     Then I Maximize the Browser Window
