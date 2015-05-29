@@ -126,6 +126,155 @@ Scenario: One field appears to be used when toggling between discount types (OTD
     # =============================================================================================================|
     #|Fixed CPM   | 3,016.60   | 19.55         | Amount        | 15                      |  154302  | 3,031.60     |
 
+#Plan Line tests
+Scenario: Fixed CPM line without Discount
+  Given I have set up a media line without discount
+    And chosen 'Fixed CPM' as 'Cost Model'
+    And Entered '6000' as 'Net Budget'
+    And entered '0.25' as 'Unit Cost'
+    And left discount field empty
+  When I look at the plan line form
+  Then I don't see 'Budget (Gross)'
+    And I don't see 'Unit Cost (Gross)'
+    And 'Quantity' is calculated as '24000000 impressions'
+
+Scenario: Fixed CPC Without discount
+  Given I have set up a media line without discount
+    And chosen 'Fixed CPC' as 'Cost Model'
+    And Entered '50000' as 'Net Budget'
+    And entered '2' as 'Unit Cost'
+    And left discount field empty
+  When I look at the plan line form
+  Then I don't see 'Budget (Gross)'
+    And I don't see 'Unit Cost (Gross)'
+    And 'Quantity' is calculated as '25000 clicks'
+
+Scenario: Fixed CPA Without discount
+  Given I have set up a media line without discount
+    And chosen 'Fixed CPA' as 'Cost Model'
+    And Entered '3200' as 'Net Budget'
+    And entered '20' as 'Unit Cost'
+    And left discount field empty
+  When I look at the plan line form
+  Then I don't see 'Budget (Gross)'
+    And I don't see 'Unit Cost (Gross)'
+    And 'Quantity' is calculated as '160'
+
+Scenario: Fixed Cost Without discount
+  Given I have set up a line without discount
+    And chosen 'Fixed Cost' as 'Cost Model'
+    And Entered '20000' as 'Net Budget'
+    And left discount field empty
+  When I look at the plan line form
+  Then I don't see 'Budget (Gross)'
+    And I don't see 'Unit Cost (Gross)'
+    And 'Unit Cost (Net)' is read only as '20000'
+    And 'Quantity' is calculated as '1'
+
+Scenario: Variable Without discount
+  Given I have set up a line without discount
+    And chosen a 'Variable' pricing type as 'Cost Model' (one of "Biddable")
+    And Entered '3200' as 'Net Budget'
+    And left discount field empty
+  When I look at the plan line form
+  Then I don't see 'Budget (Gross)'
+    And I don't see 'Unit Cost (Gross)' or 'Unit Cost (Net)'
+    And I don't see 'Quantity'
+
+
+Scenario: Fixed CPM  With discount percent (failed manual test - gross unit cost not showing up)
+  Given I have set up a line without discount
+    And chosen 'Fixed CPM' as 'Cost Model'
+    And Entered '3016.6' as 'Net Budget'
+    And entered '19.55' as 'Unit Cost'
+    And entered '15% discount'
+  When I look at the plan line form
+  Then I see 'Budget (Gross)' is equal to '3548.94'
+    And 'Unit Cost (Gross)' is equal to '23'
+    And 'Quantity' is calculated as '154302 impressions'
+
+Scenario: Fixed CPC  With discount percent
+  Given I have set up a line without discount
+    And chosen 'Fixed CPC' as 'Cost Model'
+    And Entered '25000' as 'Net Budget'
+    And entered '0.1' as 'Unit Cost'
+    And entered '15% discount'
+  When I look at the plan line form
+  Then I see 'Budget (Gross)' is equal to '29411.76'
+    And 'Unit Cost (Gross)' is equal to '0.12'
+    And 'Quantity' is calculated as '250000 clicks'
+
+Scenario: Fixed CPA  With discount percent
+  Given I have set up a line without discount
+    And chosen 'Fixed CPA' as 'Cost Model'
+    And Entered '21875' as 'Net Budget'
+    And entered '0.1' as 'Unit Cost'
+    And entered '15% discount'
+  When I look at the plan line form
+  Then I see 'Budget (Gross)' is equal to '25735.29'
+    And 'Unit Cost (Gross)' is equal to '0.12'
+    And 'Quantity' is calculated as '218750'
+
+Scenario: Fixed Cost  With discount percent
+  Given I have set up a line without discount
+    And chosen 'Fixed Cost' as 'Cost Model'
+    And Entered '17850' as 'Net Budget'
+    And entered '15% discount'
+  When I look at the plan line form
+  Then I see 'Budget (Gross)' is equal to '21000'
+    And 'Unit Cost (Net)' is read-only as '17850'
+    And 'Unit Cost (Gross)' is equal to '21000'
+    And 'Quantity' is calculated as '1'
+
+Scenario: Fixed CPM  With discount amount
+  Given I have set up a line without discount
+    And chosen 'Fixed CPM' as 'Cost Model'
+    And Entered '3016.6' as 'Net Budget'
+    And entered '19.55' as 'Unit Cost'
+    And entered '20' as 'Discount amount'
+  When I look at the plan line form
+  Then I see 'Budget (Gross)' is equal to '3036.6'
+    And 'Unit Cost (Gross)' is equal to '19.68'
+    And 'Quantity' is calculated as '154302 impressions'
+
+Scenario: Fixed CPC  With discount amount
+  Given I have set up a line without discount
+    And chosen 'Fixed CPC' as 'Cost Model'
+    And Entered '25000' as 'Net Budget'
+    And entered '0.1' as 'Unit Cost'
+    And entered '20' as 'Discount amount'
+  When I look at the plan line form
+  Then I see 'Budget (Gross)' is equal to '25020'
+    And 'Unit Cost (Gross)' is equal to '0.10008'
+    And 'Quantity' is calculated as '250000 clicks'
+
+Scenario: Fixed CPA  With discount amount
+  Given I have set up a line without discount
+    And chosen 'Fixed CPA' as 'Cost Model'
+    And Entered '21875' as 'Net Budget'
+    And entered '0.1' as 'Unit Cost'
+    And entered '20' as 'Discount amount'
+  When I look at the plan line form
+  Then I see 'Budget (Gross)' is equal to '21895'
+    And 'Unit Cost (Gross)' is equal to '0.10'
+    And 'Quantity' is calculated as '218750'
+
+Scenario: Fixed Cost  With discount amount
+  Given I have set up a line without discount
+    And chosen 'Fixed Cost' as 'Cost Model'
+    And Entered '17850' as 'Net Budget'
+    And entered '20' as 'Discount amount'
+  When I look at the plan line form
+  Then I see 'Budget (Gross)' is equal to '17870'
+    And 'Unit Cost (Net)' is read-only '17850'
+    And 'Unit Cost (Gross)' is equal to '17850'
+    And 'Quantity' is calculated as '1'
+
+
+
+
+
+
 
 
 
@@ -147,6 +296,7 @@ Scenario: Publish Plan meta data with individual line publishing (OTD-2053)
   Then User is informed that Plan meta data changes will be published as well
     # "Changes you have made to the Media Plan details will also be published at the same time as these lines"
     And all Plan meta data changes are published along with selected lines
+
 
 #to flesh out
 Scenario: FE - IO List View without grid view

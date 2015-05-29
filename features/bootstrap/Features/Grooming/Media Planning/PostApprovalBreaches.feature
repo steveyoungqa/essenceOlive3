@@ -165,8 +165,9 @@ Scenario: Publish Cancelled property / supplier (OTD-1988)
       # |Datetime |Currently Logged in User | Published Cancelation                   |N/A      |        |
 
 Scenario: Publish Changes in plan line dates (OTD-1988)
-  Given Media Plan has been approved by client
+  Given Media Plan exists and has been published
     And Campaign hasn't ended yet (Media Plan End date is in the future)
+    And Supplier sign-off has been confirmed
     And there are no upweights, but some lines have changed flight dates
   When changes are published
   Then Media Plan status remains unchanged
@@ -204,6 +205,7 @@ Scenario: Publish increased Plan budget (OTD-2009)
 
 Scenario: Publish decreased plan budget (OTD-2009)
   Given Media Plan has been approved by client
+    And Campaign hasn't ended yet (Media Plan End date is in the future)
     And Draft media plan total budget has been decreased when compared to the last Client approved version
   When changes are published
   Then user is presented with a promt that Clients will be notified
@@ -217,6 +219,7 @@ Scenario: Publish decreased plan budget (OTD-2009)
 
 Scenario: Publish Changed plan dates (OTD-2009)
   Given Media Plan has been approved by client
+    And Campaign hasn't ended yet (Media Plan End date is in the future)
     And Draft media plan flight dates have been changed when compared to the last Client approved version
   When changes are published
   Then user is presented with a promt that Clients will be notified
@@ -232,6 +235,7 @@ Scenario: Publish Changed plan dates (OTD-2009)
 
 Scenario: Publish changes to breach thresholds (OTD-2009)
   Given Media Plan has been approved by client
+    And Campaign hasn't ended yet (Media Plan End date is in the future)
     And Draft media plan breach thresholds dates have been changed when compared to the last Client approved version
   When changes are published
   Then user is presented with a prompt that Clients will be notified
