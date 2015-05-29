@@ -13,6 +13,7 @@ class customTests extends CustomPage
         #essence xpaths - that dont have IDs or Values:
 
         'Olive Header Logo' => array('xpath' => "//*[@class='header__logo']"),
+        'Logout' => array('xpath' => "//*[@class='user-logout']"),
         'Campaign Tasks Notification' => array('xpath' => "//*[@class='tasklist_item ng-scope']//*[contains(text(),'Campaign')]"),
         'Campaign Search' => array('xpath' => "//*[@id='campaign-search-basic']"),
         'Navigation Header' => array('xpath' => "//*[@class='menu-close icon icon--med icon--tables']"), //ID Needed
@@ -25,6 +26,9 @@ class customTests extends CustomPage
         'Delete Yes' => array('xpath' => "//*[@class='toast-action'][contains(text(),'Yes')]"),
         'External Platforms Market Level' => array('xpath' => "//*[@class='active--panel tiered__panel ng-scope show--panel']//*[contains(text(),'External platforms')]"),
         'External Platforms Post Create Plan' => array('xpath' => "//*[contains(@class,'active--panel')]//*[contains(text(),'External platforms')]"),
+        'DBM Advertiser' => array('xpath' => "//*[@id='campaign-dbm-advertiser-link']"),
+        'DS3 Advertiser' => array('xpath' => "//*[@id='campaign-ds3-advertiser-link']"),
+        'External System Cancel' => array('xpath' => "//*[@id='mapping-externalSystem-cancel']"),
         'Google Sub Product' => array('xpath' => "//a[@id='campaign-google-sub-product-link']"),
         'External System Save' => array('xpath' => "//*[@class='ng-isolate-scope']//*[@class='form-standard ng-pristine ng-valid']//*[@class='tiered__actions']//*[@id='mapping-externalSystem-save']"),
         'Media Plans' => array('xpath' => "//*[@class='md-header-items']//*[contains(text(),'Media Plans')]"),
@@ -75,7 +79,7 @@ class customTests extends CustomPage
 
         'Discount Applied' => array('xpath' => "//*[@class='custom-checkbox ng-scope'][2]/span[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']"),
         'Discount Amount Tab' => array('xpath' => "//*[@class=' button__label-only']//*[contains(text(),'Amount')]"),
-        'Discount Percentage Tab' => array('xpath' => "//*[@class=' button__label-only']//*[contains(text(),'Percentage')]"),
+        'Discount Percentage' => array('xpath' => "//*[@class=' button__label-only']//*[contains(text(),'Percentage')]"),
         'Discount Amount' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-discount']"),
 
 
@@ -367,5 +371,6 @@ class customTests extends CustomPage
             }
         });
     }
+
 
 }
