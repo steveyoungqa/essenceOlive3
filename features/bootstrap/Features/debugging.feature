@@ -40,6 +40,7 @@ Feature: Olive 3 Regression Pack
     Then I fill in "campaign-new-managingRegion" with "<region>"
     And I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
+    And I wait for 30000
     And I wait for xpath "//*[@id='campaign-new-owner-steve-automation']" to appear
     And I fill in "campaign-new-memo" with "Test Notes"
     Then I wait for 5000
