@@ -40,6 +40,7 @@ Feature: Olive 3 Regression Pack
     Then I fill in "campaign-new-managingRegion" with "<region>"
     And I wait for 5000
     And I fill in "campaign-new-owner" with "<owner>"
+    And I wait for 10000
     And I wait for xpath "//*[@id='campaign-new-owner-steve-automation']" to appear
     And I fill in "campaign-new-memo" with "Test Notes"
     Then I wait for 5000
@@ -69,6 +70,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
 
 #    Then I click the "KPI Type" link
+    Then I wait for xpath "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[2]" to appear
     Then I click the "KPI Type Long Path" link
     Then I click the "KPI Brand" link
     Then I wait for 2000
@@ -144,6 +146,7 @@ Feature: Olive 3 Regression Pack
     And I fill in the "Supplier" with "<supplier>"
     Then I wait for 2000
     And I click the link containing Text "<supplier>"
+    And I wait for 2000
     Then I click the "Platform" link
     Then I click the "Platform DS3" link
     Then I wait for 2000
@@ -177,6 +180,7 @@ Feature: Olive 3 Regression Pack
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -222,12 +226,7 @@ Feature: Olive 3 Regression Pack
     And I click the "Published State" link
 
 #   ***REQUEST APPROVAL***
-    Then I click the "Manage Approval" link
-    And I click the "Add Approver" link
-    Then I wait for 2000
-    And I fill in "campaign-marketbudgets-versions-approvers-add-type" with "Internal"
-    Then I wait for 2000
-    And I click the "Internal Approver" link
+    Then I click the "Request Approval" link
     Then I wait for 2000
     Then I click the "Approver Field" link
     Then I wait for 2000
@@ -235,9 +234,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the link containing Text "<approver>"
     Then I wait for 2000
-    Then I click the "Save Approver" link
-    Then I wait for 2000
-    And I click the "Request Approval" link
+    And I click the "Request Approval Confirm" link
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -257,6 +254,7 @@ Feature: Olive 3 Regression Pack
     And I click the link containing Text "Australian Dollar"
     Then I wait for 2000
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line updated successfully." to appear
 
 #   ***PUBLISH AND ACCEPT BREACH***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
@@ -335,8 +333,8 @@ Feature: Olive 3 Regression Pack
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign  |client|owner      |region |period |budget|mediaType     |costModel   |lineCurrency |liableEntity |initiative|supplier      |property        |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
-    |regression|google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|British Pound|Essence LON  |wildfire  |Ebuzzing      |Google Search   |2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
+    |campaign  |client|owner      |region |period |budget|mediaType     |costModel   |lineCurrency |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
+    |regression|google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|British Pound|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
 
 
 

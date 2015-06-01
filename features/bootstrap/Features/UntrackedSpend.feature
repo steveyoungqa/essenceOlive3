@@ -153,6 +153,7 @@ Feature: OAT-2 Untracked Spend
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I wait for 5000
 
 #   ***PUBLISH MEDIA PLAN***
@@ -197,6 +198,7 @@ Feature: OAT-2 Untracked Spend
 
     Then I wait for 2000
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I wait for 5000
 
     Then I click the "Olive Header Logo" link

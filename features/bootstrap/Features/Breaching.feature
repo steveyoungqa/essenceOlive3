@@ -159,6 +159,7 @@ Feature: Breach Scenarios
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -205,7 +206,7 @@ Feature: Breach Scenarios
     And I click the "Published State" link
 
 #   ***REQUEST APPROVAL***
-    Then I click the "Manage Approval" link
+    Then I click the "Request Approval" link
     And I click the "Add Approver" link
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-approvers-add-type" with "Internal"
@@ -220,7 +221,7 @@ Feature: Breach Scenarios
     Then I wait for 2000
     Then I click the "Save Approver" link
     Then I wait for 2000
-    And I click the "Request Approval" link
+    And I click the "Request Approval Confirm" link
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -241,6 +242,7 @@ Feature: Breach Scenarios
     And I click the link containing Text "Australian Dollar"
     Then I wait for 2000
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line updated successfully." to appear
 
 #   ***PUBLISH AND ACCEPT BREACH***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
@@ -261,6 +263,7 @@ Feature: Breach Scenarios
     And I click the link containing Text "Fixed Cost per Action"
     Then I wait for 2000
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
 
 #   ***PUBLISH AND ACCEPT BREACH***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
@@ -273,9 +276,9 @@ Feature: Breach Scenarios
     Then I wait for 3000
 
 # ***REQUEST APPROVAL***
-    Then I click the "Manage Approval" link
+    Then I click the "Request Approval" link
     Then I wait for 2000
-    And I click the "Request Approval" link
+    And I click the "Request Approval Confirm" link
     Then I wait for 2000
 
 # ***FEEDBACK & REJECT***
@@ -297,7 +300,7 @@ Feature: Breach Scenarios
 
   Examples:
     |campaign  |client|owner      |region |period |budget|liableEntity |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |breach|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |breach    |google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

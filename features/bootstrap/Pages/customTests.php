@@ -106,7 +106,7 @@ class customTests extends CustomPage
         'Edit Plan Line' => array('xpath' => "//*[@class='table__actions ng-scope']//*[contains(text(),'Edit')]"),
         'Plan Line Delete' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-line-delete']"),
 
-        'Manage Approval' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-manage-approval']"),
+        'Request Approval' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-manage-approval']"),
         'Add Approver' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add']"),
         'Save Approver' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add-save']"),
         'Publish Dropdown' => array('xpath' => "//*[@class='expandable-dropdown__toggle']"),
@@ -114,7 +114,7 @@ class customTests extends CustomPage
         'Editable Draft State' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-editable']"),
         'Approver Field' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add-person']"),
         'Internal Approver' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add-type-internal']"),
-        'Request Approval' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-request']"),
+        'Request Approval Confirm' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-request']"),
         'Set Status' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-set-status']"),
         'Feedback Notes' => array('xpath' => "//*[@ng-model='feedback.note']"),
         'Approve' => array('xpath' => "//*[@class='button'][contains(text(),'Approve')]"),

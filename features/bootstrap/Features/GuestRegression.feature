@@ -163,6 +163,7 @@ Feature: Olive 3 Regression Pack
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -208,7 +209,7 @@ Feature: Olive 3 Regression Pack
     And I click the "Published State" link
 
 #   ***REQUEST APPROVAL***
-    Then I click the "Manage Approval" link
+    Then I click the "Request Approval" link
     And I click the "Add Approver" link
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-approvers-add-type" with "Internal"
@@ -223,7 +224,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the "Save Approver" link
     Then I wait for 2000
-    And I click the "Request Approval" link
+    And I click the "Request Approval Confirm" link
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -241,6 +242,7 @@ Feature: Olive 3 Regression Pack
     And I click the link containing Text "Australian Dollar"
     Then I wait for 2000
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line updated successfully." to appear
 
 #   ***PUBLISH AND ACCEPT BREACH***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear

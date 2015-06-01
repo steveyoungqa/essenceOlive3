@@ -190,6 +190,7 @@ Feature: Olive 3 Regression Pack
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -237,6 +238,7 @@ Feature: Olive 3 Regression Pack
     And I click the "Unknown Budget" checkbox
     And I fill in the "Plan Line Description" with "<description2>"
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -257,6 +259,7 @@ Feature: Olive 3 Regression Pack
     Then I click the link containing Text "Essence LON"
     Then I wait for 2000
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
 
 # ***PUBLISH MEDIA PLAN***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear

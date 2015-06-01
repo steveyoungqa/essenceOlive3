@@ -160,6 +160,7 @@ Feature: Breach Scenarios
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<line1>"
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -196,6 +197,7 @@ Feature: Breach Scenarios
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<line2>"
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -232,6 +234,7 @@ Feature: Breach Scenarios
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<line3>"
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[contains(text(),'Default')]" to appear
 
@@ -255,7 +258,7 @@ Feature: Breach Scenarios
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 #   ***REQUEST APPROVAL***
-    Then I click the "Manage Approval" link
+    Then I click the "Request Approval" link
     And I click the "Add Approver" link
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-approvers-add-type" with "Internal"
@@ -270,7 +273,7 @@ Feature: Breach Scenarios
     Then I wait for 2000
     Then I click the "Save Approver" link
     Then I wait for 2000
-    And I click the "Request Approval" link
+    And I click the "Request Approval Confirm" link
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -291,6 +294,7 @@ Feature: Breach Scenarios
     And I fill in "campaign-marketbudgets-versions-medialines-description" with "<line2update>"
     And I wait for 2000
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     And I wait for 5000
