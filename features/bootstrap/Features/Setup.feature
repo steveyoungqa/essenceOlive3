@@ -86,9 +86,9 @@ Feature: Setup Campaign, Media Plan, Plan Lines, Insertion Order to perform test
     Then I Select a Media Plan End Date of "2015-04-30"
     Then I wait for 2000
 
-    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<clientLiable>"
+    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<liableEntity>"
     Then I wait for 2000
-    Then I click the link containing Text "<clientLiable>"
+    Then I click the link containing Text "<liableEntity>"
 
     And I fill in "campaign-marketbudgets-new-currency" with "GBP"
     Then I wait for 2000
@@ -104,7 +104,7 @@ Feature: Setup Campaign, Media Plan, Plan Lines, Insertion Order to perform test
     Then I wait for 5000
 
   Examples:
-    |campaign  |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |campaign  |client|owner      |period |budget|liableEntity |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
     |existing  |google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 

@@ -91,5 +91,5 @@ Feature: Olive 3 Regression Pack
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-  |campaign|client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
+  |campaign|client|owner      |region |period |budget|liableEntity |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
   |kpi     |google|automation |EMEA   |q4-2015|100000|Client Liable|engage    |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|

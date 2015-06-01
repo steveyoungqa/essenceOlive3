@@ -40,6 +40,7 @@ class customTests extends CustomPage
         'Campaign New Market' => array('xpath' => "//*[@id='campaign-marketbudgets-new-market']"),
         'Market United Kingdom' => array('xpath' => "//*[@id='campaign-marketbudgets-new-market-united-kingdom']"),
         'Market USA' => array('xpath' => "//*[@id='campaign-marketbudgets-new-market-united-states']"),
+        'Market Germany' => array('xpath' => "//*[@id='campaign-marketbudgets-new-market-germany']"),
         'Start Date Media Plan' => array('xpath' => "//input[@id='campaign-marketbudgets-new-startDate']"),
         'End Date Media Plan' => array('xpath' => "//input[@id='campaign-marketbudgets-new-endDate']"),
         'Start Date Media Plan Line' => array('xpath' => "//input[@id='campaign-marketbudgets-versions-lines-new-startDate']"),
@@ -145,6 +146,7 @@ class customTests extends CustomPage
         'DS3 Account ID' => array('xpath' => "//*[@id='mapping-externalSystem-ds3']"),
 
         'KPI Brand' => array('xpath' => "//*[@id='campaign-marketbudgets-new-kpiType-brand']/span[@class='ng-binding ng-scope']"),
+        'KPI DR' => array('xpath' => "//*[@id='campaign-marketbudgets-new-kpiType-dr']/span[@class='ng-binding ng-scope']"),
 
 ////       THESE FOUR FOLLOWING IDS - XPATHS ARE NOT RECOGNISED SINCE DEV CHANGES TO MEDIA PLAN - SARAH TO INVESTIGATE:
         'KPI Type Long Path' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[2]"),

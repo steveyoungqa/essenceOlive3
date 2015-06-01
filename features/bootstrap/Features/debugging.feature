@@ -96,9 +96,9 @@ Feature: Olive 3 Regression Pack
     Then I Select a Media Plan End Date of "2015-04-30"
     Then I wait for 2000
 
-    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<clientLiable>"
+    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<liableEntity>"
     Then I wait for 2000
-    Then I click the link containing Text "<clientLiable>"
+    Then I click the link containing Text "<liableEntity>"
 
     And I fill in "campaign-marketbudgets-new-currency" with "GBP"
     Then I wait for 2000
@@ -244,7 +244,7 @@ Feature: Olive 3 Regression Pack
 
 
   Examples:
-    |campaign   |client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
+    |campaign   |client|owner      |region |period |budget|liableEntity |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
     |lastapprove|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
 
 

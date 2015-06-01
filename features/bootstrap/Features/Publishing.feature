@@ -1,4 +1,4 @@
-@regression
+@publishing
 Feature: Olive 3 Regression Pack
   Create new campaign, Add Media Plan, Add Media Plan Line & Service with Discount Applied,
   Publish Media Plan, Insertion Order, Map to DS3, Map to Search Campaign, Approval Process,
@@ -70,7 +70,7 @@ Feature: Olive 3 Regression Pack
 
 #    Then I click the "KPI Type" link
     Then I click the "KPI Type Long Path" link
-    Then I click the "KPI Brand" link
+    Then I click the "KPI DR" link
     Then I wait for 2000
 
     Then I click the "Add New Period" link
@@ -88,7 +88,7 @@ Feature: Olive 3 Regression Pack
 #    Then I click the "Media Plan Market" link
     Then I click the "Market Long Path" link
     Then I wait for 2000
-    Then I click the "Market USA" link
+    Then I click the "Market Germany" link
 
     Then I select a Media Plan Start Date of "2015-04-01"
     Then I wait for 3000
@@ -99,7 +99,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the link containing Text "<liableEntity>"
 
-    And I fill in "campaign-marketbudgets-new-currency" with "GBP"
+    And I fill in "campaign-marketbudgets-new-currency" with "EUR"
     Then I wait for 2000
     Then I fill in "campaign-marketbudgets-new-budget" with "<budget>"
     Then I wait for 2000
@@ -151,11 +151,9 @@ Feature: Olive 3 Regression Pack
     And I fill in the "Property" with "<property>"
     Then I wait for 2000
     Then I click the link containing Text "<property>"
-#    And I click the link containing Text "Google Search"
     Then I wait for 2000
     Then I click the "Media Type" link
     Then I click the link containing Text "<mediaType>"
-#    And I click the link containing Text "Search Text Ad"
     Then I wait for 2000
     Then I click the "Cost Model" link
     And I click the link containing Text "<costModel>"
@@ -165,15 +163,14 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
 
     Then I click the "Line Currency" link
-    And I click the link containing Text "British Pound"
+    And I click the link containing Text "<lineCurrency>"
     Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100000"
 
 #   ***APPLY BUDGET DISCOUNT***
 
-    Then I fill in the "Discount Amount" with "50"
+    Then I fill in the "Discount Amount" with "15"
     And I click the "Discount Percentage" link
     And I wait for 2000
-    Then I fill in the "Discount Amount" with "10"
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
@@ -267,76 +264,20 @@ Feature: Olive 3 Regression Pack
 #    And I wait for text "Amends Published" to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
-
-#   ***ADD KPI***
-    Then I click the "Navigation Header" link
-    Then I click the "Campaigns" link
-    Then I wait for 3000
-    Then I fill in the "Campaign Search" with "<campaign>"
-    Then I wait for 3000
-    Given I select Edit for the existing Campaign "<campaign>"
-    And I click the "Default KPIs" link
-    Then I click the "Add KPI" link
-    Then I wait for 2000
-    And I fill in the "KPI Event Type" with "Brand"
-    Then I wait for 2000
-    And I fill in the "KPI Event Number" with "20"
-    And I fill in the "KPI Event Name" with "Regression Event"
-    Then I click the "Conversion Source Field" link
-    Then I fill in the "Conversion Source Field" with "<conversionSource>"
-    And I wait for text "<conversionSource>" to appear
-    Then I click the link containing Text "<conversionSource>"
-    And I click the "Event Save" link
-    And I wait for 3000
-    Then I click the "Add Tag" link
-    And I click the "Conversion Type" link
-    And I wait for text "<conversion>" to appear
-    And I fill in the "Conversion Type" with "<conversion>"
-    And I click the link containing Text "<conversion>"
-    And I wait for xpath "//*[@id='campaign-events-tags-new-activityGroup']" to appear
-    And I click the "Activity Category" link
-    And I fill in the "Activity Category" with "<activity>"
-    And I wait for 3000
-    And I click the link containing Text "<activity>"
-    And I click the "Activity Tag" link
-    And I fill in the "Activity Tag" with "<tag>"
-    Then I wait for 3000
-    And I click the link containing Text "<tag>"
-    Then I fill in the "Weighting" with "10"
-    And I click the "Tag Save" link
-    Then I reload the page
-    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
-
-##   ***TRACKING MANAGEMENT***
+#
+##   ***DELETE CAMPAIGN CLEAN UP***
+#    Then I Maximize the Browser Window
+#    And I wait for 2000
 #    Then I click the "Navigation Header" link
-#    Then I click the "Tracking Management DS3" link
-#    And I click the "Tracking Code Search Box" link
-#    Then I fill in the "Tracking Code Search Box" with "<searchCampaign>"
+#    Then I click the "Campaigns" link
 #    Then I wait for 3000
-#    And I click the "Advanced Filter" link
-#    Then I wait for 2000
-#    Then I click the "Campaign Filter" link
-#    And I fill in the "Campaign Filter" with "<campaign>"
-#    Then I wait for 2000
-#    Then I click the link containing Text "<campaign>"
-#    And I click the "Advanced Search Close" link
-#    Then I click the "Tracking Details" link
-#    And I wait for 5000
-#    Then I should see "MAPPED"
-
-#   ***DELETE CAMPAIGN CLEAN UP***
-    Then I Maximize the Browser Window
-    And I wait for 2000
-    Then I click the "Navigation Header" link
-    Then I click the "Campaigns" link
-    Then I wait for 3000
-    Then I fill in "campaign-search-basic" with "<campaign>"
-    Then I wait for 3000
-    Then I select the Delete "<campaign>" checkbox
+#    Then I fill in "campaign-search-basic" with "<campaign>"
+#    Then I wait for 3000
+#    Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign  |client|owner      |region |period |budget|mediaType     |costModel   |lineCurrency |liableEntity |initiative|supplier      |property        |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
-    |regression|google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|British Pound|Essence LON  |wildfire  |Ebuzzing      |Google Search   |2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
+    |campaign  |client|owner      |region |period |budget|mediaType     |costModel   |lineCurrency |liableEntity |initiative|supplier|property      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
+    |publishing|google|automation |EMEA   |q4-2015|100000|Search Text Ad|Fixed CPM   |British Pound|Essence LON  |wildfire  |Ebuzzing|Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
 
 
 

@@ -88,9 +88,9 @@ Feature: Olive 3 Regression Pack
     Then I Select a Media Plan End Date of "2015-04-30"
     Then I wait for 2000
 
-    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<clientLiable>"
+    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<liableEntity>"
     Then I wait for 2000
-    Then I click the link containing Text "<clientLiable>"
+    Then I click the link containing Text "<liableEntity>"
 
     And I fill in "campaign-marketbudgets-new-currency" with "GBP"
     Then I wait for 2000
@@ -152,7 +152,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the "Supplier" link
     And I click the link containing Text "<supplier>"
-    Then I should see text matching "<clientLiable>"
+    Then I should see text matching "<liableEntity>"
     Then I click the "Platform" link
     Then I click the "Platform DS3" link
     Then I wait for 2000
@@ -281,7 +281,7 @@ Feature: Olive 3 Regression Pack
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign      |client|owner      |region |period |budget|clientLiable |initiative|buyType   |supplier      |description1|description2|ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |campaign      |client|owner      |region |period |budget|liableEntity |initiative|buyType   |supplier      |description1|description2|ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
     |planlinetests |google|automation |EMEA   |q42015 |100000|Client Liable|wildfire  |Direct Buy|Google Ireland|Plan Line 1 |Plan Line 2 |700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
