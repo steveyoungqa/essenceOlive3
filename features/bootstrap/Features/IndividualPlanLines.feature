@@ -156,7 +156,7 @@ Feature: Breach Scenarios
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100"
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<line1>"
     Then I click the "Save Media Plan Line" link
@@ -192,7 +192,7 @@ Feature: Breach Scenarios
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100"
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<line2>"
     Then I click the "Save Media Plan Line" link
@@ -228,7 +228,7 @@ Feature: Breach Scenarios
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100"
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<line3>"
     Then I click the "Save Media Plan Line" link

@@ -78,10 +78,10 @@ class customTests extends CustomPage
         'Unknown Budget' => array('xpath' => "//*[@class='custom-checkbox ng-scope'][1]/span[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']"),
 
         'Discount Applied' => array('xpath' => "//*[@class='custom-checkbox ng-scope'][2]/span[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']"),
-        'Discount Amount Tab' => array('xpath' => "//*[@class=' button__label-only']//*[contains(text(),'Amount')]"),
-        'Discount Percentage' => array('xpath' => "//*[@class=' button__label-only']//*[contains(text(),'Percentage')]"),
+//        'Discount Amount Tab' => array('xpath' => "//*[@class=' button__label-only']//*[contains(text(),'Amount')]"),
+        'Discount Value' => array('xpath' => "//*[@class=' button__label-only']//*[contains(text(),'Value')]"),
+        'Discount Percentage' => array('xpath' => "//*[@class=' button__label-only']//*[contains(text(),'%')]"),
         'Discount Amount' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-discount']"),
-
 
         'Plan Line Description' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-description']"),
         'Plan Line Description Update' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-medialines-description']"),

@@ -160,17 +160,14 @@ Feature: Olive 3 Regression Pack
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100000"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100000"
 
 #   ***APPLY BUDGET DISCOUNT***
-    Then I click the "Discount Applied" checkbox
-    And I wait for 2000
-    And I click the "Discount Amount Tab" link
+
     Then I fill in the "Discount Amount" with "50"
     And I click the "Discount Percentage" link
     And I wait for 2000
     Then I fill in the "Discount Amount" with "10"
-    Then I should see "amount Total"
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
@@ -333,7 +330,7 @@ Feature: Olive 3 Regression Pack
 
   Examples:
     |campaign  |client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
-    |alec      |google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
+    |regression     |google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
 
 
 

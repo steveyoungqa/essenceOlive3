@@ -149,7 +149,7 @@ Feature: OAT-2 Untracked Spend
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100000"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100000"
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link

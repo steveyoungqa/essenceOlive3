@@ -161,17 +161,14 @@ Feature: Olive 3 Regression Pack
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100000"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100000"
 
 #   ***APPLY BUDGET DISCOUNT***
-    Then I click the "Discount Applied" checkbox
-    And I wait for 2000
-    And I click the "Discount Amount Tab" link
+
     Then I fill in the "Discount Amount" with "50"
     And I click the "Discount Percentage" link
     And I wait for 2000
     Then I fill in the "Discount Amount" with "10"
-    Then I should see "amount Total"
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
