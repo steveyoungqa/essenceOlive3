@@ -25,7 +25,7 @@
 # Google Ireland Ltd.| Google Search | House Ads   | Search    | Search Text Ad    | Biddable | DS3      | USD      | Biddable CPC | Client        | --            | --       |
 
 # First time publishes (S3)
-Scenario: Publish new line, only one in IO
+Scenario: 1. Publish new line, only one in IO
   Given I have set up a "Draft" media plan as outlined below
     # ---------------------------------------------------------------------------------------------|
     # Version      | Total Budget | Allocated | Unallocated | Num IOs | Num M Lines | Num S lines  |
@@ -56,7 +56,7 @@ Scenario: Publish new line, only one in IO
       # Google Ireland Ltd.   | GDN       | $10          |  $10          |
       # -----------------------------------------------------------------|
 
-Scenario: Publish new Line, out of two, never published IO
+Scenario: 2. Publish new Line, out of two, never published IO
   Given I have set up a "Draft" media plan as outlined below
     # ---------------------------------------------------------------------------------------------|
     # Version      | Total Budget | Allocated | Unallocated | Num IOs | Num M Lines | Num S lines  |
@@ -91,7 +91,7 @@ Scenario: Publish new Line, out of two, never published IO
       # Google Ireland Ltd.   | GDN               | $10          |  --           |  --                |  --               | Published          | Not Confirmed      |
       # ------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-Scenario: Publish new line, out of two in IO (the other one has already been published before)
+Scenario: 3. Publish new line, out of two in IO (the other one has already been published before)
   Given I have set up a media plan
     And it's in a "Published" state as outlined below:
       # ---------------------------------------------------------------------------------------------|
@@ -128,7 +128,7 @@ Scenario: Publish new line, out of two in IO (the other one has already been pub
       # -------------------------------------------------------------------------|
 
 # Second time publishes (S4)
-Scenario: Publish change of Channel / media type on existing line, only one in IO
+Scenario:4.  Publish change of Channel / media type on existing line, only one in IO
   Given I have set up a media plan
     And it's in a "Published" state as outlined below:
       # ---------------------------------------------------------------------------------------------|
@@ -154,7 +154,7 @@ Scenario: Publish change of Channel / media type on existing line, only one in I
       # Ebuzzing Inc     | Teads    | *Display / In-Stream*      | *Display / In-Stream*       | £10          |  £10          |
       # ----------------------------------------------------------------------------------------------------------------------|
 
-Scenario: Publish change of Buy type in existing line, out of two in IO (both have been published before)
+Scenario: 5. Publish change of Buy type in existing line, out of two in IO (both have been published before)
   Given I have set up a media plan
     And it's in a "Published" state as outlined below:
       # ---------------------------------------------------------------------------------------------|
@@ -184,7 +184,7 @@ Scenario: Publish change of Buy type in existing line, out of two in IO (both ha
     # Ebuzzing Inc     | Teads    | Direct         | Direct          | £10          |  £10          |
     # ----------------------------------------------------------------------------------------------|
 
-Scenario: Publish change in Cost model of existing line, out of two in IO (only this one has been published before)
+Scenario: 6. Publish change in Cost model of existing line, out of two in IO (only this one has been published before)
   Given I have set up a media plan
     And it's in a "Published" state as outlined below:
       # ---------------------------------------------------------------------------------------------|
@@ -214,12 +214,9 @@ Scenario: Publish change in Cost model of existing line, out of two in IO (only 
     # Ebuzzing Inc     | Teads    | Direct          | --               | £10          |  --           |
     # ------------------------------------------------------------------------------------------------|
 
-# service lines
-# unknown budget
-
 # publish one with meta data changes (S3)
 # plan: local impact: Manager
-Scenario: Publish downweight with changed Plan manager
+Scenario: 7. Publish downweight with changed Plan manager
   Given I have set up a media plan
     And it's in a "Published" state as outlined below:
       # ------------------------------------------------------------------------------------------------------------|
@@ -253,7 +250,7 @@ Scenario: Publish downweight with changed Plan manager
 
 # publish one with meta data changes (S2)
 # plan: reporting/client impact: Market - have a feeling these shouldn't be so easily changeable
-Scenario: Publish one downweight in multiple line changes with changed Market
+Scenario: 8. Publish one downweight in multiple line changes with changed Market
  Given I have set up a media plan
    And it's in a "Published" state as outlined below:
      # ---------------------------------------------------------------------------------------------------------------|
@@ -293,7 +290,7 @@ Scenario: Publish one downweight in multiple line changes with changed Market
 
 # publish multiple with meta data changes (S3)
 # plan: local impact: label
-Scenario: Publish multiple lines with changed MP Label
+Scenario: 9. Publish multiple lines with changed MP Label
  Given I have set up a media plan
    And it's in a "Published" state as outlined below:
      # ----------------------------------------------------------------------------------------------------------|
@@ -336,7 +333,7 @@ Scenario: Publish multiple lines with changed MP Label
 
 # publish multiple with meta data changes (S2)
 # plan: reporting/client impact: KPI Type   - have a feeling these shouldn't be so easily changeable
-Scenario: Publish Multiple with changed KPI Type
+Scenario: 10. Publish Multiple with changed KPI Type
   Given I have set up a media plan
     And it's in a "Published" state as outlined below:
       # ----------------------------------------------------------------------------------------------------------|
@@ -380,7 +377,7 @@ Scenario: Publish Multiple with changed KPI Type
 
 # illegal changes
 # exceeds total budget (S1)
-Scenario: Publish a move causing an exceeded budget on selective publish
+Scenario: 11. Publish a move causing an exceeded budget on selective publish
   Given I have set up a media plan
     And it's in a "Published" state as outlined below:
       # --------------------------------------------------------------------------------------------------------|
@@ -403,7 +400,7 @@ Scenario: Publish a move causing an exceeded budget on selective publish
   When when I hit "Publish Selected"
   Then I get an error saying the Planned amount exceeds Total Budget
 
-Scenario: Publish a move causing an upweight exceeding original published budget but with total budget increase to make up for it
+Scenario: 12. Publish a move causing an upweight exceeding original published budget but with total budget increase to make up for it
   Given I have set up a media plan
     And it's in a "Published" state as outlined below:
       # --------------------------------------------------------------------------------------------------------|
@@ -442,14 +439,10 @@ Scenario: Publish a move causing an upweight exceeding original published budget
       # --------------------------------------------------------------------------------------|
       #                                  |  £95         | £105
 
-# downweight below invoiced (S1) @todo
-
-# Internal approval requested @todo
-
 # Internally approved
 # publish one with line breaches internally (S1) -
 # internal: less discount
-Scenario: Publish a discount decrease causing an upweight after Internal Approval
+Scenario: 13. Publish a discount decrease causing an upweight after Internal Approval
   Given I have set up a media plan
     And it's in an "Internally Approved" state as outlined below:
       # --------------------------------------------------------------------------------------------------------|
@@ -485,7 +478,7 @@ Scenario: Publish a discount decrease causing an upweight after Internal Approva
 
 # publish multiple with line breaches internally (S1)
 # internal: move between props
-Scenario: Publish a move within IO causing an upweight for internal re-approval
+Scenario: 14. Publish a move within IO causing an upweight for internal re-approval
   Given I have set up a media plan
     And it's in an "Internally Approved" state as outlined below:
       # --------------------------------------------------------------------------------------------------------|
@@ -529,7 +522,7 @@ Scenario: Publish a move within IO causing an upweight for internal re-approval
       # ----------------------------------------------------------------------------------------------------------|
       #                                  |  £90         | £90           | £85
 
-Scenario: Publish a move within DBM IO not causing a breach
+Scenario: 15. Publish a move within DBM IO not causing a breach
   Given I have set up a media plan
     And it's in an "Internally Approved" state as outlined below:
       # --------------------------------------------------------------------------------------------------------|
@@ -571,58 +564,66 @@ Scenario: Publish a move within DBM IO not causing a breach
       #                                            | £90          | £90           | £90
 
 # CLIENT APPROVAL REQUESTED @todo
-Scenario: Publish no impact changes
+Scenario: 16. Publish no impact changes
   #appear in all versions immediatelly
-Scenario: Publish internal approval breaching changes
+Scenario: 17. Publish internal approval breaching changes
   #appear in client version after internal approval
-Scenario: Publish client approval breaching changes
+Scenario: 18. Publish client approval breaching changes
   #clients are no longer required to re-approve
 
 # CLIENT APPROVED
 # publish one with notifications to clients (S2)
 # plan: total budget downweight, dates, breach thresholds, initiative (!not on publish)
 # line, cancels, deletes
-Scenario: Publish deleted line with Total Budget Downweight
-Scenario: Publish cancelled IO with Plan end date extended (multiple notifications for Client)
-Scenario: Publish change in unkown budget flag with updated breach thresholds
+Scenario: 19. Publish deleted line with Total Budget Downweight
+Scenario: 20. Publish cancelled IO with Plan end date extended (multiple notifications for Client)
+Scenario: 21. Publish change in unkown budget flag with updated breach thresholds
 
 # publish multiple with notifications (S2)
 # plan: dates, total budget downweight, breach thresholds, initiative (!not on publish)
 # line: cancels, deletes
-Scenario: Publish multiple deleted lines with Total budget downweight
-Scenario: Publish multiple downweights to 0 with Plan Start Date set earlier
-Scenario: Publish property change (cancelling but not adding) with breach threshold change
+Scenario: 22. Publish multiple deleted lines with Total budget downweight
+Scenario: 23. Publish multiple downweights to 0 with Plan Start Date set earlier
+Scenario: 24. Publish property change (cancelling but not adding) with breach threshold change
 
 # publish one with line upweight breaching client approval (S1)
-Scenario: Publish one major upweight after Client approval
-Scenario: Publish new property after Client approval
+Scenario: 25. Publish one major upweight after Client approval
+Scenario: 26. Publish new property after Client approval
 
 # publish multiple lines with breacheing client approval (S1)
-Scenario: Publish multiple minor upweights breaching client approval
+Scenario: 27. Publish multiple minor upweights breaching client approval
 
 # publish one with breaching meta data (S1)
 # plan: Total budget,
 # line: dates, new property
-Scenario: Publish total budget increase with single line date change publish
+Scenario: 28. Publish total budget increase with single line date change publish
   #notification that meta has changed
   #notification that breaching client approval
-Scenario: Publish new property with total budget increase
+Scenario: 29. Publish new property with total budget increase
 
 # publish multiple with breaching meta data (S1)
 # plan: Total budget,
 # line: dates, description
+Scenario: 30. Publish total budget increase with multiple line description publish
+Scenario: 31. Publish multiple lines for new property with total budget increase
 
 # publish one with IO level attribute changes
 # local impact: Notes, owner (S4)
 # finace/client impact: Currency, Liable Entity (S2)
-Scenario: Publish line with Liable change on IO (2)
-Scenario: Publish line line with Currency change on the line itself (2)
+Scenario: 32. Publish line with Liable change on IO (2)
+Scenario: 33. Publish line line with Liable Entity change on the line itself (2)
   #new io
-Scenario: Publish change of description of line in IO with Currency change in other line in IO (2)
+Scenario: 34. Publish change of description of line in IO with Liable Entity change in other line in IO (2)
 
 # publish all in IO with IO level attribute changes (local impact) (S2)
 # local impact: Notes, owner (S4)
 # finace/client impact: Currency, Liable Entity (S2)
-Scenario: Publish existing line, out of two in IO, after changing Currency in both
-Scenario: Publish existing line, out of two in IO, after changing Currency in this one
-Scenario: Publish existing line, out of two in IO, after changing Currency in this one
+Scenario: 35. Publish existing line, out of two in IO, after changing Currency in both
+Scenario: 36. Publish existing line, out of two in IO, after changing Currency in this one
+Scenario: 37. Publish existing line, out of two in IO, after changing Currency in this one
+
+
+# service lines @todo
+# unknown budget @todo
+# downweight below invoiced (S1) @todo
+# Internal approval requested @todo
