@@ -1,5 +1,5 @@
 # PLAN LINE CHANGE RELATED
-Scenario: New Property
+Scenario: 1.1 New Property
   Given A Media Plan of a "$100" is "Client Approved"
     And it has two Insertion orders as outlined below
     # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
@@ -19,7 +19,7 @@ Scenario: New Property
     # ------------------------------------------------------------------------------------------------------------------|
     # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
-  Scenario: Internally Approving New Property
+  Scenario: 1.2 Internally Approving New Property
     Given A Media Plan of a "$100" is "Published" after a new Poperty Breach
       And it has two Insertion orders as outlined below
       # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
@@ -40,7 +40,7 @@ Scenario: New Property
       # ------------------------------------------------------------------------------------------------------------------|
       # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
-  Scenario: Internally Rejecting New Property
+  Scenario: 1.3 Internally Rejecting New Property
     Given A Media Plan of a "$100" is "Published" after a new Poperty Breach
       And it has two Insertion orders as outlined below
       # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
@@ -61,7 +61,7 @@ Scenario: New Property
       # ------------------------------------------------------------------------------------------------------------------|
       # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
-  Scenario: Client Approving New Property
+  Scenario: 1.4 Client Approving New Property
     Given A Media Plan of a "$100" is "Internally Approved" after a new Poperty Breach
       And it has two Insertion orders as outlined below
       # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
@@ -104,7 +104,7 @@ Scenario: New Property
         # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
 
-Scenario: Breaching Upweight
+Scenario: 2.1 Breaching Upweight
   Given A Media Plan of a "$100" is "Client Approved"
     And I have set the breach threshold to be "20%"
     And it has two Insertion orders as outlined below
@@ -122,7 +122,7 @@ Scenario: Breaching Upweight
     # AOL         | $60       | TechCrunch  | Published           | Not confirmed       | $30          | $30            |
     # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
-  Scenario: Internally Approving Breaching Upweight
+  Scenario: 2.2 Internally Approving Breaching Upweight
     Given A Media Plan of a "$100" is "Published" after a "Breach"
       And it has two Insertion orders as outlined below
       # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
@@ -140,7 +140,7 @@ Scenario: Breaching Upweight
       # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
 
-    Scenario: Internally Rejecting a Breaching Upweight
+    Scenario: 2.3 Internally Rejecting a Breaching Upweight
       Given A Media Plan of a "$100" is "Published" after a "Breach"
         And it has two Insertion orders as outlined below
         # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
@@ -157,7 +157,7 @@ Scenario: Breaching Upweight
         # AOL         | $60       | TechCrunch  | Internally Rejected | Not confirmed       | $60          | $30            |
         # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
-  Scenario: Client Approving Breaching Upweight
+  Scenario: 2.4 Client Approving Breaching Upweight
     Given A Media Plan of a "$100" is "Internally Approved" after a "Breach"
       And it has two Insertion orders as outlined below
       # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
@@ -174,7 +174,7 @@ Scenario: Breaching Upweight
       # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
 
-  Scenario: Client Rejecting Breaching Upweight
+  Scenario: 2.5 Client Rejecting Breaching Upweight
     Given A Media Plan of a "$100" is "Internally Approved" after a "Breach"
       And it has two Insertion orders as outlined below
       # Supplier    | Total net | Property    | Internal Status     | Supplier Status     | Int. appr.v. | Client appr.v. |
@@ -192,7 +192,7 @@ Scenario: Breaching Upweight
       # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
 
-Scenario: Upweight / Downweight with no effect on approval status
+Scenario: 3.1 Upweight / Downweight with no effect on approval status
   Given A Media Plan of a "$100" is "Client Approved"
     And I have set the breach threshold to be "20%"
     And it has 3 Insertion orders as outlined below
@@ -217,7 +217,7 @@ Scenario: Upweight / Downweight with no effect on approval status
 # WIERD ONE - what to do with the downweighted IO @helen, all of a sudden the unallocated ight appear bigger in client view
 # I think KJ built it so that both IOs should be re-approved but should confirm
 # - what if one is approved but the other is still pending (or worse rejected) - could result in appearing as exceeding total budget
-Scenario: Upweight / Downweight with Internal Re-approval
+Scenario: 4.1 Upweight / Downweight with Internal Re-approval
   Given A Media Plan of a "$100" is "Client Approved"
     And I have set the breach threshold to be "20%"
     And it has 3 Insertion orders as outlined below
@@ -238,7 +238,7 @@ Scenario: Upweight / Downweight with Internal Re-approval
     # AOL         | $20       | TechCrunch  | Published    ??     | Not confirmed       | $30 ??       | $30 ??         |
     # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
-    Scenario: Internally approve minor Upweight / Downweight
+    Scenario: 4.2 Internally approve minor Upweight / Downweight
       Given A Media Plan of a "$100" is "Client Approved"
         And I have set the breach threshold to be "20%"
         And it has 3 Insertion orders as outlined below
@@ -257,7 +257,7 @@ Scenario: Upweight / Downweight with Internal Re-approval
         # AOL         | $20       | TechCrunch  | Published    ??     | Not confirmed       | $30 ??       | $30 ??         |
         # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
-    Scenario: Internally reject minor Upweight / Downweight
+    Scenario: 4.3 Internally reject minor Upweight / Downweight
       Given A Media Plan of a "$100" is "Client Approved"
         And I have set the breach threshold to be "20%"
         And it has 3 Insertion orders as outlined below
@@ -277,7 +277,7 @@ Scenario: Upweight / Downweight with Internal Re-approval
         # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
 
-Scenario: Breaching Move within IO
+Scenario: 5.1 Breaching Move within IO
   Given A Media Plan of a "$100" is "Client Approved"
     And I have set the breach threshold to be "20%"
     And it has 2 Insertion orders as outlined below
@@ -302,7 +302,7 @@ Scenario: Breaching Move within IO
     # ------------------------------------------------------------------------------------------------------------------|
     # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
-    Scenario: Internally Approving a Breaching move within IO
+    Scenario: 5.2 Internally Approving a Breaching move within IO
       Given A Media Plan of a "$100" is "Published" after a Breaching move within IO
         And I have set the breach threshold to be "20%"
         And it has 2 Insertion orders as outlined below
@@ -325,7 +325,7 @@ Scenario: Breaching Move within IO
         # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
 
-    Scenario: Internally Rejecting a Breaching move within IO
+    Scenario: 5.3 Internally Rejecting a Breaching move within IO
       Given A Media Plan of a "$100" is "Published" after a breaching move within IO
         And I have set the breach threshold to be "20%"
         And it has 2 Insertion orders as outlined below
@@ -347,7 +347,7 @@ Scenario: Breaching Move within IO
         # ------------------------------------------------------------------------------------------------------------------|
         # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
-    Scenario: Client Approving a Breaching move within IO
+    Scenario: 5.4 Client Approving a Breaching move within IO
       Given A Media Plan of a "$100" is "Internally Approved" after a breaching move within IO
         And I have set the breach threshold to be "20%"
         And it has 2 Insertion orders as outlined below
@@ -368,7 +368,7 @@ Scenario: Breaching Move within IO
         # ------------------------------------------------------------------------------------------------------------------|
         # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
-    Scenario: Client Rejecting a Breaching move within IO
+    Scenario: 5.5 Client Rejecting a Breaching move within IO
       Given A Media Plan of a "$100" is "Internally Approved" after a breaching move within IO
         And I have set the breach threshold to be "20%"
         And it has 2 Insertion orders as outlined below
@@ -390,9 +390,7 @@ Scenario: Breaching Move within IO
         # ------------------------------------------------------------------------------------------------------------------|
         # Channel 5   | $10       | Channel 5   | Internally Approved | Confirmed           | $10          | $10            |
 
-# TO BE CONTINUED
-
-Scenario: Upweight / Downweight with localised impact (only 2 out of 3 IOs)
+Scenario: 6.1 Upweight / Downweight with localised impact (only 2 out of 3 IOs)
   Given A Media Plan of a "$100" is "Client Approved"
     And I have set the breach threshold to be "20%"
     And it has 3 Insertion orders as outlined below
@@ -415,7 +413,7 @@ Scenario: Upweight / Downweight with localised impact (only 2 out of 3 IOs)
 
 # META DATA RELATED
 
-Scenario: Publish Total budget upweight post approval
+Scenario: 7.1 Publish Total budget upweight post approval
   Given A Media Plan of a "$100" is "Client Approved"
     And it has 3 Insertion orders as outlined below
     # Supplier    | Total net | Property    | Internal Status     | Supplier Status     |
@@ -429,7 +427,7 @@ Scenario: Publish Total budget upweight post approval
     And Breach flag is set
     And Insertion Order Statuses and budgets remain unchanged
 
-  Scenario: Internally approve Total budget upweight
+  Scenario: 7.2 Internally approve Total budget upweight
     Given A Media Plan of a "$120" is "Published" after having been approved by Client
       And Breach flag is set due to published budget upweight
       And it has 3 Insertion orders as outlined below
@@ -444,7 +442,7 @@ Scenario: Publish Total budget upweight post approval
       And Breach flag is still set
       And Insertion Order Statuses and budgets remain unchanged
 
-  Scenario: Internally reject Total Budget upweight
+  Scenario: 7.3 Internally reject Total Budget upweight
     Given A Media Plan of a "$120" is "Published" after having been approved by Client
       And Breach flag is set due to published budget upweight
       And it has 3 Insertion orders as outlined below
@@ -460,7 +458,7 @@ Scenario: Publish Total budget upweight post approval
       And Breach flag is still set
       And Insertion Order Statuses and budgets remain unchanged
 
-  Scenario: Client approves Total budget upweight
+  Scenario: 7.4 Client approves Total budget upweight
     Given A Media Plan of a "$120" is "Internally Approved" after having been approved by Client once
       And Breach flag is set due to budget upweight
       And it has 3 Insertion orders as outlined below
@@ -475,7 +473,7 @@ Scenario: Publish Total budget upweight post approval
       And Breach flag is no longer set
       And Insertion Order Statuses and budgets remain unchanged
 
-  Scenario: Client rejects Total budget upweight
+  Scenario: 7.5 Client rejects Total budget upweight
     Given A Media Plan of a "$120" is "Internally Approved" after having been approved by Client once
       And Breach flag is set due to budget upweight
       And it has 3 Insertion orders as outlined below

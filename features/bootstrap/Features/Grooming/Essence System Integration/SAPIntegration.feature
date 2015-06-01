@@ -9,7 +9,7 @@ Scenario: Purchase Orders are created, updated and synced on Client Approval
   #activity added during campaign running is exported as new pos on client re-approval
   Given A Media Plan is set up and published
     And there are Essence Liable plan lines
-    And Purchase Orders have been generated at the time of plan publishing
+    And Client approval has been requested
   When Client has Approved the plan
   Then Olive exports Essence Liable Purchase Orders to SAP
     And Olive logs the export event in PO Sync history
