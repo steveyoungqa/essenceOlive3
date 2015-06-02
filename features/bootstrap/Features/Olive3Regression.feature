@@ -13,7 +13,7 @@ Feature: Olive 3 Regression Pack
     And I wait for xpath "//*[@id='Passwd']" to appear
     And I fill in "Passwd" with "Regression1000"
     Then I press "signIn"
-#    And I Maximize the Browser Window
+    And I Maximize the Browser Window
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
 #   ***CREATE CAMPAIGN***
@@ -101,7 +101,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the link containing Text "<liableEntity>"
 
-    And I fill in "campaign-marketbudgets-new-currency" with "GBP"
+    And I fill in "campaign-marketbudgets-new-currency" with "<lineCurrency>"
     Then I wait for 2000
     Then I fill in "campaign-marketbudgets-new-budget" with "<budget>"
     Then I wait for 2000
@@ -128,7 +128,7 @@ Feature: Olive 3 Regression Pack
 #   ***ADD MEDIA PLAN LINE**
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
-    Then I wait for 3000
+    Then I wait for 2000
     Given I select Edit for the existing Campaign "<campaign>"
     Then I wait for xpath "//*[@class='button button__label-only']" to appear
     Then I click the "Media Plan Whole Column" link
@@ -165,20 +165,20 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the "Cost Model" link
     And I click the link containing Text "<costModel>"
-    Then I select a Plan Line Start Date of "2015-04-04"
+    Then I select a Plan Line Start Date of "<startDate>"
     Then I wait for 2000
-    Then I Select a Plan Line End Date of "2015-04-04"
+    Then I Select a Plan Line End Date of "<endDate>"
     Then I wait for 2000
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100000"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "<lineBudget>"
 
 #   ***APPLY BUDGET DISCOUNT***
-    Then I fill in the "Discount Amount" with "50"
+    Then I fill in the "Discount Amount" with "<discount>"
     And I click the "Discount Percentage" link
     And I wait for 2000
-    Then I fill in the "Discount Amount" with "10"
+    Then I fill in the "Discount Amount" with "<discount>"
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<description1>"
 
     Then I click the "Save Media Plan Line" link
@@ -208,7 +208,8 @@ Feature: Olive 3 Regression Pack
     And I fill in "mapping-externalSystem-ds3" with "<ds3>"
     And I wait for 2000
     And I fill in "mapping-externalSystem-ds3" with "<ds3>"
-    Then I wait for 8000
+    And I wait for text "<ds3>" to appear
+#    Then I wait for 8000
     And I click the link containing Text "<ds3>"
     Then I click the "External System Save" link
     Then I output text "Insertion Order Linked to DS3" to the console
@@ -260,7 +261,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "First Plan Line Edit" link
     And I wait for 2000
     Then I click the "Edit Line Currency" link
-    And I click the link containing Text "Australian Dollar"
+    And I click the link containing Text "<currencyBreach>"
     Then I wait for 2000
     Then I click the "Save Media Plan Line" link
     Then I wait for text "Plan line updated successfully." to appear
@@ -279,9 +280,9 @@ Feature: Olive 3 Regression Pack
 #   ***ADD KPI***
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
-    Then I wait for 3000
+    Then I wait for 2000
     Then I fill in the "Campaign Search" with "<campaign>"
-    Then I wait for 3000
+    Then I wait for 2000
     Given I select Edit for the existing Campaign "<campaign>"
     And I click the "Default KPIs" link
     Then I click the "Add KPI" link
@@ -338,15 +339,15 @@ Feature: Olive 3 Regression Pack
     And I wait for 2000
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
-    Then I wait for 3000
+    Then I wait for 2000
     Then I fill in "campaign-search-basic" with "<campaign>"
-    Then I wait for 3000
+    Then I wait for 2000
     Then I select the Delete "<campaign>" checkbox
     Then I output text "CleanUp completed <campaign> has been deleted" to the console
 
   Examples:
-    |campaign  |client|owner      |region |period |budget|mediaType     |costModel   |lineCurrency |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|description1|
-    |regression|google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|British Pound|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|Plan Line 1|
+    |campaign  |client|owner      |region |period |budget|mediaType     |costModel   |startDate |endDate    |budget|lineBudget|discount|lineCurrency |currencyBreach   |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|description1|
+    |jenkins   |google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-04-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|Plan Line 1|
 
 
 
