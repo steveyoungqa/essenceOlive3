@@ -4,9 +4,15 @@ In order to integrate with accounting system in use
 As Campaign Manager
 I want Insertion Orders to be automatically exported to SAP as Purchase Orders and any Invoices processed against them to be visible in Olive 3
 
-#to review
-Scenario: Purchase Orders are created, updated and synced on Client Approval
-  #activity added during campaign running is exported as new pos on client re-approval
+#to flesh out
+Scenario: Re-sync plan with SAP button
+  Given A media Plan has been Client approved
+    And it contains Essence Liable plan lines
+  When I look at the PO tab in the plan
+  Then I can see a button "Sync with SAP"
+    And when I click it Olive triggers the Sync process in scenario below
+
+Scenario: Syncing POs with client approved snapshot of plan
   Given A Media Plan is set up and published
     And there are Essence Liable plan lines
     And Client approval has been requested
@@ -16,54 +22,24 @@ Scenario: Purchase Orders are created, updated and synced on Client Approval
     And If export is successful, Olive displays the SAP ID as "External ID"
     And If export has not been successful, Olive records reason for failure in PO Sync History
 
-    #for unit tests
-    #Essence liable
-    Scenario: POs generated and Exported on Client Approval on Publish, not exported
-      Given I have set up a "Draft" media plan as outlined below
-        # ----------------------------------------------------------------------------------------|
-        # Version      | Total Budget | Allocated | Unallocated | Num IOs | Num M Lines | Num POs |
-        # ----------------------------------------------------------------------------------------|
-        # Draft        | $100         | $20       | $80         | 2       | 2           | 0       |
-        # Published    | --           | --        | --          | 0       | 0           | 0       |
-        # ----------------------------------------------------------------------------------------|
-        And it has never been published before
-        And I have set up 2 plan line as outlined below my Media Plan
-        # ---------------------------------------------------------------------------------------------------------------------------------------|
-        # Supplier              | IO | Liable Entity | Draft Budget | Publ. Budget | Int. appr. Budget | Clt. appr. Budget | Status              |
-        # ---------------------------------------------------------------------------------------------------------------------------------------|
-        # Google Ireland Ltd.   | #1 | Client        | $10          |  --          | --                | --                | Draft               |
-        # Ebuzzing Inc.         | #2 | Essence LON   | $10          |  --          | --                | --                | Draft               |
-        # ---------------------------------------------------------------------------------------------------------------------------------------|
-        And there are no Purchase Orders related to any of the Insertion Orders
-        And I'm on the plan line edit form
-      When I hit Publish all
-      Then Then Media Plan status changes to "Published"
-        # ----------------------------------------------------------------------------------------|
-        # Version      | Total Budget | Allocated | Unallocated | Num IOs | Num M Lines | Num POs |
-        # ----------------------------------------------------------------------------------------|
-        # Draft        | $100         | $20       | $80         | 2       | 2           | 0       |
-        # Published    | $100         | $20       | $80         | 2       | 2           | 2       |
-        # ----------------------------------------------------------------------------------------|
-        And Plan line Data and IO status changes as outlined below
-          # ---------------------------------------------------------------------------------------------------------------------------------------|
-          # Supplier              | IO | Liable Entity | Draft Budget | Publ. Budget | Int. appr. Budget | Clt. appr. Budget | Status              |
-          # ---------------------------------------------------------------------------------------------------------------------------------------|
-          # Google Ireland Ltd.   | #1 | Client        | $10          |  $10         | --                | --                | Published           |
-          # Ebuzzing Inc.         | #2 | Essence LON   | $10          |  $10         | --                | --                | Published           |
-          # ---------------------------------------------------------------------------------------------------------------------------------------|
-        And PO lines are generated as outlined below
-          # --------------------------------------------------------------------------------------------|
-          # Supplier              | PO | IO | Liable Entity | Net Budget | Status     | Exported to SAP |
-          # --------------------------------------------------------------------------------------------|
-          # Google Ireland Ltd.   | #1 | #1 | Client        | $10        | UNAPPROVED | NO              |
-          # Ebuzzing Inc.         | #2 | #2 | Essence LON   | $10        | UNAPPROVED | NO              |
-          # --------------------------------------------------------------------------------------------|
+  # for unit tests
+  Scenario: 1st time creation
+    Given A Media Plan is set up and Client Approved
+      And I it contains 2 plan lines as outlined below my Media Plan
+      # ---------------------------------------------------------------------------------------------------------------------------------------|
+      # Supplier              | IO | Liable Entity | Draft Budget | Publ. Budget | Int. appr. Budget | Clt. appr. Budget | Status              |
+      # ---------------------------------------------------------------------------------------------------------------------------------------|
+      # Google Ireland Ltd.   | #1 | Client        | $10          | $10          | $10               | $10               | Client Approved     |
+      # Ebuzzing Inc.         | #2 | Essence LON   | $10          | $10          | $10               | $10               | Client Approved     |
+      # ---------------------------------------------------------------------------------------------------------------------------------------|
+    When Sync is triggered (on client approval or manually)
+    Then POs and PO lines are generated as outlined below
+        # --------------------------------------------------------------------------------------------|
+        # Supplier              | PO | IO | Liable Entity | Net Budget | Status     | Exported to SAP |
+        # --------------------------------------------------------------------------------------------|
+        # Ebuzzing Inc.         | #2 | #2 | Essence LON   | $10        | APPROVED   | YES             |
+        # --------------------------------------------------------------------------------------------|
 
-    Scenario: PO remains UNAPPROVED and not exported on Internal approval
-    Scenario: Essence Liable PO updated to APPROVED and eported on Client approval
-    Scenario: Client Liable PO updated to APPROVED and NOT exported on Client approval
-
-Scenario: Syncing POs with lates client approved version of plan
   Scenario: Simple upweight
   Scenario: Simple downweight
   Scenario: Upweight against invoiced line
@@ -75,6 +51,13 @@ Scenario: Syncing POs with lates client approved version of plan
   Scenario: Compelte cancel
   Scenario: Compelte cancel on invoiced - abort
   Scenario: Complete cancel on closed - abort
+
+
+  Given IO line budget change in client approved snapshot
+    And it has an uninvoiced PO line linked to it
+  Whe
+  Then the PO line can be
+
 
 #to review
 Scenario: PO downweights are exported on Publish after approval
@@ -156,12 +139,8 @@ Scenario: Cancel POs in SAP
     And If export is successful, Olive displays the SAP ID as "External ID"
     And If export has not been successful, Olive records reason for failure in PO Sync History
 
-#to flesh out
-Scenario: Re-sync plan with SAP button
 
-#for unit tests
-Scenario: PO never approved
-Scenario: PO minor
+
 
 #to review
 Scenario: Handle incorrect PO Supplier after Plan Approval

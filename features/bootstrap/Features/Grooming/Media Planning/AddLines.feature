@@ -169,7 +169,7 @@ Scenario: Fixed Cost Without discount
   Then I don't see 'Budget (Gross)'
     And I don't see 'Unit Cost (Gross)'
     And 'Unit Cost (Net)' is read only as '20000'
-    And 'Quantity' is calculated as '1'
+    And 'Quantity' is calculated as '1' but not shown
 
 Scenario: Variable Without discount
   Given I have set up a line without discount
@@ -182,7 +182,7 @@ Scenario: Variable Without discount
     And I don't see 'Quantity'
 
 
-Scenario: Fixed CPM  With discount percent (failed manual test - gross unit cost not showing up)
+Scenario: Fixed CPM  With discount percent 
   Given I have set up a line without discount
     And chosen 'Fixed CPM' as 'Cost Model'
     And Entered '3016.6' as 'Net Budget'
@@ -223,8 +223,7 @@ Scenario: Fixed Cost  With discount percent
   When I look at the plan line form
   Then I see 'Budget (Gross)' is equal to '21000'
     And 'Unit Cost (Net)' is read-only as '17850'
-    And 'Unit Cost (Gross)' is equal to '21000'
-    And 'Quantity' is calculated as '1'
+    And 'Quantity' is calculated as '1' but not shown
 
 Scenario: Fixed CPM  With discount amount
   Given I have set up a line without discount
@@ -267,8 +266,7 @@ Scenario: Fixed Cost  With discount amount
   When I look at the plan line form
   Then I see 'Budget (Gross)' is equal to '17870'
     And 'Unit Cost (Net)' is read-only '17850'
-    And 'Unit Cost (Gross)' is equal to '17850'
-    And 'Quantity' is calculated as '1'
+    And 'Quantity' is calculated as '1' but not shown
 
 
 
