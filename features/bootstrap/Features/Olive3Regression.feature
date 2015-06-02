@@ -6,7 +6,6 @@ Feature: Olive 3 Regression Pack
 
   Background:
 
-
     Given I am on "/login"
     Then I press "Sign in with Google"
     And I wait for xpath "//*[@id='Email']" to appear
@@ -17,7 +16,6 @@ Feature: Olive 3 Regression Pack
 #    And I Maximize the Browser Window
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
-
 #   ***CREATE CAMPAIGN***
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I click the "Navigation Header" link
@@ -62,6 +60,7 @@ Feature: Olive 3 Regression Pack
   # The above doesnt click External Save - it takes focus off the form dropdown in the previous step
     Then I click the "External System Save" link
     And I should see text matching "You have linked the campaign to Google Sub-Product"
+    Then I output text "Google Initative <initiative> External Platform linked" to the console
 
 #   ***CREATE MEDIA PLAN***
     Then I wait for xpath "//*[@class='md-header-items']//*[contains(text(),'Media Plans')]" to appear
@@ -71,7 +70,7 @@ Feature: Olive 3 Regression Pack
     And I fill in "campaign-marketbudgets-new-label" with "Test Label"
     Then I wait for 2000
 
-#    Then I click the "KPI Type" link
+#   Then I click the "KPI Type" link
     Then I wait for xpath "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[2]" to appear
     Then I click the "KPI Type Long Path" link
     Then I click the "KPI Brand" link
@@ -114,6 +113,7 @@ Feature: Olive 3 Regression Pack
 
 #    Then I click the "Media Plan Save" link
     Then I click the "Media Plan Long Save" link
+    Then I output text "Media Plan Created" to the console
 
 #   ***LINK TO GOOGLE INITIATIVE***
     And I wait for xpath "//*[contains(@class,'active--panel')]//*[contains(text(),'External platforms')]" to appear
@@ -124,12 +124,13 @@ Feature: Olive 3 Regression Pack
     Then I click the link containing ID "<initiative>"
     Then I click the "Save Mapped Account" link
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
+    Then I output text "Google Initative <initiative> linked to Media Plan" to the console
+
+#   ***ADD MEDIA PLAN LINE**
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
     Then I wait for 3000
     Given I select Edit for the existing Campaign "<campaign>"
-
-#   ***ADD MEDIA PLAN LINE**
     Then I wait for xpath "//*[@class='button button__label-only']" to appear
     Then I click the "Media Plan Whole Column" link
     Then I wait for 5000
@@ -174,15 +175,15 @@ Feature: Olive 3 Regression Pack
     Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100000"
 
 #   ***APPLY BUDGET DISCOUNT***
-
     Then I fill in the "Discount Amount" with "50"
     And I click the "Discount Percentage" link
     And I wait for 2000
     Then I fill in the "Discount Amount" with "10"
-    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
+    And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<description1>"
 
     Then I click the "Save Media Plan Line" link
     Then I wait for text "Plan line added successfully." to appear
+    Then I output text "Media Plan Line <description1> linked to Media Plan" to the console
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -190,6 +191,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     When I click the "Publish Media Plan" link
     And I wait for text "Media Plan published successfully." to appear
+    Then I output text "Media Plan Published" to the console
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I reload the page
 
@@ -209,6 +211,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 8000
     And I click the link containing Text "<ds3>"
     Then I click the "External System Save" link
+    Then I output text "Insertion Order Linked to DS3" to the console
 
 #   ***MAP SEARCH CAMPAIGN***
     Then I click the "Plan Lines" link
@@ -222,6 +225,7 @@ Feature: Olive 3 Regression Pack
     And I wait for 3000
     Then I click the "Close Mapped Panel" link
     And I wait for 2000
+    Then I output text "Search Campaign <searchCampaign> mapped" to the console
     Then I click the "Plan tab" link
 
     Then I click the "Publish Dropdown" link
@@ -237,7 +241,8 @@ Feature: Olive 3 Regression Pack
     Then I click the link containing Text "<approver>"
     Then I wait for 2000
     And I click the "Request Approval Confirm" link
-    Then I reload the page
+    Then I output text "Internal Approval Requested" to the console
+#    Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 #   ***FEEDBACK & APPROVE***
@@ -245,6 +250,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "Set Status" link
     And I fill in the "Feedback Notes" with "Regression Testing feedback test"
     Then I click the "Approve" link
+    Then I output text "Plan Approved" to the console
 
 #   ***EDIT FIRST MEDIA PLAN LINE***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-editable']" to appear
@@ -264,6 +270,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for text "Publishing this media plan you will require further internal approval for the amends you have made" to appear
     And I click the "Continue & Publish" link
     Then I wait for text "Media Plan published successfully" to appear
+    Then I output text "Edited Media Plan published successfully" to the console
 #    And I wait for text "Amends Published" to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
@@ -306,6 +313,7 @@ Feature: Olive 3 Regression Pack
     And I click the "Tag Save" link
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
+    Then I output text "KPI added" to the console
 
 ##   ***TRACKING MANAGEMENT***
 #    Then I click the "Navigation Header" link
@@ -333,10 +341,11 @@ Feature: Olive 3 Regression Pack
     Then I fill in "campaign-search-basic" with "<campaign>"
     Then I wait for 3000
     Then I select the Delete "<campaign>" checkbox
+    Then I output text "CleanUp completed <campaign> has been deleted" to the console
 
   Examples:
-    |campaign  |client|owner      |region |period |budget|mediaType     |costModel   |lineCurrency |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
-    |regression|google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|British Pound|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
+    |campaign  |client|owner      |region |period |budget|mediaType     |costModel   |lineCurrency |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|description1|
+    |regression|google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|British Pound|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|Plan Line 1|
 
 
 
