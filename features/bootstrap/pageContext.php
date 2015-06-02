@@ -11,6 +11,20 @@ class pageContext extends PageObjectContext
     }
 
     /**
+     * Output text in console window to show progress for debugging and Jenkins
+     *
+     * @Then /^I output text "([^"]*)" to the console$/
+     */
+    public function outputText($output)
+    {
+        /**
+         * @var customTests $custom
+         */
+        $custom = $this->getPage('customTests');
+        $custom->textOutput($output);
+    }
+
+    /**
      * For elements that don't have IDs,CSS,Values etc - so use page object arrays instead
      *
      * @Then /^I click the "([^"]*)" link$/
@@ -286,7 +300,6 @@ class pageContext extends PageObjectContext
          */
         $custom = $this->getPage('customTests');
         $custom->waitForTextAppear($text, $appear);
-
     }
 
 }

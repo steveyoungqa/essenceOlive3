@@ -170,7 +170,7 @@ Feature: Olive 3 Regression Pack
 #   ***PUBLISH MEDIA PLAN***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     When I click the "Publish Media Plan" link
-    And I wait for text "Media Plan Lines published successfully" to appear
+    And I wait for text "Media Plan published successfully." to appear
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I reload the page
 

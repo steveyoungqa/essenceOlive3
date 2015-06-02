@@ -159,7 +159,7 @@ Feature: OAT-2 Untracked Spend
 #   ***PUBLISH MEDIA PLAN***
     When I click the "Publish Media Plan" link
     Then I wait for 3000
-    Then I should see "Media Plan Lines published successfully"
+    And I wait for text "Media Plan published successfully." to appear
     Then I wait for 2000
 
 #   ***LINK INSERTION ORDER TO DS3***

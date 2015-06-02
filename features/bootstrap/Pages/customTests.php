@@ -161,6 +161,12 @@ class customTests extends CustomPage
         );
 
 
+    public function textOutput ($output)
+    {
+//        echo("\033[01;33m '.$output.'\033[0m");
+        echo "\033[33m $output \033\n";
+    }
+
     public function clickPageObject ($xpath)
     {
         $this->getElement($xpath)->click();
