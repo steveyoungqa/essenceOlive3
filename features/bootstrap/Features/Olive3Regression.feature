@@ -20,29 +20,28 @@ Feature: Olive 3 Regression Pack
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
-    Then I wait for 3000
+    Then I wait for 2000
     Then I fill in the "Campaign Search" with "<campaign>"
-    Then I wait for 3000
+    Then I wait for 2000
     Then I select the Delete "<campaign>" checkbox
     And I wait for xpath "//*[@class='toast-message success--message show']" to disappear
 
     Then I click the "Navigation Header" link
-    Then I wait for 3000
+    Then I wait for 2000
     Then I click the "Campaigns" link
-    Then I wait for 3000
+    Then I wait for 2000
     Then I follow "campaign-add"
-    Then I wait for 3000
+    Then I wait for 2000
 
     Then I fill in the "Campaign Name" with "<campaign>"
     And I fill in "campaign-new-client" with "<client>"
-    Then I wait for 5000
+    Then I wait for 2000
     Then I fill in "campaign-new-managingRegion" with "<region>"
-    And I wait for 5000
+    And I wait for 2000
     And I fill in "campaign-new-owner" with "<owner>"
-    And I wait for 10000
     And I wait for xpath "//*[@id='campaign-new-owner-steve-automation']" to appear
     And I fill in "campaign-new-memo" with "Test Notes"
-    Then I wait for 5000
+    Then I wait for 2000
     Then I click the "Campaign Save" link
     Then I output text "Campaign: <campaign> created" to the console
 
@@ -55,7 +54,7 @@ Feature: Olive 3 Regression Pack
     And I click the "External System Cancel" link
     And I click the "Google Sub Product" link
     Then I fill in "mapping-externalSystem-googleSubProduct" with "<initiative>"
-    Then I wait for 5000
+    Then I wait for 2000
     Then I click the "External System Save" link
   # The above doesnt click External Save - it takes focus off the form dropdown in the previous step
     Then I click the "External System Save" link
@@ -66,7 +65,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for xpath "//*[@class='md-header-items']//*[contains(text(),'Media Plans')]" to appear
     Then I click the "Media Plans" link
     Then I follow "campaign-marketbudgets-add"
-    Then I wait for 3000
+    Then I wait for 2000
     And I fill in "campaign-marketbudgets-new-label" with "Test Label"
     Then I wait for 2000
 
@@ -139,6 +138,7 @@ Feature: Olive 3 Regression Pack
 
     Then I click the "Add Media Plan Line" link
     Then I wait for 2000
+    And I wait for xpath "//*[@class='panel__title ng-binding']" to appear
     And I click the "Cost Type Media" link
     Then I click the "Line Channel" link
     And I click the "Line Channel Search" link
@@ -230,14 +230,14 @@ Feature: Olive 3 Regression Pack
 
     Then I click the "Publish Dropdown" link
     And I click the "Published State" link
+    Then I reload the page
 
 #   ***REQUEST APPROVAL***
     Then I click the "Request Approval" link
     Then I wait for 2000
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-versions-approvers-add-person']" to appear
     Then I click the "Approver Field" link
-    Then I wait for 2000
-    And I fill in "campaign-marketbudgets-versions-approvers-add-person" with "<approver>"
-    Then I wait for 2000
+    And I wait for text "<approver>" to appear
     Then I click the link containing Text "<approver>"
     Then I wait for 2000
     And I click the "Request Approval Confirm" link
@@ -247,6 +247,7 @@ Feature: Olive 3 Regression Pack
 
 #   ***FEEDBACK & APPROVE***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-set-status']" to appear
+    Then I reload the page
     Then I click the "Set Status" link
     And I fill in the "Feedback Notes" with "Regression Testing feedback test"
     Then I click the "Approve" link
