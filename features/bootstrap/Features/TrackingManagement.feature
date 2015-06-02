@@ -33,7 +33,7 @@ Feature: Tracking Management
 
 
   Examples:
-    |campaign  |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |campaign  |client|owner      |period |budget|liableEntity |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
     |tracking  |google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 

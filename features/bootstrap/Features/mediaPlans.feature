@@ -87,9 +87,9 @@ Feature: Olive 3 Media Plan Creation
     Then I Select a Media Plan End Date of "2015-04-30"
     Then I wait for 2000
 
-    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<clientLiable>"
+    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<liableEntity>"
     Then I wait for 2000
-    Then I click the link containing Text "<clientLiable>"
+    Then I click the link containing Text "<liableEntity>"
 
     And I fill in "campaign-marketbudgets-new-currency" with "GBP"
     Then I wait for 2000
@@ -117,6 +117,6 @@ Feature: Olive 3 Media Plan Creation
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign |client|owner      |region |period |budget|clientLiable |
+    |campaign |client|owner      |region |period |budget|liableEntity |
     |mediaplan|google|automation |EMEA   |q4-2015|100000|Client Liable|
 

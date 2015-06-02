@@ -88,9 +88,9 @@ Feature: Olive 3 Regression Pack
     Then I Select a Media Plan End Date of "2015-04-30"
     Then I wait for 2000
 
-    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<clientLiable>"
+    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<liableEntity>"
     Then I wait for 2000
-    Then I click the link containing Text "<clientLiable>"
+    Then I click the link containing Text "<liableEntity>"
 
     And I fill in "campaign-marketbudgets-new-currency" with "GBP"
     Then I wait for 2000
@@ -152,7 +152,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the "Supplier" link
     And I click the link containing Text "<supplier>"
-    Then I should see text matching "<clientLiable>"
+    Then I should see text matching "<liableEntity>"
     Then I click the "Platform" link
     Then I click the "Platform DS3" link
     Then I wait for 2000
@@ -182,16 +182,15 @@ Feature: Olive 3 Regression Pack
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100"
 
 #   ***APPLY BUDGET DISCOUNT***
-    Then I click the "Discount Applied" checkbox
-    And I wait for 2000
-    And I click the "Discount Amount Tab" link
+
     Then I fill in the "Discount Amount" with "50"
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -239,6 +238,7 @@ Feature: Olive 3 Regression Pack
     And I click the "Unknown Budget" checkbox
     And I fill in the "Plan Line Description" with "<description2>"
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -259,11 +259,12 @@ Feature: Olive 3 Regression Pack
     Then I click the link containing Text "Essence LON"
     Then I wait for 2000
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
 
 # ***PUBLISH MEDIA PLAN***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     When I click the "Publish Media Plan" link
-    Then I wait for text "Media Plan Lines published successfully" to appear
+    And I wait for text "Media Plan published successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -283,7 +284,7 @@ Feature: Olive 3 Regression Pack
     Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign      |client|owner      |region |period |budget|clientLiable |initiative|buyType   |supplier      |description1|description2|ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |campaign      |client|owner      |region |period |budget|liableEntity |initiative|buyType   |supplier      |description1|description2|ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
     |planlinetests |google|automation |EMEA   |q42015 |100000|Client Liable|wildfire  |Direct Buy|Google Ireland|Plan Line 1 |Plan Line 2 |700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 

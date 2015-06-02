@@ -96,9 +96,9 @@ Feature: Olive 3 Regression Pack
     Then I Select a Media Plan End Date of "2015-04-30"
     Then I wait for 2000
 
-    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<clientLiable>"
+    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<liableEntity>"
     Then I wait for 2000
-    Then I click the link containing Text "<clientLiable>"
+    Then I click the link containing Text "<liableEntity>"
 
     And I fill in "campaign-marketbudgets-new-currency" with "GBP"
     Then I wait for 2000
@@ -161,27 +161,25 @@ Feature: Olive 3 Regression Pack
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100000"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100000"
 
 #   ***APPLY BUDGET DISCOUNT***
-    Then I click the "Discount Applied" checkbox
-    And I wait for 2000
-    And I click the "Discount Amount Tab" link
+
     Then I fill in the "Discount Amount" with "50"
     And I click the "Discount Percentage" link
     And I wait for 2000
     Then I fill in the "Discount Amount" with "10"
-    Then I should see "amount Total"
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 #   ***PUBLISH MEDIA PLAN***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-publish']" to appear
     When I click the "Publish Media Plan" link
-    And I wait for text "Media Plan Lines published successfully" to appear
+    And I wait for text "Media Plan published successfully." to appear
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I reload the page
 
@@ -220,7 +218,7 @@ Feature: Olive 3 Regression Pack
     And I click the "Published State" link
 
 #   ***REQUEST APPROVAL***
-    Then I click the "Manage Approval" link
+    Then I click the "Request Approval" link
     And I click the "Add Approver" link
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-approvers-add-type" with "Internal"
@@ -235,7 +233,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the "Save Approver" link
     Then I wait for 2000
-    And I click the "Request Approval" link
+    And I click the "Request Approval Confirm" link
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -247,7 +245,7 @@ Feature: Olive 3 Regression Pack
 
 
   Examples:
-    |campaign   |client|owner      |region |period |budget|clientLiable |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
+    |campaign   |client|owner      |region |period |budget|liableEntity |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
     |lastapprove|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
 
 

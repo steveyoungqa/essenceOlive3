@@ -85,9 +85,9 @@ Feature: OAT-2 Untracked Spend
     Then I Select a Media Plan End Date of "2015-04-30"
     Then I wait for 2000
 
-    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<clientLiable>"
+    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<liableEntity>"
     Then I wait for 2000
-    Then I click the link containing Text "<clientLiable>"
+    Then I click the link containing Text "<liableEntity>"
 
     And I fill in "campaign-marketbudgets-new-currency" with "GBP"
     Then I wait for 2000
@@ -149,16 +149,17 @@ Feature: OAT-2 Untracked Spend
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100000"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100000"
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "Test Description"
 
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I wait for 5000
 
 #   ***PUBLISH MEDIA PLAN***
     When I click the "Publish Media Plan" link
     Then I wait for 3000
-    Then I should see "Media Plan Lines published successfully"
+    And I wait for text "Media Plan published successfully." to appear
     Then I wait for 2000
 
 #   ***LINK INSERTION ORDER TO DS3***
@@ -197,6 +198,7 @@ Feature: OAT-2 Untracked Spend
 
     Then I wait for 2000
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I wait for 5000
 
     Then I click the "Olive Header Logo" link
@@ -215,7 +217,7 @@ Feature: OAT-2 Untracked Spend
 #    Then I select the Delete "<campaign>" checkbox
 
   Examples:
-    |campaign  |client|owner      |period |budget|clientLiable |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |campaign  |client|owner      |period |budget|liableEntity |initiative|supplier      |ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
     |untracked |google|automation |q4-2015|100000|Client Liable|wildfire  |Google Ireland|700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 

@@ -89,9 +89,9 @@ Feature: Breach Scenarios
     Then I Select a Media Plan End Date of "2015-04-30"
     Then I wait for 2000
 
-    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<clientLiable>"
+    Then I fill in "campaign-marketbudgets-new-liableEntity" with "<liableEntity>"
     Then I wait for 2000
-    Then I click the link containing Text "<clientLiable>"
+    Then I click the link containing Text "<liableEntity>"
 
     And I fill in "campaign-marketbudgets-new-currency" with "GBP"
     Then I wait for 2000
@@ -156,10 +156,11 @@ Feature: Breach Scenarios
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100"
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<line1>"
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -192,10 +193,11 @@ Feature: Breach Scenarios
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100"
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<line2>"
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -228,10 +230,11 @@ Feature: Breach Scenarios
 
     Then I click the "Line Currency" link
     And I click the link containing Text "British Pound"
-    Then I fill in "campaign-marketbudgets-versions-lines-new-totalGross" with "100"
+    Then I fill in "campaign-marketbudgets-versions-lines-new-totalNet" with "100"
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-lines-new-description" with "<line3>"
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[contains(text(),'Default')]" to appear
 
@@ -255,7 +258,7 @@ Feature: Breach Scenarios
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 #   ***REQUEST APPROVAL***
-    Then I click the "Manage Approval" link
+    Then I click the "Request Approval" link
     And I click the "Add Approver" link
     Then I wait for 2000
     And I fill in "campaign-marketbudgets-versions-approvers-add-type" with "Internal"
@@ -270,7 +273,7 @@ Feature: Breach Scenarios
     Then I wait for 2000
     Then I click the "Save Approver" link
     Then I wait for 2000
-    And I click the "Request Approval" link
+    And I click the "Request Approval Confirm" link
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
@@ -291,6 +294,7 @@ Feature: Breach Scenarios
     And I fill in "campaign-marketbudgets-versions-medialines-description" with "<line2update>"
     And I wait for 2000
     Then I click the "Save Media Plan Line" link
+    Then I wait for text "Plan line added successfully." to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     And I wait for 5000
@@ -309,7 +313,7 @@ Feature: Breach Scenarios
 
 
   Examples:
-    |campaign  |client|owner      |region |period |budget|clientLiable |initiative|property1|property2|supplier      |line1       |line2      |line2update   |line3      |>ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
+    |campaign  |client|owner      |region |period |budget|liableEntity |initiative|property1|property2|supplier      |line1       |line2      |line2update   |line3      |>ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
     |individual|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |YouTube  |GDN      |Google Ireland|YouTubeDraft|GDN1Publish|Change YouTube|GDN2Publish|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 

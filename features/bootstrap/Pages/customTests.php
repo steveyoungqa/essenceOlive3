@@ -40,6 +40,7 @@ class customTests extends CustomPage
         'Campaign New Market' => array('xpath' => "//*[@id='campaign-marketbudgets-new-market']"),
         'Market United Kingdom' => array('xpath' => "//*[@id='campaign-marketbudgets-new-market-united-kingdom']"),
         'Market USA' => array('xpath' => "//*[@id='campaign-marketbudgets-new-market-united-states']"),
+        'Market Germany' => array('xpath' => "//*[@id='campaign-marketbudgets-new-market-germany']"),
         'Start Date Media Plan' => array('xpath' => "//input[@id='campaign-marketbudgets-new-startDate']"),
         'End Date Media Plan' => array('xpath' => "//input[@id='campaign-marketbudgets-new-endDate']"),
         'Start Date Media Plan Line' => array('xpath' => "//input[@id='campaign-marketbudgets-versions-lines-new-startDate']"),
@@ -78,10 +79,10 @@ class customTests extends CustomPage
         'Unknown Budget' => array('xpath' => "//*[@class='custom-checkbox ng-scope'][1]/span[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']"),
 
         'Discount Applied' => array('xpath' => "//*[@class='custom-checkbox ng-scope'][2]/span[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']"),
-        'Discount Amount Tab' => array('xpath' => "//*[@class=' button__label-only']//*[contains(text(),'Amount')]"),
-        'Discount Percentage' => array('xpath' => "//*[@class=' button__label-only']//*[contains(text(),'Percentage')]"),
+//        'Discount Amount Tab' => array('xpath' => "//*[@class=' button__label-only']//*[contains(text(),'Amount')]"),
+        'Discount Value' => array('xpath' => "//*[@class=' button__label-only']//*[contains(text(),'Value')]"),
+        'Discount Percentage' => array('xpath' => "//*[@class=' button__label-only']//*[contains(text(),'%')]"),
         'Discount Amount' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-discount']"),
-
 
         'Plan Line Description' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-lines-new-description']"),
         'Plan Line Description Update' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-medialines-description']"),
@@ -105,7 +106,7 @@ class customTests extends CustomPage
         'Edit Plan Line' => array('xpath' => "//*[@class='table__actions ng-scope']//*[contains(text(),'Edit')]"),
         'Plan Line Delete' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-line-delete']"),
 
-        'Manage Approval' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-manage-approval']"),
+        'Request Approval' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-manage-approval']"),
         'Add Approver' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add']"),
         'Save Approver' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add-save']"),
         'Publish Dropdown' => array('xpath' => "//*[@class='expandable-dropdown__toggle']"),
@@ -113,7 +114,7 @@ class customTests extends CustomPage
         'Editable Draft State' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-editable']"),
         'Approver Field' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add-person']"),
         'Internal Approver' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add-type-internal']"),
-        'Request Approval' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-request']"),
+        'Request Approval Confirm' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-request']"),
         'Set Status' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-set-status']"),
         'Feedback Notes' => array('xpath' => "//*[@ng-model='feedback.note']"),
         'Approve' => array('xpath' => "//*[@class='button'][contains(text(),'Approve')]"),
@@ -145,6 +146,7 @@ class customTests extends CustomPage
         'DS3 Account ID' => array('xpath' => "//*[@id='mapping-externalSystem-ds3']"),
 
         'KPI Brand' => array('xpath' => "//*[@id='campaign-marketbudgets-new-kpiType-brand']/span[@class='ng-binding ng-scope']"),
+        'KPI DR' => array('xpath' => "//*[@id='campaign-marketbudgets-new-kpiType-dr']/span[@class='ng-binding ng-scope']"),
 
 ////       THESE FOUR FOLLOWING IDS - XPATHS ARE NOT RECOGNISED SINCE DEV CHANGES TO MEDIA PLAN - SARAH TO INVESTIGATE:
         'KPI Type Long Path' => array('xpath' => "/html/body/div[4]/div[2]/div/div/div[1]/div/form/fieldset/ul[1]/li[2]"),
@@ -158,6 +160,12 @@ class customTests extends CustomPage
         'Continue & Publish' => array('xpath' => "//*[@class='toast-message error--message show']//*[contains(text(),'Continue & Publish')]"),
         );
 
+
+    public function textOutput ($output)
+    {
+//        echo("\033[01;33m '.$output.'\033[0m");
+        echo "\033[33m $output \033\n";
+    }
 
     public function clickPageObject ($xpath)
     {
