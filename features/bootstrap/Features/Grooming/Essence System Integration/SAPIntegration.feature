@@ -132,7 +132,6 @@ Scenario: Update Olive DB after an unsuccessful SAP export
 
   Given IO line budget change in client approved snapshot
     And it has an uninvoiced PO line linked to it
-  Whe
   Then the PO line can be
 
 
