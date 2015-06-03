@@ -4,23 +4,100 @@ In order to integrate with accounting system in use
 As Campaign Manager
 I want Insertion Orders to be automatically exported to SAP as Purchase Orders and any Invoices processed against them to be visible in Olive 3
 
+###################################################################################################################
+# IOs that need to be exported to sap are:                                                                        #
+#   ~ Essence Liable                                                                                              #
+#   ~ not raised for the following suppliers: Essence Creative, Essence Mobile, Essence Media, Essence Social     #
+###################################################################################################################
+
 #to flesh out
 Scenario: Re-sync plan with SAP button
   Given A media Plan has been Client approved
-    And it contains Essence Liable plan lines
   When I look at the PO tab in the plan
   Then I can see a button "Sync with SAP"
     And when I click it Olive triggers the Sync process in scenario below
 
-Scenario: Syncing POs with client approved snapshot of plan
+Scenario: Detect if PO should be exported to SAP
+  Given that an Insertion order is Essence Liable
+    And It is not raised for any of the following Suppliers:
+     # Supplier Name | Master Code
+  When A new Client snapshot is created
+  Then prepare a Purchase Order for Export to SAP
+
+Scenario: Create POs
   Given A Media Plan is set up and published
-    And there are Essence Liable plan lines
-    And Client approval has been requested
-  When Client has Approved the plan
-  Then Olive exports Essence Liable Purchase Orders to SAP
+    And Client has approved the plan
+    And there are Insertion Orders that need to be exported to SAP
+    And that Insertion Order Does not have an associated PO in SAP
+  When SAP Sync is triggered
+  Then Olive creates a Purchase order with the following information
+    #https://docs.google.com/document/d/1ko-1-TmRZ7UwBfgq_a37l5x_DEEBZnqjlzFu-dnxIu0/edit#heading=h.mku47oviebtt
+    And PO ID is the same as IO ID
+    # QQ - can this be somehow enforced? where would we get PO ids in case we needed to make multiple POs for IOs
+
+Scenario: Create PO Lines
+
+Scenario: Update PO Lines
+
+Scenario: Alert of discrepancies for Insertion Order
+
+Scenario: Discounts are exported separately with Agency Discount GL account
+  #https://docs.google.com/document/d/1ko-1-TmRZ7UwBfgq_a37l5x_DEEBZnqjlzFu-dnxIu0/edit#heading=h.30djt44mgg3
+  Given an IO line has a discount applied
+    And it has to be exported to SAP
+    And a representative Purchase Order line is created for it
+  When Olive prepares PO SAP export for the PO
+  Then the PO Line is split into two lines as follows:
+    # |--------------------------------------------------------------------------------------------------------------|
+    # | Olive ID      | GL Account            | Description   | Total Gross         | Discount | Total net           |
+    # |--------------------------------------------------------------------------------------------------------------|
+    # | {PO Line ID}  | {PO line GL account}  | {po line desc}| PO line Net         | 0        | PO line Net         |
+    # | {PO Line ID}c | 350040Media_00000000  | {po line desc}| PO line Disc amount | 0        | PO line Disc amount |
+    # |--------------------------------------------------------------------------------------------------------------|
+
+Scenario: Export POs to SAP
+  Given new Client Snapshot has been created
+  When PO SAP update has been prepared
+  Then Olive sends Purchase Order requests to relevant SAP db (depending on Liable Entity as follows:
+    # Olive Env  | SAP Server | Liable Entity | ID     | SAP DB           |
+    # --------------------------------------------------------------------|
+    # Production | SAP LON    | Essence LON   | UK     | Essence_Ltd_Live |
+    # Production | SAP LON    | Essence NA    | US     | Essence_Inc_Live |
+    # Production | SAP LON    | Essence SG    | SG     | Essence_Sin_Live |
+    # Production | SAP LON    | Essence JP    | JP     | ??               |
+    # Production | SAP LON    | Essence AU    | AU     | TBC              |
+    # --------------------------------------------------------------------|
+    # UAT        | SAP LON    | Essence LON   | TESTUK | Essence_Ltd_Test |
+    # UAT        | SAP LON    | Essence NA    | TESTUS | Essence_Inc_Test |
+    # UAT        | SAP LON    | Essence SG    | TESTSG | Essence_Sin_Test |
+    # UAT        | SAP LON    | Essence JP    | TESTJP | ???              |
+    # UAT        | SAP LON    | Essence AU    | TESTAU | TBC              |
+
+
     And Olive logs the export event in PO Sync history
-    And If export is successful, Olive displays the SAP ID as "External ID"
-    And If export has not been successful, Olive records reason for failure in PO Sync History
+    # QQ - where would we look at sync log for POs that don't get recorded in Olive becuase the export failed?
+
+Scenario: Update Olive DB after a successful SAP export
+  Given Olive has sent a PO request to SAP
+  When PO Export to SAP is successful
+  Then Olive records PO SAP ID as "External ID" for Purchase Order
+    And Updates Olive database with information that's just been exported to SAP
+    And users can find the Purchase Order in a list of "Purchase Orders" for related Plan as well as the global "/finance/pos" page
+
+Scenario: Update Olive DB after an unsuccessful SAP export
+  Given Olive has sent a PO request to SAP
+  When PO Export to SAP is not successful
+  Then Olive records the reason for failure in Sync history
+    And Indicates on Insertion Order that there has been a problem
+    And Olive autosubmits a JIRA ticket for developers to investigate the issue with the following information:
+     # ERROR - PO Export failed - {SAP Env} - {PO ID} ({Olive Env})
+     # --------------------------------------------------------------------
+     # {Reason for failure}
+     # Related IO: {Url to Insertion Order}
+     # Purchase Order: {Url to Purchase Order} # if available
+     # -------------------------------------------------------------------
+
+
 
   # for unit tests
   Scenario: 1st time creation
