@@ -122,3 +122,27 @@ Scenario: Client views a plan for which they have already giving feedback (OTD-2
 
   #to review
   Scenario: FE - Highlight changes between Client Approval Requested vs Last Approved version (OTD-788)
+    Given Client has approved a Media Plan
+      And I have since published breaching changes to the plan
+      And I have requested Client re-approval
+    When Client look the new request in Client portal
+    Then they see each value that is different when compared to previously approved version marked with a highlight
+      And when they hover over the highlight they can see the following information:
+        # Current value,
+        # Last approved value and
+        # any other value in between that had ever been visible to the client as auto-approved
+        #
+        # e.g.
+        # ------------------
+        # Value in Cell:
+        # ------------------
+        # 160,000
+        # ------------------
+        # Info in hover:
+        # ------------------
+        # Auto-approved: 10,000 on 31 May 2014
+        # Last approved: 8,000 on 29 May 2015
+      And budget changes (Upweights / Downweights) are indicated with colored arrows (red for downweight, green for upweight)
+      And Deleted lines are shown as striked out lines
+      And New lines are shown emphasised (bolded)
+      And changes in Media Plan meta data are highlighted (TBC)
