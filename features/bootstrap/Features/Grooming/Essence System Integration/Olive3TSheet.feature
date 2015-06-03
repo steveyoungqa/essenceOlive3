@@ -4,7 +4,7 @@ In order to map olive 2 placements to Olive 3 financial data
 As Campaign Manager
 I want to be able to upload a new format T-sheet in Olive 2
 
-#(reviewed 5th May)
+#reviewed 3th Jun - in Sprint 31 [8th Jun] -
 #in Olive 3
 Scenario: Download O3 Plan with Line IDs for T-sheet (OTD-1921)
   Given I have set up a Media Plan in Olive 3

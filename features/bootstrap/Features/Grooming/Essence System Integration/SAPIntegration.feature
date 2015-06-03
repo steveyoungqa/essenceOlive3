@@ -10,37 +10,84 @@ I want Insertion Orders to be automatically exported to SAP as Purchase Orders a
 #   ~ not raised for the following suppliers: Essence Creative, Essence Mobile, Essence Media, Essence Social     #
 ###################################################################################################################
 
-#to flesh out
+#to review
 Scenario: Re-sync plan with SAP button
   Given A media Plan has been Client approved
   When I look at the PO tab in the plan
   Then I can see a button "Sync with SAP"
     And when I click it Olive triggers the Sync process in scenario below
 
-Scenario: Detect if PO should be exported to SAP
+#to review
+Scenario: Detect if PO should be exported to SAP (OTD-2139)
   Given that an Insertion order is Essence Liable
     And It is not raised for any of the following Suppliers:
-     # Supplier Name | Master Code
+     # | Supplier Name    | Master Code |
+     # |--------------------------------|
+     # | Essence Creative | |
+     # | Essence Mobile   | |
+     # | Essence Social   |
+     # | Essence Media    |
   When A new Client snapshot is created
   Then prepare a Purchase Order for Export to SAP
 
+#to review
 Scenario: Create POs
   Given A Media Plan is set up and published
     And Client has approved the plan
     And there are Insertion Orders that need to be exported to SAP
     And that Insertion Order Does not have an associated PO in SAP
   When SAP Sync is triggered
-  Then Olive creates a Purchase order with the following information
+  Then Olive creates a Purchase order as per specification in "20130816 - Olive 3 - B1IF and Olive Interface Requirements - v.0.3: Purchase Orders" section
     #https://docs.google.com/document/d/1ko-1-TmRZ7UwBfgq_a37l5x_DEEBZnqjlzFu-dnxIu0/edit#heading=h.mku47oviebtt
     And PO ID is the same as IO ID
     # QQ - can this be somehow enforced? where would we get PO ids in case we needed to make multiple POs for IOs
 
+#to review
 Scenario: Create PO Lines
+  Given a Media plan is set up and published
+    And Client has approved the plan
+    And there are insertion order that need to be exported to SAP
+    And the insertion Order has an associated Purchase Order
+    And a line in the insertion Order has changed (or has been newly introduced)
+    And that associated Purchase Order does not have any uninvoiced lines
+  When SAP Sync is triggered
+  Then Olive creates a Purchase Order line for the change amount as per specification in "20130816 - Olive 3 - B1IF and Olive Interface Requirements - v.0.3: Purchase Orders" section
 
+#to review
 Scenario: Update PO Lines
+  Given a Media plan is set up and published
+    And Client has approved the plan
+    And there are insertion order that need to be exported to SAP
+    And the insertion Order has an associated Purchase Order
+    And a line in the insertion Order has changed (or has been newly introduced)
+    And that associated Purchase Order has an uninvoiced PO line
+  When SAP Sync is triggered
+  Then Olive updates uninvoiced PO by the change amount as per specification in "20130816 - Olive 3 - B1IF and Olive Interface Requirements - v.0.3: Purchase Orders" section
 
+#to review
 Scenario: Alert of discrepancies for Insertion Order
+  Given a Media plan is set up and published
+    And Client has approved the plan
+    And there are insertion order that need to be exported to SAP
+    And the insertion Order is associated with a Purchase Order
+    And Olive checks if the Purchase Order status in SAP
+  When SAP responsed with a "CLOSED" status
+  Then Olive displays an warning idicator against the Insertion Order (in list view and details - PO Sync area)
+    And Olive displays a warning indicator against the Purchase Order (in list view and details - PO Sync area)
+    And Olive updates Olive PO Status to "CLOSED"
+    And Olive autosubmits a JIRA ticket for developers to investigate the issue with the following information:
+     # ERROR - PO Sync impossible - {SAP Env} - {PO ID} ({Olive Env})
+     # --------------------------------------------------------------------
+     # Purchase Order Closed in SAP
+     # Not possible to update Total ({Currency} {PO Total}) to match Insertion Order ({Currency} {IO Total})
+     # Discrepancy  of {Currency} {difference}
+     #
+     # Related IO: {Url to Insertion Order}
+     # Purchase Order: {Url to Purchase Order}
+     # -------------------------------------------------------------------
 
+
+#to review
 Scenario: Discounts are exported separately with Agency Discount GL account
   #https://docs.google.com/document/d/1ko-1-TmRZ7UwBfgq_a37l5x_DEEBZnqjlzFu-dnxIu0/edit#heading=h.30djt44mgg3
   Given an IO line has a discount applied
@@ -55,6 +102,7 @@ Scenario: Discounts are exported separately with Agency Discount GL account
     # | {PO Line ID}c | 350040Media_00000000  | {po line desc}| PO line Disc amount | 0        | PO line Disc amount |
     # |--------------------------------------------------------------------------------------------------------------|
 
+#to review
 Scenario: Export POs to SAP
   Given new Client Snapshot has been created
   When PO SAP update has been prepared
@@ -74,11 +122,16 @@ Scenario: Export POs to SAP
     # UAT        | SAP LON    | Essence AU    | TESTAU | TBC              |
     And Olive logs the export event in "PO Sync" history
 
+#to review
 Scenario: View PO Sync history for each IO
-  Given
-  When
-  Then 
+  Given An Insertion Order has to be exported to SAP
+    And it has been approved by Client
+  When I view Insertion Order Details
+  Then I can see a ... (tab?)
+    And for each export event it displays the following:
+    # Date Time, SAP instance, Export Content, Reponse Content, Success/Failure flag, reason for failure
 
+#to review
 Scenario: Update Olive DB after a successful SAP export
   Given Olive has sent a PO request to SAP
   When PO Export to SAP is successful
@@ -86,6 +139,7 @@ Scenario: Update Olive DB after a successful SAP export
     And Updates Olive database with information that's just been exported to SAP
     And users can find the Purchase Order in a list of "Purchase Orders" for related Plan as well as the global "/finance/pos" page
 
+#to review
 Scenario: Update Olive DB after an unsuccessful SAP export
   Given Olive has sent a PO request to SAP
   When PO Export to SAP is not successful
@@ -99,10 +153,31 @@ Scenario: Update Olive DB after an unsuccessful SAP export
      # Purchase Order: {Url to Purchase Order} # if available
      # -------------------------------------------------------------------
 
+ #to review
+Scenario: Do not allow changing Supplier/Currency/Liable Entity after Approval
+  Given A Media Plan is set up and Client Approved
+    And Essence Liable Purchase Orders have been exported to SAP
+  When I edit these lines in Media Plan
+  Then I cannot change their Supplier, Currency or Liable Entity or Delete (forced to downweight to 0 and raise a new line)
+
+ #to review
+Scenario: Cancel POs in SAP
+  Given a Purchase Order has been Exported to SAP
+    And changes to plan have since been published
+    And these changes would resulted in Purchase Order total being 0.00
+    And Purchase Order has not been invoiced yet
+  When changes are "Published"
+  Then PO totals are updated in Olive 3
+    And Olive exports "CANCEL" messageg to SAP
+    And Olive logs the export event in PO Sync history
+    And If export is successful, Olive displays the SAP ID as "External ID"
+    And If export has not been successful, Olive records reason for failure in PO Sync History
 
 
-  # for unit tests
-  Scenario: 1st time creation
+
+Scenario: All Unit Tests Pass
+
+  Scenario: Creation of POs
     Given A Media Plan is set up and Client Approved
       And I it contains 2 plan lines as outlined below my Media Plan
       # ---------------------------------------------------------------------------------------------------------------------------------------|
@@ -119,104 +194,120 @@ Scenario: Update Olive DB after an unsuccessful SAP export
         # Ebuzzing Inc.         | #2 | #2 | Essence LON   | $10        | APPROVED   | YES             |
         # --------------------------------------------------------------------------------------------|
 
-  Scenario: Simple upweight
-  Scenario: Simple downweight
+  Scenario: Minor upweight (on internal approval)
+    Given A Media Plan is set up and Client Approved
+      And changes have been published to create an situation as outlined below
+      # ---------------------------------------------------------------------------------------------------------------------------------|
+      # Supplier              | IO | Liable Entity | Draft Budget | Publ. Budget | Int. appr. Budget | Clt. appr. Budget | Status        |
+      # ---------------------------------------------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc.         | #2 | Essence LON   | $12          | $12          | $10               | $10               | Published     |
+      # ---------------------------------------------------------------------------------------------------------------------------------|
+    When IO changes are internally approved
+    Then IO line changes as outlined
+      # ------------------------------------------------------------------------------------------------------------------------------------|
+      # Supplier              | IO | Liable Entity | Draft Budget | Publ. Budget | Int. appr. Budget | Clt. appr. Budget | Status           |
+      # ------------------------------------------------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc.         | #2 | Essence LON   | $12          | $12          | $12               | $12               | Client Approved  |
+      # ------------------------------------------------------------------------------------------------------------------------------------|
+      And POs and PO lines are updated as outlined below
+        # --------------------------------------------------------------------------------------------|
+        # Supplier              | PO | IO | Liable Entity | Net Budget | Status     | Exported to SAP |
+        # --------------------------------------------------------------------------------------------|
+        # Ebuzzing Inc.         | #2 | #2 | Essence LON   | $12        | APPROVED   | YES             |
+        # --------------------------------------------------------------------------------------------|
+
+  Scenario: Major upweight (on client approval)
+    Given A Media Plan is set up and Client Approved
+      And changes have been internally approved to create an situation as outlined below
+      # ---------------------------------------------------------------------------------------------------------------------------------------|
+      # Supplier              | IO | Liable Entity | Draft Budget | Publ. Budget | Int. appr. Budget | Clt. appr. Budget | Status              |
+      # ---------------------------------------------------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc.         | #2 | Essence LON   | $50          | $50          | $50               | $10               | Internally Approved |
+      # ---------------------------------------------------------------------------------------------------------------------------------------|
+    When Client reapproves the plan
+    Then IO line changes as outlined
+      # ------------------------------------------------------------------------------------------------------------------------------------|
+      # Supplier              | IO | Liable Entity | Draft Budget | Publ. Budget | Int. appr. Budget | Clt. appr. Budget | Status           |
+      # ------------------------------------------------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc.         | #2 | Essence LON   | $50          | $50          | $50               | $50               | Client Approved  |
+      # ------------------------------------------------------------------------------------------------------------------------------------|
+      And POs and PO lines are updated as outlined below
+        # --------------------------------------------------------------------------------------------|
+        # Supplier              | PO | IO | Liable Entity | Net Budget | Status     | Exported to SAP |
+        # --------------------------------------------------------------------------------------------|
+        # Ebuzzing Inc.         | #2 | #2 | Essence LON   | $50        | APPROVED   | YES             |
+        # --------------------------------------------------------------------------------------------|
+
+  Scenario: Simple downweight (on publish)
+    Given A Media Plan is set up and Client Approved
+      And changes have been made to draft as outlined below
+      # ---------------------------------------------------------------------------------------------------------------------------------------|
+      # Supplier              | IO | Liable Entity | Draft Budget | Publ. Budget | Int. appr. Budget | Clt. appr. Budget | Status              |
+      # ---------------------------------------------------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc.         | #2 | Essence LON   | $6           | $10          | $10               | $10               | Client Approved     |
+      # ---------------------------------------------------------------------------------------------------------------------------------------|
+    When Changes are published
+    Then IO line changes as outlined
+      # ------------------------------------------------------------------------------------------------------------------------------------|
+      # Supplier              | IO | Liable Entity | Draft Budget | Publ. Budget | Int. appr. Budget | Clt. appr. Budget | Status           |
+      # ------------------------------------------------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc.         | #2 | Essence LON   | $6           | $6           | $6                | $6                | Client Approved  |
+      # ------------------------------------------------------------------------------------------------------------------------------------|
+      And POs and PO lines are updated as outlined below
+        # --------------------------------------------------------------------------------------------|
+        # Supplier              | PO | IO | Liable Entity | Net Budget | Status     | Exported to SAP |
+        # --------------------------------------------------------------------------------------------|
+        # Ebuzzing Inc.         | #2 | #2 | Essence LON   | $6         | APPROVED   | YES             |
+        # --------------------------------------------------------------------------------------------|
+
+  Scenario: Complete cancel
+    Given A Media Plan is set up and Client Approved
+      And changes have been made to draft as outlined below (deleted line)
+      # ---------------------------------------------------------------------------------------------------------------------------------------|
+      # Supplier              | IO | Liable Entity | Draft Budget | Publ. Budget | Int. appr. Budget | Clt. appr. Budget | Status              |
+      # ---------------------------------------------------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc.         | #2 | Essence LON   | --           | $10          | $10               | $10               | Client Approved     |
+      # ---------------------------------------------------------------------------------------------------------------------------------------|
+    When Changes are published
+    Then IO line changes as outlined
+      # ------------------------------------------------------------------------------------------------------------------------------------|
+      # Supplier              | IO | Liable Entity | Draft Budget | Publ. Budget | Int. appr. Budget | Clt. appr. Budget | Status           |
+      # ------------------------------------------------------------------------------------------------------------------------------------|
+      # Ebuzzing Inc.         | #2 | Essence LON   | --           | --           | --                | --                | Client Approved  |
+      # ------------------------------------------------------------------------------------------------------------------------------------|
+      And POs and PO lines are updated as outlined below
+        # --------------------------------------------------------------------------------------------|
+        # Supplier              | PO | IO | Liable Entity | Net Budget | Status     | Exported to SAP |
+        # --------------------------------------------------------------------------------------------|
+        # Ebuzzing Inc.         | #2 | #2 | Essence LON   | --         | CANCELLED  | YES             |
+        # --------------------------------------------------------------------------------------------|
+
+  #invoiced lines
   Scenario: Upweight against invoiced line
     #create a new PO line for remainder - the sum of BOTH POs = the total net of IO
-  Scenario: Upweight against closed PO
-    #create a new PO
   Scenario: Downweight against invoiced line
-  Scenario: Downweight against closed PO
-  Scenario: Compelte cancel
   Scenario: Compelte cancel on invoiced - abort
-  Scenario: Complete cancel on closed - abort
 
+  #closed pos
+  Scenario: Upweight against closed PO
+  Scenario: Downweight against closed PO
+  Scenario: Complete cancel against closed PO
 
-  Given IO line budget change in client approved snapshot
-    And it has an uninvoiced PO line linked to it
-  Whe
-  Then the PO line can be
+  #discounts
+  #discount percent
+  Scenario: Create with Discount Percent
+  Scenario: Upweight with Discount Percent
+  Scenario: Downweight with discount Percent
+  Scenario: Upweight with discount against invoiced line
+  Scenario: Downweight with discount against invoiced discount line
 
+  #discount amount
+  Scenario: Create with Discount Percent
+  Scenario: Upweight with Discount Percent
+  Scenario: Downweight with discount Percent
+  Scenario: Upweight with discount against invoiced line
+  Scenario: Downweight with discount against invoiced discount line
 
-#to review
-Scenario: PO downweights are exported on Publish after approval
-  Given A Media Plan is set up and Client Approved
-    And Essence Liable Purchase Orders have been exported to SAP
-    And changes are made to plan that would cause a PO total to be less than what was originally exported (no internal approval needed)
-  When changes are "Published"
-  Then PO totals are updated in Olive 3
-    And Olive exports new amount to SAP
-    And Olive logs the export event in PO Sync history
-    And If export is successful, Olive displays the SAP ID as "External ID"
-    And If export has not been successful, Olive records reason for failure in PO Sync History
-
-    #for unit tests
-    Scenario: Essence Liable PO Updated on publishing downweight
-    Scenario: Client Liable PO updated on publishing downweight
-    Scenario: Essence Liable PO Exported on publishing downweight
-    Scenario: Client Liable PO NOT exported on publishing downweight
-
-    #handle part invoiced - add a negative PO line item
-    #handle invoiced (closed) - @todo - verify
-
-#to review
-Scenario: Minor PO Upweights are exported on IO internal approval
-  Given A Media Plan is set up and Client Approved
-    And Essence Liable Purchase Orders have been exported to SAP
-    And changes are made to plan that would cause a PO total to be greater than what was originally exported
-    And Client approval isn't breached (however internal approval needed)
-  When changes are "Internally approved"
-  Then PO totals are updated in Olive 3
-    And Olive exports new amount to SAP
-    And Olive logs the export event in PO Sync history
-    And If export is successful, Olive displays the SAP ID as "External ID"
-    And If export has not been successful, Olive records reason for failure in PO Sync History
-
-    #for unit tests
-    Scenario: Essence Liable PO not updated on publishing upweight
-    Scenario: Essence Liable PO updated on internally approving minor upweight
-    Scenario: Essence Liable PO Exported on publishing downweight
-    Scenario: Client Liable PO not updated on publishing upweight
-    Scenario: Client Liable PO updated on internally approving minor upweight
-    Scenario: Client Liable PO NOT exported on internally approving minor upweight
-
-
-
-    #handle part invoiced - add a new PO line item for remainder - worth updating only just before export as SAP might have processed a new invoice by then
-    #handle invoiced (closed) - @todo - verify
-
-#to reivew
-Scenario: Major PO upweights are exported to SAP on Client  re-approval
-  Given A Media Plan is set up and Client Approved
-    And Essence Liable Purchase Orders have been exported to SAP
-    And changes are made to plan that would cause a PO total to be greater than what was originally exported
-    And Client approval is breached (re-approval needed)
-  When changes are "Re-approved by Client"
-  Then PO totals are updated in Olive 3
-    And Olive exports new amount to SAP
-    And Olive logs the export event in PO Sync history
-    And If export is successful, Olive displays the SAP ID as "External ID"
-    And If export has not been successful, Olive records reason for failure in PO Sync History
-
-#to review
-Scenario: Do not allow changing Supplier/Currency/Liable Entity after Approval
-  Given A Media Plan is set up and Client Approved
-    And Essence Liable Purchase Orders have been exported to SAP
-  When I edit these lines in Media Plan
-  Then I cannot change their Supplier, Currency or Liable Entity or Delete (forced to downweight to 0 and raise a new line)
-
-#to review
-Scenario: Cancel POs in SAP
- Given a Purchase Order has been Exported to SAP
-  And changes to plan have since been published
-  And these changes would resulted in Purchase Order total being 0.00
-  And Purchase Order has not been invoiced yet
-  When changes are "Published"
-  Then PO totals are updated in Olive 3
-    And Olive exports "CANCEL" messageg to SAP
-    And Olive logs the export event in PO Sync history
-    And If export is successful, Olive displays the SAP ID as "External ID"
-    And If export has not been successful, Olive records reason for failure in PO Sync History
 
 
 
@@ -259,3 +350,10 @@ Scenario: Handle incorrect PO Currency after Plan Approval
 
 #to flesh out
 Scenario: Handle incorrect Liable Entity
+
+#to flesh out
+Scenario: Close Purchase Orders for Reconciled Insertion Orders
+
+
+# INVOICES
+Scenario: Import invoice against discount line
