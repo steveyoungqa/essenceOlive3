@@ -72,10 +72,12 @@ Scenario: Export POs to SAP
     # UAT        | SAP LON    | Essence SG    | TESTSG | Essence_Sin_Test |
     # UAT        | SAP LON    | Essence JP    | TESTJP | ???              |
     # UAT        | SAP LON    | Essence AU    | TESTAU | TBC              |
+    And Olive logs the export event in "PO Sync" history
 
-
-    And Olive logs the export event in PO Sync history
-    # QQ - where would we look at sync log for POs that don't get recorded in Olive becuase the export failed?
+Scenario: View PO Sync history for each IO
+  Given
+  When
+  Then 
 
 Scenario: Update Olive DB after a successful SAP export
   Given Olive has sent a PO request to SAP
@@ -132,6 +134,7 @@ Scenario: Update Olive DB after an unsuccessful SAP export
 
   Given IO line budget change in client approved snapshot
     And it has an uninvoiced PO line linked to it
+  Whe
   Then the PO line can be
 
 

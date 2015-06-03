@@ -15,7 +15,7 @@ Scenario: Download O3 Plan with Line IDs for T-sheet (OTD-1921)
 #    |Client Name  |Campaign ID    |Campaign Name  |
 #    |Media Plan ID|Media Plan Name|Initiative     |Market (code)|Start Date |End Date   |
 #    |Plan Line ID |Section        |Supplier       |Property     |Platform   |Channel    |
-#    |Media Type   |Currency       |Budget         |Description  |
+#    |Media Type   |Currency       |Budget (NET)   |Unit Cost    | Quantity  |Description|
 
 #(reviewed 5th May)
 #in Olive 2
@@ -307,6 +307,8 @@ Scenario: O2 - Sync O3 changes to Olive 2 T-sheet entities (OTD-2106)
   Given Olive 2 has auto-generated entities as a result of O3 T-sheet upload
     And changes have been published to the source entities in Olive 3
   When 4 hours has passed since last sync
+  # have to make sure it runs at least an hour before the Olive 2 -> Oracle transfer scripts run, those are set to run at
+  # 0:00, 4:00, 8:00, 12:00, 16:00, 20:00 London Time (that is BST or GMT whichever applies at the time)
   Then Olive 2 detects published changes in Olive 2
     And updates Olive 2 counterparts accordingly Campaigns, Budget Periods, Purchase Orders and log changes
     And Deleted lines - PO archived, Bookings - leave as is, delete booking lines and forecast lines

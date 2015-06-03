@@ -152,21 +152,7 @@ Scenario: Notify Client Approver (OTD-765)
         #|Datetime |Currently Logged in User | [Rejected] plan   | {message if available}|
         #------------------------------------------------------------------------------------------
 
-#reviewed 14th May -
-Scenario: Version changed before Approval
-# as per flow: https://docs.google.com/presentation/d/1kfVC7tLbzNUZO_W20_k8IKkkEH3l_7ZtI769Br2l8Js/edit#slide=id.g9d920b67a_0_115
-  Given Client Approval was requested
-    And Approval is pending
-  When campiagn manager publishes new changes that do not breach terms
-  Then Cients who view the version for approval can see and approve published changes as part of the first approval request
-    #in other words - no need to create a new version or request new approval
-    #Example
-#    * Request approval with a version with Facebook line has a budget of 10,000
-#    * Before Approval received, I publish changes to the facebook line, it is now 11,000, not a breaching change
-#    * Client views the plan for approval - they see 11,000
-#    * client approves 11,000
-    # While request is pending, breaches checked against the snapshot of Client approval requested version at the time of requessting
-    # Once Client has approved, breaches are checked against the snapshot version that was approved at the time of approved
+
 
 #(reviewed 5th May)
 Scenario: Version breached before Approval (OTD-767)
@@ -193,16 +179,28 @@ Scenario: Version breached before Approval (OTD-767)
       #
     And Plan status changes to "Published"
 
+
+
 #to be reviewed
-Scenario: Version changed after Approval
+Scenario: Version changed after Approval (OTD-2199)
 #as per flow: https://docs.google.com/presentation/d/1kfVC7tLbzNUZO_W20_k8IKkkEH3l_7ZtI769Br2l8Js/edit#slide=id.g9d920b67a_0_93
   Given Client approval was given for a plan
-    And minor (non-breaching) changes have been published
+    And minor (non-breaching) changes have been published or internally approved
   When Client approver looks at the plan in Client Portal
-  Then they see the last approved version with the published changes included
+  Then they see the last approved version with the internally approved (or auto-approved e.g. downweights) changes included
     # Client approved 10,000 for Facebook
-    # AM published changes - upweight by 1,000
+    # AM published and internally approved changes - upweight by 1,000
     # Client goes to view plan - they see 11,000 against Facebook
+    And the changes are highlighted (OTD-788)
+
+#reviewed 14th May -
+Scenario: Version changed before Approval  (OTD-786)
+# as per flow: https://docs.google.com/presentation/d/1kfVC7tLbzNUZO_W20_k8IKkkEH3l_7ZtI769Br2l8Js/edit#slide=id.g9d920b67a_0_115
+  Given Client Approval was requested
+    And Approval is pending
+  When campiagn manager publishes new changes that do not breach terms
+  Then Cients who view the version for approval can see and approve published changes as part of the first approval request
+    #in other words - no need to create a new version or request new approval
 
 #reviewed 6th May
 Scenario: Version breached after approval (OTD-786)
@@ -211,7 +209,7 @@ Scenario: Version breached after approval (OTD-786)
     And breaching changes to plan have been published
     And plan is in "Published" state
   When Client approver looks at the plan in Client Portal
-  Then they see the last approved verions
+  Then they see the last approved verions including auto-approved changes
 
 
 
