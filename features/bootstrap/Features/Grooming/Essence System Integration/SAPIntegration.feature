@@ -55,7 +55,6 @@ Scenario: Syncing POs with client approved snapshot of plan
 
   Given IO line budget change in client approved snapshot
     And it has an uninvoiced PO line linked to it
-  Whe
   Then the PO line can be
 
 
