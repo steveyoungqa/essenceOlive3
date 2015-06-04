@@ -17,39 +17,67 @@ Scenario: Download O3 Plan with Line IDs for T-sheet (OTD-1921)
 #    |Plan Line ID |Section        |Supplier       |Property     |Platform   |Channel    |
 #    |Media Type   |Currency       |Budget (NET)   |Unit Cost    | Quantity  |Description|
 
-#(reviewed 5th May)
+#(reviewed 5th May) - in sprint 27 [13th April] - accepted
 #in Olive 2
-Scenario: New Format T-Sheet (OTD-2001) - in sprint 27 [13th April]
+Scenario: New Format T-Sheet (OTD-2001)
   # OTD-2123 in sprint 29
   Given Campaign financial information is due to be managed thorugh Olive 3 as of new quarter
     And the plan and all lines are set up and published in Olive 3
     And Media Detail (T-sheet) relating to that plan is ready to be trafficked
   When AdOps member log into Olive 2
   Then he can find an upload form that accepts a new format T-sheet with the following changes:
-#      -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#      |Campaign ID                    | Campaign Name                    | PO ID     | Media Plan ID         | Media Plan Name         | Plan Line ID          | BOOKING
-#      ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#      |Olive 2 Campaign ID (optional) | Olive 2 Campaign name (optional) |*REMOVE*  | Olive 3 Media Plan ID  | Olive 3 Media PLan Name | Olive 3 Plan Line ID  | *REMOVE*
-#      ----------------------------------------------------------------------------------------------
+    #      -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    #      |Campaign ID                    | Campaign Name                    | PO ID     | Media Plan ID         | Media Plan Name         | Plan Line ID          | Supplier
+    #      ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    #      |Olive 2 Campaign ID (optional) | Olive 2 Campaign name (optional) |*REMOVE*  | Olive 3 Media Plan ID  | Olive 3 Media PLan Name | Olive 3 Plan Line ID  | *REMOVE*
+    #      ----------------------------------------------------------------------------------------------
     And it is clearly labelled as "Olive 3 T-Sheet" in a section "Olive 3 AdOps Mapping"
     And on upload Olive 2 validates the T-Sheet format to ensure all columns are there
     And Olive 2 validates the content of new columns and displays feedback if failed:
-#       ------------------------------------------------------------------------------------------------------------------------------
-#       | RULE                                                         | Error Msg                                                   |
-#       ------------------------------------------------------------------------------------------------------------------------------
-#       | If Campaign ID provided, it's a recognised Olive 2 Campaign  | "Campaign ID not recognised"                                |
-#       | If CAmpaign ID and CAmpaign Name provided, they match        | "Campaign ID and Campaign Name do not match data in Olive"  |
-#       | If Campaign ID not provided, allow upload anyway             |                                                             |
-#       | Plan Line ID is a recognised Olive 3 published plan line     | "Plan Line ID not recognised. Please ensure it's pubished"  |
-#       | Media Plan ID is a recognised Olive 3 Pulbisehd Media Plan ID| "Media Plan ID not recognised. Please ensure it's published"|
-#       | Media PLan Name is a recognised Olive 3 Media plan and       | "Media Plan ID and Media Plan  Name do not match data       |
-#       |    matches the ID provided                                   |    in Olive 3"                                              |
-#       | Plan Line belongs to Media Plan                              | "Plan Line belongs to a different Media Plan.               |
-#       |                                                              | Please ensure IDs are correct"                              |
-#       | Plan Line iD is a recognised Media Line (not service)        | "Plan Line ID refers to a service line, please ensure       |
-#       |                                                              | you use Media Line ids"                                     |
+    #       ------------------------------------------------------------------------------------------------------------------------------
+    #       | RULE                                                         | Error Msg                                                   |
+    #       ------------------------------------------------------------------------------------------------------------------------------
+    #       | If Campaign ID provided, it's a recognised Olive 2 Campaign  | "Campaign ID not recognised"                                |
+    #       |--------------------------------------------------------------|-------------------------------------------------------------|
+    #       | If CAmpaign ID and CAmpaign Name provided, they match        | "Campaign ID and Campaign Name do not match data in Olive"  |
+    #       |--------------------------------------------------------------|-------------------------------------------------------------|
+    #       | If Campaign ID not provided, allow upload anyway             |                                                             |
+    #       |--------------------------------------------------------------|-------------------------------------------------------------|
+    #       | Plan Line ID is a recognised Olive 3 published plan line     | "Plan Line ID not recognised. Please ensure it's pubished"  |
+    #       |--------------------------------------------------------------|-------------------------------------------------------------|
+    #       | Media Plan ID is a recognised Olive 3 Pulbisehd Media Plan ID| "Media Plan ID not recognised. Please ensure it's published"|
+    #       |--------------------------------------------------------------|-------------------------------------------------------------|
+    #       | Media PLan Name is a recognised Olive 3 Media plan and       | "Media Plan ID and Media Plan  Name do not match data       |
+    #       |    matches the ID provided                                   |    in Olive 3"                                              |
+    #       |--------------------------------------------------------------|-------------------------------------------------------------|
+    #       | Plan Line belongs to Media Plan                              | "Plan Line belongs to a different Media Plan.               |
+    #       |                                                              | Please ensure IDs are correct"                              |
+    #       |----------------------------------------------------------------------------------------------------------------------------|
+    #       | Plan Line iD is a recognised Media Line (not service)        | "Plan Line ID refers to a service line, please ensure       |
+    #       |                                                              | you use Media Line ids"                                     |
+    #       |--------------------------------------------------------------|-------------------------------------------------------------|
+    #       | Media PLan's Campaign is associated with a Google Sub-Product| ""
+    #       |--------------------------------------------------------------|-------------------------------------------------------------|
+    #       | Media Plan is associated with an Initiative                  | ""
+    #       |--------------------------------------------------------------|-------------------------------------------------------------|
+    #       | Media plan is associated with a Client PO (unless all HA)    | ""
+    #       |----------------------------------------------------------------------------------------------------------------------------|
+    #       | Plan Line ID and Existing Olive 2 Booking match suppliers    | "Supplier mismatch. Plan Line Supplier is                   |
+    #       |                                                              | {Supplier legal entity}, but Supplier of existing booking   |
+    #       |                                                              | and in T-sheet is {Supplier legal Entity}.Please ensure     |
+    #       |                                                              | they match"                                                 |
+    #       |----------------------------------------------------------------------------------------------------------------------------|
+    #       | IF fixed pricing type plan line referenced, allow relating   | "Placements under Olive 3 Plan lines with fixed pricing type|
+    #       | only one booking                                             |  Cost Model cannot be separated into different Olive 2      |
+    #       |                                                              | bookings.                                                   |
+    #       |                                                              | Please ensure all rows for this Olive 3 plan line ID        |
+    #       |                                                              | reference the same Booking Name"                            |
+    #       |----------------------------------------------------------------------------------------------------------------------------|
+    #       | Media Plan doesn't overlap with Existing budget periods      | ""                                                          |
+    #       | (only applies to already existing campaigns)                 |                                                             |
+    #       |----------------------------------------------------------------------------------------------------------------------------|
 
-#reviewed 5th May - in sprint 27 [11th April] -
+#reviewed 5th May - in sprint 27 [11th April] - accepted
 Scenario: Olive 2 Campaign Doesn't exist (OTD-1928)
   Given a new O3 style t-sheet has been prepared for a completely new campaign (Trafic not set up)
     And an O3 tsheet has never been uploaded for it before
@@ -58,7 +86,7 @@ Scenario: Olive 2 Campaign Doesn't exist (OTD-1928)
     And Olive 2 validates the content
     And Olive 2 T-Sheet upload generates Campaigns, Budget Periods and Purchase Orders from Information
 
-#reviewed - in sprint 29 [11th May] -
+#reviewed - in sprint 29 [11th May] - accepted
 Scenario: O2 - Create separate Off-network and House-Ads Campaigns (OTD-2084)
     Given a new O3 style t-sheet has been prepared for a completely new "Google" campaign (Trafic not set up)
       And an O3 tsheet has never been uploaded for it before
@@ -80,7 +108,7 @@ Scenario: O2 - Create separate Off-network and House-Ads Campaigns (OTD-2084)
       #                   |                     | {MP Market Code}              |                         |
       #----------------------------------------------------------------------------------------------------
 
-#to flesh out
+#reviewed - in sprint 30 [25th May] -
 Scenario: O2 - Separate House ads and Offnetwork Total Budgets (OTD-2127)
   # weight the sums of line items in each and attribute portions of total budget accordingly
   Given I have set up a Media plan in Olive 3
@@ -89,12 +117,12 @@ Scenario: O2 - Separate House ads and Offnetwork Total Budgets (OTD-2127)
     And I have uploaded this T-sheet in Olive 2
   When Olive generates separate budget periods for House Ads and Off Network lines (OTD-2084)
   Then It assigns a proportion of Total Budget as the Campaign Budget Period Budget as per calculations below
-#   using a ratio of the Total budget (converted in Media Plan currency)
+    # using a ratio of the Total budget (converted in Media Plan currency)
     # House Ads: sum of Client Liable lines converted in Media Plan currency) * Total Media Plan Budget in Olive 3 / Total Allocated Budget in Olive 3
     # Off-Network: Total Budget in Olive 3 - Campaign Budget Period BUdget of House Ads Budget period
 
 
-#reviewed 5th May - in sprint 28 [27th April] -
+#reviewed 5th May - in sprint 28 [27th April] - accepted
 Scenario: Olive 2 Budget Period doesn't exist but Placements, Bookings and Campaign already set up and trafficked in the previous quarter (OTD-2001)
   Given I have already set up Campaigns / Bookings in Olive 2
     And a new budget period is starting when I have to manage finances through Olive 3
@@ -117,7 +145,7 @@ Scenario: Olive 2 Campaign already has a Budget Period that overlaps dates of O3
     And suggest that if MAF is already signed off, submit a JIRA ticket.
     #we'd have to manually figure out what the link between the Olive 2 Placement to Olive 3 Media Plan Line is
 
-#reviewed 12th May - in sprint 29 [11th May] -
+#reviewed 12th May - in sprint 29 [11th May] - REMOVED
 Scenario: O2 - Use O3 to look up Brand / DR and capping information (OTD-2067)
   Given Campaign financial information is due to be managed thorugh Olive 3 as of new quarter
     And negotiated media plan and all lines are set up and published in Olive 3
@@ -127,7 +155,7 @@ Scenario: O2 - Use O3 to look up Brand / DR and capping information (OTD-2067)
     # [TGC] Brand / DR is no longer required (ignored) - CANCELLED - still possible to set brand and dr
     # Capping fields are no longer present (ignored): Deal Structure	Olive Cap Amount	Billing Stats	Booking Start Date	Booking End Date	Net Unit Cost	Net Media Budget
 
-#reviewed 12th May - in sprint 29 [11th May] -
+#reviewed 12th May - in sprint 29 [11th May] - accepted
 Scenario: O2 - Autogenerated dummy biddable forecast lines for "Biddable" Olive 3 plan lines (OTD-2071)
   Given I'm uploading an Olive 3 t-sheet
     And I have entered a reference to Olive 3 Plan line which is of Cost Model "Biddable *" ("VARIABLE" type), also should be the same as Buy Type "Biddable" or "Programmatic - *"
@@ -135,7 +163,7 @@ Scenario: O2 - Autogenerated dummy biddable forecast lines for "Biddable" Olive 
   Then Olive 3 t-sheet upload behaves as if "BID" was entered in the "Deal structure" column of existing t-sheet (generate Dummy bkl & fcl)
     And Olive 2 stores a reference to Olive 3 "Plan line ID" against every Booking and forecast line
 
-#reviewed 12th May - in sprint 29 [11th May] -
+#reviewed 12th May - in sprint 29 [11th May] - accepted
 Scenario: O2 - Autogenerate Negotiated cost Booking Lines from Olive 3 Plan lines (OTD-2071)
   Given I'm uploading an Olive 3 t-sheet
     And I have entered a reference to Olive 3 Plan line which is of Buy Type "Direct Buy"
@@ -198,8 +226,6 @@ Scenario: O2 - Autogenerate Negotiated cost Booking Lines from Olive 3 Plan line
       # 105 | 34 | Untracked
       #------------------------------------------
 
-
-
 #reviewed 18th May - in sprint 29 [11th May] - accepted
 Scenario: Do not enforce Client POs for Client Liable Plan lines (OTD-2104)
   Given I've prepared an O3 t-sheet
@@ -249,7 +275,7 @@ Scenario: O2 - Ensure 1-to-1 relationship between Bookings and FIXED pricing typ
     # "Placements under Olive 3 Plan lines with fixed pricing type Cost Model cannot be separated into different Olive 2 bookings.
     # Please ensure all rows for this Olive 3 plan line ID reference the same Booking Name"
 
-#to review
+#reviewed - in sprint 30 [25th May] - accepted
 Scenario: Supplier Mismatch handling
   #UAT outcome - Olive shouldn't let me uplaod a T-sheet where existing Placement is under a booking with mismatching Supplier
     Given I have prepared a t-sheet
@@ -260,8 +286,6 @@ Scenario: Supplier Mismatch handling
     Then Olive 2 throws an error indicating the line number in T-sheet and the folowing text
       # "Supplier mismatch. Plan Line Supplier is {Supplier legal entity}, but Supplier of existing booking and in T-sheet is {Supplier legal Entity}.
       # Please ensure they match"
-
-
 
 #reviewed 21st May - in sprint 30 [25th May] -
 Scenario: O2 - Ensure Booking is never linked to more than one plan line during a time (OTD-2128)
@@ -283,8 +307,6 @@ Scenario: O2 - Ignore booking column and autogenerate (OTD-2105)
     And names it as per convention using Olive 3 {"PLan Line ID"} - {"Property"} - {first 20 chars from "Plan Line description"}
     And uses Plan line creator and last publisher as created and last changed events
 
-
-
 #reviewed 21st May - in sprint 30 [22nd May] -
 Scenario: O2 - Do not create dummy lines for certain platforms (OTD-2129)
   Given I have selected one of "Biddable" Cost models for plan lines in olive 3
@@ -301,6 +323,19 @@ Scenario: O2 - Do not create dummy lines for certain platforms (OTD-2129)
     And I have added ids of these lines in O3 T-sheet
   When I'm uploading the T-sheet in Olive 2
   Then There are no dummy Booking and Forecast lines created for the related placements
+
+#to review - TIME CRITICAL
+Scenario: Handle Fixed cost for existing Bookings
+  #when there are already existing forecast lines and new ones to be generated)
+  Given O3 T-sheet is prepared
+    And it contains only new "tracking tag" type placements
+    And it references an Existing Booking
+    And the existing booking already has some Placements that exist in db
+    And one of those existing placements is "Masthead" (high ranking type)
+    And the related Media Plan line is of "Fixed Cost" cost model
+  When T-sheet is uploaded
+  Then Olive 2 assignes unit cost to the Forecast line of highest ranking Placement across T-sheet and Olive db combined
+    #meaning there is no forecast cost against forecast lines under the new tracking tag placement
 
 #reviewed 18th May - in sprint 30 [22nd May] -
 Scenario: O2 - Sync O3 changes to Olive 2 T-sheet entities (OTD-2106)
@@ -323,29 +358,29 @@ Scenario: O2 - Sync O3 changes to Olive 2 T-sheet entities (OTD-2106)
     And "Fixed Cost" Plan Line - check that there is only ONE forecast line with cost > 0 - write a line in the discrepancy log:
       # Media Plan: {Media PLan ID - Media Plan Name} - Encountered multiple forecast lines with cost greater than 0 under a Fixed cost booking line:
 
+#to review - in sprint 32 [29th June] -
 Scenario: Log unsolved discrepanices between Olive 2 and Olive 3 while sync runs
-  Given
-  When
-  Then
-    And email the log to as@
+  Given Discrepancies are encountered during O3-O2 Sync run
+  When Sync run is finished
+  Then Compile all discrepancies encountered during the run
+    And email the summary to as@
     # SUBJECT: Discrepancies in O2 - O3 data during sync
     # ------------------ all lines as logged during run
 
-#reviewed
+#to review -
 Scenario: Log sync runs in the db and detail changes in a media plan specific file
-  Given a sync run has happened
-  When I look in the database / file directory
-  Then
-    And when changes done, create a summary of what changes were made per Olive 3 media plan and store in a log
-    And the log file is named as follows:
-    # NAME: media_plan_{Media Plan ID}.log
-    # Date time           | Entity             | Entity ID  | Full JSON of before               | Changed attrib json for New values |
-    # 2015-06-02 14:23:54 | mktg_booking_lines | 35234      | {bkl_id: 35234, bkl_com_id: 3...} | {bkl_cap: 0, bkl_com_id: 3}        |
+  Given O3-02 Sync has found discrepancies or changes in O3 data that need to be reflected in O2
+  When Sync run is finished
+  Then  Olive creates a summary of what changes were made for each Olive 3 media plan and store in a log
+    And the log file is named as follows "media_plan_{Media Plan ID}.log"
+    And it contains the following information
+      # Date time           | Entity             | Entity ID  | Full JSON of before               | Changed attrib json for New values |
+      # 2015-06-02 14:23:54 | mktg_booking_lines | 35234      | {bkl_id: 35234, bkl_com_id: 3...} | {bkl_cap: 0, bkl_com_id: 3}        |
+    And I can also find the following information in O2 DB about the last sync run:
+      # Date time, number of Media Plans changed, list of changed plan IDs, number of discrepancies logged, raw discrepancy content
 
-Scenario: handle Fixed cost for existing Bookings
-  #when there are already existing forecast lines and new ones to be generated)
 
-#reviewed 18th May - in sprint 30 [22nd May] -
+#reviewed 18th May - in sprint 30 [22nd May] - accepted
 Scenario: Indicate that an Olive 2 entity is auto generated as a result of updating O3 T-sheet (OTD-2107)
   #blocked by booking autogen
   Given Olive 2 has auto-generated entities as a result of O3 T-sheet upload
