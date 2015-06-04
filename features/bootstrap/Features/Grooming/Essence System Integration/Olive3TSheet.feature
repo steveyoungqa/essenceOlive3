@@ -358,8 +358,8 @@ Scenario: O2 - Sync O3 changes to Olive 2 T-sheet entities (OTD-2106)
     And "Fixed Cost" Plan Line - check that there is only ONE forecast line with cost > 0 - write a line in the discrepancy log:
       # Media Plan: {Media PLan ID - Media Plan Name} - Encountered multiple forecast lines with cost greater than 0 under a Fixed cost booking line:
 
-#to review - in sprint 32 [29th June] -
-Scenario: Log unsolved discrepanices between Olive 2 and Olive 3 while sync runs
+#to review - in sprint 31 [8th June] -
+Scenario: Log unsolved discrepanices between Olive 2 and Olive 3 while sync runs (OTD-2211)
   Given Discrepancies are encountered during O3-O2 Sync run
   When Sync run is finished
   Then Compile all discrepancies encountered during the run
@@ -367,8 +367,8 @@ Scenario: Log unsolved discrepanices between Olive 2 and Olive 3 while sync runs
     # SUBJECT: Discrepancies in O2 - O3 data during sync
     # ------------------ all lines as logged during run
 
-#to review -
-Scenario: Log sync runs in the db and detail changes in a media plan specific file
+#to review - in sprint 31 [8th June] -
+Scenario: Log sync runs in the db and detail changes in a media plan specific file (OTD-2211)
   Given O3-02 Sync has found discrepancies or changes in O3 data that need to be reflected in O2
   When Sync run is finished
   Then  Olive creates a summary of what changes were made for each Olive 3 media plan and store in a log
