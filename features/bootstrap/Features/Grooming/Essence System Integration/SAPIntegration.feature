@@ -10,73 +10,57 @@ I want Insertion Orders to be automatically exported to SAP as Purchase Orders a
 #   ~ not raised for the following suppliers: Essence Creative, Essence Mobile, Essence Media, Essence Social     #
 ###################################################################################################################
 
-#to review
+#reviewd
+Scenario: Trigger SAP Sync
+  Given A media plan exists
+  When New client approved snapshot
+  Then trigger SAP Sync process
+
+#reviewed
 Scenario: Re-sync plan with SAP button
   Given A media Plan has been Client approved
-  When I look at the PO tab in the plan
-  Then I can see a button "Sync with SAP"
+  When I look at the IO and PO tab in the plan
+  Then I can see a button "Sync with SAP" (just above the IO or PO list)
     And when I click it Olive triggers the Sync process in scenario below
 
-#to review
+#reviewed
 Scenario: Detect if PO should be exported to SAP (OTD-2139)
   Given that an Insertion order is Essence Liable
     And It is not raised for any of the following Suppliers:
      # | Supplier Name    | Master Code |
      # |--------------------------------|
-     # | Essence Creative | |
+     # | Essence Creative | @todo master codes |
      # | Essence Mobile   | |
      # | Essence Social   |
      # | Essence Media    |
-  When A new Client snapshot is created
+  When Sync is triggered
   Then prepare a Purchase Order for Export to SAP
 
-#to review
+#reviewed
 Scenario: Create POs
-  Given A Media Plan is set up and published
-    And Client has approved the plan
-    And there are Insertion Orders that need to be exported to SAP
+  Given there are Insertion Orders that need to be exported to SAP
     And that Insertion Order Does not have an associated PO in SAP
   When SAP Sync is triggered
-  Then Olive creates a Purchase order as per specification in "20130816 - Olive 3 - B1IF and Olive Interface Requirements - v.0.3: Purchase Orders" section
+  Then Olive creates Olive 3 Purchase order with fields in "20130816 - Olive 3 - B1IF and Olive Interface Requirements - v.0.3: Purchase Orders" section
     #https://docs.google.com/document/d/1ko-1-TmRZ7UwBfgq_a37l5x_DEEBZnqjlzFu-dnxIu0/edit#heading=h.mku47oviebtt
     And PO ID is the same as IO ID
     # QQ - can this be somehow enforced? where would we get PO ids in case we needed to make multiple POs for IOs
+    And the Olive PO is created with a status "OPEN"
 
-#to review
-Scenario: Create PO Lines
-  Given a Media plan is set up and published
-    And Client has approved the plan
-    And there are insertion order that need to be exported to SAP
-    And the insertion Order has an associated Purchase Order
-    And a line in the insertion Order has changed (or has been newly introduced)
-    And that associated Purchase Order does not have any uninvoiced lines
-  When SAP Sync is triggered
-  Then Olive creates a Purchase Order line for the change amount as per specification in "20130816 - Olive 3 - B1IF and Olive Interface Requirements - v.0.3: Purchase Orders" section
 
-#to review
-Scenario: Update PO Lines
-  Given a Media plan is set up and published
-    And Client has approved the plan
-    And there are insertion order that need to be exported to SAP
-    And the insertion Order has an associated Purchase Order
-    And a line in the insertion Order has changed (or has been newly introduced)
-    And that associated Purchase Order has an uninvoiced PO line
-  When SAP Sync is triggered
-  Then Olive updates uninvoiced PO by the change amount as per specification in "20130816 - Olive 3 - B1IF and Olive Interface Requirements - v.0.3: Purchase Orders" section
-
-#to review
+#reviewed
 Scenario: Alert of discrepancies for Insertion Order
-  Given a Media plan is set up and published
-    And Client has approved the plan
-    And there are insertion order that need to be exported to SAP
+  Given an insertion order needs to be exported to SAP
     And the insertion Order is associated with a Purchase Order
-    And Olive checks if the Purchase Order status in SAP
+    And Olive checks the Purchase Order status in SAP
   When SAP responsed with a "CLOSED" status
-  Then Olive displays an warning idicator against the Insertion Order (in list view and details - PO Sync area)
+  Then Olive displays a against the Insertion Order list view
+    And displays a RED coloured sync status ("FAILED") on IO meta data in details view
+    And a red warning indicator on the "Export history" tab (as per mapping)
     And Olive displays a warning indicator against the Purchase Order (in list view and details - PO Sync area)
     And Olive updates Olive PO Status to "CLOSED"
-    And Olive autosubmits a JIRA ticket for developers to investigate the issue with the following information:
-     # ERROR - PO Sync impossible - {SAP Env} - {PO ID} ({Olive Env})
+    And Olive autosubmits a JIRA ticket (only from Production) for developers to investigate the issue with the following information:
+     # ERROR - PO Sync impossible - {SAP Env} - {PO ID}
      # --------------------------------------------------------------------
      # Purchase Order Closed in SAP
      # Not possible to update Total ({Currency} {PO Total}) to match Insertion Order ({Currency} {IO Total})
@@ -85,6 +69,26 @@ Scenario: Alert of discrepancies for Insertion Order
      # Related IO: {Url to Insertion Order}
      # Purchase Order: {Url to Purchase Order}
      # -------------------------------------------------------------------
+
+
+#reviewed
+Scenario: Create PO Lines
+  Given there are insertion order that need to be exported to SAP
+    And the insertion Order has an associated Purchase Order
+    And a line in the insertion Order has changed (or has been newly introduced)
+    And that associated Purchase Order does not have any uninvoiced lines associated with changed IO line
+  When SAP Sync is triggered
+  Then Olive creates a Purchase Order line for the change amount with fields in "20130816 - Olive 3 - B1IF and Olive Interface Requirements - v.0.3: Purchase Orders" section
+
+#reviewed
+Scenario: Update PO Lines
+  Given there are insertion order that need to be exported to SAP
+    And the insertion Order has an associated Purchase Order
+    And a line in the insertion Order has changed
+    And that IO line is associated with an uninvoiced PO line
+  When SAP Sync is triggered
+  Then Olive updates uninvoiced PO line by the change amount as per specification in "20130816 - Olive 3 - B1IF and Olive Interface Requirements - v.0.3: Purchase Orders" section
+
 
 
 #to review
@@ -102,9 +106,19 @@ Scenario: Discounts are exported separately with Agency Discount GL account
     # | {PO Line ID}c | 350040Media_00000000  | {po line desc}| PO line Disc amount | 0        | PO line Disc amount |
     # |--------------------------------------------------------------------------------------------------------------|
 
-#to review
+#reviewed
+Scenario: Export PO cancelation to SAP
+  Given new Client Snapshot has been created
+    And PO SAP update has been prepared
+    And the PO total is 0.00
+  When Olive prepares B1IF request
+  Then it sends a "CANCEL" message (see table in next scenario)
+    And sets the PO Status to "CANCELLED"
+
+#reviewed
 Scenario: Export POs to SAP
   Given new Client Snapshot has been created
+    And PO total > 0
   When PO SAP update has been prepared
   Then Olive sends Purchase Order requests to relevant SAP db (depending on Liable Entity as follows:
     # Olive Env  | SAP Server | Liable Entity | ID     | SAP DB           |
@@ -122,16 +136,16 @@ Scenario: Export POs to SAP
     # UAT        | SAP LON    | Essence AU    | TESTAU | TBC              |
     And Olive logs the export event in "PO Sync" history
 
-#to review
-Scenario: View PO Sync history for each IO
+#reviewed
+Scenario: View PO Sync history for each IO and PO
   Given An Insertion Order has to be exported to SAP
     And it has been approved by Client
   When I view Insertion Order Details
-  Then I can see a ... (tab?)
+  Then I can see a tab "Export history"
     And for each export event it displays the following:
     # Date Time, SAP instance, Export Content, Reponse Content, Success/Failure flag, reason for failure
 
-#to review
+#reviewed
 Scenario: Update Olive DB after a successful SAP export
   Given Olive has sent a PO request to SAP
   When PO Export to SAP is successful
@@ -139,21 +153,21 @@ Scenario: Update Olive DB after a successful SAP export
     And Updates Olive database with information that's just been exported to SAP
     And users can find the Purchase Order in a list of "Purchase Orders" for related Plan as well as the global "/finance/pos" page
 
-#to review
+#reviewed
 Scenario: Update Olive DB after an unsuccessful SAP export
   Given Olive has sent a PO request to SAP
   When PO Export to SAP is not successful
   Then Olive records the reason for failure in Sync history
     And Indicates on Insertion Order that there has been a problem
-    And Olive autosubmits a JIRA ticket for developers to investigate the issue with the following information:
-     # ERROR - PO Export failed - {SAP Env} - {PO ID} ({Olive Env})
+    And Olive autosubmits a JIRA ticket (from Production only) for developers to investigate the issue with the following information:
+     # ERROR - PO Export failed - {SAP Env} - {PO ID}
      # --------------------------------------------------------------------
      # {Reason for failure}
      # Related IO: {Url to Insertion Order}
      # Purchase Order: {Url to Purchase Order} # if available
      # -------------------------------------------------------------------
 
- #to review
+#to review
 Scenario: Do not allow changing Supplier/Currency/Liable Entity after Approval
   Given A Media Plan is set up and Client Approved
     And Essence Liable Purchase Orders have been exported to SAP
