@@ -10,34 +10,34 @@ I want Insertion Orders to be automatically exported to SAP as Purchase Orders a
 #   ~ not raised for the following suppliers: Essence Creative, Essence Mobile, Essence Media, Essence Social     #
 ###################################################################################################################
 
-#reviewd
-Scenario: Trigger SAP Sync
+#reviewd 4th June - in Sprint 31 [8th June] -
+Scenario: Trigger SAP Sync (OTD-2229)
   Given A media plan exists
   When New client approved snapshot
   Then trigger SAP Sync process
 
-#reviewed
-Scenario: Re-sync plan with SAP button
+#reviewed 4th June - in Sprint 31 [8th June] -
+Scenario: Re-sync plan with SAP button (OTD-2229)
   Given A media Plan has been Client approved
   When I look at the IO and PO tab in the plan
   Then I can see a button "Sync with SAP" (just above the IO or PO list)
     And when I click it Olive triggers the Sync process in scenario below
 
-#reviewed
+#reviewed 4th June - in Sprint 31 [8th June] -
 Scenario: Detect if PO should be exported to SAP (OTD-2139)
   Given that an Insertion order is Essence Liable
     And It is not raised for any of the following Suppliers:
      # | Supplier Name    | Master Code |
      # |--------------------------------|
-     # | Essence Creative | @todo master codes |
-     # | Essence Mobile   | |
-     # | Essence Social   |
-     # | Essence Media    |
+     # | Essence Creative | MC00000     |
+     # | Essence Mobile   | MC20000     |
+     # | Essence Social   | MC10000     |
+     # | Essence Media    | MC30000     |
   When Sync is triggered
   Then prepare a Purchase Order for Export to SAP
 
-#reviewed
-Scenario: Create POs
+#reviewed 4th June - in Sprint 31 [8th June] -
+Scenario: Create POs (OTD-2139)
   Given there are Insertion Orders that need to be exported to SAP
     And that Insertion Order Does not have an associated PO in SAP
   When SAP Sync is triggered
@@ -48,8 +48,8 @@ Scenario: Create POs
     And the Olive PO is created with a status "OPEN"
 
 
-#reviewed
-Scenario: Alert of discrepancies for Insertion Order
+#reviewed 4th June - in Sprint 31 [8th June] -
+Scenario: Alert of discrepancies for Insertion Order (OTD-2139)
   Given an insertion order needs to be exported to SAP
     And the insertion Order is associated with a Purchase Order
     And Olive checks the Purchase Order status in SAP
@@ -71,8 +71,8 @@ Scenario: Alert of discrepancies for Insertion Order
      # -------------------------------------------------------------------
 
 
-#reviewed
-Scenario: Create PO Lines
+#reviewed 4th June - in Sprint 31 [8th June] -
+Scenario: Create PO Lines (OTD-2139)
   Given there are insertion order that need to be exported to SAP
     And the insertion Order has an associated Purchase Order
     And a line in the insertion Order has changed (or has been newly introduced)
@@ -80,8 +80,8 @@ Scenario: Create PO Lines
   When SAP Sync is triggered
   Then Olive creates a Purchase Order line for the change amount with fields in "20130816 - Olive 3 - B1IF and Olive Interface Requirements - v.0.3: Purchase Orders" section
 
-#reviewed
-Scenario: Update PO Lines
+#reviewed 4th June - in Sprint 31 [8th June] -
+Scenario: Update PO Lines (OTD-2139)
   Given there are insertion order that need to be exported to SAP
     And the insertion Order has an associated Purchase Order
     And a line in the insertion Order has changed
@@ -92,7 +92,7 @@ Scenario: Update PO Lines
 
 
 #to review
-Scenario: Discounts are exported separately with Agency Discount GL account
+Scenario: Discounts are exported separately with Agency Discount GL account (OTD-1972)
   #https://docs.google.com/document/d/1ko-1-TmRZ7UwBfgq_a37l5x_DEEBZnqjlzFu-dnxIu0/edit#heading=h.30djt44mgg3
   Given an IO line has a discount applied
     And it has to be exported to SAP
@@ -106,8 +106,8 @@ Scenario: Discounts are exported separately with Agency Discount GL account
     # | {PO Line ID}c | 350040Media_00000000  | {po line desc}| PO line Disc amount | 0        | PO line Disc amount |
     # |--------------------------------------------------------------------------------------------------------------|
 
-#reviewed
-Scenario: Export PO cancelation to SAP
+#reviewed 4th June - in Sprint 31 [8th June] -
+Scenario: Export PO cancelation to SAP (OTD-1972)
   Given new Client Snapshot has been created
     And PO SAP update has been prepared
     And the PO total is 0.00
@@ -115,8 +115,8 @@ Scenario: Export PO cancelation to SAP
   Then it sends a "CANCEL" message (see table in next scenario)
     And sets the PO Status to "CANCELLED"
 
-#reviewed
-Scenario: Export POs to SAP
+#reviewed 4th June - in Sprint 31 [8th June] -
+Scenario: Export POs to SAP (OTD-1972)
   Given new Client Snapshot has been created
     And PO total > 0
   When PO SAP update has been prepared
@@ -136,8 +136,8 @@ Scenario: Export POs to SAP
     # UAT        | SAP LON    | Essence AU    | TESTAU | TBC              |
     And Olive logs the export event in "PO Sync" history
 
-#reviewed
-Scenario: View PO Sync history for each IO and PO
+#reviewed 4th June
+Scenario: View PO Sync history for each IO and PO (OTD-2230)
   Given An Insertion Order has to be exported to SAP
     And it has been approved by Client
   When I view Insertion Order Details
@@ -145,16 +145,16 @@ Scenario: View PO Sync history for each IO and PO
     And for each export event it displays the following:
     # Date Time, SAP instance, Export Content, Reponse Content, Success/Failure flag, reason for failure
 
-#reviewed
-Scenario: Update Olive DB after a successful SAP export
+#reviewed 4th June - in Sprint 31 [8th June] -
+Scenario: Update Olive DB after a successful SAP export (OTD-1972)
   Given Olive has sent a PO request to SAP
   When PO Export to SAP is successful
   Then Olive records PO SAP ID as "External ID" for Purchase Order
     And Updates Olive database with information that's just been exported to SAP
     And users can find the Purchase Order in a list of "Purchase Orders" for related Plan as well as the global "/finance/pos" page
 
-#reviewed
-Scenario: Update Olive DB after an unsuccessful SAP export
+#reviewed 4th June - in Sprint 31 [8th June] -
+Scenario: Update Olive DB after an unsuccessful SAP export (OTD-1972)
   Given Olive has sent a PO request to SAP
   When PO Export to SAP is not successful
   Then Olive records the reason for failure in Sync history
@@ -173,21 +173,6 @@ Scenario: Do not allow changing Supplier/Currency/Liable Entity after Approval
     And Essence Liable Purchase Orders have been exported to SAP
   When I edit these lines in Media Plan
   Then I cannot change their Supplier, Currency or Liable Entity or Delete (forced to downweight to 0 and raise a new line)
-
- #to review
-Scenario: Cancel POs in SAP
-  Given a Purchase Order has been Exported to SAP
-    And changes to plan have since been published
-    And these changes would resulted in Purchase Order total being 0.00
-    And Purchase Order has not been invoiced yet
-  When changes are "Published"
-  Then PO totals are updated in Olive 3
-    And Olive exports "CANCEL" messageg to SAP
-    And Olive logs the export event in PO Sync history
-    And If export is successful, Olive displays the SAP ID as "External ID"
-    And If export has not been successful, Olive records reason for failure in PO Sync History
-
-
 
 Scenario: All Unit Tests Pass
 
