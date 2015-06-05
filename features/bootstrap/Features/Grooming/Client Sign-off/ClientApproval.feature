@@ -13,6 +13,20 @@ Scenario: Add a Client Approver Account (OTD-771)
   When Olive Admin views Client Contact Details (People - Edit details)
   Then Olive Admin can choose a "Client Plan Approver" role and assign it to the Client contact
 
+#to reivew - in sprint 31 [8th June] -
+Scenario: Preview as Client (OTD-2228)
+  Given Media Plan in any of the combinations of the below status
+    # Internal Status             | Client Status             |
+    # ----------------------------|---------------------------|
+    # Publish                     | Client Approval Requested |
+    # Internal Approval Requested | Client Approval Requested |
+    # Internally Approved         | Never Approved            |
+    # Internally Approved         | Breached                  |
+    # Internally Approved         | Client Approval Requested |
+  When I'm viewing the "Internally approved" view of plan
+  Then I can see a button "Preview as Client"
+    And it opens up a new tab that looks like the Plan will be looking for the Client once Client approval is requested (TBC with Dalith)
+
 #Client Approval Requested
 #reviewed 28th April - in sprint 29 [11th May] -
 Scenario: Request Client Approval (OTD-762)
@@ -211,6 +225,14 @@ Scenario: Version breached after approval (OTD-786)
   When Client approver looks at the plan in Client Portal
   Then they see the last approved verions including auto-approved changes
 
+
+#to reivew - in sprint 31 [8th June] -
+Scenario: View as Client (OTD-772)
+  Given Media Plan has been approved by Client
+    #https://docs.google.com/spreadsheets/d/1bRTlE5cDOuWZUpXc7cYVXqr2hCcOUFkDqm2TJfZ3HdI/edit#gid=0
+  When I'm viewing the "Client approved" view of plan
+  Then I can see a button "View as Client"
+    And it opens up a new tab that looks like the Plan version that the Client sees in Client Portal (TBC with Dalith)
 
 
     # CLient approves 10,000 Facebook
