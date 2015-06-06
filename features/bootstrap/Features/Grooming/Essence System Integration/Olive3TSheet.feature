@@ -489,8 +489,48 @@ Scenario: Existing booking in DB & existing Booking in t-sheet for 1 fixed prici
   Then I receive an error
     #as per O2 - Ensure 1-to-1 relationship between Bookings and FIXED pricing type cost model O3 Plan Lines (OTD-2148)
 
-
+#Ensure Booking is never linked to more than one plan line during a time
+#passed manual (Zanete)
 Scenario: New booking referenced by 2 lines for overlapping time periods in T-sheet - expect to error
+  Given a T-sheet is prepared
+    And it contains new placements for a new booking as outlined below
+      # PLACEMENT       | O3 Plan Line | Booking Name |
+      # ==============================================|
+      # New Pla A       | O3 line #123 | New Booking  |
+      # New Pla B       | O3 line #456 | New Booking  |
+    And each reference a different Plan line in Olive 3 for the same Supplier
+    And both reference the same Booking
+  When I upload that t-sheet to Olive 2
+  Then I receive an error
+    #as per O2 - Ensure Booking is never linked to more than one plan line during a time (OTD-2128)
+
+#passed manual (Zanete)
 Scenario: existing booking referenced by 2 lines for overlapping time periods in T-sheet - expect to error
+  Given a T-sheet is prepared
+    And it contains new placements for a new booking as outlined below
+      # PLACEMENT       | O3 Plan Line | Booking Name      |
+      # ===================================================|
+      # New Pla A       | O3 line #123 | Existing Booking  |
+      # New Pla B       | O3 line #456 | Existing Booking  |
+    And each reference a different Plan line in Olive 3 for the same Supplier
+    And both reference the same Booking
+  When I upload that t-sheet to Olive 2
+  Then I receive an error
+    #as per O2 - Ensure Booking is never linked to more than one plan line during a time (OTD-2128)
+
+#FAILED manual (Zanete)
 Scenario: existing booking referenced by an additional O3 line for overlapping time period - expect to error
+  Given a T-sheet has been successfully uploaded
+    And "O3 line #123" from Olive 3 plan has been used as source for booking lines under "DB_Booking_A"
+    And a new T-sheet is prepared
+    And it contains new placements for the same existing booking as outlined below
+      # PLACEMENT       | O3 Plan Line | Booking Name |
+      # ==============================================|
+      # New Pla B      | O3 line #456  | DB_Booking_A |
+    And it references a different Plan line in Olive 3
+  When I upload that t-sheet to Olive 2
+  Then I receive an error
+    #as per O2 - Ensure Booking is never linked to more than one plan line during a time (OTD-2128)
+    
+#to test
 Scenario: existing booking referenced by 2 lines in T-sheet over different time periods - allow
