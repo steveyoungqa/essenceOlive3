@@ -241,13 +241,11 @@ Scenario: Clearer labels on Client view of Plan
   Then I do not see the search box
     And the Message that Requester has left me does NOT obstruct the header information
     And I cannot toggle help system (The tooltip off/on control isn't visible)
-    And "Media Costs" ISN'T one of the column headers #after having seen how it looks, it feels out of place, it looked better without 
+    And "Media Costs" ISN'T one of the column headers #after having seen how it looks, it feels out of place, it looked better without
     And instead of "Budget([ISO code of Media Plan Currency])" relabel column header to "Budget (Buying Currency)"
     And approver area is labelled "Approval Status" (instead of "Plan Feedback")
-    And while my approval is pending I see the following note just by "Approve / Reject" controls
-      # "Your approval indicates MRF ID .... .
-      # All Budgets are Market Value"
-      # @todo - Helen - please help with correct copy
+    And while my approval is pending, when I click on "Approve" and approval panel opens up, I see the following note just by "Approve" button (highlighted in screenshot attached):
+      # Please note that by submitting "Approve", you are also indicating that you approve the association of this Media Plan with the Initiative (MRF ID), "{Initiative without quarter and year, just the MRF ID and name}".
 
 #to review
 Scenario: Clearer labels on Media Plan Listing in Client Portal
