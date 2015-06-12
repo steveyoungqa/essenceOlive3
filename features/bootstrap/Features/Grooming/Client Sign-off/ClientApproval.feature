@@ -241,8 +241,10 @@ Scenario: Clearer labels on Client view of Plan
   Then I do not see the search box
     And the Message that Requester has left me does NOT obstruct the header information
     And I cannot toggle help system (The tooltip off/on control isn't visible)
+    And Bug submission link isn't visible (as they wouldn't have JIRA accounts)
     And "Media Costs" ISN'T one of the column headers #after having seen how it looks, it feels out of place, it looked better without
     And instead of "Budget([ISO code of Media Plan Currency])" relabel column header to "Budget (Buying Currency)"
+    And a tooltip icon is displayed by both budget column headers with tooltip text "Market Value" in both
     And approver area is labelled "Approval Status" (instead of "Plan Feedback")
     And while my approval is pending, when I click on "Approve" and approval panel opens up, I see the following note just by "Approve" button (highlighted in screenshot attached):
       # Please note that by submitting "Approve", you are also indicating that you approve the association of this Media Plan with the Initiative (MRF ID), "{Initiative without quarter and year, just the MRF ID and name}".
@@ -253,6 +255,7 @@ Scenario: Clearer labels on Media Plan Listing in Client Portal
   When I view a list of Media Plans under a Campaign for which I've been requested to give approval
   Then I see Total sums of Budget for each grouping (by status) displayed on the status row for both currencies
     And instead of "Budget" relabel column header to "Budget (Buying Currency)"
+    And a tooltip icon is displayed by both budget column headers with tooltip text "Market Value" in both
 
 
 #(reviewed 1st May)
