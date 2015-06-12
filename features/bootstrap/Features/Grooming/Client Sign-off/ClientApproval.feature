@@ -244,11 +244,12 @@ Scenario: Clearer labels on Client view of Plan
     And instead of "Budget([ISO code of Media Plan Currency])" relabel column header to "Budget (Buying Currency)"
     And approver area is labelled "Approval Status" (instead of "Plan Feedback")
     And while my approval is pending I see the following note just by "Approve / Reject" controls
-      # "Your approval indicates MRF ID .... . All Budgets are Market Value"
-      # @Helen - please help with copy
+      # "Your approval indicates MRF ID .... .
+      # All Budgets are Market Value"
+      # @todo - Helen - please help with correct copy
 
 #to review
-Scenario: Clearer labels on
+Scenario: Clearer labels on Media Plan Listing in Client Portal
   Given I'm a logged in Client Plan Approver
   When I view a list of Media Plans under a Campaign for which I've been requested to give approval
   Then I see Total sums of Budget for each grouping (by status) displayed on the status row for both currencies
