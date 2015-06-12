@@ -241,6 +241,7 @@ Scenario: Clearer labels on Client view of Plan
   Then I do not see the search box
     And the Message that Requester has left me does NOT obstruct the header information
     And I cannot toggle help system (The tooltip off/on control isn't visible)
+    And "Media Costs" ISN'T one of the column headers #after having seen how it looks, it feels out of place, it looked better without 
     And instead of "Budget([ISO code of Media Plan Currency])" relabel column header to "Budget (Buying Currency)"
     And approver area is labelled "Approval Status" (instead of "Plan Feedback")
     And while my approval is pending I see the following note just by "Approve / Reject" controls
