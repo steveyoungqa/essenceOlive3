@@ -216,7 +216,7 @@ Scenario: Version changed before Approval  (OTD-786)
   Then Cients who view the version for approval can see and approve published changes as part of the first approval request
     #in other words - no need to create a new version or request new approval
 
-#reviewed 6th May
+#reviewed 6th May - in sprint 31 [8th June] -
 Scenario: Version breached after approval (OTD-786)
 #as per flow: https://docs.google.com/presentation/d/1kfVC7tLbzNUZO_W20_k8IKkkEH3l_7ZtI769Br2l8Js/edit#slide=id.g9d920b67a_0_55
   Given Client approval was given for a plan
@@ -234,29 +234,28 @@ Scenario: View as Client (OTD-772)
   Then I can see a button "View as Client"
     And it opens up a new tab that looks like the Plan version that the Client sees in Client Portal (TBC with Dalith)
 
+#to review
+Scenario: Clearer labels on Client view of Plan
+  Given I have received an approval request
+  When I look at Media Plan in Client Portal
+  Then I do not see the search box
+    And the Message that Requester has left me does NOT obstruct the header information
+    And I cannot toggle help system (The tooltip off/on control isn't visible)
+    And Bug submission link isn't visible (as they wouldn't have JIRA accounts)
+    And "Media Costs" ISN'T one of the column headers #after having seen how it looks, it feels out of place, it looked better without
+    And instead of "Budget([ISO code of Media Plan Currency])" relabel column header to "Budget (Buying Currency)"
+    And a tooltip icon is displayed by both budget column headers with tooltip text "Market Value" in both
+    And approver area is labelled "Approval Status" (instead of "Plan Feedback")
+    And while my approval is pending, when I click on "Approve" and approval panel opens up, I see the following note just by "Approve" button (highlighted in screenshot attached):
+      # Please note that by submitting "Approve", you are also indicating that you approve the association of this Media Plan with the Initiative (MRF ID), "{Initiative without quarter and year, just the MRF ID and name}".
 
-    # CLient approves 10,000 Facebook
-    # Am publishes 5,000 upweight - needs re-apprval internally
-    # Client sees 10,000 for Facebook
-    # AM internally approves the upweight
-    # Client sees 15,000
-    # AM publishes 1,000 upweight - needs re-approval internally AND client re-approval
-    # Client sees 15,000
-    # a) AM Approves upweight to 16,00 - plan is breached and needs Client re-approval
-    # a) Client sees 15,000
-    # a) AM requests client approval
-    # a) Client sees 16,000 and highlight that it's different from:
-    #     Last approved: 10,000 (beause otherwise the difference might not be big enough to cause a breach and could be confusing)
-    #     Last auto-approved: 15,000
-    # b) AM Rejects upweight to 16,00
-    # b) Client still sees 15,000
-    # ba) AM resets back to 14,000 and publishes - plan changes are checked against last client approved and Client plan status is re-stated to APproved!!!
-    # ba) Client sees 14,000
-    # bb) AM resets to 15,500 and publishes -
-    # bb) Client Sees 15,000
-    # bb) AM internally approves the upweight
-    # bb) Client sees 15,500
-
+#to review
+Scenario: Clearer labels on Media Plan Listing in Client Portal
+  Given I'm a logged in Client Plan Approver
+  When I view a list of Media Plans under a Campaign for which I've been requested to give approval
+  Then I see Total sums of Budget for each grouping (by status) displayed on the status row for both currencies
+    And instead of "Budget" relabel column header to "Budget (Buying Currency)"
+    And a tooltip icon is displayed by both budget column headers with tooltip text "Market Value" in both
 
 
 #(reviewed 1st May)
