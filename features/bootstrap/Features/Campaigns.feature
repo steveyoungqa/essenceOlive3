@@ -9,9 +9,10 @@ Feature: P01 - Create new campaign
     Then I press "Sign in with Google"
     And I wait for xpath "//*[@id='Email']" to appear
     And I fill in "Email" with "steve.automation@gmail.com"
+    Then I press "signIn"
     And I wait for xpath "//*[@id='Passwd']" to appear
     And I fill in "Passwd" with "Regression1000"
-    Then I press "signIn"
+    Then I press "Sign in"
     And I Maximize the Browser Window
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
