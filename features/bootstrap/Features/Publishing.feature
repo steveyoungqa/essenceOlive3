@@ -139,7 +139,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "Line Channel" link
     And I click the "Line Channel Search" link
     Then I click the "Section" link
-    And I click the link containing Text "Default"
+    And I click the "Section Default" link
     Then I wait for 2000
     Then I click the "Supplier" link
     And I fill in the "Supplier" with "<supplier>"
@@ -242,7 +242,7 @@ Feature: Olive 3 Regression Pack
 
 #   ***FEEDBACK & APPROVE***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-set-status']" to appear
-    Then I click the "Set Status" link
+    Then I click the "Approve or Reject" link
     And I fill in the "Feedback Notes" with "Regression Testing feedback test"
     Then I click the "Approve" link
 

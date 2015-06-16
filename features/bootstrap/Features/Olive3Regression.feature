@@ -21,6 +21,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
     Then I click the "Navigation Header" link
     Then I click the "Campaigns" link
+    Then I wait for xpath "//*[@class='loader__progress']" to disappear
     Then I wait for 2000
     Then I fill in the "Campaign Search" with "<campaign>"
     Then I wait for 2000
@@ -93,9 +94,9 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the "Market USA" link
 
-    Then I select a Media Plan Start Date of "2015-04-01"
+    Then I select a Media Plan Start Date of "<startDate>"
     Then I wait for 3000
-    Then I Select a Media Plan End Date of "2015-04-30"
+    Then I Select a Media Plan End Date of "<endDate>"
     Then I wait for 2000
 
     Then I fill in "campaign-marketbudgets-new-liableEntity" with "<liableEntity>"
@@ -108,7 +109,7 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
 
     And I fill in "campaign-marketbudgets-new-owner" with "<owner>"
-    Then I wait for 2000
+    And I wait for xpath "//*[@id='campaign-marketbudgets-new-owner-steve-automation']" to appear
     Then I click the link containing ID "<owner>"
 
 #    Then I click the "Media Plan Save" link
@@ -144,7 +145,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "Line Channel" link
     And I click the "Line Channel Search" link
     Then I click the "Section" link
-    And I click the link containing Text "Default"
+    And I click the "Section Default" link
     Then I wait for 2000
     Then I click the "Supplier" link
     And I fill in the "Supplier" with "<supplier>"
@@ -199,6 +200,7 @@ Feature: Olive 3 Regression Pack
 #   ***LINK INSERTION ORDER TO DS3***
     Then I wait for xpath "//*[@class='md-header-items']//*[contains(text(),'Insertion orders')]" to appear
     Then I click the "Insertion Order tab" link
+    Then I wait for xpath "//*[@class='loader__progress']" to disappear
     And I wait for xpath "//*[@class='button button__label-only']//*[contains(text(),'View IO')]" to appear
     And I click the "View IO" link
     And I wait for xpath "//*[@class='md-header-items-container']//*[contains(text(),'External platforms')]" to appear
@@ -233,14 +235,17 @@ Feature: Olive 3 Regression Pack
     Then I click the "Publish Dropdown" link
     And I click the "Published State" link
     Then I reload the page
+    Then I wait for xpath "//*[@class='loader__progress']" to disappear
+
 
 #   ***REQUEST APPROVAL***
     Then I click the "Request Approval" link
     Then I wait for 2000
     Then I wait for xpath "//*[@id='campaign-marketbudgets-versions-approvers-add-person']" to appear
     Then I click the "Approver Field" link
-    And I wait for text "<approver>" to appear
-    Then I click the link containing Text "<approver>"
+    And I wait for text "Steve Automation" to appear
+    Then I click the link containing ID "<approver>"
+#    Then I click the link containing Text "<approver>"
     Then I wait for 2000
     And I click the "Request Approval Confirm" link
     Then I output text "Internal Approval Requested" to the console
@@ -248,9 +253,9 @@ Feature: Olive 3 Regression Pack
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 #   ***FEEDBACK & APPROVE***
-    Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-set-status']" to appear
     Then I reload the page
-    Then I click the "Set Status" link
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-set-status']" to appear
+    Then I click the "Approve or Reject" link
     And I fill in the "Feedback Notes" with "Regression Testing feedback test"
     Then I click the "Approve" link
     Then I output text "Plan Approved" to the console
@@ -272,7 +277,7 @@ Feature: Olive 3 Regression Pack
     When I click the "Publish Media Plan" link
     Then I wait for text "Publishing this media plan you will require further internal approval for the amends you have made" to appear
     And I click the "Continue & Publish" link
-    Then I wait for text "Media Plan published successfully" to appear
+    Then I wait for text "Media Plan Lines published successfully" to appear
     Then I output text "Edited Media Plan published successfully" to the console
 #    And I wait for text "Amends Published" to appear
     Then I reload the page
@@ -294,7 +299,7 @@ Feature: Olive 3 Regression Pack
     And I fill in the "KPI Event Name" with "Regression Event"
     Then I click the "Conversion Source Field" link
     Then I fill in the "Conversion Source Field" with "<conversionSource>"
-    And I wait for text "<conversionSource>" to appear
+    And I wait for 7000
     Then I click the link containing Text "<conversionSource>"
     And I click the "Event Save" link
     And I wait for 3000
@@ -347,8 +352,8 @@ Feature: Olive 3 Regression Pack
     Then I output text "CleanUp completed <campaign> has been deleted" to the console
 
   Examples:
-    |campaign  |client|owner      |region |period |budget|mediaType     |costModel   |startDate |endDate    |budget|lineBudget|discount|lineCurrency |currencyBreach   |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|description1|
-    |regression  |google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-04-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|Plan Line 1|
+    |campaign        |client|owner      |region |period |budget|mediaType     |costModel   |startDate |endDate    |budget|lineBudget|discount|lineCurrency |currencyBreach   |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver        |conversion        |activity         |tag       |ds3Advert                    |conversionSource|description1|
+    |regressionfixed |google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-12-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |automation      |Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|Plan Line 1|
 
 
 
