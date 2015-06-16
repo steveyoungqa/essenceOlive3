@@ -10,9 +10,10 @@ Feature: Olive 3 Regression Pack
     Then I press "Sign in with Google"
     And I wait for xpath "//*[@id='Email']" to appear
     And I fill in "Email" with "steve.automation@gmail.com"
+    Then I press "signIn"
     And I wait for xpath "//*[@id='Passwd']" to appear
     And I fill in "Passwd" with "Regression1000"
-    Then I press "signIn"
+    Then I press "Sign in"
     And I Maximize the Browser Window
 
   Scenario Outline: Olive 3 Regression Test Pack & Sanity Checks
@@ -347,7 +348,7 @@ Feature: Olive 3 Regression Pack
 
   Examples:
     |campaign  |client|owner      |region |period |budget|mediaType     |costModel   |startDate |endDate    |budget|lineBudget|discount|lineCurrency |currencyBreach   |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|description1|
-    |jenkins   |google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-04-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|Plan Line 1|
+    |regression  |google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-04-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|Plan Line 1|
 
 
 
