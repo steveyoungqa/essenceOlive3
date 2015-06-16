@@ -39,7 +39,7 @@ Feature: Olive 3 Regression Pack
     And I fill in "campaign-new-client" with "<client>"
     Then I wait for 2000
     Then I fill in "campaign-new-managingRegion" with "<region>"
-    And I wait for 2000
+    Then I wait for xpath "//*[@class='loader__progress']" to disappear
     And I fill in "campaign-new-owner" with "<owner>"
     And I wait for xpath "//*[@id='campaign-new-owner-steve-automation']" to appear
     And I fill in "campaign-new-memo" with "Test Notes"
@@ -355,7 +355,7 @@ Feature: Olive 3 Regression Pack
 
   Examples:
     |campaign        |client|owner      |region |period |budget|mediaType     |costModel   |startDate |endDate    |budget|lineBudget|discount|lineCurrency |currencyBreach   |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver        |conversion        |activity         |tag       |ds3Advert                    |conversionSource|description1|
-    |uattest   |google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-12-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |automation      |Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|floodlights|Plan Line 1|
+    |ownerwait       |google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-12-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |automation      |Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|floodlights|Plan Line 1|
 
 
 
