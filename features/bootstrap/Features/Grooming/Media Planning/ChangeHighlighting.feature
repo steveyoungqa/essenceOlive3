@@ -37,7 +37,13 @@ Scenario: FE - Highlight Plan changes in Published when compared to others
 #to review
 Scenario: FE - Highlight Plan changes in Internally Approved when compared to Client Approved
 
+#to flesh out
+Scenario: FE - Update progress indicator to better display Client Approved plans that require internal approval
+  #yellow status rows here: https://docs.google.com/spreadsheets/d/1bRTlE5cDOuWZUpXc7cYVXqr2hCcOUFkDqm2TJfZ3HdI/edit#gid=0
 
+#to flesh out
+Scenario: FE - Refactor the actions available for different users at different states and views of plan
+  #as per https://docs.google.com/spreadsheets/d/1bRTlE5cDOuWZUpXc7cYVXqr2hCcOUFkDqm2TJfZ3HdI/edit#gid=0
 
 #to review
 Scenario: FE - Display Approved plan that has IOs with missing Internal Approval or Supplier countersigned IO
