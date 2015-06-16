@@ -21,7 +21,8 @@ Scenario: Client redirected to Campaign Management (OTD-781)
   Then they are taken to the Campaign Management area
 
 #reviewed 7th May
-Scenario: Client views a list of campaigns that contain plans they can access (OTD-768)
+Scenario: Client views a list of campaigns that contain plans they can access (OTD-768) - DEPRECATED
+  #rework under Client Viewer views a list of all plans ever requested for approval for Client
   #prototype: http://mnnl4s.axshare.com/#p=1_2_3_7b_cliant_campaign_view_-_campaigns
   Given Client has loged in Olive
   When they navigate to Campaign management
@@ -40,7 +41,8 @@ Scenario: Client views a list of campaigns that contain plans they can access (O
     And Advanced filters do not contain "Client" dropdown
 
 #reviewed 7th May
-Scenario: Client views a list of plans that they can access (OTD-768)
+Scenario: Client views a list of plans that they can access (OTD-768) - DEPRECATED
+  #rework under Client Viewer views a list of all plans ever requested for approval for Client
   #prototype: http://mnnl4s.axshare.com/#p=1_2_3_7a_cliant_campaign_view_-_media_plans
   Given Client approver has received more than one Plan approval requests
   When they follow one of those links
@@ -61,6 +63,33 @@ Scenario: Client views a list of plans that they can access (OTD-768)
     And they cannot delete or edit Plan meta data
     And each row is a clickable control that takes user to the latest version for which client approval was requested
 
+
+#to review
+Scenario: Client Viewer Role
+  Given I'm a logged in Olive user with permissions to manage other Olive users
+  When I view client contact details
+  Then I can assign them a role "Client Viewer"
+
+#to review
+Scenario: Client Viewer views a list of all plans ever requested for approval for Client
+  Given I am a logged in Client User
+    And I have been assigned the role "Client Viewer"
+  When I log in Client Portal
+  Then I can see a list of ALL Media Plans ever grouped by Approval status, ordered by "Date Approval requested" desc
+    And I see the following information for each plan:
+    # Name
+    # Budget (Buying Currency)
+    # Budget (_Client Currency code_) (e.g. "Budget (USD)" )
+    # Start Date
+    # End Date
+    And I can see the rolled up total Budget (in client currency) by status
+    And a tooltip icon is displayed by both budget column headers with tooltip text "All budgets are Market Value" in both
+
+#to flesh out
+Scenario: Download all plans to a CSV file
+
+#to flesh out
+Scenario: Include MRF Region
 
 #reviewed 7th May
 Scenario: Client views plan that he is to approve / reject (OTD-292)
