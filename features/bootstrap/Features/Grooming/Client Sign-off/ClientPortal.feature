@@ -65,13 +65,13 @@ Scenario: Client views a list of plans that they can access (OTD-768) - DEPRECAT
 
 
 #to review
-Scenario: Client Viewer Role
+Scenario: Client Viewer Role (OTD-2215)
   Given I'm a logged in Olive user with permissions to manage other Olive users
   When I view client contact details
   Then I can assign them a role "Client Viewer"
 
 #to review
-Scenario: Client Viewer views a list of all plans ever requested for approval for Client
+Scenario: Client Viewer views a list of all plans ever requested for approval for Client (OTD-2215)
   Given I am a logged in Client User
     And I have been assigned the role "Client Viewer"
   When I log in Client Portal
@@ -89,7 +89,7 @@ Scenario: Client Viewer views a list of all plans ever requested for approval fo
 Scenario: Download all plans to a CSV file
 
 #to flesh out
-Scenario: Include MRF Region
+Scenario: Include MRF Region (OTD-1951)
 
 #reviewed 7th May
 Scenario: Client views plan that he is to approve / reject (OTD-292)

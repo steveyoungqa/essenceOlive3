@@ -10,20 +10,20 @@ I want Insertion Orders to be automatically exported to SAP as Purchase Orders a
 #   ~ not raised for the following suppliers: Essence Creative, Essence Mobile, Essence Media, Essence Social     #
 ###################################################################################################################
 
-#reviewd 4th June - in Sprint 31 [8th June] -
+#reviewd 4th June - in Sprint 32 [22nd June] -
 Scenario: Trigger SAP Sync (OTD-2229)
   Given A media plan exists
   When New client approved snapshot
   Then trigger SAP Sync process
 
-#reviewed 4th June - in Sprint 31 [8th June] -
+#reviewed 4th June - in Sprint 32 [22nd June] -
 Scenario: Re-sync plan with SAP button (OTD-2229)
   Given A media Plan has been Client approved
   When I look at the IO and PO tab in the plan
   Then I can see a button "Sync with SAP" (just above the IO or PO list)
     And when I click it Olive triggers the Sync process in scenario below
 
-#reviewed 4th June - in Sprint 31 [8th June] -
+#reviewed 4th June - in Sprint 32 [22nd June] -
 Scenario: Detect if PO should be exported to SAP (OTD-2139)
   Given that an Insertion order is Essence Liable
     And It is not raised for any of the following Suppliers:
@@ -36,7 +36,7 @@ Scenario: Detect if PO should be exported to SAP (OTD-2139)
   When Sync is triggered
   Then prepare a Purchase Order for Export to SAP
 
-#reviewed 4th June - in Sprint 31 [8th June] -
+#reviewed 4th June - in Sprint 32 [22nd June] -
 Scenario: Create POs (OTD-2139)
   Given there are Insertion Orders that need to be exported to SAP
     And that Insertion Order Does not have an associated PO in SAP
@@ -48,7 +48,7 @@ Scenario: Create POs (OTD-2139)
     And the Olive PO is created with a status "OPEN"
 
 
-#reviewed 4th June - in Sprint 31 [8th June] -
+#reviewed 4th June - in Sprint 32 [22nd June] -
 Scenario: Alert of discrepancies for Insertion Order (OTD-2139)
   Given an insertion order needs to be exported to SAP
     And the insertion Order is associated with a Purchase Order
@@ -71,7 +71,7 @@ Scenario: Alert of discrepancies for Insertion Order (OTD-2139)
      # -------------------------------------------------------------------
 
 
-#reviewed 4th June - in Sprint 31 [8th June] -
+#reviewed 4th June - in Sprint 32 [22nd June] -
 Scenario: Create PO Lines (OTD-2139)
   Given there are insertion order that need to be exported to SAP
     And the insertion Order has an associated Purchase Order
@@ -80,7 +80,7 @@ Scenario: Create PO Lines (OTD-2139)
   When SAP Sync is triggered
   Then Olive creates a Purchase Order line for the change amount with fields in "20130816 - Olive 3 - B1IF and Olive Interface Requirements - v.0.3: Purchase Orders" section
 
-#reviewed 4th June - in Sprint 31 [8th June] -
+#reviewed 4th June - in Sprint 32 [22nd June] -
 Scenario: Update PO Lines (OTD-2139)
   Given there are insertion order that need to be exported to SAP
     And the insertion Order has an associated Purchase Order
@@ -90,8 +90,7 @@ Scenario: Update PO Lines (OTD-2139)
   Then Olive updates uninvoiced PO line by the change amount as per specification in "20130816 - Olive 3 - B1IF and Olive Interface Requirements - v.0.3: Purchase Orders" section
 
 
-
-#to review
+#reviewed 4th June - in Sprint 32 [22nd June] -
 Scenario: Discounts are exported separately with Agency Discount GL account (OTD-1972)
   #https://docs.google.com/document/d/1ko-1-TmRZ7UwBfgq_a37l5x_DEEBZnqjlzFu-dnxIu0/edit#heading=h.30djt44mgg3
   Given an IO line has a discount applied
@@ -106,7 +105,7 @@ Scenario: Discounts are exported separately with Agency Discount GL account (OTD
     # | {PO Line ID}c | 350040Media_00000000  | {po line desc}| PO line Disc amount | 0        | PO line Disc amount |
     # |--------------------------------------------------------------------------------------------------------------|
 
-#reviewed 4th June - in Sprint 31 [8th June] -
+#reviewed 4th June - in Sprint 32 [22nd June] -
 Scenario: Export PO cancelation to SAP (OTD-1972)
   Given new Client Snapshot has been created
     And PO SAP update has been prepared
@@ -115,7 +114,7 @@ Scenario: Export PO cancelation to SAP (OTD-1972)
   Then it sends a "CANCEL" message (see table in next scenario)
     And sets the PO Status to "CANCELLED"
 
-#reviewed 4th June - in Sprint 31 [8th June] -
+#reviewed 4th June - in Sprint 32 [22nd June] -
 Scenario: Export POs to SAP (OTD-1972)
   Given new Client Snapshot has been created
     And PO total > 0
@@ -136,7 +135,7 @@ Scenario: Export POs to SAP (OTD-1972)
     # UAT        | SAP LON    | Essence AU    | TESTAU | TBC              |
     And Olive logs the export event in "PO Sync" history
 
-#reviewed 4th June
+#reviewed 4th June - in Sprint 32 [22nd June] -
 Scenario: View PO Sync history for each IO and PO (OTD-2230)
   Given An Insertion Order has to be exported to SAP
     And it has been approved by Client
@@ -145,7 +144,7 @@ Scenario: View PO Sync history for each IO and PO (OTD-2230)
     And for each export event it displays the following:
     # Date Time, SAP instance, Export Content, Reponse Content, Success/Failure flag, reason for failure
 
-#reviewed 4th June - in Sprint 31 [8th June] -
+#reviewed 4th June - in Sprint 32 [22nd June] -
 Scenario: Update Olive DB after a successful SAP export (OTD-1972)
   Given Olive has sent a PO request to SAP
   When PO Export to SAP is successful
@@ -153,7 +152,7 @@ Scenario: Update Olive DB after a successful SAP export (OTD-1972)
     And Updates Olive database with information that's just been exported to SAP
     And users can find the Purchase Order in a list of "Purchase Orders" for related Plan as well as the global "/finance/pos" page
 
-#reviewed 4th June - in Sprint 31 [8th June] -
+#reviewed 4th June - in Sprint 32 [22nd June] -
 Scenario: Update Olive DB after an unsuccessful SAP export (OTD-1972)
   Given Olive has sent a PO request to SAP
   When PO Export to SAP is not successful
@@ -167,7 +166,7 @@ Scenario: Update Olive DB after an unsuccessful SAP export (OTD-1972)
      # Purchase Order: {Url to Purchase Order} # if available
      # -------------------------------------------------------------------
 
-#to review
+#to review - in Sprint 31 [8th June] -
 Scenario: Do not allow changing Supplier/Currency/Liable Entity after Approval
   Given A Media Plan is set up and Client Approved
     And Essence Liable Purchase Orders have been exported to SAP
@@ -313,13 +312,12 @@ Scenario: All Unit Tests Pass
 
 #to review
 Scenario: Handle incorrect PO Supplier after Plan Approval
-  Given Media Plan has been approved
+  Given Media Plan has been approved by Client
     And a Insertion Order for e.g. "Yahoo! UK Ltd." has been raised
     And as a result a Purchase Order for "Yahoo! UK Ltd." has been exported to SAP
-    And no Invoices have been processed against this PO yet
+    And Invoiced total for this PO is 0.00 (or no invoices have been processed/imported)
     And Invoice has come in from "Yahoo! Inc."
     And Finance require the Purchase order to be re-raised for "Yahoo! Inc."
-    But downweighting said line to 0.00 and adding new line would result in "Breached" Client Approval
   When Account Manager submits a an issue for service desk about wrong supplier selected for PO
   Then Olive admin can access restricted Interface "SAP Integration Management" #(enough to be just a hidden url for now )
     And Locate Purchase Order by supplying the "Olive 3 PO ID"
@@ -328,24 +326,62 @@ Scenario: Handle incorrect PO Supplier after Plan Approval
     # "This will update the Supplier for related Insertion Order {Insertion Order Name},
     #  cancel Existing PO in Olive 3 and {Liable Entity} SAP, generate a new one in Olive 3 and export it to {Liable Entity} SAP.
     #  This cannot be undone. Are you sure you want to proceed? Yes / Cancel "
-    And on confirm, Related Insertion Order Supplier is updated to new selection
-    And "CANCEL" request is posted to B1I
-    And if B1IF has responded with success, new Purchase order is generated for the new supplier
-    And all PO lines from old Purchase Order are moved to the new one
-    And old Purchase Order and has a status "Cancelled" (and contains no lines - the same should be in SAP)
-    And new Purchase Order is
-    And user is displayed success feedback containing the new "Olive 3 PO ID" and new "SAP PO ID" (so that can be communicated back to whoever raised service desk issue)
-    And in Insertion Order history an event is logged
-    # ----------------------------------------------------------------------------------------------------------------------------------------------------|
-    # Time     |User                     |Action                                          |Document| Notes                                                |
-    # ----------------------------------------------------------------------------------------------------------------------------------------------------|
-    # Datetime |Currently Logged in User | Supplier changed through SAP Integration Admin | N/A    |{Old Supplier} changed to {New Supplier}              |
-    #          |                         |                                                |        | Purchase Order #{Old PO ID} reraised as #{new PO ID} |
-
-
+    And on confirm, new IO for new Supplier is created, and it contains all the lines that were included in the prev IO
+    And "CANCEL" request is posted to B1I against the old Purchase Order (TBC - what if there are processed invoices - need to at least 0 out the PO with negative lines)
+    And if B1IF has responded with success, Olive 3 Purchase order is update to match SAP PO
+    And new Purchase Order is generated from the new Insertion Order
+    And user is displayed success feedback containing the new "Olive 3 IO ID" and new "SAP PO ID" (so that can be communicated back to whoever raised service desk issue)
+    And the following events are recorded in Insertion Order history
+    # ----------------------------------------------------------------------------------------------------------|
+    # IO     | User           | Action                    | Notes                                               |
+    # ----------------------------------------------------------------------------------------------------------|
+    # Prev   | Currently      | Supplier updated through  | {Old Supplier} changed to {New Supplier}            |
+    #        | Logged in User | SAP Integration Admin     | New IO #{new PO ID}[link to new io] generated as a  |
+    #        |                |                           | result                                              |
+    # -------|----------------|---------------------------|-----------------------------------------------------|
+    # New    | Currently      | Raised as a result of     | {Old Supplier} changed to {New Supplier}            |
+    #        | Logged in User | Supplier update through   | Prev IO #{Prev PO ID}[link to new io] cancelled as  |
+    #        |                | SAP Integration Admin     | a result                                            |
+    # ----------------------------------------------------------------------------------------------------------|
+    # * note - for suppliers - use the name that's imported from Olive 2 sup_legal_entity field
 
 #to flesh out
 Scenario: Handle incorrect PO Currency after Plan Approval
+  Given Media Plan has been approved by Client
+    And a Insertion Order for in "USD" has been raised
+    And as a result a Purchase Order in "USD." has been exported to SAP
+    And Invoiced total for this PO is 0.00 (or no invoices have been processed/imported)
+    And Invoice has come in "GBP"
+    And Finance require the Purchase order to be re-raised in "GBP"
+  When Account Manager submits a an issue for service desk about wrong Currency selected for PO
+  Then Olive admin can access restricted Interface "SAP Integration Management" #(enough to be just a hidden url for now )
+    And Locate Purchase Order by supplying the "Olive 3 IO ID" with or without SAP prefix (assuming they're the same as PO id)
+    And Choose a new "Currency" for it
+    And enter a new net amount for each line under the Olive 3 IO
+    And Cofirm they're happy to proceed:
+      # "This will create a new Insertion Order with new Currency with other information the same as {Insertion Order Name},
+      #  The Existing PO will be downweighted to 0 or Cancelled in Olive 3 and {Liable Entity} SAP, instead a new Purchase Order will be generated and exported to {Liable Entity} SAP.
+      #  This cannot be undone. Are you sure you want to proceed? Yes / Cancel "
+    And on confirm, new IO for new Currency is created, and it contains all the lines that were included in the prev IO
+    And "CANCEL" request is posted to B1I against the old Purchase Order (TBC - what if there are processed invoices - need to at least 0 out the PO with negative lines)
+    And if B1IF has responded with success, Olive 3 Purchase order is update to match SAP PO
+    And new Purchase Order is generated from the new Insertion Order
+    And user is displayed success feedback containing the new "Olive 3 IO ID" and new "SAP PO ID" (so that can be communicated back to whoever raised service desk issue)
+    And the following events are recorded in Insertion Order history
+    # ----------------------------------------------------------------------------------------------------------|
+    # IO     | User           | Action                    | Notes                                               |
+    # ----------------------------------------------------------------------------------------------------------|
+    # Prev   | Currently      | Currency updated through  | {Old Currency} changed to {New Currency}            |
+    #        | Logged in User | SAP Integration Admin     | New IO #{new PO ID}[link to new io] generated as a  |
+    #        |                |                           | result                                              |
+    # -------|----------------|---------------------------|-----------------------------------------------------|
+    # New    | Currently      | Raised as a result of     | {Old Currency} changed to {New Currency}            |
+    #        | Logged in User | Currency update through   | Prev IO #{Prev PO ID}[link to new io] cancelled as  |
+    #        |                | SAP Integration Admin     | a result                                            |
+    # ----------------------------------------------------------------------------------------------------------|
+    # * note - for suppliers - use the name that's imported from Olive 2 sup_legal_entity field
+
+
 
 #to flesh out
 Scenario: Handle incorrect Liable Entity
