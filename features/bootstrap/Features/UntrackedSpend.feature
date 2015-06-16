@@ -128,7 +128,7 @@ Feature: OAT-2 Untracked Spend
     Then I click the "Line Channel" link
     And I click the "Line Channel Search" link
     Then I click the "Section" link
-    And I click the link containing Text "Default"
+    And I click the "Section Default" link
     Then I wait for 2000
     Then I click the "Supplier" link
     And I click the link containing Text "<supplier>"
