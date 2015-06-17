@@ -67,7 +67,8 @@ Feature: Olive 3 Regression Pack
     Then I wait for xpath "//*[@class='md-header-items']//*[contains(text(),'Media Plans')]" to appear
     Then I click the "Media Plans" link
     Then I follow "campaign-marketbudgets-add"
-    Then I wait for 2000
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-new-panel-close']" to appear
+#    Then I wait for 2000
     And I fill in "campaign-marketbudgets-new-label" with "Test Label"
     Then I wait for 2000
 
@@ -356,7 +357,7 @@ Feature: Olive 3 Regression Pack
 
   Examples:
     |campaign  |client|owner      |region |period |budget|mediaType     |costModel   |startDate |endDate    |budget|lineBudget|discount|lineCurrency |currencyBreach   |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver        |conversion        |activity         |tag       |ds3Advert                    |conversionSource|description1|
-    |regression|google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-12-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |automation      |Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|floodlights|Plan Line 1|
+    |planwait  |google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-12-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |automation      |Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|floodlights|Plan Line 1|
 
 
 
