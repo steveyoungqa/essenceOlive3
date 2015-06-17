@@ -12,11 +12,11 @@ Scenario: Setup Campaign Metrics (OTD-2307)
   When I navigate to Campaign Details "Measurement" Tab
     # i.e. rename the tab Default KPI to Meaurement
   Then I see a list of already defined metrics
-    #==========================================================|
-    # Metric name          | Value type    | Associated input  |
-    #==========================================================|
-    # Downlods             | Amount        | Event 1           |
-    # CPA                  | Ratio         | Event 4 / Event 6 |
+    #============================================================|
+    # Metric name          | Value type    | Associated input    |
+    #============================================================|
+    # Downloads            | Amount        | Event Name          |
+    # CPA                  | Ratio         | Cost / Event Name   |
   When I add a new metric or edit an existing one
   Then I can specify a name
     And a Value of Ratio or Amount
@@ -27,6 +27,8 @@ Scenario: Setup Campaign Metrics (OTD-2307)
       # Event 2 - Downloads PCR             |
       # Cost                                |
       # Clicks                              |
+      # Impressions                         |
+      # Ranking                             |
 
 Scenario: Tracking Tag/SDK Input edit page
 - combine event input + activities tags into single page
