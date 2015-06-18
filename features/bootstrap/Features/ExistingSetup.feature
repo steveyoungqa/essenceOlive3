@@ -73,7 +73,7 @@ Feature: Perform tests upon an Existing Setup
 
   Examples:
     |campaign  |client|owner      |region |period |budget|liableEntity |initiative|property1|property2|supplier      |line1       |line2      |line3      |line2update              |>ds3 |searchCampaign|approver   |conversionSource  |conversion        |activity         |tag       |ds3Advert                    |
-    |stevefix  |google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |YouTube  |GDN      |Google Ireland|YouTubeDraft|GDN1Publish|GDN2Publish|Line 2 Changed to YouTube|2604|Shopping      |Steve Young |Google Floodlights|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |stevefix  |google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |YouTube  |GDN      |Google Ireland|YouTubeDraft|GDN1Publish|GDN2Publish|Line 2 Changed to YouTube|2604|Shopping      |Steve Automation |Google Floodlights|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

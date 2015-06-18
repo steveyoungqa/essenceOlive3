@@ -286,7 +286,7 @@ Feature: Olive 3 Regression Pack
 
   Examples:
     |campaign      |client|owner      |region |period |budget|liableEntity |initiative|buyType   |supplier      |description1|description2|ds3            |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |planlinetests |google|automation |EMEA   |q42015 |100000|Client Liable|wildfire  |Direct Buy|Google Ireland|Plan Line 1 |Plan Line 2 |700000001004851|Madrid        |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |planlinetests |google|automation |EMEA   |q42015 |100000|Client Liable|wildfire  |Direct Buy|Google Ireland|Plan Line 1 |Plan Line 2 |700000001004851|Madrid        |Steve Automation |Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

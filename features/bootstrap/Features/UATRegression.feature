@@ -237,20 +237,17 @@ Feature: Olive 3 Regression Pack
     Then I reload the page
     Then I wait for xpath "//*[@class='loader__progress']" to disappear
 
-
-#   ***REQUEST APPROVAL***
+#    ***REQUEST APPROVAL***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-manage-approval']" to appear
     Then I click the "Request Approval" link
     Then I wait for 2000
     Then I wait for xpath "//*[@id='campaign-marketbudgets-versions-approvers-add-person']" to appear
     Then I click the "Approver Field" link
-    And I wait for text "Steve Automation" to appear
-    Then I click the link containing ID "<approver>"
-#    Then I click the link containing Text "<approver>"
+    And I wait for 2000
+    And I fill in the "Approver Field" with "<approver>"
     Then I wait for 2000
     And I click the "Request Approval Confirm" link
     Then I output text "Internal Approval Requested" to the console
-#    Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
 #   ***FEEDBACK & APPROVE***
@@ -354,8 +351,8 @@ Feature: Olive 3 Regression Pack
     Then I output text "CleanUp completed <campaign> has been deleted" to the console
 
   Examples:
-    |campaign  |client|owner      |region |period |budget|mediaType     |costModel   |startDate |endDate    |budget|lineBudget|discount|lineCurrency |currencyBreach   |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver        |conversion        |activity         |tag       |ds3Advert                    |conversionSource|description1|
-    |uatsanity |google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-12-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |automation      |Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|floodlights|Plan Line 1|
+    |campaign   |client|owner      |region |period |budget|mediaType     |costModel   |startDate |endDate    |budget|lineBudget|discount|lineCurrency |currencyBreach   |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver        |conversion        |activity         |tag       |ds3Advert                    |conversionSource|description1|
+    |regression |google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-12-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |Steve Automation      |Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|floodlights|Plan Line 1|
 
 
 

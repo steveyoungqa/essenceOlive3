@@ -258,25 +258,19 @@ Feature: Breach Scenarios
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
 
-#   ***REQUEST APPROVAL***
+#    ***REQUEST APPROVAL***
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-manage-approval']" to appear
     Then I click the "Request Approval" link
-    And I click the "Add Approver" link
     Then I wait for 2000
-    And I fill in "campaign-marketbudgets-versions-approvers-add-type" with "Internal"
-    Then I wait for 2000
-#    And I click the "Internal Approver" link
-#    Then I wait for 2000
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-versions-approvers-add-person']" to appear
     Then I click the "Approver Field" link
-    Then I wait for 2000
-    And I fill in "campaign-marketbudgets-versions-approvers-add-person" with "<approver>"
-    Then I wait for 2000
-    Then I click the link containing Text "<approver>"
-    Then I wait for 2000
-    Then I click the "Save Approver" link
+    And I wait for 2000
+    And I fill in the "Approver Field" with "<approver>"
     Then I wait for 2000
     And I click the "Request Approval Confirm" link
-    Then I reload the page
+    Then I output text "Internal Approval Requested" to the console
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
+
 
 #   ***FEEDBACK & APPROVE***
     Then I click the "Approve or Reject" link
@@ -315,7 +309,7 @@ Feature: Breach Scenarios
 
   Examples:
     |campaign  |client|owner      |region |period |budget|liableEntity |initiative|property1|property2|supplier      |line1       |line2      |line2update   |line3      |>ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |
-    |individual|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |YouTube  |GDN      |Google Ireland|YouTubeDraft|GDN1Publish|Change YouTube|GDN2Publish|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
+    |individual|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |YouTube  |GDN      |Google Ireland|YouTubeDraft|GDN1Publish|Change YouTube|GDN2Publish|2604|Shopping      |Steve Automation |Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|
 
 
 

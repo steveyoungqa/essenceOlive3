@@ -267,7 +267,7 @@ Feature: Olive 3 Regression Pack
 
   Examples:
     |campaign     |client|owner      |region |period |budget|liableEntity |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
-    |clientapprove|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Young|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
+    |clientapprove|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Automation |Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
 
 
 
