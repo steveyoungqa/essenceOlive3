@@ -310,12 +310,11 @@ Scenario: All Unit Tests Pass
 
 
 
-#to review
-Scenario: Handle incorrect PO Supplier after Plan Approval
+#reviewed 17th June
+Scenario: Handle incorrect PO Supplier after Plan Approval (OTD-2312)
   Given Media Plan has been approved by Client
     And a Insertion Order for e.g. "Yahoo! UK Ltd." has been raised
     And as a result a Purchase Order for "Yahoo! UK Ltd." has been exported to SAP
-    And Invoiced total for this PO is 0.00 (or no invoices have been processed/imported)
     And Invoice has come in from "Yahoo! Inc."
     And Finance require the Purchase order to be re-raised for "Yahoo! Inc."
   When Account Manager submits a an issue for service desk about wrong supplier selected for PO
@@ -323,13 +322,15 @@ Scenario: Handle incorrect PO Supplier after Plan Approval
     And Locate Purchase Order by supplying the "Olive 3 PO ID"
     And Choose a new "Supplier" for it
     And Cofirm they're happy to proceed:
-    # "This will update the Supplier for related Insertion Order {Insertion Order Name},
-    #  cancel Existing PO in Olive 3 and {Liable Entity} SAP, generate a new one in Olive 3 and export it to {Liable Entity} SAP.
-    #  This cannot be undone. Are you sure you want to proceed? Yes / Cancel "
+      # "This will create a new Insertion Order for the new Supplier with other information the same as {Insertion Order Name},
+      #  The Existing PO will be downweighted to 0 or Cancelled in Olive 3 and {Liable Entity} SAP, instead a new Purchase Order will be generated and exported to {Liable Entity} SAP.
+      #  As this cannot be undone, please make sure there are no invoices processed against this IO in SAP.
+      #  Are you sure you want to proceed? Yes / Cancel "
     And on confirm, new IO for new Supplier is created, and it contains all the lines that were included in the prev IO
-    And "CANCEL" request is posted to B1I against the old Purchase Order (TBC - what if there are processed invoices - need to at least 0 out the PO with negative lines)
+    And add a negative PO line item to existing PO to downweight to 0.00, export that to SAP
+    And "CANCEL" request is posted to B1I against the old Purchase Order (ignore failure)
     And if B1IF has responded with success, Olive 3 Purchase order is update to match SAP PO
-    And new Purchase Order is generated from the new Insertion Order
+    And new Purchase Order is generated from the new Insertion Order and exported to SAP / saved
     And user is displayed success feedback containing the new "Olive 3 IO ID" and new "SAP PO ID" (so that can be communicated back to whoever raised service desk issue)
     And the following events are recorded in Insertion Order history
     # ----------------------------------------------------------------------------------------------------------|
@@ -345,8 +346,8 @@ Scenario: Handle incorrect PO Supplier after Plan Approval
     # ----------------------------------------------------------------------------------------------------------|
     # * note - for suppliers - use the name that's imported from Olive 2 sup_legal_entity field
 
-#to flesh out
-Scenario: Handle incorrect PO Currency after Plan Approval
+#reviewed 17th June
+Scenario: Handle incorrect PO Currency after Plan Approval (OTD-2312)
   Given Media Plan has been approved by Client
     And a Insertion Order for in "USD" has been raised
     And as a result a Purchase Order in "USD." has been exported to SAP
@@ -357,13 +358,17 @@ Scenario: Handle incorrect PO Currency after Plan Approval
   Then Olive admin can access restricted Interface "SAP Integration Management" #(enough to be just a hidden url for now )
     And Locate Purchase Order by supplying the "Olive 3 IO ID" with or without SAP prefix (assuming they're the same as PO id)
     And Choose a new "Currency" for it
-    And enter a new net amount for each line under the Olive 3 IO
     And Cofirm they're happy to proceed:
       # "This will create a new Insertion Order with new Currency with other information the same as {Insertion Order Name},
       #  The Existing PO will be downweighted to 0 or Cancelled in Olive 3 and {Liable Entity} SAP, instead a new Purchase Order will be generated and exported to {Liable Entity} SAP.
-      #  This cannot be undone. Are you sure you want to proceed? Yes / Cancel "
+      #  As this cannot be undone, please make sure there are no invoices processed against this IO in SAP.
+      #  Are you sure you want to proceed? Yes / Cancel "
     And on confirm, new IO for new Currency is created, and it contains all the lines that were included in the prev IO
-    And "CANCEL" request is posted to B1I against the old Purchase Order (TBC - what if there are processed invoices - need to at least 0 out the PO with negative lines)
+    And the line amounts are converted from USD to GBP using one of the following exchange rates:
+      # use Essence internal Trading exchange rate if is defined for Old IO Currency (IN) to New IO Currency (OUT) currencies is defined (using the start date of the plan)
+      # use daily spot rate otherwise (date as per current conversion logic)
+    And add a negative PO line item to existing PO to downweight to 0.00, export that to SAP
+    And "CANCEL" request is posted to B1I against the old Purchase Order (ignore failure)
     And if B1IF has responded with success, Olive 3 Purchase order is update to match SAP PO
     And new Purchase Order is generated from the new Insertion Order
     And user is displayed success feedback containing the new "Olive 3 IO ID" and new "SAP PO ID" (so that can be communicated back to whoever raised service desk issue)
@@ -383,8 +388,43 @@ Scenario: Handle incorrect PO Currency after Plan Approval
 
 
 
-#to flesh out
-Scenario: Handle incorrect Liable Entity
+#reviewed 17th June
+Scenario: Handle incorrect Liable Entity (OTD-2312)
+  Given Media Plan has been approved by Client
+    And a Insertion Order for e.g. "Essence LON" has been raised
+    And as a result a Purchase Order for "Essence LON" has been exported to SAP
+    And Invoiced total for this PO is 0.00 (or no invoices have been processed/imported)
+    And Invoice has come in but needs to be processed in  "Essence NA"
+    And Finance require the Purchase order to be re-raised for "Essence NA"
+  When Account Manager submits a an issue for service desk about wrong supplier selected for PO
+  Then Olive admin can access restricted Interface "SAP Integration Management" #(enough to be just a hidden url for now )
+    And Locate Purchase Order by supplying the "Olive 3 PO ID"
+    And Choose a new "Liable Entity" for it
+    And Cofirm they're happy to proceed:
+      # "This will create a new Insertion Order for the new Liable Entity with other information the same as {Insertion Order Name},
+      #  The Existing PO will be downweighted to 0 or Cancelled in Olive 3 and {Liable Entity} SAP, instead a new Purchase Order will be generated and exported to {Liable Entity} SAP.
+      #  As this cannot be undone, please make sure there are no invoices processed against this IO in SAP.
+      #  Are you sure you want to proceed? Yes / Cancel "
+    And on confirm, new IO for new Liable Entity is created, and it contains all the lines that were included in the prev IO
+    And add a negative PO line item to existing PO to downweight to 0.00, export that to SAP
+    And "CANCEL" request is posted to B1I against the old Purchase Order (ignore failure)
+    And if B1IF has responded with success, Olive 3 Purchase order is update to match SAP PO
+    And new Purchase Order is generated from the new Insertion Order and exported to SAP / saved
+    And user is displayed success feedback containing the new "Olive 3 IO ID" and new "SAP PO ID" (so that can be communicated back to whoever raised service desk issue)
+    And the following events are recorded in Insertion Order history
+    # ----------------------------------------------------------------------------------------------------------|
+    # IO     | User           | Action                    | Notes                                               |
+    # ----------------------------------------------------------------------------------------------------------|
+    # Prev   | Currently      | Liable Entity updated     | {Old Supplier} changed to {New Supplier}            |
+    #        | Logged in User | through SAP Integration   | New IO #{new PO ID}[link to new io] generated as a  |
+    #        |                | Admin                     | result                                              |
+    # -------|----------------|---------------------------|-----------------------------------------------------|
+    # New    | Currently      | Raised as a result of     | {Old Supplier} changed to {New Supplier}            |
+    #        | Logged in User | Liable Entity update      | Prev IO #{Prev PO ID}[link to new io] cancelled as  |
+    #        |                | through SAP Integration   | a result                                            |
+    #        |                | Admin                     |                                                     |
+    # ----------------------------------------------------------------------------------------------------------|
+    # * note - for suppliers - use the name that's imported from Olive 2 sup_legal_entity field
 
 #to flesh out
 Scenario: Close Purchase Orders for Reconciled Insertion Orders
