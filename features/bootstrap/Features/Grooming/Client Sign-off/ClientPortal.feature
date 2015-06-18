@@ -72,18 +72,24 @@ Scenario: Client Viewer Role (OTD-2215)
 
 #to review
 Scenario: Client Viewer views a list of all plans ever requested for approval for Client (OTD-2215)
+  #prototype: http://mnnl4s.axshare.com/#p=1_2_3_7b_client_view_-_all_media_plans
   Given I am a logged in Client User
     And I have been assigned the role "Client Viewer"
   When I log in Client Portal
-  Then I can see a list of ALL Media Plans ever grouped by Approval status, ordered by "Date Approval requested" desc
+  Then I can see a title "Media Plans" (not campaign management)
+    And I can see a list of ALL Media Plans ever grouped by Approval status, ordered by "Date Approval requested" desc
     And I see the following information for each plan:
     # Name
+    # Region
     # Budget (Buying Currency)
     # Budget (_Client Currency code_) (e.g. "Budget (USD)" )
     # Start Date
     # End Date
+    # Version - ["Initial", "Updated - V"{increment}"]
     And I can see the rolled up total Budget (in client currency) by status
     And a tooltip icon is displayed by both budget column headers with tooltip text "All budgets are Market Value" in both
+    And I can filter plans by Approver, Status and Region
+    # *Note that the version increment should be 1, 2, 3 etc and restart for each plan, we shouldn't reuse the actual db pk as it's not user friendly
 
 #to flesh out
 Scenario: Download all plans to a CSV file
