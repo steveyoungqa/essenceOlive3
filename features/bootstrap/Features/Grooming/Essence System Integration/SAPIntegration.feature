@@ -310,8 +310,8 @@ Scenario: All Unit Tests Pass
 
 
 
-#to review
-Scenario: Handle incorrect PO Supplier after Plan Approval
+#reviewed 17th June
+Scenario: Handle incorrect PO Supplier after Plan Approval (OTD-2312)
   Given Media Plan has been approved by Client
     And a Insertion Order for e.g. "Yahoo! UK Ltd." has been raised
     And as a result a Purchase Order for "Yahoo! UK Ltd." has been exported to SAP
@@ -346,8 +346,8 @@ Scenario: Handle incorrect PO Supplier after Plan Approval
     # ----------------------------------------------------------------------------------------------------------|
     # * note - for suppliers - use the name that's imported from Olive 2 sup_legal_entity field
 
-#to flesh out
-Scenario: Handle incorrect PO Currency after Plan Approval
+#reviewed 17th June
+Scenario: Handle incorrect PO Currency after Plan Approval (OTD-2312)
   Given Media Plan has been approved by Client
     And a Insertion Order for in "USD" has been raised
     And as a result a Purchase Order in "USD." has been exported to SAP
@@ -388,8 +388,8 @@ Scenario: Handle incorrect PO Currency after Plan Approval
 
 
 
-#to flesh out
-Scenario: Handle incorrect Liable Entity
+#reviewed 17th June
+Scenario: Handle incorrect Liable Entity (OTD-2312)
   Given Media Plan has been approved by Client
     And a Insertion Order for e.g. "Essence LON" has been raised
     And as a result a Purchase Order for "Essence LON" has been exported to SAP
