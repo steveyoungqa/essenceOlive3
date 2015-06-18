@@ -1,4 +1,4 @@
-@regression
+@uatregression
 Feature: Olive 3 Regression Pack
   Create new campaign, Add Media Plan, Add Media Plan Line & Service with Discount Applied,
   Publish Media Plan, Insertion Order, Map to DS3, Map to Search Campaign, Approval Process,
@@ -221,8 +221,7 @@ Feature: Olive 3 Regression Pack
 #   ***MAP SEARCH CAMPAIGN***
     Then I click the "Plan Lines" link
     And I click the "Manage mappings" link
-    Then I wait for xpath "//*[@class='custom-checkbox']/span[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']" to appear
-
+    Then I wait for 20000
     Then I Map Search Campaign "<searchCampaign>"
     And I wait for 5000
     And I click the "Save Managed Entities" link
@@ -356,7 +355,7 @@ Feature: Olive 3 Regression Pack
 
   Examples:
     |campaign  |client|owner      |region |period |budget|mediaType     |costModel   |startDate |endDate    |budget|lineBudget|discount|lineCurrency |currencyBreach   |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver        |conversion        |activity         |tag       |ds3Advert                    |conversionSource|description1|
-    |regression|google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-12-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |automation      |Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|floodlights|Plan Line 1|
+    |uatsanity |google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-12-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |automation      |Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|floodlights|Plan Line 1|
 
 
 
