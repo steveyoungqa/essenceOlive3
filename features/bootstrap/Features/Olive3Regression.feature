@@ -41,7 +41,9 @@ Feature: Olive 3 Regression Pack
     Then I fill in "campaign-new-managingRegion" with "<region>"
     Then I wait for xpath "//*[@class='loader__progress']" to disappear
     And I fill in "campaign-new-owner" with "<owner>"
-    And I wait for xpath "//*[@id='campaign-new-owner-steve-automation']" to appear
+    And I wait for 2000
+    Then I wait for text "<owner>" to appear
+    And I click the link containing Text "<owner>"
     And I fill in "campaign-new-memo" with "Test Notes"
     Then I wait for 2000
     Then I click the "Campaign Save" link
@@ -103,14 +105,15 @@ Feature: Olive 3 Regression Pack
     Then I wait for 2000
     Then I click the link containing Text "<liableEntity>"
 
+    And I fill in "campaign-marketbudgets-new-owner" with "<owner>"
+    And I wait for 2000
+    And I wait for xpath "//*[@id='campaign-marketbudgets-new-owner-walter-kummer']" to appear
+    And I wait for 2000
+
     And I fill in "campaign-marketbudgets-new-currency" with "<lineCurrency>"
     Then I wait for 2000
     Then I fill in "campaign-marketbudgets-new-budget" with "<budget>"
     Then I wait for 2000
-
-    And I fill in "campaign-marketbudgets-new-owner" with "<owner>"
-    And I wait for xpath "//*[@id='campaign-marketbudgets-new-owner-steve-automation']" to appear
-    Then I click the link containing ID "<owner>"
 
 #    Then I click the "Media Plan Save" link
     Then I click the "Media Plan Long Save" link
@@ -238,16 +241,17 @@ Feature: Olive 3 Regression Pack
     Then I reload the page
     Then I wait for xpath "//*[@class='loader__progress']" to disappear
 
-
 #    ***REQUEST APPROVAL***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-manage-approval']" to appear
     Then I click the "Request Approval" link
     Then I wait for xpath "//*[@class='loader__progress']" to disappear
     Then I wait for xpath "//*[@id='campaign-marketbudgets-versions-approvers-add-person']" to appear
     Then I click the "Approver Field" link
+    And I wait for 5000
+#    And I fill in the "Approver Field" with "<approver>"
+    Then I wait for xpath "//*[@id='campaign-marketbudgets-versions-approvers-add-person-steve-automation']" to appear
+    And I click the "Steve Automation" link
     And I wait for 2000
-    And I fill in the "Approver Field" with "<approver>"
-    Then I wait for 20000
     And I click the "Request Approval Confirm" link
     Then I wait for xpath "//*[@class='button__icon button__icon--left icon icon--clear icon--lrg icon--cropped']" to disappear
     Then I output text "Internal Approval Requested" to the console
@@ -355,7 +359,7 @@ Feature: Olive 3 Regression Pack
 
   Examples:
     |campaign  |client|owner      |region |period |budget|mediaType     |costModel   |startDate |endDate    |budget|lineBudget|discount|lineCurrency |currencyBreach   |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver        |conversion        |activity         |tag       |ds3Advert                    |conversionSource|description1|
-    |regression|google|automation |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-12-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |Steve Automation|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|floodlights     |Plan Line 1 |
+    |regression|google|Walter     |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-12-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |Steve Automation|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|floodlights     |Plan Line 1 |
 
 
 

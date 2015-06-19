@@ -115,6 +115,7 @@ class customTests extends CustomPage
         'Editable Draft State' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-editable']"),
         'Approver Field' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add-person']"),
         'Internal Approver' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add-type-internal']"),
+        'Steve Automation' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-add-person-steve-automation']"),
         'Request Approval Confirm' => array('xpath' => "//*[@id='campaign-marketbudgets-versions-approvers-request']"),
         'Approve or Reject' => array('xpath' => "//*[@id='campaign-marketbudgets-mediaplan-set-status']"),
         'Feedback Notes' => array('xpath' => "//*[@ng-model='feedback.note']"),

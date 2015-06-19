@@ -41,9 +41,11 @@ Feature: Olive 3 Regression Pack
     Then I wait for xpath "//*[@class='loader__progress']" to disappear
     Then I wait for xpath "//*[@id='campaign-marketbudgets-versions-approvers-add-person']" to appear
     Then I click the "Approver Field" link
-    And I wait for 2000
+    And I wait for 10000
     And I fill in the "Approver Field" with "<approver>"
-    Then I wait for 10000
+    Then I wait for 5000
+    And I click the link containing Text "<approver>"
+    And I wait for 2000
     And I click the "Request Approval Confirm" link
     Then I wait for xpath "//*[@class='button__icon button__icon--left icon icon--clear icon--lrg icon--cropped']" to disappear
     Then I output text "Internal Approval Requested" to the console
