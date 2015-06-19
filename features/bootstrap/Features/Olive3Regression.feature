@@ -221,7 +221,7 @@ Feature: Olive 3 Regression Pack
 #   ***MAP SEARCH CAMPAIGN***
     Then I click the "Plan Lines" link
     And I click the "Manage mappings" link
-    Then I wait for xpath "//*[@class='custom-checkbox']/span[@class='custom-checkbox__icon icon icon--tick icon--md icon--cropped']" to appear
+    Then I wait for xpath "//*[@class='ol-list-item ol-drag-preview ng-scope']/td[@class='checkbox-cell ng-scope']" to appear
 
     Then I Map Search Campaign "<searchCampaign>"
     And I wait for 5000
