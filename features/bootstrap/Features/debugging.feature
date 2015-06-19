@@ -35,36 +35,9 @@ Feature: Olive 3 Regression Pack
     Then I click the "Publish Dropdown" link
     And I click the "Published State" link
 
-#    ***REQUEST APPROVAL***
-    Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-manage-approval']" to appear
-    Then I click the "Request Approval" link
-    Then I wait for xpath "//*[@class='loader__progress']" to disappear
-    Then I wait for xpath "//*[@id='campaign-marketbudgets-versions-approvers-add-person']" to appear
-    Then I click the "Approver Field" link
-    And I wait for 10000
-    And I fill in the "Approver Field" with "<approver>"
-    Then I wait for 5000
-    And I click the link containing Text "<approver>"
-    And I wait for 2000
-    And I click the "Request Approval Confirm" link
-    Then I wait for xpath "//*[@class='button__icon button__icon--left icon icon--clear icon--lrg icon--cropped']" to disappear
-    Then I output text "Internal Approval Requested" to the console
-
-    #***FEEDBACK & APPROVE***
-    Then I reload the page
-    Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-set-status']" to appear
-    Then I click the "Approve or Reject" link
-    And I fill in the "Feedback Notes" with "Regression Testing feedback test"
-    Then I click the "Approve" link
-    Then I output text "Plan Approved" to the console
-
-
-
-
-
   Examples:
     |campaign   |client|owner      |region |period |budget|liableEntity |initiative|supplier      |ds3 |searchCampaign|approver   |conversion        |activity         |tag       |ds3Advert                    |conversionSource|
-    |regression |google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Automation |Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
+    |failedxpath|google|automation |EMEA   |q4-2015|100000|Client Liable|wildfire  |Google Ireland|2604|Shopping      |Steve Automation |Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|Google Floodlights|
 
 
 

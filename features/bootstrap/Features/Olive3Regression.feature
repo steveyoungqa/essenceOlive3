@@ -163,11 +163,9 @@ Feature: Olive 3 Regression Pack
     And I fill in the "Property" with "<property>"
     Then I wait for 2000
     Then I click the link containing Text "<property>"
-#    And I click the link containing Text "Google Search"
     Then I wait for 2000
     Then I click the "Media Type" link
     Then I click the link containing Text "<mediaType>"
-#    And I click the link containing Text "Search Text Ad"
     Then I wait for 2000
     Then I click the "Cost Model" link
     And I click the link containing Text "<costModel>"
@@ -216,7 +214,6 @@ Feature: Olive 3 Regression Pack
     And I wait for 2000
     And I fill in "mapping-externalSystem-ds3" with "<ds3>"
     And I wait for text "<ds3>" to appear
-#    Then I wait for 8000
     And I click the link containing Text "<ds3>"
     Then I click the "External System Save" link
     Then I output text "Insertion Order Linked to DS3" to the console
@@ -239,7 +236,7 @@ Feature: Olive 3 Regression Pack
     Then I click the "Publish Dropdown" link
     And I click the "Published State" link
     Then I reload the page
-    Then I wait for xpath "//*[@class='loader__progress']" to disappear
+#    Then I wait for xpath "//*[@class='loader__progress']" to disappear
 
 #    ***REQUEST APPROVAL***
     Then I wait for xpath "//*[@id='campaign-marketbudgets-mediaplan-manage-approval']" to appear
@@ -248,14 +245,12 @@ Feature: Olive 3 Regression Pack
     Then I wait for xpath "//*[@id='campaign-marketbudgets-versions-approvers-add-person']" to appear
     Then I click the "Approver Field" link
     And I wait for 5000
-#    And I fill in the "Approver Field" with "<approver>"
     Then I wait for xpath "//*[@id='campaign-marketbudgets-versions-approvers-add-person-steve-automation']" to appear
     And I click the "Steve Automation" link
     And I wait for 2000
     And I click the "Request Approval Confirm" link
-    Then I wait for xpath "//*[@class='button__icon button__icon--left icon icon--clear icon--lrg icon--cropped']" to disappear
+    Then I should see text matching "Approval request sent successfully"
     Then I output text "Internal Approval Requested" to the console
-
 
 #   ***FEEDBACK & APPROVE***
     Then I reload the page
@@ -284,67 +279,8 @@ Feature: Olive 3 Regression Pack
     And I click the "Continue & Publish" link
     Then I wait for text "Media Plan Lines published successfully" to appear
     Then I output text "Edited Media Plan published successfully" to the console
-#    And I wait for text "Amends Published" to appear
     Then I reload the page
     Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
-
-##   ***ADD KPI***
-#    Then I click the "Navigation Header" link
-#    Then I click the "Campaigns" link
-#    Then I wait for 2000
-#    Then I fill in the "Campaign Search" with "<campaign>"
-#    Then I wait for 2000
-#    Given I select Edit for the existing Campaign "<campaign>"
-#    And I click the "Default KPIs" link
-#    Then I click the "Add KPI" link
-#    Then I wait for 2000
-#    And I fill in the "KPI Event Type" with "Brand"
-#    Then I wait for 2000
-#    And I fill in the "KPI Event Number" with "20"
-#    And I fill in the "KPI Event Name" with "Regression Event"
-#    Then I click the "Conversion Source Field" link
-#    Then I fill in the "Conversion Source Field" with "<conversionSource>"
-##    And I wait for text "<conversionSource>" to appear
-##    Then I click the link containing ID "<conversionSource>"
-#    And I wait for 3000
-#    And I click the "Event Save" link
-#    And I wait for 3000
-#    Then I click the "Add Tag" link
-#    And I click the "Conversion Type" link
-#    And I wait for text "<conversion>" to appear
-#    And I fill in the "Conversion Type" with "<conversion>"
-#    And I click the link containing Text "<conversion>"
-#    And I wait for xpath "//*[@id='campaign-events-tags-new-activityGroup']" to appear
-#    And I click the "Activity Category" link
-#    And I fill in the "Activity Category" with "<activity>"
-#    And I wait for 3000
-#    And I click the link containing Text "<activity>"
-#    And I click the "Activity Tag" link
-#    And I fill in the "Activity Tag" with "<tag>"
-#    Then I wait for 3000
-#    And I click the link containing Text "<tag>"
-#    Then I fill in the "Weighting" with "10"
-#    And I click the "Tag Save" link
-#    Then I reload the page
-#    Then I wait for xpath "//*[@class='menu-close icon icon--med icon--tables']" to appear
-#    Then I output text "KPI added" to the console
-
-##   ***TRACKING MANAGEMENT***
-#    Then I click the "Navigation Header" link
-#    Then I click the "Tracking Management DS3" link
-#    And I click the "Tracking Code Search Box" link
-#    Then I fill in the "Tracking Code Search Box" with "<searchCampaign>"
-#    Then I wait for 3000
-#    And I click the "Advanced Filter" link
-#    Then I wait for 2000
-#    Then I click the "Campaign Filter" link
-#    And I fill in the "Campaign Filter" with "<campaign>"
-#    Then I wait for 2000
-#    Then I click the link containing Text "<campaign>"
-#    And I click the "Advanced Search Close" link
-#    Then I click the "Tracking Details" link
-#    And I wait for 5000
-#    Then I should see "MAPPED"
 
 #   ***DELETE CAMPAIGN CLEAN UP***
     Then I Maximize the Browser Window
@@ -358,8 +294,8 @@ Feature: Olive 3 Regression Pack
     Then I output text "CleanUp completed <campaign> has been deleted" to the console
 
   Examples:
-    |campaign  |client|owner      |region |period |budget|mediaType     |costModel   |startDate |endDate    |budget|lineBudget|discount|lineCurrency |currencyBreach   |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver        |conversion        |activity         |tag       |ds3Advert                    |conversionSource|description1|
-    |regression|google|Walter     |EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-12-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |Steve Automation|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|floodlights     |Plan Line 1 |
+    |campaign  |client|owner |region |period |budget|mediaType     |costModel   |startDate |endDate    |budget|lineBudget|discount|lineCurrency |currencyBreach   |liableEntity  |initiative|supplier      |property        |ds3 |searchCampaign|approver        |conversion        |activity         |tag       |ds3Advert                    |conversionSource|description1|
+    |regression|google|Walter|EMEA   |q4-2015|100000|Search Text Ad|Biddable CPC|2015-04-04| 2015-12-04|100000|100       |10      |GBP          |Australian Dollar|Client Liable |wildfire  |Google Ireland|Google Search   |2604|Shopping      |Steve Automation|Post Click Revenue|Enterprise - Apps|Begin Here|Chromecast B2C - Essence EMEA|floodlights     |Plan Line 1 |
 
 
 

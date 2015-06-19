@@ -226,13 +226,6 @@ class customTests extends CustomPage
     public function fillInXpathLinkWithValue ($xpath, $value)
     {
         $this->getElement($xpath)->setValue($value);
-
-//        $this->getElement($xpath)->setValue($xpath,$value);
-
-//        $xpath = $this->fixStepArgument($xpath);
-//        $value = $this->fixStepArgument($value);
-//        $this->getSession()->getPage()->fillField($xpath, $value);
-
     }
 
     public function deleteCampaign ($campaign)
